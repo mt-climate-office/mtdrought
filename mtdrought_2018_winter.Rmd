@@ -1,0 +1,1389 @@
+---
+title: "Montana Drought and Climate Update"
+author: "The Montana Climate Office"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  bookdown::html_document2:
+    code_folding: hide
+    df_print: paged
+    fig_caption: yes
+    toc: true
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## Introduction {-}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      results = "hide",
+                      eval.after = "fig.cap",
+                      fig.width = 4.45,
+                      fig.height = 2.54
+)
+
+# install.packages("devtools")
+# devtools::install_github("mt-climate-office/mcor")
+# source("https://bioconductor.org/biocLite.R")
+devtools::install_github("ecohealthalliance/fasterize")
+# biocLite("rhdf5")
+
+## Load all packages
+all_packages <- c("mcor", # The Core MCO package
+                  "FedData", "smapr", "rhdf5", # Package for data aquisition
+                  "sf", "raster", "rgeos", "fasterize", "velox", # Packages for spatial processing
+                  "magrittr", "tidyverse", "purrrlyr", # Packages for tidy code
+                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
+                  "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
+
+# devtools::install_bioc("rhdf5")
+# purrr::walk(all_packages, devtools::install_cran, character.only = TRUE)
+purrr::walk(all_packages, library, character.only = TRUE)
+
+# Load other useful functions
+for(f in list.files("./R", full.names = T)){
+  source(f)
+}
+
+get_df <- function(x){
+  out <- cbind(xyFromCell(x, seq_len(ncell(x))),
+               tibble::tibble(ID = getValues(x))) %>%
+    tibble::as_tibble()
+  
+  if(is.factor(x)){
+    
+    levels <- levels(x)[[1]] %>%
+      dplyr::mutate_all(.funs = funs(ordered)) %>%
+      tibble::as_tibble()
+    
+    fact <- out$ID %>%
+      ordered(levels = levels(levels$ID))
+    out %<>%
+      dplyr::mutate(ID = fact) %>%
+      dplyr::left_join(levels)
+  }
+  
+  return(out)
+}
+
+add_mt_background <- function(){
+  # Plot the county boundaries
+  ggplot2::geom_sf(data = mt_state_simple,
+                   fill = "white",
+                   color = NA)
+}
+
+add_hillshade <- function(){
+  
+  # Plot the hillshade using the "alpha hack"
+  list(
+    ggplot2::geom_raster(data = mt_hillshade_500m %>%
+                           get_df(),
+                         mapping = aes(x = x,
+                                       y = y,
+                                       alpha = ID),
+                         na.rm = TRUE),
+    scale_alpha(range = c(0.8, 0), 
+                na.value = 0,
+                limits = c(0,255),
+                guide = "none")
+  )
+}
+
+add_counties <- function(){
+  # Plot the county boundaries
+  ggplot2::geom_sf(data = mt_counties_simple,
+                   fill = NA,
+                   color = "white",
+                   size = 0.1)
+}
+
+add_climate_divisions <- function(){
+  # Plot the climate division boundaries
+  ggplot2::geom_sf(data = mt_climate_divisions_simple,
+                   fill = NA,
+                   color = "white",
+                   size = 0.5)
+}
+
+save_mt_map <- function(x, name){
+  x %>%
+    ggplot2::ggsave(name,
+         plot = .,
+         device = "pdf",
+         path = "./figures/",
+         width = 4.45,
+         height = 2.54)
+}
+
+print_sign <- function(x){
+  out <- sapply(x,function(y){
+    if(y>0) return("+")
+    if(y<=0) return("")
+    # if(y==0) return("")
+    stop("Cannot calculate sign!")
+  })
+  return(out)
+  
+}
+
+mdt_theme_map <- function(base_size = 6.5, base_family = ""){
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) %+replace%
+    ggplot2::theme(axis.line = ggplot2::element_blank(),
+          axis.text = ggplot2::element_blank(),
+          axis.ticks = ggplot2::element_blank(),
+          axis.title = ggplot2::element_blank(),
+          panel.background = ggplot2::element_blank(),
+          panel.border = ggplot2::element_blank(),
+          panel.grid = ggplot2::element_blank(),
+          panel.grid.major = ggplot2::element_line(colour = 'transparent'),
+          panel.grid.minor = ggplot2::element_line(colour = 'transparent'),
+          panel.spacing = ggplot2::unit(0,"lines"),
+          legend.justification = c(0,0),
+          legend.position = c(-0.02,0),
+          legend.background = ggplot2::element_blank(),
+          legend.key.width=unit(0.15,"in"),
+          legend.key.height=unit(0.15,"in"),
+          legend.margin = margin(t = 0, r = -0.2, b = 0, l = 0, unit = "in"),
+          # legend.text = element_text(margin = margin(r = -0.1, unit = "in")),
+          plot.background = ggplot2::element_blank(),
+          plot.margin = ggplot2::margin(0,0,0,10)
+    )
+}
+
+
+```
+
+```{r climate-divisions, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+(mt_climate_divisions_simple %>%
+   dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                   sf::st_centroid() %>%
+                   sf::st_coordinates() %>%
+                   tibble::as_tibble() %$%
+                   X,
+                 Centroid_y = mt_climate_divisions_simple %>%
+                   sf::st_centroid() %>%
+                   sf::st_coordinates() %>%
+                   tibble::as_tibble() %$%
+                   Y) %>%
+   ggplot2::ggplot() +
+   geom_sf(aes(geometry = Shape,
+               text = Division),
+           fill = NA,
+           color = "white") +
+   add_mt_background() +
+   add_hillshade() +
+   add_counties() +
+   add_climate_divisions() +
+   #     # Plot the climate division boundaries
+   # ggplot2::geom_sf(data = mt_climate_divisions_simple,
+   #                  fill = NA,
+   #                  color = "black",
+   #                  size = 1) +
+   # Plot the labels
+   geom_label(aes(x = Centroid_x,
+                  y = Centroid_y,
+                  label = Division),
+              alpha = 1,
+              size = 2.25) +
+   mdt_theme_map()) %T>%
+  save_mt_map("climate-divisions.pdf")
+# plotly::ggplotly(tooltip = "text") %>%
+# plotly::highlight(
+#   "plotly_hover",
+#   opacityDim = 1,
+#   selected = attrs_selected(fill = list(color = "black"))
+# )
+
+```
+
+-----
+
+## Summer 2017 Conditions (June--August) {-}
+
+### Temperature {-}
+TODO: Create 4km PRISM version
+```{r jun-aug-2017-seasonal-tmax, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+climdiv_tmax <- climdiv_summary(months = 6:8,
+                                year = 2017,
+                                element = "tmax",
+                                agg_fun = mean)
+
+(climdiv_tmax$latest %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(geometry = Shape,
+                fill = Value-Normal),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() + 
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," ºF\n",
+                                          print_sign(Value-Normal), round(Value-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jun-Aug, 2017\nMax. Temperature\nDeviation from Normal (ºF)",
+                         #limits = c(0,1),
+                         direction = -1,
+                         limits = c(-7,7),
+                         breaks = c(-7,0,7),
+                         palette = "RdBu",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+    mdt_theme_map(base_size = 7)) %>%
+    save_mt_map("jun-aug-2017-seasonal-temp.pdf")
+
+```
+
+* In June–August, 2017, the average daytime maximum temperature statewide was `r round(climdiv_tmax$state_rank$Value, digits = 1)` ºF, `r round(climdiv_tmax$state_rank$Deviation, digits = 1)` degrees higher than the 1981--2010 normal value.
+* June–August, 2017 was the `r scales::ordinal(climdiv_tmax$state_rank$N - climdiv_tmax$state_rank$Rank)` hottest summer since record keeping began in 1895.
+
+### Precipitation {-}
+```{r jun-aug-2017-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_pcpn <- climdiv_summary(months = 6:8,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+(climdiv_pcpn$latest %>%
+    ggplot2::ggplot() +
+    # Plot the polygon fills
+    geom_sf(aes(geometry = Shape,
+                fill = Value-Normal),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," in.\n",
+                                          print_sign(Value-Normal), round(Value-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jun-Aug, 2017\nTotal Precipitation\nDeviation from 1981-2010 Normal (in.)",
+                         #limits = c(0,1),
+                         direction = 1,
+                         limits = c(-4,4),
+                         breaks = c(-4,0,4),
+                         palette = "BrBG",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+    mdt_theme_map()) %>%
+  save_mt_map("jun-aug-2017-seasonal-prcp.pdf")
+
+```
+
+* In June–August, 2017, the average total precipitation statewide was `r round(climdiv_pcpn$state_rank$Value, digits = 1)` inches, `r round(abs(climdiv_pcpn$state_rank$Deviation), digits = 1)` inches lower than the 1981--2010 normal value.
+* June–August, 2017 was the `r scales::ordinal(climdiv_pcpn$state_rank$Rank)` driest summer since record keeping began in 1895.
+
+### Soil Moisture {-}
+```{r jun-aug-2017-seasonal-soil-moisture, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+dir.create("./data/SMAP",
+           recursive = TRUE,
+           showWarnings = FALSE)
+
+soil_moisture <- mcor::mco_get_smap(id = "SPL4SMGP",
+                                    dates = "2017-09-01",
+                                    raw_dir = "./data/SMAP")
+
+soil_moisture_date <- soil_moisture %>%
+  names() %>%
+  stringr::str_extract("\\_[0-9]+") %>%
+  unique() %>%
+  stringr::str_replace("\\_","") %>%
+  lubridate::as_date()
+
+soil_moisture %<>%
+  # Average over the layers (which represent time slices during the day)
+  raster::calc(mean) %>%
+  # Bin into soil moisture categories
+  raster::cut(breaks = c(0,
+                         0.1,
+                         0.2,
+                         0.3,
+                         0.35,
+                         0.4,
+                         0.45,
+                         0.5,
+                         0.6,
+                         1),
+              ordered_result = TRUE) %>%
+  # Convert to polygons
+  raster::rasterToPolygons() %>%
+  sf::st_as_sf() %>%
+  sf::st_transform(mt_state_plane) %>%
+  dplyr::mutate(layer = factor(layer,
+                               levels = 1:9,
+                               labels = c("<10%",
+                                          "10-20%",
+                                          "20-30%",
+                                          "30-35%",
+                                          "35-40%",
+                                          "40-45%",
+                                          "45-50%",
+                                          "50-60%",
+                                          ">60%"))) %>%
+  sf::st_intersection(mt_state_simple) %>%
+  dplyr::group_by(layer) %>%
+  dplyr::summarise()
+
+(soil_moisture %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_sf(aes(fill = layer),
+                     color = NA) +
+    scale_fill_manual(name = stringr::str_c("% Soil Saturation\n",soil_moisture_date),
+                      limits = c("<10%",
+                                 "10-20%",
+                                 "20-30%",
+                                 "30-35%",
+                                 "35-40%",
+                                 "40-45%",
+                                 "45-50%",
+                                 "50-60%",
+                                 ">60%"),
+                      values = c("<10%" = rgb(115, 0, 0, maxColorValue = 255),
+                                 "10-20%" = rgb(255, 0, 0, maxColorValue = 255),
+                                 "20-30%" = rgb(255, 170, 0, maxColorValue = 255),
+                                 "30-35%" = rgb(215, 194, 158, maxColorValue = 255),
+                                 "35-40%" = rgb(255, 255, 0, maxColorValue = 255),
+                                 "40-45%" = rgb(255, 255, 255, maxColorValue = 255),
+                                 "45-50%" = rgb(190, 232, 255, maxColorValue = 255),
+                                 "50-60%" = rgb(0, 112, 255, maxColorValue = 255),
+                                 ">60%" = rgb(0, 38, 115, maxColorValue = 255)),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+        mdt_theme_map()) %>%
+  save_mt_map("jun-aug-2017-seasonal-soil-moisture.pdf")
+   
+
+```
+
+
+### Drought {-}
+```{r jun-aug-2017-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+# Get data from the US drought monitor
+FedData::download_data("http://droughtmonitor.unl.edu/data/shapefiles_m/USDM_20170829_M.zip", destdir = "./data")
+unzip("./data/USDM_20170829_M.zip", exdir = "./data/USDM_20170829_M")
+
+(sf::st_read("./data/USDM_20170829_M/USDM_20170829.shp", quiet = T) %>%
+    sf::st_transform(mt_state_plane) %>%
+    sf::st_intersection(mt_counties_simple %>%
+                          sf::st_union()) %>%
+    dplyr::mutate(DM = as.character(DM)) %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(fill = DM),
+            color = NA) +
+    scale_fill_manual(name = "Drought Intensity\nAugust 29, 2017",
+                      labels = c("Abnormally\nDry",
+                                 "Moderate\nDrought",
+                                 "Severe\nDrought",
+                                 "Extreme\nDrought",
+                                 "Exceptional\nDrought"),
+                      values = c("0" = rgb(255, 255, 0, maxColorValue = 255),
+                                 "1" = rgb(215, 194, 158, maxColorValue = 255),
+                                 "2" = rgb(255, 170, 0, maxColorValue = 255),
+                                 "3" = rgb(255, 0, 0, maxColorValue = 255),
+                                 "4" = rgb(115, 0, 0, maxColorValue = 255)),
+                      limits = c("0","1","2","3","4"),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    mdt_theme_map()) %>%
+  save_mt_map("jun-aug-2017-seasonal-drought.pdf")
+
+```
+
+## Fall conditions (September--November) {-}
+
+### Temperature {-}
+```{r sep-nov-2017-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+climdiv_tmpc <- climdiv_summary(months = 9:11,
+                                year = 2017,
+                                element = "tmpc",
+                                agg_fun = mean)
+
+(climdiv_tmpc$latest %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(geometry = Shape,
+                fill = Value-Normal),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() + 
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," ºF\n",
+                                          print_sign(Value-Normal), round(Value-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Sep-Nov, 2017\nAvg. Temperature\nDeviation from 1981-2010 Normal (ºF)",
+                         #limits = c(0,1),
+                         direction = -1,
+                         limits = c(-7,7),
+                         breaks = c(-7,0,7),
+                         palette = "RdBu",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+    mdt_theme_map()) %>%
+  save_mt_map("sep-nov-2017-seasonal-temp.pdf")
+
+```
+
+### Precipitation {-}
+```{r sep-nov-2017-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_pcpn <- climdiv_summary(months = 9:11,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+(climdiv_pcpn$latest %>%
+    ggplot2::ggplot() +
+    # Plot the polygon fills
+    geom_sf(aes(geometry = Shape,
+                fill = Value-Normal),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," in.\n",
+                                          print_sign(Value-Normal), round(Value-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Sep-Nov, 2017\nTotal Precipitation\nDeviation from 1981-2010 Normal (in.)",
+                         #limits = c(0,1),
+                         direction = 1,
+                         limits = c(-4,4),
+                         breaks = c(-4,0,4),
+                         palette = "BrBG",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+    mdt_theme_map()) %>%
+   save_mt_map("sep-nov-2017-seasonal-prcp.pdf")
+  
+
+```
+
+### Drought {-}
+```{r sep-nov-2017-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+# Get data from the US drought monitor
+FedData::download_data("http://droughtmonitor.unl.edu/data/shapefiles_m/USDM_20171128_M.zip", destdir = "./data")
+unzip("./data/USDM_20171128_M.zip", exdir = "./data/USDM_20171128_M")
+
+(sf::st_read("./data/USDM_20171128_M/USDM_20171128.shp", quiet = T) %>%
+    sf::st_transform(mt_state_plane) %>%
+    sf::st_intersection(mt_counties_simple %>%
+                          sf::st_union()) %>%
+    dplyr::mutate(DM = as.character(DM)) %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(fill = DM),
+            color = NA) +
+    scale_fill_manual(name = "Drought Intensity\nNovember 28, 2017",
+                      labels = c("Abnormally\nDry",
+                                 "Moderate\nDrought",
+                                 "Severe\nDrought",
+                                 "Extreme\nDrought",
+                                 "Exceptional\nDrought"),
+                      values = c("0" = rgb(255, 255, 0, maxColorValue = 255),
+                                 "1" = rgb(215, 194, 158, maxColorValue = 255),
+                                 "2" = rgb(255, 170, 0, maxColorValue = 255),
+                                 "3" = rgb(255, 0, 0, maxColorValue = 255),
+                                 "4" = rgb(115, 0, 0, maxColorValue = 255)),
+                      limits = c("0","1","2","3","4"),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    mdt_theme_map()) %>%
+  save_mt_map("sep-nov-2017-seasonal-drought.pdf")
+
+
+```
+
+### La Niña {-}
+```{r enso, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+# Read the three-month seasonal Oceanic Niño Index
+oni <- readr::read_table("http://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt")
+
+# ENSO Events are defined as 5 consecutive overlapping 3-month periods at or above the +0.5o anomaly for warm (El Niño) events and at or below the -0.5 anomaly for cold (La Niña) events.
+la_nina_rle <- (oni$ANOM <= -0.5) %>%
+  rle()
+la_nina_rle$values <- la_nina_rle %$%
+  tibble::tibble(lengths = lengths,
+                 values = values) %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(`La Niña` = ifelse(lengths >= 5 & values,T,F)) %$%
+  `La Niña`
+oni$`La Niña` <- inverse.rle(la_nina_rle)
+
+el_nino_rle <- (oni$ANOM >= 0.5) %>%
+  rle()
+el_nino_rle$values <- el_nino_rle %$%
+  tibble::tibble(lengths = lengths,
+                 values = values) %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(`El Niño` = ifelse(lengths >= 5 & values,T,F)) %$%
+  `El Niño`
+oni$`El Niño` <- inverse.rle(el_nino_rle)
+
+```
+
+![The typical winter La Niña pattern. Read more at https://www.climate.gov/enso.](https://www.climate.gov/sites/default/files/LaNin%CC%83a_winter_flat_updated_620_0.png)
+
+### La Niña Temperature Anomaly, January--March {-}
+```{r jan-mar-2018-enso-temp-anomaly, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_tmpc <- climdiv_summary(months = 1:3,
+                                year = 2017,
+                                element = "tmpc",
+                                agg_fun = mean)
+
+la_nina_average_tmpc <- climdiv_tmpc$data %>%
+  dplyr::filter(Year %in% (oni %>%
+                             dplyr::filter(SEAS == "JFM",
+                                           `La Niña`) %$%
+                             YR)) %>%
+  dplyr::group_by(`Division code`) %>%
+  dplyr::summarise(`La Niña Average` = mean(Value))
+
+tmpc_data <- dplyr::left_join(climdiv_tmpc$normals,
+                              la_nina_average_tmpc,
+                              by = "Division code") %>%
+  dplyr::mutate(Anomaly = `La Niña Average` - Normal) %>%
+  left_join(mt_climate_divisions_simple %>%
+              dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                              sf::st_centroid() %>%
+                              sf::st_coordinates() %>%
+                              tibble::as_tibble() %$%
+                              X,
+                            Centroid_y = mt_climate_divisions_simple %>%
+                              sf::st_centroid() %>%
+                              sf::st_coordinates() %>%
+                              tibble::as_tibble() %$%
+                              Y),
+            .,
+            by = "Division code")
+
+(tmpc_data %>%
+    ggplot2::ggplot() +
+    # Plot the polygon fills
+    geom_sf(aes(geometry = Shape,
+                fill = Anomaly),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(`La Niña Average`, digits = 1)," ºF\n",
+                                          print_sign(`La Niña Average`-Normal), round(`La Niña Average`-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jan-Mar\nLa Niña Avg. Temperature\nDeviation from 1981-2010 Normal (ºF)",
+                         #limits = c(0,1),
+                         direction = -1,
+                         limits = c(-7,7),
+                         breaks = c(-7,0,7),
+                         palette = "RdBu",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+        mdt_theme_map()) %>%
+  save_mt_map("jan-mar-2018-enso-temp-anomaly.pdf")
+   
+```
+
+### La Niña Precipitation Anomaly {-}
+```{r jan-mar-2018-enso-prcp-anomaly, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_pcpn <- climdiv_summary(months = 1:3,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+la_nina_average_pcpn <- climdiv_pcpn$data %>%
+  dplyr::filter(Year %in% (oni %>%
+                             dplyr::filter(SEAS == "JFM",
+                                           `La Niña`) %$%
+                             YR)) %>%
+  dplyr::group_by(`Division code`) %>%
+  dplyr::summarise(`La Niña Average` = mean(Value))
+
+pcpn_data <- dplyr::left_join(climdiv_pcpn$normals,
+                              la_nina_average_pcpn,
+                              by = "Division code") %>%
+  dplyr::mutate(Anomaly = `La Niña Average` - Normal) %>%
+  left_join(mt_climate_divisions_simple %>%
+              dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                              sf::st_centroid() %>%
+                              sf::st_coordinates() %>%
+                              tibble::as_tibble() %$%
+                              X,
+                            Centroid_y = mt_climate_divisions_simple %>%
+                              sf::st_centroid() %>%
+                              sf::st_coordinates() %>%
+                              tibble::as_tibble() %$%
+                              Y),
+            .,
+            by = "Division code")
+
+(pcpn_data  %>%
+    ggplot2::ggplot() +
+    # Plot the polygon fills
+    geom_sf(aes(geometry = Shape,
+                fill = Anomaly),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(`La Niña Average`, digits = 1)," in.\n",
+                                          print_sign(`La Niña Average`-Normal), round(`La Niña Average`-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jan-Mar\nLa Niña Avg. Precipitation\nDeviation from 1981-2010 Normal (in.)",
+                         #limits = c(0,1),
+                         direction = 1,
+                         limits = c(-4,4),
+                         breaks = c(-4,0,4),
+                         palette = "BrBG",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+            mdt_theme_map()) %>%
+  save_mt_map("jan-mar-2018-enso-prcp-anomaly.pdf")
+
+```
+
+## Seasonal Forecast {-}
+
+### Temperature {-}
+TODO: Convert to 2-category system (1-(t+50)) (rescaled to 1)
+```{r jan-mar-2018-seasonal-outlook-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_tmpc <- climdiv_summary(months = 1:3,
+                                year = 2017,
+                                element = "tmpc",
+                                agg_fun = mean)
+
+# Get data from the US drought monitor
+FedData::download_data("ftp://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/seastemp_201712.zip", destdir = "./data")
+unzip("./data/seastemp_201712.zip", exdir = "./data/seastemp_201712")
+
+(sf::st_read("./data/seastemp_201712/lead1_JFM_temp.shp", quiet = T) %>%
+    sf::st_transform(mt_state_plane) %>%
+    sf::st_intersection(mt_counties_simple %>%
+                          sf::st_union()) %>%
+    dplyr::mutate(Prob = ifelse(Cat == "Below",0 - Prob, Prob),
+                  Prob = ifelse(Cat == "EC",0, Prob),
+                  Prob = factor(Prob,
+                                levels = c(seq(-100,-40,10),
+                                           -33,
+                                           0,
+                                           33,
+                                           seq(40,100,10)),
+                                ordered = TRUE)) %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(fill = Prob),
+            color = NA) +
+    scale_fill_manual(name = "Probability Above/Below",
+                      limits = rev(c(seq(-100,-40,20),
+                                     -33,
+                                     0,
+                                     33,
+                                     seq(40,100,20))),
+                      labels = rev(c(seq(100,40,-20),
+                                     33,
+                                     "EC",
+                                     33,
+                                     seq(40,100,20))),
+                      values = c(colorRampPalette(RColorBrewer::brewer.pal(11,"RdBu")[11:7])(8),
+                                 RColorBrewer::brewer.pal(11,"RdBu")[6],
+                                 colorRampPalette(RColorBrewer::brewer.pal(11,"RdBu")[5:1])(8)) %>%
+                        magrittr::set_names(c(seq(-100,-40,10),
+                                              -33,
+                                              0,
+                                              33,
+                                              seq(40,100,10))),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(data = climdiv_tmpc$normals %>%
+                 left_join(mt_climate_divisions_simple %>%
+                             dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                                             sf::st_centroid() %>%
+                                             sf::st_coordinates() %>%
+                                             tibble::as_tibble() %$%
+                                             X,
+                                           Centroid_y = mt_climate_divisions_simple %>%
+                                             sf::st_centroid() %>%
+                                             sf::st_coordinates() %>%
+                                             tibble::as_tibble() %$%
+                                             Y),
+                           .,
+                           by = "Division code"),
+               aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c("1981-2010 normal: \n",
+                                          Normal %>%
+                                            round(digits = 1) %>%
+                                            paste0(" ºF"))),
+               alpha = 1,
+               size = 2.25) +
+    mdt_theme_map()) %>%
+  save_mt_map("jan-mar-2018-seasonal-outlook-temp.pdf")
+
+```
+
+### Precipitation {-}
+```{r jan-mar-2018-seasonal-outlook-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_pcpn <- climdiv_summary(months = 1:3,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+# Get data from the US drought monitor
+FedData::download_data("ftp://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/seasprcp_201712.zip", destdir = "./data")
+unzip("./data/seasprcp_201712.zip", exdir = "./data/seasprcp_201712")
+
+(sf::st_read("./data/seasprcp_201712/lead1_JFM_prcp.shp", quiet = T) %>%
+    sf::st_transform(mt_state_plane) %>%
+    sf::st_intersection(mt_counties_simple %>%
+                          sf::st_union()) %>%
+    dplyr::mutate(Prob = ifelse(Cat == "Below",0 - Prob, Prob),
+                  Prob = ifelse(Cat == "EC",0, Prob),
+                  Prob = factor(Prob,
+                                levels = c(seq(-100,-40,10),
+                                           -33,
+                                           0,
+                                           33,
+                                           seq(40,100,10)),
+                                ordered = TRUE)) %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(fill = Prob),
+            color = NA) +
+    scale_fill_manual(name = "Probability Above/Below",
+                      limits = rev(c(seq(-100,-40,20),
+                                     -33,
+                                     0,
+                                     33,
+                                     seq(40,100,20))),
+                      labels = rev(c(seq(100,40,-20),
+                                     33,
+                                     "EC",
+                                     33,
+                                     seq(40,100,20))),
+                      values = c(colorRampPalette(RColorBrewer::brewer.pal(11,"BrBG")[1:5])(8),
+                                 RColorBrewer::brewer.pal(11,"BrBG")[6],
+                                 colorRampPalette(RColorBrewer::brewer.pal(11,"BrBG")[7:11])(8)) %>%
+                        magrittr::set_names(c(seq(-100,-40,10),
+                                              -33,
+                                              0,
+                                              33,
+                                              seq(40,100,10))),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(data = climdiv_pcpn$normals %>%
+                 left_join(mt_climate_divisions_simple %>%
+                             dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                                             sf::st_centroid() %>%
+                                             sf::st_coordinates() %>%
+                                             tibble::as_tibble() %$%
+                                             X,
+                                           Centroid_y = mt_climate_divisions_simple %>%
+                                             sf::st_centroid() %>%
+                                             sf::st_coordinates() %>%
+                                             tibble::as_tibble() %$%
+                                             Y),
+                           .,
+                           by = "Division code"),
+               aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c("1981-2010 normal: \n",
+                                          Normal %>%
+                                            round(digits = 1) %>%
+                                            paste0(" in."))),
+               alpha = 1,
+               size = 2.25) +
+        mdt_theme_map()) %>%
+  save_mt_map("jan-mar-2018-seasonal-outlook-prcp.pdf")
+   
+
+```
+
+### Drought {-}
+
+```{r jan-mar-2018-seasonal-outlook-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+# Get data from the US drought monitor
+FedData::download_data("ftp://ftp.cpc.ncep.noaa.gov/GIS/droughtlook/sdo_polygons_20171221.zip", destdir = "./data")
+unzip("./data/sdo_polygons_20171221.zip", exdir = "./data/sdo_polygons_20171221")
+
+(sf::st_read("./data/sdo_polygons_20171221/DO_Merge_Clip.shp", quiet = T) %>%
+    sf::st_transform(mt_state_plane) %>%
+    sf::st_intersection(mt_counties_simple %>%
+                          sf::st_union()) %>%
+    tidyr::gather(key = "Drought Outlook",
+                  value = "True?",
+                  FID_improv,FID_persis,FID_dev,FID_Remove) %>%
+    dplyr::filter(`True?` == 1) %>%
+    dplyr::select(-`True?`) %>%
+    dplyr::mutate(`Drought Outlook` = factor(`Drought Outlook`,
+                                             levels = c("FID_persis",
+                                                        "FID_improv",
+                                                        "FID_Remove",
+                                                        "FID_dev"),
+                                             labels = c("Drought persists",
+                                                        "Drought remains but improves",
+                                                        "Drought removal likely",
+                                                        "Drought development likely"))) %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(fill = `Drought Outlook`),
+            color = NA) +
+    scale_fill_manual(name = "Seasonal Drought Outlook",
+                      limits = c("Drought persists",
+                                 "Drought remains but improves",
+                                 "Drought removal likely",
+                                 "Drought development likely"),
+                      labels = c("Drought persists",
+                                 "Drought remains\nbut improves",
+                                 "Drought removal\nlikely",
+                                 "Drought development\nlikely"),
+                      values = c("Drought persists" = rgb(255, 170, 0, maxColorValue = 255),
+                                 "Drought remains but improves" = rgb(215, 194, 158, maxColorValue = 255),
+                                 "Drought removal likely" = rgb(190, 232, 255, maxColorValue = 255),
+                                 "Drought development likely" = rgb(255, 255, 0, maxColorValue = 255)),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+            mdt_theme_map()) %>%
+  save_mt_map("jan-mar-2018-seasonal-outlook-drought.pdf")
+
+```
+
+### Snowpack {-}
+```{r current-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+swe <- mco_get_swe_basins(date = "2018-01-13",
+                          huc = 6)
+
+(swe %>%
+    dplyr::mutate(Centroid_x = swe %>%
+                    sf::st_centroid() %>%
+                    sf::st_coordinates() %>%
+                    tibble::as_tibble() %$%
+                    X,
+                  Centroid_y = swe %>%
+                    sf::st_centroid() %>%
+                    sf::st_coordinates() %>%
+                    tibble::as_tibble() %$%
+                    Y) %>%
+    ggplot2::ggplot() +
+    # Plot the polygon fills
+    geom_sf(aes(fill = `Percent SWE`),
+            color = NA) +
+    add_hillshade() +
+    add_counties() +
+    # Plot the polygon boundaries
+    geom_sf(fill = NA,
+            color = "white",
+            size = 0.5) +
+    # add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = `Percent SWE` %>%
+                     paste0("%")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = stringr::str_c(format(Sys.time(), '%B %d, %Y'),
+                                               "\nSnow Water Equivalent\n% of 1981-2010 median"),
+                         #limits = c(0,1),
+                         direction = 1,
+                         limits = c(0,200),
+                         breaks = c(0,200),
+                         palette = "RdBu",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+                mdt_theme_map()) %>%
+  save_mt_map(stringr::str_c("current-swe-2018-01-13.pdf"))
+  
+# library(mapview)
+# mapview(mt_watersheds_simple %>%
+#                         dplyr::filter(`Hydrologic Unit` == 6),
+#                  zcol = "Watershed") +
+# mapview(snotel_inventory)
+```
+
+
+### Soil Moisture {-}
+```{r current-soil-moisture, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+dir.create("./data/SMAP",
+           recursive = TRUE,
+           showWarnings = FALSE)
+
+soil_moisture <- mcor::mco_get_smap(id = "SPL4SMGP",
+                                    dates = "2018-01-13",
+                                    raw_dir = "./data/SMAP")
+
+soil_moisture_date <- soil_moisture %>%
+  names() %>%
+  stringr::str_extract("\\_[0-9]+") %>%
+  unique() %>%
+  stringr::str_replace("\\_","") %>%
+  lubridate::as_date()
+
+soil_moisture %<>%
+  # Average over the layers (which represent time slices during the day)
+  raster::calc(mean) %>%
+  # Bin into soil moisture categories
+  raster::cut(breaks = c(0,
+                         0.1,
+                         0.2,
+                         0.3,
+                         0.35,
+                         0.4,
+                         0.45,
+                         0.5,
+                         0.6,
+                         1),
+              ordered_result = TRUE) %>%
+  # Convert to polygons
+  raster::rasterToPolygons() %>%
+  sf::st_as_sf() %>%
+  sf::st_transform(mt_state_plane) %>%
+  dplyr::mutate(layer = factor(layer,
+                               levels = 1:9,
+                               labels = c("<10%",
+                                          "10-20%",
+                                          "20-30%",
+                                          "30-35%",
+                                          "35-40%",
+                                          "40-45%",
+                                          "45-50%",
+                                          "50-60%",
+                                          ">60%"))) %>%
+  sf::st_intersection(mt_state_simple) %>%
+  dplyr::group_by(layer) %>%
+  dplyr::summarise()
+
+(soil_moisture %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_sf(aes(fill = layer),
+                     color = NA) +
+    scale_fill_manual(name = stringr::str_c("% Soil Saturation\n",soil_moisture_date),
+                      limits = c("<10%",
+                                 "10-20%",
+                                 "20-30%",
+                                 "30-35%",
+                                 "35-40%",
+                                 "40-45%",
+                                 "45-50%",
+                                 "50-60%",
+                                 ">60%"),
+                      values = c("<10%" = rgb(115, 0, 0, maxColorValue = 255),
+                                 "10-20%" = rgb(255, 0, 0, maxColorValue = 255),
+                                 "20-30%" = rgb(255, 170, 0, maxColorValue = 255),
+                                 "30-35%" = rgb(215, 194, 158, maxColorValue = 255),
+                                 "35-40%" = rgb(255, 255, 0, maxColorValue = 255),
+                                 "40-45%" = rgb(255, 255, 255, maxColorValue = 255),
+                                 "45-50%" = rgb(190, 232, 255, maxColorValue = 255),
+                                 "50-60%" = rgb(0, 112, 255, maxColorValue = 255),
+                                 ">60%" = rgb(0, 38, 115, maxColorValue = 255)),
+                      guide = guide_legend(title.position = "bottom")) +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+        mdt_theme_map()) %>%
+  save_mt_map(stringr::str_c("current-soil-moisture-",soil_moisture_date,".pdf"))
+   
+```
+
+## Mid-century Summer Outlook {-}
+
+### Temperature {-}
+```{r tasmean-data-midcentury, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
+
+macav2_tasmax_rcp45 <- get_macav2_monthly(x = mt_climate_divisions_simple,
+                                          raw_dir = "./data/raw_data/macav2_monthly/",
+                                          elements = c("tasmax"),
+                                          scenarios = c("rcp45")) %>%
+  purrr::compact() %>%
+  purrr::map(function(x){
+    x %>%
+      raster::subset(
+        x %>%
+          names() %>%
+          gsub("X","",.) %>%
+          as.Date(format = "%Y.%m.%d") %>%
+          lubridate::year() %in%
+          c(2040:2069) %>%
+          which()
+      )
+  }) %>%
+  purrr::map(aggregate_months,
+             months = 6:8,
+             months_fun = mean,
+             agg_stat = median) %>%
+  raster::brick() %>%
+  mean()
+
+k_to_f <- function(x){
+  x %>%
+    magrittr::multiply_by(9/5) %>% # C/K to F
+    magrittr::subtract(459.67)
+}
+
+macav2_tasmax_rcp45 <- k_to_f(macav2_tasmax_rcp45)
+
+```
+
+```{r jun-aug-midcentury-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+mt_climate_divisions_simple_4326 <- mt_climate_divisions_simple %>%
+  sf::st_transform(4326)
+
+sf::st_geometry(mt_climate_divisions_simple_4326) <- sf::st_geometry(mt_climate_divisions_simple_4326) + c(360,0)
+
+
+climdiv_tmax <- climdiv_summary(months = 6:8,
+                                year = 2017,
+                                element = "tmax",
+                                agg_fun = mean)
+
+macav2_tasmax_rcp45.vx <- velox::velox(macav2_tasmax_rcp45)
+
+macav2_tasmax_rcp45_climdiv <- mt_climate_divisions_simple %>%
+  dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                  sf::st_centroid() %>%
+                  sf::st_coordinates() %>%
+                  tibble::as_tibble() %$%
+                  X,
+                Centroid_y = mt_climate_divisions_simple %>%
+                  sf::st_centroid() %>%
+                  sf::st_coordinates() %>%
+                  tibble::as_tibble() %$%
+                  Y) %>%
+  dplyr::mutate(Value = (macav2_tasmax_rcp45.vx$extract(mt_climate_divisions_simple_4326,
+                                                        fun = mean,
+                                                        df = TRUE))$out) %>%
+  dplyr::left_join(climdiv_tmax$normals,
+                   by = "Division code")
+
+rm(macav2_tasmax_rcp45.vx)
+
+(macav2_tasmax_rcp45_climdiv %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(geometry = Shape,
+                fill = Value-Normal),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," ºF\n",
+                                          print_sign(Value-Normal), round(Value-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jun-Aug, AD 2040-2069\nMax. Temperature\nDeviation from 1981-2010 Normal (ºF)",
+                         #limits = c(0,1),
+                         direction = -1,
+                         limits = c(-7,7),
+                         breaks = c(-7,0,7),
+                         palette = "RdBu",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+    mdt_theme_map()) %>%
+  save_mt_map("jun-aug-midcentury-temp.pdf")
+  # ggsave("jun-aug-midcentury-temp.pdf",
+  #        plot = .,
+  #        device = "pdf",
+  #        path = "./figures/",
+  #        width = 7,
+  #        height = 4)# %>%
+# plotly::ggplotly(tooltip = "text") %>%
+# plotly::highlight(
+#   "plotly_hover",
+#   opacityDim = 1,
+#   selected = attrs_selected(fill = list(color = "black"))
+# )
+
+```
+
+
+### Precipitation {-}
+
+```{r pr-data-midcentury, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
+
+# macav2_pr_historical <- get_macav2_monthly(mt_climate_divisions_simple,
+#                                            raw_dir = "./data/raw_data/macav2_monthly/",
+#                                            elements = c("pr"),
+#                                            scenarios = c("historical")) %>%
+#   purrr::map(aggregate_months,
+#              months = 6:8,
+#              months_fun = sum,
+#              agg_stat = median) %>%
+#   raster::brick() %>%
+#   mean()
+
+macav2_pr_rcp45 <- get_macav2_monthly(mt_climate_divisions_simple,
+                                      raw_dir = "./data/raw_data/macav2_monthly/",
+                                      elements = c("pr"),
+                                      scenarios = c("rcp45")) %>%
+  purrr::compact() %>%
+  purrr::map(function(x){
+    x %>%
+      raster::subset(
+        x %>%
+          names() %>%
+          gsub("X","",.) %>%
+          as.Date(format = "%Y.%m.%d") %>%
+          lubridate::year() %in%
+          c(2040:2069) %>%
+          which()
+      )
+  }) %>%
+  purrr::map(aggregate_months,
+             months = 6:8,
+             months_fun = sum,
+             agg_stat = median) %>%
+  raster::brick() %>%
+  mean()
+
+mm_to_in <- function(x){
+  x %>%
+    magrittr::multiply_by(0.0393701) # mm to inches
+}
+
+macav2_pr_rcp45 <- mm_to_in(macav2_pr_rcp45)
+
+# pr_expected_changes <- (mm_to_in(macav2_pr_rcp45) - mm_to_in(macav2_pr_historical))
+
+
+```
+
+```{r jun-aug-midcentury-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_pcpn <- climdiv_summary(months = 6:8,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+macav2_pr_rcp45.vx <- velox::velox(macav2_pr_rcp45)
+
+macav2_pr_rcp45_climdiv <- mt_climate_divisions_simple %>%
+  dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                  sf::st_centroid() %>%
+                  sf::st_coordinates() %>%
+                  tibble::as_tibble() %$%
+                  X,
+                Centroid_y = mt_climate_divisions_simple %>%
+                  sf::st_centroid() %>%
+                  sf::st_coordinates() %>%
+                  tibble::as_tibble() %$%
+                  Y) %>%
+  dplyr::mutate(`Value` = (macav2_pr_rcp45.vx$extract(mt_climate_divisions_simple_4326,
+                                                      fun = mean,
+                                                      df = TRUE))$out) %>%
+  dplyr::left_join(climdiv_pcpn$normals,
+                   by = "Division code")
+
+rm(macav2_pr_rcp45.vx)
+
+
+
+(macav2_pr_rcp45_climdiv %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(geometry = Shape,
+                fill = Value - Normal),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," in.\n",
+                                          print_sign(Value-Normal), round(Value-Normal, digits = 1), " from norm")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jun-Aug, AD 2040-2069\nTotal Precipitation\nDeviation from 1981-2010 Normal (in.)",
+                         #limits = c(0,1),
+                         direction = 1,
+                         limits = c(-4,4),
+                         breaks = c(-4,0,4),
+                         palette = "BrBG",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+        mdt_theme_map()) %>%
+  save_mt_map("jun-aug-midcentury-prcp.pdf")
+  #   mco_theme_map()) %T>%
+  # ggsave("jun-aug-midcentury-prcp.pdf",
+  #        plot = .,
+  #        device = "pdf",
+  #        path = "./figures/",
+  #        width = 7,
+  #        height = 4)# %>%
+# plotly::ggplotly(tooltip = "text") %>%
+# plotly::highlight(
+#   "plotly_hover",
+#   opacityDim = 1,
+#   selected = attrs_selected(fill = list(color = "black"))
+# )
+
+```
+
+### Comparison with Jun-Aug 2017 {-}
+```{r jun-aug-midcentury-vs-2017-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
+
+climdiv_tmax <- climdiv_summary(months = 6:8,
+                                year = 2017,
+                                element = "tmax",
+                                agg_fun = mean)
+
+macav2_tasmax_rcp45_climdiv %<>%
+  dplyr::left_join(climdiv_tmax$latest %>%
+                     sf::st_set_geometry(NULL) %>%
+                     dplyr::select(`Division code`,Value) %>%
+                     dplyr::rename(`2017` = Value),
+                   by = "Division code")
+
+(macav2_tasmax_rcp45_climdiv %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(geometry = Shape,
+                fill = Value-`2017`),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," ºF\n",
+                                          print_sign(Value-`2017`), round(Value-`2017`, digits = 1), " from 2017")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jun-Aug, AD 2040-2069\nMax. Temperature\nDeviation from 2017 (ºF)",
+                         #limits = c(0,1),
+                         direction = -1,
+                         limits = c(-7,7),
+                         breaks = c(-7,0,7),
+                         palette = "RdBu",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+            mdt_theme_map()) %>%
+  save_mt_map("jun-aug-midcentury-vs-2017-temp.pdf")
+
+```
+
+```{r jun-aug-midcentury-vs-2017-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
+
+climdiv_pcpn <- climdiv_summary(months = 6:8,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+macav2_pr_rcp45_climdiv %<>%
+  dplyr::left_join(climdiv_pcpn$latest %>%
+                     sf::st_set_geometry(NULL) %>%
+                     dplyr::select(`Division code`,Value) %>%
+                     dplyr::rename(`2017` = Value),
+                   by = "Division code")
+
+(macav2_pr_rcp45_climdiv %>%
+    ggplot2::ggplot() +
+    geom_sf(aes(geometry = Shape,
+                fill = Value-`2017`),
+            color = "white") +
+    add_hillshade() +
+    add_counties() +
+    add_climate_divisions() +
+    # Plot the labels
+    geom_label(aes(x = Centroid_x,
+                   y = Centroid_y,
+                   label = stringr::str_c(round(Value, digits = 1)," in.\n",
+                                          print_sign(Value-`2017`), round(Value-`2017`, digits = 1), " from 2017")),
+               alpha = 1,
+               size = 2.25) +
+    scale_fill_distiller(name = "Jun-Aug, AD 2040-2069\nTotal Precipitation\nDeviation from 2017 (in.)",
+                         #limits = c(0,1),
+                         direction = 1,
+                         limits = c(-4,4),
+                         breaks = c(-4,0,4),
+                         palette = "BrBG",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+                mdt_theme_map()) %>%
+  save_mt_map("jun-aug-midcentury-vs-2017-prcp.pdf")
+  #   mco_theme_map()) %T>%
+  # ggsave("jun-aug-midcentury-vs-2017-prcp.pdf",
+  #        plot = .,
+  #        device = "pdf",
+  #        path = "./figures/",
+  #        width = 7,
+  #        height = 4)# %>%
+# plotly::ggplotly(tooltip = "text") %>%
+# plotly::highlight(
+#   "plotly_hover",
+#   opacityDim = 1,
+#   selected = attrs_selected(fill = list(color = "black"))
+# )
+
+```
+
+```{r}
+macav2_tasmax_rcp45_stats <- list(average = macav2_tasmax_rcp45_climdiv %$% 
+  weighted.mean(Value,sf::st_area(Shape)) %>% 
+  round(digits = 1),
+  dev_normal  = macav2_tasmax_rcp45_climdiv %$% 
+  weighted.mean(Value-Normal,sf::st_area(Shape)) %>% 
+  round(digits = 1),
+  dev_2017 = macav2_tasmax_rcp45_climdiv %$%
+  weighted.mean(Value-`2017`,
+                sf::st_area(Shape)) %>%
+  round(digits = 1))
+
+macav2_pr_rcp45_stats <- list(average = macav2_pr_rcp45_climdiv %$% 
+  weighted.mean(Value,sf::st_area(Shape)) %>% 
+  round(digits = 1),
+  dev_normal  = macav2_pr_rcp45_climdiv %$% 
+  weighted.mean(Value-Normal,sf::st_area(Shape)) %>% 
+  round(digits = 1),
+  dev_2017 = macav2_pr_rcp45_climdiv %$%
+  weighted.mean(Value-`2017`,
+                sf::st_area(Shape)) %>%
+  round(digits = 1))
+
+
+```
+
+* Daytime high temperatures across the state are predicted to be an average of `r macav2_tasmax_rcp45_stats$average` ºF, or `r macav2_tasmax_rcp45_stats$dev_normal` degrees above normal, and 
+`r macav2_tasmax_rcp45_stats$dev_2017` degrees above summer 2017 temperatures.
+* Precipitation across the state is predicted to be an average of `r macav2_pr_rcp45_stats$average` in., or `r macav2_pr_rcp45_stats$dev_normal` in. less than normal, and 
+`r macav2_pr_rcp45_stats$dev_2017` in. more than summer 2017 precipitation.
