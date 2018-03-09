@@ -5,11 +5,10 @@ title: "In a Word..."
 ## {-}
 Weather and climate forecasters use words and information in very particular ways that may be different from what we are accustomed to. Here is a list of terms we use in this newsletter:
   
-  <article>
-  ![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Normal(s)** --- Climatologists use "normal"" to indicate values—weather
-measurements like temperature or amount of precipitation—that are expected to occur within a given
-area, based on past observations. Here, the “normal” value is the statistical median value for a given measurement over the 1981–2010 time period, a standard period for de ning climatology in North America. The median is the middle value
-among observed values were they all arranged from smallest to largest. 50 percent of the values are above the median, and 50 percent are below it.
+<hr>
+
+<div style="-webkit-columns: 3 250px;-moz-columns: 3 250px;columns: 3 250px;">
+  ![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Normal(s)** --- Climatologists use "normal" to indicate values---weather measurements like temperature or amount of precipitation---that are expected to occur within a given area, based on past observations. Here, the "normal" value is the statistical median value for a given measurement over the 1981--2010 time period, a standard period for defining climatology in North America. The median is the middle value among observed values when arranged from smallest to largest. 50 percent of the values are above the median, and 50 percent are below it.
 
 <div style="float:left;">
 ![](./icons/temperature.svg){style="height:50px; margin:10px 10px; float:left;"}
@@ -20,28 +19,25 @@ among observed values were they all arranged from smallest to largest. 50 percen
 
 <div class="clearfix"></div>
 
-![](./icons/drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Drought** --- The US Drought Monitor identi es general areas of
-drought and labels them by intensity. Maps of drought intensity are used by policy-makers, resource managers, and agricultural producers to make decisions. More information about the US Drought Monitor can be found at [the US Drought Monitor website](http://droughtmonitor.unl.edu/).
+![](./icons/drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Drought** --- The US Drought Monitor identifies general areas of drought and labels them by intensity. Maps of drought intensity are used by policy-makers, resource managers, and agricultural producers to make decisions. More information about the US Drought Monitor can be found at [the US Drought Monitor website](http://droughtmonitor.unl.edu/).
 
 <div class="clearfix"></div>
 
 ![](./icons/soil_saturation.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Percent Soil Saturation** --- A measure of the water content in the soil. In the maps in this newsletter, soil saturation is estimated from [NASA’s Soil Moisture Active Passive (SMAP) satellite program](https://smap.jpl.nasa.gov). Soil moisture content is mapped via a combination of radar and radiometer measurements from space at an ~10 km spatial resolution.
 
-![](./icons/swe.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Snow Water Equivalent (SWE)** --- SWE is the amount of water contained within the snowpack. It can be thought of as the depth of water that would theoretically result if you melted the entire snowpack. SWE is measured across the West by the [SNOTEL network](https://www.wcc.nrcs.usda.gov/about/mon_automate.html) of snow monitoring stations. The SWE percent of normal represents the current snow water equivalent found at selected SNOTEL sites in the basin compared to the normal value for those sites from 1981–2010.
+![](./icons/swe.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Snow Water Equivalent (SWE)** --- SWE is the amount of water contained within the snowpack. It can be thought of as the depth of water that would theoretically result if you melted the entire snowpack. SWE is measured across the West by the [SNOTEL network](https://www.wcc.nrcs.usda.gov/about/mon_automate.html) of snow monitoring stations. The SWE percent of normal represents the current snow water equivalent found at selected SNOTEL sites in the basin compared to the normal value for those sites from 1981--2010.
 
 <div class="clearfix"></div>
 
-![](./icons/enso.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**La Niña/El Niño** --- El Niño and La Niña are the warm and cool phases of a recurring climate pattern across the tropical Pacific. The *El Niño Southern Oscillation (ENSO)* is one of several global climate phenomena that affect Montana’s weather patterns.
+![](./icons/enso.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**La Niña/El Niño** --- El Niño and La Niña are the warm and cool phases of a recurring climate pattern across the tropical Pacific. The *El Niño Southern Oscillation (ENSO)* is one of several global climate phenomena that affect Montana's weather patterns.
 
 <div class="clearfix"></div>
 
 ![](./icons/soil_conditions.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Soil Conditions** ---
 <div class="clearfix"></div>
-- *Very poor*: Extreme degree of loss
-to yield potential. Pastures provide
-little or no feed.
+- *Very poor*: Extreme degree of loss to yield potential. Pastures provide little or no feed.
 
-- *Very short*: Within the top 6” of soil, moisture supply is considerably less than what is required for normal plant development.
+- *Very short*: Within the top 6" of soil, moisture supply is considerably less than what is required for normal plant development.
 
 Please go to [the USDA National Crop Progress website](https://www.nass.usda.gov/Publications/National_Crop_Progress/Terms_and_Definitions/index.php) for more soil condition and crop definitions.
 
@@ -51,8 +47,8 @@ Please go to [the USDA National Crop Progress website](https://www.nass.usda.gov
 
 <div class="clearfix"></div>
 
-![](./icons/midcentury.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Mid-century** --- AD 2040–2069.
+![](./icons/midcentury.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Mid-century** --- AD 2040--2069.
 
 <div class="clearfix"></div>
 
-</article>
+</div>

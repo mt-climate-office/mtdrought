@@ -2,9 +2,10 @@
 title: "Where are you?"
 ---
 
-<br><br>
-
 ## {-}
+
+Throughout this newsletter, we report weather and forecasts for the seven climate divisions of Montana. The National Oceanic
+and Atmospheric Administration (NOAA) defines climate divisions in Montana to roughly conform to major watersheds, adjusted to match county and agricultural region boundaries. Climate information in this newsletter is often summarized across these climate divisions.
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")

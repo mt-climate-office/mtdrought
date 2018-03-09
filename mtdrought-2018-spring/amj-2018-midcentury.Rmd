@@ -2,8 +2,6 @@
 title: "April–June Mid-century Outlook"
 ---
 
-<br><br>
-
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r setup, include=FALSE}
