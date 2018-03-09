@@ -20,8 +20,6 @@ navbar:
     href: amj-2018-midcentury.html
   - text: Expert Summary
     href: amj-2018-summary.html
-  - text: About
-    href: about.html
 output:
   html_document:
     theme: simplex
