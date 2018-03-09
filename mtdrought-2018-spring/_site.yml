@@ -30,5 +30,8 @@ output:
     df_print: paged
     lib_dir: site_libs
     self_contained: no
+    includes:
+      before_body: open_review_block.html
+      after_body: after_body.html
 output_dir: ../docs/mtdrought-2018-spring
 

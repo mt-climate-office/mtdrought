@@ -34,4 +34,5 @@ plotly
 bibtex
 knitcitations
 kableExtra
+testthat
 bindrcpp
