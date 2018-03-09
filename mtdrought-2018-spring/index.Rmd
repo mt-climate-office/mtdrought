@@ -16,7 +16,9 @@ What information is provided in our Newsletters and what relevance is it?
 
 [**Expert Comments (Agricultural Response)**](amj-2018-summary.html) --- An expert in the agriculture field has provided input on what producers are looking to know. This is where connections and implications between agriculture and climate are discussed.
 
-## April--June 2018 Summary{-}
+<br><br>
+
+### April--June 2018 Summary {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
 - Summer 2017 was the second driest and fifth warmest in Montana since record-keeping began in 1895.
@@ -73,7 +75,7 @@ list.files("../R", full.names = T) %>%
 Production of this newsletter is supported by Water for Agriculture Challenge Area grant no. 2017-67027-26313 from the [USDA National Institute of Food and Agriculture](https://nifa.usda.gov/). Any opinions, findings, conclusions, or recommendations expressed in this publication are those of the author(s) and do not necessarily reflect the view of the U.S. Department of Agriculture.
 
 <br>
-<div style="text-align: center;">
+<div style="text-align: left;">
 ![](./img/NIFA_logo.jpg){style="width:400px;"}
 </div>
 
