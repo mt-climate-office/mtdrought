@@ -1,5 +1,5 @@
 climdiv_summary <- function(months,
-                            year = 2017,
+                            year = lubridate::year(Sys.Date()) - 1,
                             element,
                             agg_fun){
   climdiv_raw <- mco_get_climdiv(element) %>%

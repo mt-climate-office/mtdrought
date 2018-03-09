@@ -49,6 +49,9 @@ get_macav2_midcentury_summary <-
       }) %>%
       raster::brick() %>%
       raster::calc(fun=function(x){quantile(x, probs = c(0.25, 0.5, 0.75))}) %>%
-      {if(element == "pr") mm_to_in(.) else k_to_f(.)}
+      {if(element == "pr") 
+        mm_to_in(.) 
+        else 
+          k_to_f(.)}
     
   }

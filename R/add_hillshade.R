@@ -8,7 +8,7 @@ add_hillshade <- function(){
                                        y = y,
                                        alpha = ID),
                          na.rm = TRUE),
-    scale_alpha(range = c(0.8, 0), 
+    scale_alpha(range = c(0.8, 0),
                 na.value = 0,
                 limits = c(0,255),
                 guide = "none")

@@ -10,8 +10,12 @@ mtd_plot_noaa_drought_outlook <- function(date,
   
   # List the files available from the Drought Monitor
   noaa_files <- 
-    noaa_url %>%
-    httr::GET() %>%
+    suppressWarnings(
+      httr::GET(
+        noaa_url,
+        httr::authenticate("anonymous", "")
+        )
+      ) %>%
     httr::content() %>%
     readr::read_table(col_names = FALSE) %$%
     X9 %>%
@@ -83,7 +87,7 @@ mtd_plot_noaa_drought_outlook <- function(date,
                  add_counties() +
                  add_climate_divisions() +
                  mdt_theme_map()) %T>%
-    save_mt_map(stringr::str_c(noaa_date,"-",element,"-seasonal-drought-outlook.pdf"))
+    save_mt_map(stringr::str_c(noaa_date,"-seasonal-drought-outlook.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%
            tools::file_path_sans_ext())

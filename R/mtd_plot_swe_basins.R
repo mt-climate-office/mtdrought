@@ -39,7 +39,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                                  paste0("%")),
                            alpha = 1,
                            size = 2.25) +
-                scale_fill_distiller(name = stringr::str_c("\nSnow Water Equivalent\n% of 1981-2010 median\nas of",
+                scale_fill_distiller(name = stringr::str_c("\nSnow Water Equivalent\n% of 1981-2010 median\nas of ",
                                                            format(lubridate::ymd(date), '%B %d, %Y')),
                                      #limits = c(0,1),
                                      direction = 1,

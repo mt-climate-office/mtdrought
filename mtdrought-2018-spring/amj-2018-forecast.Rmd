@@ -1,0 +1,122 @@
+---
+title: "April–June 2018 Forecast"
+---
+
+<br><br>
+
+## {- .tabset .tabset-fade .tabset-pills}
+
+```{r setup, include=FALSE}
+source("./R/setup.R")
+```
+
+### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
+```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_tmpc <- climdiv_summary(months = 4:6,
+                                year = 2017,
+                                element = "tmpc",
+                                agg_fun = mean)
+
+
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-04-01",
+                                                 element = "temp",
+                                                 data_out = "../data/NOAA_seasonal")
+
+noaa_seasonal$map +
+  geom_label(data = climdiv_tmpc$normals %>%
+               left_join(mt_climate_divisions_simple %>%
+                           dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                                           sf::st_centroid() %>%
+                                           sf::st_coordinates() %>%
+                                           tibble::as_tibble() %$%
+                                           X,
+                                         Centroid_y = mt_climate_divisions_simple %>%
+                                           sf::st_centroid() %>%
+                                           sf::st_coordinates() %>%
+                                           tibble::as_tibble() %$%
+                                           Y),
+                         .,
+                         by = "Division code"),
+             aes(x = Centroid_x,
+                 y = Centroid_y,
+                 label = stringr::str_c("1981-2010 normal: \n",
+                                        Normal %>%
+                                          round(digits = 1) %>%
+                                          paste0(" ºF"))),
+             alpha = 1,
+             size = 2.25)
+
+```
+
+### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
+```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+climdiv_pcpn <- climdiv_summary(months = 4:6,
+                                year = 2017,
+                                element = "pcpn",
+                                agg_fun = sum)
+
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-04-01",
+                                                 element = "prcp",
+                                                 data_out = "../data/NOAA_seasonal")
+
+noaa_seasonal$map +
+  geom_label(data = climdiv_pcpn$normals %>%
+               left_join(mt_climate_divisions_simple %>%
+                           dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
+                                           sf::st_centroid() %>%
+                                           sf::st_coordinates() %>%
+                                           tibble::as_tibble() %$%
+                                           X,
+                                         Centroid_y = mt_climate_divisions_simple %>%
+                                           sf::st_centroid() %>%
+                                           sf::st_coordinates() %>%
+                                           tibble::as_tibble() %$%
+                                           Y),
+                         .,
+                         by = "Division code"),
+             aes(x = Centroid_x,
+                 y = Centroid_y,
+                 label = stringr::str_c("Normal: \n",
+                                        Normal %>%
+                                          round(digits = 1) %>%
+                                          paste0(" in."))),
+             alpha = 1,
+             size = 2.25)
+
+```
+
+### <img src="icons/drought.svg" width="35px"/> Drought {-}
+
+```{r future-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+mtd_plot_noaa_drought_outlook(date = "2018-04-01",
+                              data_out = "../data/NOAA_droughtlook")
+
+```
+
+### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-}
+
+Sea surface temperatures have remained below average, maintaining La Niña conditions in the ocean and lower atmosphere. Most models agree that as this winter transitions into spring, sea surface temperatures are expected to return to near average. Returning to ENSO-neutral in spring means neither El Niño nor La Niña conditions are present. When ENSO-neutral occurs, ocean and atmospheric conditions are near the long-term average and it often coincides with a transition from La Niña to El Niño or vice versa. While ENSO-neutral persists there is often less confidence in summer forecast as durations of neutral conditions vary. As this transition occurs, La Niña conditions will continue with below-average temperatures and above-median precipitation in spring for Montana. These conditions will gradually weaken and transition to neutral as spring transitions to summer.
+
+#### Temperature {-}
+```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+
+enso_temp <- mtd_plot_enso(months = 4:6,
+                                element = "tmpc",
+                                agg_fun = mean)
+ 
+enso_temp$map
+```
+
+#### Precipitation {-}
+```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+enso_prcp <- mtd_plot_enso(months = 4:6,
+                                element = "pcpn",
+                                agg_fun = sum)
+ 
+enso_prcp$map
+```

@@ -1,0 +1,34 @@
+name: MT Drought & Climate — April–June 2018
+navbar:
+  title: <div style="position:relative;top:50%;transform:translateY(-50%);"><img src="MDC_logo.svg"
+    style="max-height:50px; padding:0 15px; float:left;">Monitoring and Forecasting<br>for
+    Agricultural Producers<br><b>April–June 2018</b></div>
+  right:
+  - text: Reference
+    menu:
+    - text: Where are you?
+      href: location.html
+    - text: Weather or Climate?
+      href: weather-climate.html
+    - text: Glossary
+      href: glossary.html
+  - text: Jan–Mar 2018
+    href: jfm-2018-review.html
+  - text: Apr–Jun 2018
+    href: amj-2018-forecast.html
+  - text: Apr–Jun Mid-century
+    href: amj-2018-midcentury.html
+  - text: Expert Summary
+    href: amj-2018-summary.html
+  - text: About
+    href: about.html
+output:
+  html_document:
+    theme: simplex
+    highlight: textmate
+    css: style.css
+    df_print: paged
+    lib_dir: site_libs
+    self_contained: no
+output_dir: ../docs/mtdrought-2018-spring
+

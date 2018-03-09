@@ -1,7 +1,10 @@
 mtd_plot_macav2_midcentury_summary <-
   function (months = 1:3,
-            element = "tasmax",
-            agg_fun = mean)
+            year = 2018,
+            element = "tasmean",
+            agg_fun = mean,
+            normal = FALSE,
+            data_out = "../data/macav2_monthly")
   {
     
     if(element == "tasmax"){
@@ -27,20 +30,24 @@ mtd_plot_macav2_midcentury_summary <-
       macav2_data <- (
         get_macav2_midcentury_summary(months = months,
                                       element = "tasmax",
-                                      agg_fun = agg_fun) + 
+                                      agg_fun = agg_fun,
+                                      data_out = data_out) + 
           get_macav2_midcentury_summary(months = months,
                                         element = "tasmin",
-                                        agg_fun = agg_fun)
+                                        agg_fun = agg_fun,
+                                        data_out = data_out)
       ) / 2
       
     } else {
       macav2_data <- 
         get_macav2_midcentury_summary(months = months,
                                       element = element,
-                                      agg_fun = agg_fun)
+                                      agg_fun = agg_fun,
+                                      data_out = data_out)
     } 
     
     climdiv_data <- climdiv_summary(months = months,
+                                    year = year,
                                     element = climdiv_element,
                                     agg_fun = agg_fun)
     
@@ -68,15 +75,25 @@ mtd_plot_macav2_midcentury_summary <-
                                               df = TRUE) %>%
                          dplyr::select(-ID_sp) %>%
                          magrittr::set_names(c("25%","50%","75%"))) %>%
-      dplyr::left_join(climdiv_data$normals,
+      dplyr::left_join(climdiv_data$latest %>%
+                         dplyr::select(`Division code`,
+                                       Normal, 
+                                       Value) %>%
+                         sf::st_set_geometry(NULL),
                        by = "Division code")
     
     rm(macav2_data.vx)
     
+    range <- macav2_climdiv %$%
+    {if(normal) `50%` - Normal else `50%` - Value} %>%
+      abs() %>%
+      max() %>%
+      ceiling()
+    
     macav2_climdiv_map <- (macav2_climdiv %>%
                              ggplot2::ggplot() +
                              geom_sf(aes(geometry = Shape,
-                                         fill = `50%`-Normal),
+                                         fill = if(normal) `50%` - Normal else `50%` - Value),
                                      color = "white") +
                              add_hillshade() +
                              add_counties() +
@@ -85,11 +102,13 @@ mtd_plot_macav2_midcentury_summary <-
                              geom_label(aes(x = Centroid_x,
                                             y = Centroid_y,
                                             label = stringr::str_c(round(`50%`, digits = 1)," ",unit_symbol,"\n",
-                                                                   print_sign(`50%`-Normal), round(`50%`-Normal, digits = 1), " from norm.")),
+                                                                   print_sign(if(normal) `50%` - Normal else `50%` - Value), 
+                                                                   round(if(normal) `50%` - Normal else `50%` - Value, digits = 1), 
+                                                                   " from ",ifelse(normal, "norm.", year))),
                                         alpha = 1,
                                         size = 2.25) +
                              scale_fill_distiller(name = stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],", ",
-                                                                        year,"\n",long_name,"\nDeviation from Norm. (",unit_symbol,")"),
+                                                                        "2040-2069\n",long_name,"\nDeviation from ",ifelse(normal, "Norm.", year)," (",unit_symbol,")"),
                                                   direction = if(element == "pr") 1 else -1,
                                                   limits = c(0-range,range),
                                                   breaks = c(0-range,0,range),
@@ -97,7 +116,8 @@ mtd_plot_macav2_midcentury_summary <-
                                                   expand = FALSE,
                                                   guide = guide_colourbar(title.position = "bottom")) +
                              mdt_theme_map()) %T>%
-      save_mt_map(stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],"-midcentury-",element,".pdf"))
+      save_mt_map(stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],"-",
+                                 ifelse(normal, "normal", year),"-midcentury-",element,".pdf"))
     
     return(list(data = macav2_climdiv,
                 map = macav2_climdiv_map))

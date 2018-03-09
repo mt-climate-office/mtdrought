@@ -1,0 +1,9 @@
+---
+title: "Weather or Climate?"
+---
+
+<br><br>
+
+## {-}
+
+The difference between weather and climate is dependent on time. To understand climate at a given place requires looking at weather over relatively long periods of time. Weather is the day-to-day interaction of factors like temperature, humidity, precipitation, cloudiness, visibility, and wind. In addition to studying weather, scientists examine climate trends or cycles of variability to understand the bigger picture of long-term changes.

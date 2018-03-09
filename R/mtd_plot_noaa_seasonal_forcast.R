@@ -11,8 +11,12 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
   
   # List the files available from the Drought Monitor
   noaa_files <- 
-    noaa_url %>%
-    httr::GET() %>%
+    suppressWarnings(
+      httr::GET(
+        noaa_url,
+        httr::authenticate("anonymous", "")
+      )
+    ) %>%
     httr::content() %>%
     readr::read_table(col_names = FALSE) %$%
     X9 %>%

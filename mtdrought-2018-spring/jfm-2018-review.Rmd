@@ -1,0 +1,82 @@
+---
+title: "January--March, 2018: In review"
+---
+
+<br><br>
+
+## {- .tabset .tabset-fade .tabset-pills}
+
+```{r setup, include=FALSE}
+source("./R/setup.R")
+```
+
+La Nina didn't dissappoint! Reflecting on last winter...
+
+### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
+```{r past-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+past_seasonal_temp <- mtd_plot_climdiv(months = 1:2,
+                                 year = 2018,
+                                 element = "tmpc",
+                                 agg_fun = mean)
+
+past_seasonal_temp$map
+
+```
+
+* In January--February, 2018, the average temperature statewide was `r round(past_seasonal_temp$data$state_rank$Value, digits = 1)` ºF, `r abs(round(past_seasonal_temp$data$state_rank$Deviation, digits = 1))` degrees lower than the 1981--2010 normal value.
+* January--February, 2018 was the `r scales::ordinal(past_seasonal_temp$data$state_rank$Rank)` coldest winter since record keeping began in 1895.
+
+### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
+```{r past-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+past_seasonal_prcp <- mtd_plot_climdiv(months = 1:2,
+                                 year = 2018,
+                                 element = "pcpn",
+                                 agg_fun = sum)
+
+past_seasonal_prcp$map
+
+```
+
+* In January--February, 2018, the average total precipitation statewide was `r round(past_seasonal_prcp$data$state_rank$Value, digits = 1)` inches, `r round(abs(past_seasonal_prcp$data$state_rank$Deviation), digits = 1)` inches lower than the 1981--2010 normal value.
+* January--February, 2018 was the `r scales::ordinal(past_seasonal_prcp$data$state_rank$Rank)` driest winter since record keeping began in 1895.
+
+### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
+
+```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+past_seasonal_swe <- mtd_plot_swe_basins(date="2018-04-01")
+
+past_seasonal_swe$map
+
+```
+
+#### Big Story: Blackfeet Blizzard {-}
+
+
+### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
+
+```{r past-seasonal-smap, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+past_seasonal_smap <- mtd_plot_smap(date = "2018-04-01",
+                                    data_out = "../data/SMAP")
+
+past_seasonal_smap$map
+
+```
+
+#### Snow and soil moisture recharge {-}
+"Recharge rates" ...
+
+### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+```{r past-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+past_seasonal_drought <- mtd_plot_usdm(date = "2018-04-01",
+                                       data_out = "../data/USDM")
+
+past_seasonal_drought$map
+
+```
+
+Not out of it yet in the northeast.
+
