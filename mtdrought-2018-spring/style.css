@@ -9,6 +9,12 @@ article {
           columns: 3 250px;
 }
 
+@media only screen and (max-width : 550px){
+    ht {
+        display:none;
+    }
+}
+
 .rmdreview {
   margin-top: 30px;
   padding: 1em 1em 1em 1em;
@@ -22,7 +28,7 @@ article {
 }
 
 .navbar-brand {
-  padding: 0 15px;
+  padding: 15px 15px;
   height: 80px;
   line-height: 18px;
 }

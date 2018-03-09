@@ -1,8 +1,8 @@
 name: MT Drought & Climate — April–June 2018
 navbar:
-  title: <div style="position:relative;top:50%;transform:translateY(-50%);"><img src="img/MDC_logo.svg"
-    style="max-height:50px; padding:0 15px; float:left;">Monitoring and Forecasting<br>for
-    Agricultural Producers<br><b>April–June 2018</b></div>
+  title: <img src="img/MDC_logo.svg"
+    style="height:50px; padding:0 15px; float:left; vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;">Monitoring and Forecasting<br>for
+    Agricultural Producers<br><b>April–June 2018</b></ht>
   right:
   - text: Reference
     menu:
