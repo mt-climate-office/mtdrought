@@ -3,7 +3,21 @@ title: "2018 Winter-in-review and Spring Outlook"
 ---
 
 ## {-}
-  
+
+Welcome to the April 2018 Montana Drought & Climate newsletter. We are working to provide and interpret climate data for agricultural producers in Montana. With our seasonal newsletters, we hope to transform existing forecasts and projections into useful climate information that meet producer needs. Please [send us your feedback](mailto:mtdrought@umontana.org)!
+
+What information is provided in our Newsletters and what relevance is it?
+
+[**Conditions**](./jfm-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the season and allows producers to reflect on years past in comparison.
+
+[**Forecast**](./amj-2018-forecast.html) --- The seasonal forecast is generally the most frequently requested dataset by producers. Here Temperature, Precipitation, Drought and influential global air circulation patterns are discussed in regional detail.
+
+[**2040--2069 Outlook**](./amj-2018-midcentury.html) --- Modeling allows for a better idea of what mid-century conditions could look like in Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
+
+[**Expert Comments (Agricultural Response)**](amj-2018-summary.html) --- An expert in the agriculture field has provided input on what producers are looking to know. This is where connections and implications between agriculture and climate are discussed.
+
+## April--June 2018 Summary{-}
+
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
 - Summer 2017 was the second driest and fifth warmest in Montana since record-keeping began in 1895.
 - In the summer 2017, the lack of rainfall and brisk winds in eastern Montana led to a rapid onset severe drought, or a “flash drought”, across the state.
@@ -67,15 +81,15 @@ Production of this newsletter is supported by Water for Agriculture Challenge Ar
 -----
 
 <br>
-<a href="default.asp">
+<a href="https://climate.umt.edu/" target="_blank">
   <img src="./img/MCO_logo.svg" alt="Montana Climate Office logo" style="width:250px;float:right;">
 </a>
-Montana Climate Office<br>
+[Montana Climate Office](https://climate.umt.edu/)<br>
 Montana Forest & Conservation Experiment Station<br>
 University of Montana<br>
 32 Campus Drive<br>
 Missoula, MT 59812<br>
 
 P: (406) 243-6793<br>
-E: [mtdrought@umontana.org](mailto:mtdrought@umontana.org)<br>
+E: [mtdrought@umontana.org](mailto:mtdrought@umontana.edu)<br>
 W: [http://climate.umt.edu/](http://climate.umt.edu/)
