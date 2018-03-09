@@ -68,10 +68,8 @@ Production of this newsletter is supported by Water for Agriculture Challenge Ar
 
 <br>
 <a href="default.asp">
-  <img src="./img/MCO_logo.svg" alt="Montana Climate Office logo" style="width:250px;">
+  <img src="./img/MCO_logo.svg" alt="Montana Climate Office logo" style="width:250px;float:right;">
 </a>
-<br>
-<br>
 Montana Climate Office<br>
 Montana Forest & Conservation Experiment Station<br>
 University of Montana<br>
