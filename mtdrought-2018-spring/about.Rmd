@@ -1,5 +1,5 @@
 ---
-title: "About Montana Drought and Climate and the Montana Climate Office"
+title: "About **Montana Drought & Climate**<br>and the **Montana Climate Office**"
 ---
 
 ## {-}
@@ -7,3 +7,20 @@ Montana Drought and Climate is a USDA-funded product of the Montana Climate Offi
 
 Production of this newsletter is supported by Water for Agriculture Challenge Area grant no. 2017-67027-26313 from the USDA National Institute of Food and Agriculture. Any opinions, findings, conclusions, or recommendations expressed in this publication are those of the author(s) and do not necessarily reflect the view of the U.S. Department of Agriculture.
 
+-----
+
+## Contact Us {-}
+
+
+![](./img/MCO_logo.svg){style="width:300px;"}
+<br>
+<br>
+Montana Climate Office<br>
+Montana Forest & Conservation Experiment Station<br>
+University of Montana<br>
+32 Campus Drive<br>
+Missoula, MT 59812<br>
+
+P: (406) 243-6793<br>
+E: [mtdrought@umontana.org](mailto:mtdrought@umontana.org)<br>
+W: [http://climate.umt.edu/](http://climate.umt.edu/)
