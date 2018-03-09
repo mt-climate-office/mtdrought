@@ -244,50 +244,6 @@ $(document).ready(function () {
 <div id="snowpack" class="section level3 unnumbered">
 <h3><img src="icons/swe.svg" width="35px"/> Snowpack</h3>
 <p><img src="amj-2018-midcentury_files/figure-html/midcentury-swe-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<!-- ### Comparison with Jan-Mar 2018 {-} -->
-<!-- ```{r midcentury-vs-past-season-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- midcentury_temp_vs_past <- -->
-<!--   mtd_plot_macav2_midcentury_summary(months = 1:3, -->
-<!--                                      year = 2018, -->
-<!--                                      element = "tasmean", -->
-<!--                                      agg_fun = mean, -->
-<!--                                      data_out = "../data/macav2_monthly") -->
-<!-- midcentury_temp_vs_past$map -->
-<!-- ``` -->
-<!-- ```{r midcentury-vs-past-season-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- midcentury_prcp_vs_past <- mtd_plot_macav2_midcentury_summary(months = 1:3, -->
-<!--                                      year = 2018, -->
-<!--                                      element = "pr", -->
-<!--                                      agg_fun = function(x,...){sum(x,...)}, -->
-<!--                                      data_out = "../data/macav2_monthly") -->
-<!-- midcentury_prcp_vs_past$map -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- midcentury_temp_vs_past_stats <- list(average = midcentury_temp_vs_past$data %$% -->
-<!--                                     weighted.mean(`50%`,sf::st_area(Shape)) %>% -->
-<!--                                     round(digits = 1), -->
-<!--                                   dev_normal  = midcentury_temp_vs_past$data %$% -->
-<!--                                     weighted.mean(`50%`-Normal,sf::st_area(Shape)) %>% -->
-<!--                                     round(digits = 1), -->
-<!--                                   dev_2017 = midcentury_temp_vs_past$data %$% -->
-<!--                                     weighted.mean(`50%`-Value, -->
-<!--                                                   sf::st_area(Shape)) %>% -->
-<!--                                     round(digits = 1)) -->
-<!-- midcentury_prcp_vs_past_stats <- list(average = midcentury_prcp_vs_past$data %$% -->
-<!--                                     weighted.mean(`50%`,sf::st_area(Shape)) %>% -->
-<!--                                     round(digits = 1), -->
-<!--                                   dev_normal  = midcentury_prcp_vs_past$data %$% -->
-<!--                                     weighted.mean(`50%`-Normal,sf::st_area(Shape)) %>% -->
-<!--                                     round(digits = 1), -->
-<!--                                   dev_2017 = midcentury_prcp_vs_past$data %$% -->
-<!--                                     weighted.mean(`50%`-Value, -->
-<!--                                                   sf::st_area(Shape)) %>% -->
-<!--                                     round(digits = 1)) -->
-<!-- ``` -->
-<!-- * Temperatures across the state are predicted to be an average of 31 ºF, or 4.9 degrees above normal, and -->
-<!-- 14.3 degrees above winter 2018 temperatures. -->
-<!-- * Precipitation across the state is predicted to be an average of 3.5 in., or 0.3 in. less than normal, and -->
-<!-- 0.3 in. more than winter 2018 precipitation. -->
 </div>
 </div>
 

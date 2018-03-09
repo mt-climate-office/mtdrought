@@ -3,6 +3,7 @@ title: "In a Word..."
 ---
 
 ## {-}
+Weather and climate forecasters use words and information in very particular ways that may be different from what we are accustomed to. Here is a list of terms we use in this newsletter:
   
   <article>
   ![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Normal(s)** --- Climatologists use "normal"" to indicate values—weather
