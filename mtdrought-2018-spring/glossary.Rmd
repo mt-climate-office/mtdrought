@@ -36,7 +36,9 @@ Weather and climate forecasters use words and information in very particular way
 <div class="clearfix"></div>
 
 ![](./icons/soil_conditions.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Soil Conditions** ---
+
 <div class="clearfix"></div>
+
 - *Very poor*: Extreme degree of loss to yield potential. Pastures provide little or no feed.
 
 - *Very short*: Within the top 6" of soil, moisture supply is considerably less than what is required for normal plant development.
