@@ -1,8 +1,27 @@
 ---
-title: "In a Word..."
+title: "Reference"
 ---
 
-## {-}
+## Where are you? {-}
+
+Throughout this newsletter, we report weather and forecasts for the seven climate divisions of Montana. The National Oceanic
+and Atmospheric Administration (NOAA) defines climate divisions in Montana to roughly conform to major watersheds, adjusted to match county and agricultural region boundaries. Climate information in this newsletter is often summarized across these climate divisions.
+
+```{r setup, include=FALSE}
+source("./R/setup.R")
+```
+
+```{r climate-divisions, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+mtd_plot_overview()
+
+```
+
+## Weather or Climate? {-}
+
+The difference between weather and climate is the measure of *time*. To understand climate at a given place requires looking at weather over relatively long periods of time. Weather is the day-to-day interaction of factors like temperature, humidity, precipitation, cloudiness, visibility, and wind. In addition to studying weather, scientists examine climate trends or cycles of variability to understand the bigger picture of long-term changes.
+
+## In a Word... {-}
 Weather and climate forecasters use words and information in very particular ways that may be different from what we are accustomed to. Here is a list of terms we use in this newsletter:
   
 <hr>
@@ -56,3 +75,5 @@ Please go to [the USDA National Crop Progress website](https://www.nass.usda.gov
 <div class="clearfix"></div>
 
 </div>
+
+

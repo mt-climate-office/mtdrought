@@ -45,9 +45,8 @@ knitr::opts_chunk$set(echo = FALSE,
 
 # install.packages("devtools")
 # devtools::install_github("mt-climate-office/mcor")
-# source("https://bioconductor.org/biocLite.R")
 # devtools::install_github("ecohealthalliance/fasterize")
-# biocLite("rhdf5")
+# devtools::install_bioc("rhdf5")
 
 ## Load all packages
 all_packages <- c("mcor", # The Core MCO package
@@ -57,7 +56,6 @@ all_packages <- c("mcor", # The Core MCO package
                   "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
                   "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
 
-# devtools::install_bioc("rhdf5")
 # purrr::walk(all_packages, devtools::install_cran, character.only = TRUE)
 purrr::walk(all_packages, library, character.only = TRUE)
 
