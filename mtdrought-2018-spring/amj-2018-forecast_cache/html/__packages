@@ -1,10 +1,10 @@
 base
 mcor
 sp
-sf
 FedData
 smapr
 rhdf5
+sf
 raster
 rgeos
 fasterize
@@ -28,5 +28,4 @@ plotly
 bibtex
 knitcitations
 kableExtra
-testthat
 bindrcpp
