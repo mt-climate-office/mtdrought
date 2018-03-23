@@ -20,7 +20,7 @@ Weather and climate forecasters use words and information in very particular way
 <div class="clearfix"></div>
 ![](./icons/precipitation.svg){style="height:50px; margin:10px 10px; float:left;"}
 </div>
-<br>**Temperature and Precipitation** --- Throughout this newsletter, we report past temperature and precipitation data derived directly from the [NOAA US Climate Division dataset](https://www.ncdc.noaa.gov/monitoring-references/maps/us-climate-divisions.php). Temperature data are reported as seasonal averages; precipitation data are reported as seasonal total precipitation.
+<br>**Temperature and Precipitation** --- Throughout this newsletter, we report past temperature and precipitation data derived directly from the [GridMET](http://www.climatologylab.org/gridmet.html) daily 4-km-gridded meteorological dataset from the University of Idaho. Temperature data are reported as seasonal averages; precipitation data are reported as seasonal total precipitation. In some maps, we have aggregated gridded data to county boundaries.
 
 <div class="clearfix"></div>
 
@@ -40,21 +40,21 @@ Weather and climate forecasters use words and information in very particular way
 
 <div class="clearfix"></div>
 
-![](./icons/soil_conditions.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Soil Conditions** ---
+<!-- ![](./icons/soil_conditions.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Soil Conditions** --- -->
 
-<div class="clearfix"></div>
+<!-- <div class="clearfix"></div> -->
 
-- *Very poor*: Extreme degree of loss to yield potential. Pastures provide little or no feed.
+<!-- - *Very poor*: Extreme degree of loss to yield potential. Pastures provide little or no feed. -->
 
-- *Very short*: Within the top 6" of soil, moisture supply is considerably less than what is required for normal plant development.
+<!-- - *Very short*: Within the top 6" of soil, moisture supply is considerably less than what is required for normal plant development. -->
 
-Please go to [the USDA National Crop Progress website](https://www.nass.usda.gov/Publications/National_Crop_Progress/Terms_and_Definitions/index.php) for more soil condition and crop definitions.
+<!-- Please go to [the USDA National Crop Progress website](https://www.nass.usda.gov/Publications/National_Crop_Progress/Terms_and_Definitions/index.php) for more soil condition and crop definitions. -->
 
-<div class="clearfix"></div>
+<!-- <div class="clearfix"></div> -->
 
-![](./icons/flash_drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Flash drought** --- Short periods of no rainfall and/or warm temperatures that induce low and rapidly decreasing soil moisture.
+<!-- ![](./icons/flash_drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Flash drought** --- Short periods of no rainfall and/or warm temperatures that induce low and rapidly decreasing soil moisture. -->
 
-<div class="clearfix"></div>
+<!-- <div class="clearfix"></div> -->
 
 ![](./icons/midcentury.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Mid-century** --- AD 2040--2069.
 

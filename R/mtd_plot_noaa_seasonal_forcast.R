@@ -1,6 +1,5 @@
 mtd_plot_noaa_seasonal_forecast <- function(date,
                                             element,
-                                            lead = 1,
                                             data_out = "./data/NOAA_seasonal"){
   
   noaa_url <- "ftp://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/"
@@ -8,6 +7,16 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
   dir.create(data_out,
              recursive = TRUE,
              showWarnings = FALSE)
+  
+  if(element == "temp"){
+    unit_symbol <- "ºF"
+    long_name <- "Temperature"
+  }else if(element == "prcp"){
+    unit_symbol <- "in."
+    long_name <- "Net precipitation"
+  } else {
+    stop("Element passed was not allowed! Please use either 'temp' or 'prcp'.")
+  }
   
   # List the files available from the Drought Monitor
   noaa_files <- 
@@ -45,12 +54,20 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
         exdir = stringr::str_c(data_out,"/",closest_file) %>%
           tools::file_path_sans_ext())
   
-  noaa_data <- sf::st_read(stringr::str_c(data_out,"/",closest_file) %>%
-                             tools::file_path_sans_ext() %>%
-                             list.files(pattern = "\\.shp$",
-                                        full.names = T) %>%
-                             stringr::str_subset(stringr::str_c("lead",lead,"_")),
-                           quiet = T) %>%
+  months <- lubridate::as_date(date) %>%
+    lubridate::month() %>%
+    magrittr::add(0:2) %>%
+    magrittr::extract(month.name, .) %>%
+    stringr::str_sub(1,1) %>%
+    stringr::str_flatten()
+    
+    noaa_data <- sf::st_read(stringr::str_c(data_out,"/",closest_file) %>%
+                               tools::file_path_sans_ext() %>%
+                               list.files(pattern = "\\.shp$",
+                                          full.names = T) %>%
+                               stringr::str_subset(months) %>%
+                               stringr::str_subset("lead[1-9]_"),
+                             quiet = T) %>%
     lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
@@ -68,9 +85,14 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = Prob),
                          color = NA) +
-                 scale_fill_manual(name = stringr::str_c("Three-month Forecast\n",
-                                                         "Probability Above/Below Normal\nas of ",
-                                                         format(lubridate::ymd(noaa_date), '%B %d, %Y')),
+                 scale_fill_manual(name = stringr::str_c(lubridate::as_date(date) %>%
+                                                           lubridate::month() %>%
+                                                           magrittr::add(c(0,2)) %>%
+                                                           magrittr::extract(month.name, .) %>%
+                                                           stringr::str_flatten(collapse = " - "),
+                                                         ", ",lubridate::year(lubridate::ymd(date)),"\n",
+                                                         long_name," (", unit_symbol, ")", "\n",                              
+                                                         "Probability above/below normal"),
                                    limits = rev(c(seq(-100,-40,20),
                                                   -33,
                                                   0,
@@ -82,12 +104,12 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                                                   33,
                                                   seq(40,100,20))),
                                    values = (if(element == "prcp")
-                                                   c(colorRampPalette(RColorBrewer::brewer.pal(11,"BrBG")[1:5])(8),
-                                                     RColorBrewer::brewer.pal(11,"BrBG")[6],
-                                                     colorRampPalette(RColorBrewer::brewer.pal(11,"BrBG")[7:11])(8)) else
-                                                   c(colorRampPalette(RColorBrewer::brewer.pal(11,"RdBu")[11:7])(8),
-                                                     RColorBrewer::brewer.pal(11,"RdBu")[6],
-                                                     colorRampPalette(RColorBrewer::brewer.pal(11,"RdBu")[5:1])(8))) %>%
+                                     c(colorRampPalette(RColorBrewer::brewer.pal(11,"BrBG")[1:5])(8),
+                                       RColorBrewer::brewer.pal(11,"BrBG")[6],
+                                       colorRampPalette(RColorBrewer::brewer.pal(11,"BrBG")[7:11])(8)) else
+                                         c(colorRampPalette(RColorBrewer::brewer.pal(11,"RdBu")[11:7])(8),
+                                           RColorBrewer::brewer.pal(11,"RdBu")[6],
+                                           colorRampPalette(RColorBrewer::brewer.pal(11,"RdBu")[5:1])(8))) %>%
                                      magrittr::set_names(c(seq(-100,-40,10),
                                                            -33,
                                                            0,
@@ -108,19 +130,19 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                  #                                        Centroid_y = mt_climate_divisions_simple %>%
                  #                                          sf::st_centroid() %>%
                  #                                          sf::st_coordinates() %>%
-                 #                                          tibble::as_tibble() %$%
-                 #                                          Y),
-                 #                        .,
-                 #                        by = "Division code"),
-                 #            aes(x = Centroid_x,
-                 #                y = Centroid_y,
-                 #                label = stringr::str_c("1981-2010 normal: \n",
-                 #                                       Normal %>%
-                 #                                         round(digits = 1) %>%
-                 #                                         paste0(" ºF"))),
-                 #            alpha = 1,
-                 #            size = 2.25) +
-                 mdt_theme_map()) %T>%
+               #                                          tibble::as_tibble() %$%
+               #                                          Y),
+               #                        .,
+               #                        by = "Division code"),
+               #            aes(x = Centroid_x,
+               #                y = Centroid_y,
+               #                label = stringr::str_c("1981-2010 normal: \n",
+               #                                       Normal %>%
+               #                                         round(digits = 1) %>%
+               #                                         paste0(" ºF"))),
+               #            alpha = 1,
+               #            size = 2.25) +
+               mdt_theme_map()) %T>%
     save_mt_map(stringr::str_c(noaa_date,"-",element,"-seasonal-forecast.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%
