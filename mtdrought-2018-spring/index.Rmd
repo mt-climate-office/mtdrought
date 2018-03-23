@@ -1,22 +1,18 @@
 ---
-title: "2018 Winter-in-review and Spring Outlook"
+title: "2018 Spring Outlook"
 ---
 
 ## {-}
 
 Welcome to the April 2018 Montana Drought & Climate newsletter. We are working to provide and interpret climate data for agricultural producers in Montana. With our seasonal newsletters, we hope to transform existing forecasts and projections into useful climate information that meet producer needs. Please [send us your feedback](mailto:mtdrought@umontana.org)!
 
-What information is provided in our Newsletters and what relevance is it?
+Here's what you'll find in this newsletter:
 
 [**Conditions**](./jfm-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the season and allows producers to reflect on years past in comparison.
 
 [**Forecast**](./amj-2018-forecast.html) --- The seasonal forecast is generally the most frequently requested dataset by producers. Here Temperature, Precipitation, Drought and influential global air circulation patterns are discussed in regional detail.
 
 [**2040--2069 Outlook**](./amj-2018-midcentury.html) --- Modeling allows for a better idea of what mid-century conditions could look like in Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
-
-[**Expert Comments (Agricultural Response)**](amj-2018-summary.html) --- An expert in the agriculture field has provided input on what producers are looking to know. This is where connections and implications between agriculture and climate are discussed.
-
-<br><br>
 
 -----
 
