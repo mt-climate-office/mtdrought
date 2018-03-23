@@ -22,7 +22,7 @@ mtd_plot_midcentury_swe_basins <- function(month,
   midcentury_swe_basins <- 
     midcentury_swe.vx$extract(swe %>%
                                 sf::st_cast() %>%
-                                sf::st_transform(4326),
+                                lwgeom::st_transform_proj(4326),
                               fun = mean,
                               small = TRUE,
                               df = TRUE) %>%

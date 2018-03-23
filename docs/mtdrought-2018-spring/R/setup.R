@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE,
 ## Load all packages
 all_packages <- c("mcor", "thredds",# The Core MCO package
                   "FedData", "smapr", "rhdf5", # Package for data aquisition
-                  "sf", "raster", "rgeos", "fasterize", "velox", # Packages for spatial processing
+                  "sf", "raster", "rgeos", "fasterize", "velox", "lwgeom",# Packages for spatial processing
                   "magrittr", "tidyverse", "purrrlyr", # Packages for tidy code
                   "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
                   "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown

@@ -51,7 +51,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                                         full.names = T) %>%
                              stringr::str_subset(stringr::str_c("lead",lead,"_")),
                            quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(Prob = ifelse(Cat == "Below",0 - Prob, Prob),

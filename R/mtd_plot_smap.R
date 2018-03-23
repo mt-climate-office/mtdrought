@@ -54,7 +54,7 @@ mtd_plot_smap <- function(date,
       # Convert to polygons
       raster::rasterToPolygons() %>%
       sf::st_as_sf() %>%
-      sf::st_transform(mt_state_plane) %>%
+      lwgeom::st_transform_proj(mt_state_plane) %>%
       dplyr::mutate(layer = factor(layer,
                                    levels = 1:9,
                                    labels = c("<10%",
@@ -104,7 +104,7 @@ mtd_plot_smap <- function(date,
   }
   
   agg_sf_4326 <- agg_sf %>%
-    sf::st_transform(raster::projection(soil_moisture))
+    lwgeom::st_transform_proj(raster::projection(soil_moisture))
   
   soil_moisture.vx <- velox::velox(soil_moisture)
   

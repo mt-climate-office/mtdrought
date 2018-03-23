@@ -6,6 +6,9 @@ mtd_plot_swe_basins <- function(date = "latest",
   
   swe <- mcor::mco_get_swe_basins(date = date,
                             huc = huc) %>%
+    dplyr::rename(value = `SWE (in)`,
+                  normals = `SWE 1981-2010 Median (in)`,
+                  percent = `Percent SWE`) %>%
     sf::st_intersection(mt_state_simple)
   
   swe %<>%
@@ -27,7 +30,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                                 Y) %>%
                 ggplot2::ggplot() +
                 # Plot the polygon fills
-                geom_sf(aes(fill = `Percent SWE`),
+                geom_sf(aes(fill = percent),
                         color = NA) +
                 add_hillshade() +
                 add_counties() +
@@ -39,7 +42,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                 # Plot the labels
                 geom_label(aes(x = Centroid_x,
                                y = Centroid_y,
-                               label = `Percent SWE` %>%
+                               label = percent %>%
                                  paste0("%")),
                            alpha = 1,
                            size = 2.25) +

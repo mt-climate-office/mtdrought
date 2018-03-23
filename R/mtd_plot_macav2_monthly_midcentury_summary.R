@@ -80,13 +80,13 @@ mtd_plot_macav2_monthly_midcentury_summary <- function(macav2,
     map_data %<>%
       raster::rasterToPolygons() %>%
       sf::st_as_sf() %>%
-      sf::st_transform(mt_state_plane) %>%
+      lwgeom::st_transform_proj(mt_state_plane) %>%
       dplyr::group_by(value) %>%
       dplyr::summarise() %>%
       sf::st_intersection(mt_state_simple)
   } else {
     agg_sf_4326 <- agg_sf %>%
-      sf::st_transform(raster::projection(macav2))
+      lwgeom::st_transform_proj(raster::projection(map_data))
     
     macav2.vx <- velox::velox(map_data)
     

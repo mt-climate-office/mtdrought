@@ -46,7 +46,7 @@ mtd_plot_noaa_drought_outlook <- function(date,
                              list.files(pattern = "\\.shp$",
                                         full.names = T),
                            quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     tidyr::gather(key = "Drought Outlook",

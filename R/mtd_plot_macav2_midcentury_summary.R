@@ -53,7 +53,7 @@ mtd_plot_macav2_midcentury_summary <-
                                     agg_fun = agg_fun)
     
     agg_sf_4326 <- agg_sf %>%
-      sf::st_transform(4326)
+      lwgeom::st_transform_proj(4326)
     
     sf::st_geometry(agg_sf_4326) <- 
       sf::st_geometry(agg_sf_4326) + c(360,0)

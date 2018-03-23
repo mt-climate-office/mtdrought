@@ -319,7 +319,7 @@ soil_moisture %<>%
   # Convert to polygons
   raster::rasterToPolygons() %>%
   sf::st_as_sf() %>%
-  sf::st_transform(mt_state_plane) %>%
+  lwgeom::st_transform_proj(mt_state_plane) %>%
   dplyr::mutate(layer = factor(layer,
                                levels = 1:9,
                                labels = c("<10%",
@@ -377,7 +377,7 @@ FedData::download_data("http://droughtmonitor.unl.edu/data/shapefiles_m/USDM_201
 unzip("./data/USDM_20170829_M.zip", exdir = "./data/USDM_20170829_M")
 
 (sf::st_read("./data/USDM_20170829_M/USDM_20170829.shp", quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(DM = as.character(DM)) %>%
@@ -488,7 +488,7 @@ FedData::download_data("http://droughtmonitor.unl.edu/data/shapefiles_m/USDM_201
 unzip("./data/USDM_20171128_M.zip", exdir = "./data/USDM_20171128_M")
 
 (sf::st_read("./data/USDM_20171128_M/USDM_20171128.shp", quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(DM = as.character(DM)) %>%
@@ -689,7 +689,7 @@ FedData::download_data("ftp://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/seastemp
 unzip("./data/seastemp_201712.zip", exdir = "./data/seastemp_201712")
 
 (sf::st_read("./data/seastemp_201712/lead1_JFM_temp.shp", quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(Prob = ifelse(Cat == "Below",0 - Prob, Prob),
@@ -768,7 +768,7 @@ FedData::download_data("ftp://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/seasprcp
 unzip("./data/seasprcp_201712.zip", exdir = "./data/seasprcp_201712")
 
 (sf::st_read("./data/seasprcp_201712/lead1_JFM_prcp.shp", quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(Prob = ifelse(Cat == "Below",0 - Prob, Prob),
@@ -844,7 +844,7 @@ FedData::download_data("ftp://ftp.cpc.ncep.noaa.gov/GIS/droughtlook/sdo_polygons
 unzip("./data/sdo_polygons_20171221.zip", exdir = "./data/sdo_polygons_20171221")
 
 (sf::st_read("./data/sdo_polygons_20171221/DO_Merge_Clip.shp", quiet = T) %>%
-    sf::st_transform(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     tidyr::gather(key = "Drought Outlook",
@@ -975,7 +975,7 @@ soil_moisture %<>%
   # Convert to polygons
   raster::rasterToPolygons() %>%
   sf::st_as_sf() %>%
-  sf::st_transform(mt_state_plane) %>%
+  lwgeom::st_transform_proj(mt_state_plane) %>%
   dplyr::mutate(layer = factor(layer,
                                levels = 1:9,
                                labels = c("<10%",
@@ -1065,7 +1065,7 @@ macav2_tasmax_rcp45 <- k_to_f(macav2_tasmax_rcp45)
 ```{r jun-aug-midcentury-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
 mt_climate_divisions_simple_4326 <- mt_climate_divisions_simple %>%
-  sf::st_transform(4326)
+  lwgeom::st_transform_proj(4326)
 
 sf::st_geometry(mt_climate_divisions_simple_4326) <- sf::st_geometry(mt_climate_divisions_simple_4326) + c(360,0)
 
