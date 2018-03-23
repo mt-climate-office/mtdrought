@@ -18,6 +18,8 @@ What information is provided in our Newsletters and what relevance is it?
 
 <br><br>
 
+-----
+
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
@@ -27,6 +29,8 @@ What information is provided in our Newsletters and what relevance is it?
 - During fall of 2017, Montana entered a La Niña event. La Niña events often bring cooler temperatures across the state as well as increased winter precipitation specifically to western Montana.
 - For April through June 2018, above average precipitation and below normal temperatures are forecasted across Montana, in line with a typical La Niña event. However, given the soil moisture deficit hanging on from last summer, it is too early to tell if this forecast will improve the spring growing season. Keep an eye on subsurface soil moisture levels, especially in eastern Montana.
 </div>
+
+-----
 
 ### Expert summary {-}
 
