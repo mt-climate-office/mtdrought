@@ -1,11 +1,15 @@
 mtd_plot_swe_basins <- function(date = "latest",
                                 huc = 6){
   
-  if(date >= Sys.Date())
+  if(date != "latest" && date >= Sys.Date())
     date <- "latest"
   
-  swe <- mco_get_swe_basins(date = date,
-                            huc = huc)
+  swe <- mcor::mco_get_swe_basins(date = date,
+                            huc = huc) %>%
+    sf::st_intersection(mt_state_simple)
+  
+  swe %<>%
+    dplyr::filter(sf::st_area(swe) > units::set_units(1000000000,m^2))
   
   if(date == "latest")
     date <- Sys.Date()
@@ -39,12 +43,11 @@ mtd_plot_swe_basins <- function(date = "latest",
                                  paste0("%")),
                            alpha = 1,
                            size = 2.25) +
-                scale_fill_distiller(name = stringr::str_c("\nSnow Water Equivalent\n% of 1981-2010 median\nas of ",
-                                                           format(lubridate::ymd(date), '%B %d, %Y')),
+                scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"\n",
+                                                           "Snow water equivalent","\nPercent of normal"),
                                      #limits = c(0,1),
                                      direction = 1,
                                      limits = c(0,200),
-                                     breaks = c(0,200),
                                      palette = "RdBu",
                                      expand = FALSE,
                                      guide = guide_colourbar(title.position = "bottom")) +

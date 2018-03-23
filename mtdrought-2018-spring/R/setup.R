@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE,
 # biocLite("rhdf5")
 
 ## Load all packages
-all_packages <- c("mcor", # The Core MCO package
+all_packages <- c("mcor", "thredds",# The Core MCO package
                   "FedData", "smapr", "rhdf5", # Package for data aquisition
                   "sf", "raster", "rgeos", "fasterize", "velox", # Packages for spatial processing
                   "magrittr", "tidyverse", "purrrlyr", # Packages for tidy code
@@ -33,3 +33,5 @@ purrr::walk(all_packages, library, character.only = TRUE)
 # Load other useful functions
 list.files("../R", full.names = T) %>%
   purrr::walk(source)
+
+rasterOptions(maxmemory = 1e+09)

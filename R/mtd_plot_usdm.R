@@ -49,8 +49,8 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = DM),
                          color = NA) +
-                 scale_fill_manual(name = stringr::str_c("Drought Intensity\nas of ",
-                                                         format(lubridate::ymd(usdm_date), '%B %d, %Y')),
+                 scale_fill_manual(name = stringr::str_c(format(lubridate::ymd(usdm_date), '%B %d, %Y'),"\n",
+                                                         "Drought Intensity"),
                                    labels = c("Abnormally\nDry",
                                               "Moderate\nDrought",
                                               "Severe\nDrought",
@@ -65,7 +65,7 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                                    guide = guide_legend(title.position = "bottom")) +
                  add_hillshade() +
                  add_counties() +
-                 add_climate_divisions() +
+                 # add_climate_divisions() +
                  mdt_theme_map()) %T>%
     save_mt_map(stringr::str_c(usdm_date,"-drought-intensity.pdf"))
   

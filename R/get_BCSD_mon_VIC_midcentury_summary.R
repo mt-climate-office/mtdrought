@@ -13,7 +13,8 @@ get_bcsd_swe_midcentury_summary <-
         stringr::str_subset("_rcp45_") %>%
         sort()
       
-      BCSD_swe_vars <- thredds::tds_ncss_list_vars("https://cida.usgs.gov/thredds/ncss/BCSD_mon_VIC/dataset.html") %>%
+      BCSD_swe_vars <- thredds::tds_ncss_list_vars("https://cida.usgs.gov/thredds/ncss/BCSD_mon_VIC/dataset.html") %$%
+        name %>%
         stringr::str_subset("swe") %>%
         stringr::str_subset("_rcp45_") %>%
         sort()
@@ -23,13 +24,16 @@ get_bcsd_swe_midcentury_summary <-
         purrr::map_chr(function(var){
           thredds::tds_ncss_download(ncss_url = "https://cida.usgs.gov/thredds/ncss/BCSD_mon_VIC/dataset.html",
                                      out_file = stringr::str_c(data_out,"/raw_data/",var,".nc"),
-                                     bbox = mt_climate_divisions_simple %>% 
+                                     bbox = mt_watersheds_simple %>%
+                                       dplyr::filter(`Hydrologic Unit` == 6) %>%
                                        sf::st_bbox() %>%
                                        sf::st_as_sfc() %>%
                                        sf::st_transform(4326) %>%
                                        # magrittr::add(c(360,0)) %>%
                                        sf::st_bbox(),
                                      vars = var,
+                                     ncss_args = list(time_start = "2040-01-01",
+                                                      time_end = "2069-12-31"),
                                      overwrite = FALSE)
         }) %>%
         purrr::compact() %>%
@@ -70,6 +74,7 @@ get_bcsd_swe_midcentury_summary <-
                  probs = c(0.25, 0.5, 0.75),
                  na.rm = TRUE)
       }) %>%
-      mm_to_in()
+      mm_to_in() %>%
+      magrittr::set_names(c("lower","value","upper"))
     
   }

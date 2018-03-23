@@ -4,16 +4,14 @@ navbar:
     vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
     and Forecasting<br>for Agricultural Producers<br><b>April–June 2018</b></ht>
   right:
-  - text: Reference
-    href: reference.html
   - text: Jan–Mar 2018
     href: jfm-2018-review.html
   - text: Apr–Jun 2018
     href: amj-2018-forecast.html
   - text: Apr–Jun Mid-century
     href: amj-2018-midcentury.html
-  - text: Expert Summary
-    href: amj-2018-summary.html
+  - text: Reference
+    href: reference.html
 output:
   html_document:
     theme: simplex

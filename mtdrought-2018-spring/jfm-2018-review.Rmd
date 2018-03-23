@@ -1,44 +1,89 @@
 ---
 title: "January--March, 2018: In review"
+editor_options: 
+  chunk_output_type: console
 ---
-
-## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
+
 ```
+
+## {- .tabset .tabset-fade .tabset-pills}
 
 La Nina didn't dissappoint! Reflecting on last winter...
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-```{r past-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-gridmet, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-past_seasonal_temp <- mtd_plot_climdiv(months = 1:2,
-                                 year = 2018,
-                                 element = "tmpc",
-                                 agg_fun = mean)
-
-past_seasonal_temp$map
+gridmet <- mtd_get_gridmet(dates = c("2018-01-01",
+                                     "2018-03-31"),
+                           data_out = "../data/gridmet")
 
 ```
 
-* In January--February, 2018, the average temperature statewide was `r round(past_seasonal_temp$data$state_rank$Value, digits = 1)` ºF, `r abs(round(past_seasonal_temp$data$state_rank$Deviation, digits = 1))` degrees lower than the 1981--2010 normal value.
-* January--February, 2018 was the `r scales::ordinal(past_seasonal_temp$data$state_rank$Rank)` coldest winter since record keeping began in 1895.
+
+```{r past-seasonal-temp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "tmpc")
+```
+
+
+```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "tmpc",
+                   use_normals = TRUE)
+```
+
+
+```{r past-seasonal-temp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "tmpc",
+                   agg_sf = mt_counties_simple,
+                   agg_sf_fun = median)
+```
+
+
+```{r past-seasonal-temp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "tmpc",
+                   agg_sf = mt_counties_simple,
+                   agg_sf_fun = median,
+                   use_normals = TRUE)
+```
+
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-```{r past-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-past_seasonal_prcp <- mtd_plot_climdiv(months = 1:2,
-                                 year = 2018,
-                                 element = "pcpn",
-                                 agg_fun = sum)
 
-past_seasonal_prcp$map
-
+```{r past-seasonal-prcp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "pcpn")
 ```
 
-* In January--February, 2018, the average total precipitation statewide was `r round(past_seasonal_prcp$data$state_rank$Value, digits = 1)` inches, `r round(abs(past_seasonal_prcp$data$state_rank$Deviation), digits = 1)` inches lower than the 1981--2010 normal value.
-* January--February, 2018 was the `r scales::ordinal(past_seasonal_prcp$data$state_rank$Rank)` driest winter since record keeping began in 1895.
+
+```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "pcpn",
+                   use_normals = TRUE)
+```
+
+
+```{r past-seasonal-prcp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "pcpn",
+                   agg_sf = mt_counties_simple,
+                   agg_sf_fun = median)
+```
+
+
+```{r past-seasonal-prcp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet %>%
+  mtd_plot_gridmet(element = "pcpn",
+                   agg_sf = mt_counties_simple,
+                   agg_sf_fun = median,
+                   use_normals = TRUE)
+```
 
 ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
 
@@ -54,13 +99,36 @@ past_seasonal_swe$map
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
-```{r past-seasonal-smap, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-past_seasonal_smap <- mtd_plot_smap(date = "2018-04-01",
-                                    data_out = "../data/SMAP")
+```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+mtd_plot_smap(date = "2018-04-01",
+              variable = "sm_rootzone",
+              data_out = "../data/SMAP")$map
+```
 
-past_seasonal_smap$map
 
+```{r past-seasonal-smap-grid-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+mtd_plot_smap(date = "2018-04-01",
+              variable = "sm_rootzone_wetness",
+              data_out = "../data/SMAP")$map
+```
+
+
+```{r past-seasonal-smap-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+mtd_plot_smap(date = "2018-04-01",
+              variable = "sm_rootzone",
+              data_out = "../data/SMAP",
+              agg_sf = mt_counties_simple,
+              agg_fun = mean)$map
+```
+
+
+```{r past-seasonal-smap-counties-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+mtd_plot_smap(date = "2018-04-01",
+              variable = "sm_rootzone_wetness",
+              data_out = "../data/SMAP",
+              agg_sf = mt_counties_simple,
+              agg_fun = mean)$map
 ```
 
 #### Snow and soil moisture recharge {-}

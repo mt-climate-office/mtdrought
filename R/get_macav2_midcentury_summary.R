@@ -1,4 +1,4 @@
-get_macav2_midcentury_summary <- 
+mtd_get_macav2_midcentury_summary <- 
   function (months = 1:3,
             element = "tasmax",
             agg_fun = mean,
@@ -11,7 +11,7 @@ get_macav2_midcentury_summary <-
     if(!file.exists(stringr::str_c(data_out,"/maca_midcentury_medians_",element,".Rds"))){
       
       maca_midcentury_medians <- 
-        get_macav2_monthly(x = mt_climate_divisions_simple,
+        get_macav2_monthly(x = mt_state,
                            raw_dir = stringr::str_c(data_out,"/raw_data/"),
                            elements = element,
                            scenarios = c("rcp45")) %>%

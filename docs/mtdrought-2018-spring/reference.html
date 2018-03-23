@@ -185,9 +185,6 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="reference.html">Reference</a>
-</li>
-<li>
   <a href="jfm-2018-review.html">Jan–Mar 2018</a>
 </li>
 <li>
@@ -197,7 +194,7 @@ $(document).ready(function () {
   <a href="amj-2018-midcentury.html">Apr–Jun Mid-century</a>
 </li>
 <li>
-  <a href="amj-2018-summary.html">Expert Summary</a>
+  <a href="reference.html">Reference</a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -216,21 +213,12 @@ This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hyp
 </div>
 
 
-<div id="where-are-you" class="section level2 unnumbered">
-<h2>Where are you?</h2>
-<p>Throughout this newsletter, we report weather and forecasts for the seven climate divisions of Montana. The National Oceanic and Atmospheric Administration (NOAA) defines climate divisions in Montana to roughly conform to major watersheds, adjusted to match county and agricultural region boundaries. Climate information in this newsletter is often summarized across these climate divisions.</p>
-<p><img src="reference_files/figure-html/climate-divisions-1.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="weather-or-climate" class="section level2 unnumbered">
-<h2>Weather or Climate?</h2>
-<p>The difference between weather and climate is the measure of <em>time</em>. To understand climate at a given place requires looking at weather over relatively long periods of time. Weather is the day-to-day interaction of factors like temperature, humidity, precipitation, cloudiness, visibility, and wind. In addition to studying weather, scientists examine climate trends or cycles of variability to understand the bigger picture of long-term changes.</p>
-</div>
 <div id="in-a-word" class="section level2 unnumbered">
 <h2>In a Word…</h2>
 <p>Weather and climate forecasters use words and information in very particular ways that may be different from what we are accustomed to. Here is a list of terms we use in this newsletter:</p>
 <hr>
 <div style="-webkit-columns: 3 250px;-moz-columns: 3 250px;columns: 3 250px;">
-<p><img src="icons/normals.svg" style="height:50px; margin:10px 10px; float:left;" /><br><strong>Normal(s)</strong> — Climatologists use “normal” to indicate values—weather measurements like temperature or amount of precipitation—that are expected to occur within a given area, based on past observations. Here, the “normal” value is the statistical median value for a given measurement over the 1981–2010 time period, a standard period for defining climatology in North America. The median is the middle value among observed values when arranged from smallest to largest. 50 percent of the values are above the median, and 50 percent are below it.</p>
+<p><img src="icons/normals.svg" style="height:50px; margin:10px 10px; float:left;" /><br><strong>Normal(s)</strong> — Climatologists use “normal” to indicate values—weather measurements like temperature or amount of precipitation—that are expected to occur within a given area, based on past observations. Here, the “normal” value is the statistical mean value (average) for a given measurement over the past observations. Climatologists use the most recent 30-year period, rounded to the nearest decade, to define normal in North America: 1981–2010. The goal is to look far enough back in time to capture variation in weather patterns, but not so far as to be irrelevant to recent conditions. In 2021, we will start using the 1991–2020 period. <!-- The median is the middle value among observed values when arranged from smallest to largest. 50 percent of the values are above the median, and 50 percent are below it. --></p>
 <div style="float:left;">
 <img src="icons/temperature.svg" style="height:50px; margin:10px 10px; float:left;" />
 <div class="clearfix">
@@ -246,7 +234,7 @@ This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hyp
 <div class="clearfix">
 
 </div>
-<p><img src="icons/soil_saturation.svg" style="height:50px; margin:10px 10px; float:left;" /><br><strong>Percent Soil Saturation</strong> — A measure of the water content in the soil. In the maps in this newsletter, soil saturation is estimated from <a href="https://smap.jpl.nasa.gov">NASA’s Soil Moisture Active Passive (SMAP) satellite program</a>. Soil moisture content is mapped via a combination of radar and radiometer measurements from space at an ~10 km spatial resolution.</p>
+<p><img src="icons/soil_saturation.svg" style="height:50px; margin:10px 10px; float:left;" /><br><strong>Root Zone Soil Moisture</strong> — The average volumetric percent soil moisture between 0 and 100 cm depth, or the volume of water divided by the total volume of soil including solids, water, and air. In the maps in this newsletter, soil saturation from <a href="https://smap.jpl.nasa.gov">NASA’s Soil Moisture Active Passive (SMAP) satellite program</a> “SPL4SMGP” data product. Soil moisture is mapped via a combination of radar and radiometer measurements from space and surface observations at an approximately 9 km spatial resolution.</p>
 <div class="clearfix">
 
 </div>
@@ -279,6 +267,14 @@ This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hyp
 
 </div>
 </div>
+<!-- ## Where are you? {-} -->
+<!-- Throughout this newsletter, we report weather and forecasts for the seven climate divisions of Montana. The National Oceanic -->
+<!-- and Atmospheric Administration (NOAA) defines climate divisions in Montana to roughly conform to major watersheds, adjusted to match county and agricultural region boundaries. Climate information in this newsletter is often summarized across these climate divisions. -->
+<!-- ```{r climate-divisions, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
+<!-- mtd_plot_overview() -->
+<!-- ``` -->
+<!-- ## Weather or Climate? {-} -->
+<!-- The difference between weather and climate is the measure of *time*. To understand climate at a given place requires looking at weather over relatively long periods of time. Weather is the day-to-day interaction of factors like temperature, humidity, precipitation, cloudiness, visibility, and wind. In addition to studying weather, scientists examine climate trends or cycles of variability to understand the bigger picture of long-term changes. -->
 </div>
 
 <!-- hypothes.is -->
