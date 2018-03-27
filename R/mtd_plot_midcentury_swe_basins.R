@@ -58,33 +58,30 @@ mtd_plot_midcentury_swe_basins <- function(month,
                                   # Plot the polygon fills
                                   geom_sf(aes(fill = `Percent SWE`),
                                           color = NA) +
-                                  add_hillshade() +
-                                  add_counties() +
+                                  scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d') %>%
+                                                                               stringr::str_replace(" 0"," "),", ",
+                                                                             "AD 2040 - 2069\n",
+                                                                             "Snow Water Equivalent","\n",
+                                                                             "Percent of normal"),
+                                                       #limits = c(0,1),
+                                                       direction = 1,
+                                                       limits = c(0,200),
+                                                       # breaks = c(0,200),
+                                                       palette = "RdBu",
+                                                       expand = FALSE,
+                                                       guide = guide_colourbar(title.position = "bottom")) +
+                                  mtd_plot() +
                                   # Plot the polygon boundaries
                                   geom_sf(fill = NA,
                                           color = "white",
                                           size = 0.5) +
-                                  # add_climate_divisions() +
                                   # Plot the labels
                                   geom_label(aes(x = Centroid_x,
                                                  y = Centroid_y,
                                                  label = `Percent SWE` %>%
                                                    paste0("%")),
                                              alpha = 1,
-                                             size = 2.25) +
-                                  scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d') %>%
-                                                                               stringr::str_replace(" 0"," "),", ",
-                                                                             "AD 2040 - 2069\n",
-                                                                             "Snow Water Equivalent","\n",
-                                                                             "Percent of normal"),
-                                  #limits = c(0,1),
-                                  direction = 1,
-                                  limits = c(0,200),
-                                  # breaks = c(0,200),
-                                  palette = "RdBu",
-                                  expand = FALSE,
-                                  guide = guide_colourbar(title.position = "bottom")) +
-                                  mdt_theme_map()) %T>%
+                                             size = 2.25)) %T>%
     save_mt_map(stringr::str_c(date,"-midcentury-swe.pdf"))
   
   

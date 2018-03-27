@@ -1,9 +1,9 @@
 mtd_plot_gridmet <- function(gridmet,
-                             element = "tmpc",
-                             dates = "latest",
-                             data_out = "./data/gridmet",
-                             agg_sf,
-                             agg_sf_fun = mean,
+                             element = "tmean",
+                             # dates = "latest",
+                             # data_out = "./data/gridmet",
+                             # agg_sf,
+                             # agg_sf_fun = mean,
                              use_normals = FALSE){
   
   if(element == "tmax"){
@@ -14,11 +14,11 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet_element = "daily_minimum_temperature"
     unit_symbol <- "ºF"
     long_name <- "Minimum temperature"
-  }else if(element == "pcpn"){
+  }else if(element == "prcp"){
     gridmet_element = "precipitation_amount"
     unit_symbol <- "in."
     long_name <- "Net precipitation"
-  }else if(element == "tmpc"){
+  }else if(element == "tmean"){
     gridmet_element = c("daily_maximum_temperature","daily_minimum_temperature")
     unit_symbol <- "ºF"
     long_name <- "Average temperature"
@@ -26,77 +26,73 @@ mtd_plot_gridmet <- function(gridmet,
     stop("Element passed was not allowed!")
   }
   
-  if(missing(gridmet)){
-    gridmet <- mtd_get_gridmet(dates = dates,
-                               data_out = data_out)
-  }
+  # if(missing(gridmet)){
+  #   gridmet <- mtd_get_gridmet(dates = dates,
+  #                              data_out = data_out)
+  # }
   
   gridmet_dates <- attr(gridmet,"dates")
   
   gridmet %<>%
     magrittr::extract(gridmet_element)
   
+  if(!is(gridmet[[1]],"RasterBrick")){
+    gridmet %<>%
+      purrr::map(function(x){
+        x %>%
+          magrittr::extract(c("value","normals"))
+      })
+  }
+  
   if(length(gridmet) > 1){
-    gridmet <- (gridmet[[1]] + gridmet[[2]]) / 2
+    gridmet_out <- gridmet[[1]]
+    
+    gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
+    gridmet_out$normals <- (gridmet[[1]]$normals + gridmet[[2]]$normals) / 2
+    gridmet <- gridmet_out
+    
   } else {
     gridmet <- gridmet[[1]]
   }
   
+  if(is(gridmet,"RasterBrick")){
+    gridmet %<>%
+      mtd_as_sf_gridmet()
+  }
   
   if(use_normals){
-    if(element == "pcpn") {
-      map_data <- (gridmet$value / gridmet$normals) %>%
-        magrittr::multiply_by(100) %>%
-        round()
+    if(element == "prcp") {
+      map_data <- gridmet %>%
+        dplyr::mutate(value = (value / normals) %>%
+                        magrittr::multiply_by(100) %>%
+                        round()) %>%
+        dplyr::select(value)
       
       legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
                                      format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
                                      long_name,"\nPercent of normal")
     } else {
-      map_data <- (gridmet$value - gridmet$normals) %>%
-        round(digits = 1)
+      map_data <- gridmet %>%
+        dplyr::mutate(value = (value - normals) %>%
+                        round(digits = 1)) %>%
+        dplyr::select(value)
+      
       legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
                                      format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
-                                     long_name,"\nDeviation from normal (",unit_symbol,")")
+                                     long_name," (",unit_symbol,")","\n",
+                                     "Deviation from normal")
       
     }
   } else {
-    map_data <- gridmet$value %>%
-      round() %>%
-      as.integer()
+    map_data <- gridmet %>%
+      dplyr::mutate(value = value %>%
+                      round() %>%
+                      as.integer()) %>%
+      dplyr::select(value)
     
     legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
                                    format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
                                    long_name," (",unit_symbol,")")
-  }
-  
-  map_data %<>%
-    magrittr::set_names("value")
-  
-  if(missing(agg_sf)){
-    map_data %<>%
-      raster::rasterToPolygons() %>%
-      sf::st_as_sf() %>%
-      lwgeom::st_transform_proj(mt_state_plane) %>%
-      dplyr::group_by(value) %>%
-      dplyr::summarise() %>%
-      sf::st_intersection(mt_state_simple)
-  } else {
-    agg_sf_4326 <- agg_sf %>%
-      lwgeom::st_transform_proj(raster::projection(gridmet))
-    
-    gridmet.vx <- velox::velox(map_data)
-    
-    map_data <- agg_sf %>%
-      dplyr::bind_cols(gridmet.vx$extract(agg_sf_4326,
-                                          fun = function(x){agg_sf_fun(x, na.rm = TRUE)},
-                                          df = TRUE,
-                                          small = TRUE) %>%
-                         dplyr::select(-ID_sp) %>%
-                         magrittr::set_names(c("value"))) %>%
-      sf::st_as_sf()
-    
-    rm(gridmet.vx)
   }
   
   sf_column <- attr(map_data, "sf_column") %>%
@@ -106,10 +102,14 @@ mtd_plot_gridmet <- function(gridmet,
     dplyr::rename(geometry = !!sf_column)
   
   if(use_normals){
-    if(element == "pcpn") {
+    if(element == "prcp") {
       limits <- c(0,200)
       
       map_data$value[map_data$value > 200] <- 200
+      
+      map_data %<>%
+        dplyr::group_by(value) %>%
+        dplyr::summarise()
       
     } else {
       range <- map_data$value %>%
@@ -123,33 +123,28 @@ mtd_plot_gridmet <- function(gridmet,
     limits <- range(map_data$value)
   }
   
-  file_name <- stringr::str_c(head(gridmet_dates,1),"_",
-                              tail(gridmet_dates,1),"_",
-                              element,
-                              ifelse(missing(agg_sf),"","-aggregated"),
-                              ifelse(use_normals,"-normals",""),
-                              ".pdf")
+  if(element == "prcp") {
+    direction = 1
+    palette = "BrBG"
+  }else {
+    direction = -1
+    palette = "RdBu"
+  }
+  
+  map_data %<>%
+    dplyr::group_by(value) %>%
+    dplyr::summarise()
   
   (map_data %>%
-                    ggplot2::ggplot() +
-                    ggplot2::geom_sf(aes(fill = value),
-                                     color = NA) +
-                    scale_fill_distiller(name = legend_title,
-                                         direction = if(element == "pcpn") 
-                                           1 
-                                         else 
-                                           -1,
-                                         limits = limits,
-                                         # breaks = breaks,
-                                         palette = if(element == "pcpn") 
-                                           "BrBG" 
-                                         else 
-                                           "RdBu",
-                                         expand = FALSE,
-                                         guide = guide_colourbar(title.position = "bottom")) +
-                    add_hillshade() +
-                    add_counties() +
-                    # add_climate_divisions() +
-                    mdt_theme_map()) %T>%
-    save_mt_map(file_name)
+      ggplot2::ggplot() +
+      ggplot2::geom_sf(aes(fill = value),
+                       color = NA) +
+      scale_fill_distiller(name = legend_title,
+                           direction = direction,
+                           limits = limits,
+                           # breaks = breaks,
+                           palette = palette,
+                           expand = FALSE,
+                           guide = guide_colourbar(title.position = "bottom")) +
+      mtd_plot())
 }

@@ -63,10 +63,11 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                                               "4" = rgb(115, 0, 0, maxColorValue = 255)),
                                    limits = c("0","1","2","3","4"),
                                    guide = guide_legend(title.position = "bottom")) +
-                 add_hillshade() +
-                 add_counties() +
+                 # add_hillshade() +
+                 # add_counties() +
                  # add_climate_divisions() +
-                 mdt_theme_map()) %T>%
+                 mtd_plot() +
+                 ggplot2::theme(legend.key.height = unit(0.15,"in"))) %T>%
     save_mt_map(stringr::str_c(usdm_date,"-drought-intensity.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%

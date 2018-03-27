@@ -49,14 +49,14 @@ mtd_plot_macav2_monthly_midcentury_summary <- function(macav2,
         magrittr::multiply_by(100) %>%
         round()
       
-      legend_title <- stringr::str_c(head(month.name[months],1)," - \n",
+      legend_title <- stringr::str_c(head(month.name[months],1)," - ",
                                      tail(month.name[months],1),",\n",
                                      "AD 2040 - 2069\n",
                                      long_name,"\nPercent of normal")
     } else {
       map_data <- (macav2$value - macav2$normals) %>%
         round(digits = 1)
-      legend_title <- stringr::str_c(head(month.name[months],1)," - \n",
+      legend_title <- stringr::str_c(head(month.name[months],1)," - ",
                                      tail(month.name[months],1),",\n",
                                      "AD 2040 - 2069\n",
                                      long_name,"\nDeviation from normal (",unit_symbol,")")
@@ -67,7 +67,7 @@ mtd_plot_macav2_monthly_midcentury_summary <- function(macav2,
       round() %>%
       as.integer()
     
-    legend_title <- stringr::str_c(head(month.name[months],1)," - \n",
+    legend_title <- stringr::str_c(head(month.name[months],1)," - ",
                                    tail(month.name[months],1),",\n",
                                    "AD 2040 - 2069\n",
                                    long_name," (",unit_symbol,")")
@@ -151,9 +151,6 @@ mtd_plot_macav2_monthly_midcentury_summary <- function(macav2,
                              "RdBu",
                            expand = FALSE,
                            guide = guide_colourbar(title.position = "bottom")) +
-      add_hillshade() +
-      add_counties() +
-      # add_climate_divisions() +
-      mdt_theme_map()) %T>%
+      mtd_plot()) %T>%
     save_mt_map(file_name)
 }

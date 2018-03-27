@@ -22,6 +22,7 @@ noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-04-01",
                                                  data_out = "../data/NOAA_seasonal")
 
 noaa_seasonal$map +
+  add_climate_divisions() +
   geom_label(data = climdiv_tmpc$normals %>%
                left_join(mt_climate_divisions_simple %>%
                            dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
@@ -60,6 +61,7 @@ noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-04-01",
                                                  data_out = "../data/NOAA_seasonal")
 
 noaa_seasonal$map +
+  add_climate_divisions() +
   geom_label(data = climdiv_pcpn$normals %>%
                left_join(mt_climate_divisions_simple %>%
                            dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
@@ -87,11 +89,12 @@ noaa_seasonal$map +
 
 ### <img src="icons/drought.svg" width="35px"/> Drought {-}
 
-```{r future-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-mtd_plot_noaa_drought_outlook(date = "2018-04-01",
+future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2018-04-01",
                               data_out = "../data/NOAA_droughtlook")
 
+future_seasonal_drought$map
 ```
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-}
@@ -106,7 +109,8 @@ enso_temp <- mtd_plot_enso(months = 4:6,
                                 element = "tmpc",
                                 agg_fun = mean)
  
-enso_temp$map
+enso_temp$map +
+  add_climate_divisions()
 ```
 
 #### Precipitation {-}
@@ -116,5 +120,6 @@ enso_prcp <- mtd_plot_enso(months = 4:6,
                                 element = "pcpn",
                                 agg_fun = sum)
  
-enso_prcp$map
+enso_prcp$map +
+  add_climate_divisions()
 ```

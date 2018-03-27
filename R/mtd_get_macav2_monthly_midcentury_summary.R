@@ -8,12 +8,12 @@ mtd_get_macav2_monthly_midcentury_summary <-
                showWarnings = FALSE,
                recursive = TRUE)
     
-    if(!file.exists(stringr::str_c(data_out,"/macav2_monthly_midcentury_medians.Rds"))){
+    if(!file.exists(stringr::str_c(data_out,"/macav2_monthly/macav2_monthly_midcentury_medians.Rds"))){
       
       maca_midcentury_medians <- 
         get_macav2_monthly(x = mt_state %>%
                              sf::st_buffer(10000),
-                           raw_dir = stringr::str_c(data_out,"/raw_data/"),
+                           raw_dir = stringr::str_c(data_out,"/macav2_monthly/raw_data/"),
                            scenarios = c("rcp45")) %>%
         purrr::compact() %>%
         purrr::map(function(x){
@@ -60,11 +60,11 @@ mtd_get_macav2_monthly_midcentury_summary <-
                               "daily_minimum_temperature"))
       
       maca_midcentury_medians %>%
-        readr::write_rds(stringr::str_c(data_out,"/macav2_monthly_midcentury_medians.Rds"),
+        readr::write_rds(stringr::str_c(data_out,"/macav2_monthly/macav2_monthly_midcentury_medians.Rds"),
                          compress = "xz")
     }
     
-    normals <- mco_get_gridmet_normals()
+    normals <- mco_get_gridmet_normals(raw_dir = stringr::str_c(data_out,"/gridmet/normals/"))
     
     normals$precipitation_amount %<>%
       magrittr::extract2((1:365) %>%
@@ -105,7 +105,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
     
     
     maca_midcentury_medians <- 
-      stringr::str_c(data_out,"/macav2_monthly_midcentury_medians.Rds") %>%
+      stringr::str_c(data_out,"/macav2_monthly/macav2_monthly_midcentury_medians.Rds") %>%
       readr::read_rds()
     
    suppressWarnings(

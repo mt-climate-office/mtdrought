@@ -15,7 +15,7 @@ source("./R/setup.R")
 
 macav2_midcentury <- 
   mtd_get_macav2_monthly_midcentury_summary(months = 1:3,
-                                            data_out = "../data/macav2_monthly")
+                                            data_out = "../data")
 
 ```
 
@@ -34,7 +34,7 @@ macav2_midcentury %>%
 
 
 ```{r midcentury-seasonal-temp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-macav2_midcentury %>%
+scratch <- macav2_midcentury %>%
   mtd_plot_macav2_monthly_midcentury_summary(element = "tmpc",
                    agg_sf = mt_counties_simple,
                    agg_sf_fun = median)
@@ -42,7 +42,7 @@ macav2_midcentury %>%
 
 
 ```{r midcenturyt-seasonal-temp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-macav2_midcentury %>%
+scratch <- macav2_midcentury %>%
   mtd_plot_macav2_monthly_midcentury_summary(element = "tmpc",
                    agg_sf = mt_counties_simple,
                    agg_sf_fun = median,
@@ -66,7 +66,7 @@ macav2_midcentury %>%
 
 
 ```{r midcentury-seasonal-prcp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-macav2_midcentury %>%
+scratch <- macav2_midcentury %>%
   mtd_plot_macav2_monthly_midcentury_summary(element = "pcpn",
                    agg_sf = mt_counties_simple,
                    agg_sf_fun = median)
@@ -74,7 +74,7 @@ macav2_midcentury %>%
 
 
 ```{r midcenturyt-seasonal-prcp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-macav2_midcentury %>%
+scratch <- macav2_midcentury %>%
   mtd_plot_macav2_monthly_midcentury_summary(element = "pcpn",
                    agg_sf = mt_counties_simple,
                    agg_sf_fun = median,

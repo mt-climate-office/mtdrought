@@ -116,9 +116,9 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                                                            33,
                                                            seq(40,100,10))),
                                    guide = guide_legend(title.position = "bottom")) +
-                 add_hillshade() +
-                 add_counties() +
-                 add_climate_divisions() +
+                 # add_hillshade() +
+                 # add_counties() +
+                 # add_climate_divisions() +
                  # # Plot the labels
                  # geom_label(data = climdiv_tmpc$normals %>%
                  #              left_join(mt_climate_divisions_simple %>%
@@ -142,7 +142,8 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                #                                         paste0(" ºF"))),
                #            alpha = 1,
                #            size = 2.25) +
-               mdt_theme_map()) %T>%
+               mtd_plot() +
+                 ggplot2::theme(legend.key.height = unit(0.15,"in"))) %T>%
     save_mt_map(stringr::str_c(noaa_date,"-",element,"-seasonal-forecast.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%

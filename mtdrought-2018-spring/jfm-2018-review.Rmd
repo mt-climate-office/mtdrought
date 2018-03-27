@@ -18,71 +18,129 @@ La Nina didn't dissappoint! Reflecting on last winter...
 
 gridmet <- mtd_get_gridmet(dates = c("2018-01-01",
                                      "2018-03-31"),
-                           data_out = "../data/gridmet")
+                           raw_dir = "../data/gridmet")
+
+gridmet_dates <- attr(gridmet,"dates")
+gridmet_sf_cropped <- gridmet %>%
+  mtd_as_sf_gridmet() %>%
+    purrr::map(sf::st_intersection,
+               y = mt_state_simple)
+attr(gridmet_sf_cropped,"dates") <- gridmet_dates
+
+gridmet_agg <- gridmet %>%
+  mtd_aggregate_gridmet(mt_counties)
 
 ```
 
 
 ```{r past-seasonal-temp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "tmpc")
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "tmean") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              # "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "tmpc",
-                   use_normals = TRUE)
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "tmean",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              # "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 
 ```{r past-seasonal-temp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "tmpc",
-                   agg_sf = mt_counties_simple,
-                   agg_sf_fun = median)
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "tmean") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 
 ```{r past-seasonal-temp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "tmpc",
-                   agg_sf = mt_counties_simple,
-                   agg_sf_fun = median,
-                   use_normals = TRUE)
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "tmean",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-
 ```{r past-seasonal-prcp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "pcpn")
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "prcp") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              # "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
+
 ```
 
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "pcpn",
-                   use_normals = TRUE)
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "prcp",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              # "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 
 ```{r past-seasonal-prcp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "pcpn",
-                   agg_sf = mt_counties_simple,
-                   agg_sf_fun = median)
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "prcp") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 
 ```{r past-seasonal-prcp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-gridmet %>%
-  mtd_plot_gridmet(element = "pcpn",
-                   agg_sf = mt_counties_simple,
-                   agg_sf_fun = median,
-                   use_normals = TRUE)
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "prcp",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
 ```
 
 ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
@@ -101,9 +159,9 @@ past_seasonal_swe$map
 
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-mtd_plot_smap(date = "2018-04-01",
-              variable = "sm_rootzone",
-              data_out = "../data/SMAP")$map
+scratch <- mtd_plot_smap(date = "2018-04-01",
+                         variable = "sm_rootzone",
+                         data_out = "../data/SMAP")$map
 ```
 
 
@@ -115,20 +173,20 @@ mtd_plot_smap(date = "2018-04-01",
 
 
 ```{r past-seasonal-smap-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-mtd_plot_smap(date = "2018-04-01",
-              variable = "sm_rootzone",
-              data_out = "../data/SMAP",
-              agg_sf = mt_counties_simple,
-              agg_fun = mean)$map
+scratch <- mtd_plot_smap(date = "2018-04-01",
+                         variable = "sm_rootzone",
+                         data_out = "../data/SMAP",
+                         agg_sf = mt_counties_simple,
+                         agg_fun = mean)$map
 ```
 
 
 ```{r past-seasonal-smap-counties-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-mtd_plot_smap(date = "2018-04-01",
-              variable = "sm_rootzone_wetness",
-              data_out = "../data/SMAP",
-              agg_sf = mt_counties_simple,
-              agg_fun = mean)$map
+scratch <- mtd_plot_smap(date = "2018-04-01",
+                         variable = "sm_rootzone_wetness",
+                         data_out = "../data/SMAP",
+                         agg_sf = mt_counties_simple,
+                         agg_fun = mean)$map
 ```
 
 #### Snow and soil moisture recharge {-}

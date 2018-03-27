@@ -1,4 +1,5 @@
 base
+magrittr
 mcor
 thredds
 sp
@@ -10,8 +11,8 @@ raster
 rgeos
 fasterize
 velox
+spex
 lwgeom
-magrittr
 tidyverse
 ggplot2
 tibble

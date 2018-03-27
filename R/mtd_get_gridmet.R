@@ -1,9 +1,9 @@
 mtd_get_gridmet <- function(dates = "latest",
-                             data_out = "./data/gridmet",
+                            raw_dir = "./data/gridmet",
                             pcpn_fun = sum,
                             temp_fun = mean){
   
-  dir.create(data_out,
+  dir.create(raw_dir,
              recursive = TRUE,
              showWarnings = FALSE)
   
@@ -11,7 +11,9 @@ mtd_get_gridmet <- function(dates = "latest",
     dates <- "latest"
   
   gridmet <- mcor::mco_get_gridmet(dates = dates,
-                                   out_dir = data_out)
+                                   out_dir = raw_dir)
+  
+  normals <- mco_get_gridmet_normals(raw_dir = stringr::str_c(raw_dir,"/normals"))
   
   gridmet_dates <- gridmet[[1]] %>%
     names() %>%
@@ -29,8 +31,6 @@ mtd_get_gridmet <- function(dates = "latest",
   gridmet$daily_maximum_temperature %<>%
     raster::calc(temp_fun) %>%
     k_to_f(.)
-
-  normals <- mco_get_gridmet_normals()
   
   normals$precipitation_amount %<>%
     magrittr::extract2(gridmet_dates %>%
@@ -59,5 +59,5 @@ mtd_get_gridmet <- function(dates = "latest",
   
   attr(out,"dates") <- gridmet_dates
   return(out)
-
+  
 }

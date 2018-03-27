@@ -32,20 +32,6 @@ mtd_plot_swe_basins <- function(date = "latest",
                 # Plot the polygon fills
                 geom_sf(aes(fill = percent),
                         color = NA) +
-                add_hillshade() +
-                add_counties() +
-                # Plot the polygon boundaries
-                geom_sf(fill = NA,
-                        color = "white",
-                        size = 0.5) +
-                # add_climate_divisions() +
-                # Plot the labels
-                geom_label(aes(x = Centroid_x,
-                               y = Centroid_y,
-                               label = percent %>%
-                                 paste0("%")),
-                           alpha = 1,
-                           size = 2.25) +
                 scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"\n",
                                                            "Snow water equivalent","\nPercent of normal"),
                                      #limits = c(0,1),
@@ -54,7 +40,18 @@ mtd_plot_swe_basins <- function(date = "latest",
                                      palette = "RdBu",
                                      expand = FALSE,
                                      guide = guide_colourbar(title.position = "bottom")) +
-                mdt_theme_map()) %T>%
+                mtd_plot() +
+                # Plot the polygon boundaries
+                geom_sf(fill = NA,
+                        color = "white",
+                        size = 0.5) +
+                # Plot the labels
+                geom_label(aes(x = Centroid_x,
+                               y = Centroid_y,
+                               label = percent %>%
+                                 paste0("%")),
+                           alpha = 1,
+                           size = 2.25)) %T>%
     save_mt_map(stringr::str_c(date,"-swe.pdf"))
   
   

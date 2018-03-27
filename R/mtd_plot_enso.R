@@ -53,16 +53,6 @@ mtd_plot_enso <- function (months,
                     geom_sf(aes(geometry = Shape,
                                 fill = `ENSO`-Normal),
                             color = "white") +
-                    add_hillshade() +
-                    add_counties() +
-                    add_climate_divisions() + 
-                    # Plot the labels
-                    geom_label(aes(x = Centroid_x,
-                                   y = Centroid_y,
-                                   label = stringr::str_c(round(Value, digits = 1)," ",unit_symbol,"\n",
-                                                          print_sign(`ENSO`-Normal), round(`ENSO`-Normal, digits = 1), " from norm.")),
-                               alpha = 1,
-                               size = 2.25) +
                     scale_fill_distiller(name = stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],", ",
                                                                enso,"\n",long_name,"\nDeviation from Norm. (",unit_symbol,")"),
                                          #limits = c(0,1),
@@ -72,7 +62,14 @@ mtd_plot_enso <- function (months,
                                          palette = if(element == "pcpn") "BrBG" else "RdBu",
                                          expand = FALSE,
                                          guide = guide_colourbar(title.position = "bottom")) +
-                    mdt_theme_map()) %T>%
+                    mtd_plot() +
+                    # Plot the labels
+                    geom_label(aes(x = Centroid_x,
+                                   y = Centroid_y,
+                                   label = stringr::str_c(round(Value, digits = 1)," ",unit_symbol,"\n",
+                                                          print_sign(`ENSO`-Normal), round(`ENSO`-Normal, digits = 1), " from norm.")),
+                               alpha = 1,
+                               size = 2.25)) %T>%
     save_mt_map(stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],"-",
                                enso,"-",element,".pdf"))
   
