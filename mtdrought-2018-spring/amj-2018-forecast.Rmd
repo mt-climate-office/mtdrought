@@ -8,7 +8,38 @@ title: "April–June 2018 Forecast"
 source("./R/setup.R")
 ```
 
+### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-}
+
+Pacific sea surface temperatures have remained below average, maintaining La Niña conditions in the ocean and lower atmosphere. This typically results in wetter and cooler conditions during Montana’s winters and spring. Early in the spring the La Niña conditions are expected to contribute to below-average temperatures and above-median precipitation for portions of Montana. Most models agree that the La Niña will transition to ENSO neutral in late April to May. When ENSO-neutral occurs, ocean temperatures and atmospheric conditions are near the long-term average and there is often less predictability in the summer three month outlook. 
+
+#### Temperature {-}
+```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+
+enso_temp <- mtd_plot_enso(months = 4:6,
+                                element = "tmpc",
+                                agg_fun = mean)
+ 
+enso_temp$map +
+  add_climate_divisions()
+```
+
+#### Precipitation {-}
+```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+enso_prcp <- mtd_plot_enso(months = 4:6,
+                                element = "pcpn",
+                                agg_fun = sum)
+ 
+enso_prcp$map +
+  add_climate_divisions()
+```
+
+
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
+
+Because of the weakening La Niña, the spring outlook for temperature is cooler than normal across eastern, central, and northwestern portions of the state. Equal chances of above, below, or normal spring temperatures are expected for the southwestern portions of the state. If the cooler than normal temperatures are realized for the majority of the state they will contribute to a delay in the onset of warmer soil temperatures, the growing season, and snowmelt. 
+
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
 climdiv_tmpc <- climdiv_summary(months = 4:6,
@@ -49,6 +80,8 @@ noaa_seasonal$map +
 ```
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
+The weakening La Niña still plays a part for expected above normal precipitation in northeastern to northcentral Montana. Here the polar jetstream is expected to continue bringing moisture from the north and is welcome for portions of northeast Montana that still have moisture deficits from last summer’s drought. Across the rest of the state spanning from southeastern to western Montana, precipitation amounts are less certain and equal chances of above, below or normal precipitation are forecast.
+
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
 climdiv_pcpn <- climdiv_summary(months = 4:6,
@@ -97,29 +130,3 @@ future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2018-04-01",
 future_seasonal_drought$map
 ```
 
-### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-}
-
-Sea surface temperatures have remained below average, maintaining La Niña conditions in the ocean and lower atmosphere. Most models agree that as this winter transitions into spring, sea surface temperatures are expected to return to near average. Returning to ENSO-neutral in spring means neither El Niño nor La Niña conditions are present. When ENSO-neutral occurs, ocean and atmospheric conditions are near the long-term average and it often coincides with a transition from La Niña to El Niño or vice versa. While ENSO-neutral persists there is often less confidence in summer forecast as durations of neutral conditions vary. As this transition occurs, La Niña conditions will continue with below-average temperatures and above-median precipitation in spring for Montana. These conditions will gradually weaken and transition to neutral as spring transitions to summer.
-
-#### Temperature {-}
-```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-
-
-enso_temp <- mtd_plot_enso(months = 4:6,
-                                element = "tmpc",
-                                agg_fun = mean)
- 
-enso_temp$map +
-  add_climate_divisions()
-```
-
-#### Precipitation {-}
-```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-
-enso_prcp <- mtd_plot_enso(months = 4:6,
-                                element = "pcpn",
-                                agg_fun = sum)
- 
-enso_prcp$map +
-  add_climate_divisions()
-```
