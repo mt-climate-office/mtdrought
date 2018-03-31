@@ -70,7 +70,7 @@ noaa_seasonal$map +
                          by = "Division code"),
              aes(x = Centroid_x,
                  y = Centroid_y,
-                 label = stringr::str_c("1981-2010 normal: \n",
+                 label = stringr::str_c("Normal: \n",
                                         Normal %>%
                                           round(digits = 1) %>%
                                           paste0(" ºF"))),

@@ -200,6 +200,9 @@ scratch <- mtd_plot_smap(date = "2018-04-01",
 ```
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+
+Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding as we move into the spring. Pockets of Northwestern and Southcentral Montana have soil moisture surpluses due to the high precipitation in the last couple of months. The majority of the state has near normal soil moisture saturation percentages (50--60%) for this time of the year. These are likely to progress towards saturation (100%) as snowmelt and spring rains occur. Pockets of soil moisture deficit still exist in northeastern Montana and southwestern Montana and are associated with last summer’s drought conditions and precipitation deficits.
+
 ```{r past-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
 past_seasonal_drought <- mtd_plot_usdm(date = "2018-04-01",
@@ -208,6 +211,4 @@ past_seasonal_drought <- mtd_plot_usdm(date = "2018-04-01",
 past_seasonal_drought$map
 
 ```
-
-Not out of it yet in the northeast.
 
