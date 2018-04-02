@@ -90,7 +90,7 @@ scratch <- gridmet_agg %>%
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-Winter yielded wet conditions throughout the state from the mountains to the plains. This precipitation was much needed and helped to lessen the drought conditions that persisted in northeastern Montana since last summer. On the wet end of the spectrum, much of central and eastern portions of the state received from 150 to over 200 percent of normal precipitation. The mountainous region in western Montana received between 120 to 150 percent of normal precipitation. February was a major contributor to the winter precipitation totals, ranking as the fourth wettest February on record for the state. There was a pocket of normal to slightly below normal precipitation that occurred in Daniels, Sheridan, and Roosevelt counties, areas that also experienced some of the most severe drought conditions last summer.
+Winter yielded wet conditions throughout the state from the mountains to the plains. This precipitation was much needed and helped to lessen the drought conditions that persisted in northeastern Montana since last summer. On the wet end of the spectrum, much of central and eastern portions of the state received from 150 to over 200 percent of normal precipitation. The mountainous region in western Montana received between 120 to 150 percent of normal precipitation. Above normal precipitation in February helped a lot; it was the fourth wettest February on record for the state. There was a pocket of normal to slightly below normal precipitation that occurred in Daniels, Sheridan, and Roosevelt counties, areas that also experienced some of the most severe drought conditions last summer.
 
 ```{r past-seasonal-prcp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 gridmet_sf_cropped %>%
@@ -148,7 +148,7 @@ scratch <- gridmet_agg %>%
 
 ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
 
-Snowpack continued to fare well into March across Montana. According to the US Army Corps of Engineers, there were slight increases in snowpack in the Upper Missouri River Basin since last month. Snow Water Equivalent (SWE) in the Basin above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. In the Plains, snowfall in central to eastern portions of the state deepened the snowpack and covered the ground, which was bare at the end of January. The ample snowpack will contribute significantly to soil moisture recharge and good growing conditions this summer. Given the above average snowpack, it will be important to pay close attention to spring temperatures that impact the rapidity of snowmelt and potential for flooding in a given region.
+Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the UMRB above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 past_seasonal_swe <- mtd_plot_swe_basins(date="2018-04-01")
@@ -166,24 +166,24 @@ past_seasonal_swe$map
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
-Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding as we move into the spring. Pockets of Northwestern and Southcentral Montana have soil moisture surpluses due to the high precipitation in the last couple of months. The majority of the state has near normal soil moisture saturation percentages (50--60%) for this time of the year. These are likely to progress towards saturation (100%) as snowmelt and spring rains occur. Pockets of soil moisture deficit still exist in northeastern Montana and southwestern Montana and are associated with last summer’s drought conditions and precipitation deficits.
+Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding as we move into the spring. Pockets of northwestern and south-central Montana have soil moisture surpluses due to the high precipitation in the last couple of months. The majority of the state has near normal soil moisture saturation (50--60%) for this time of the year. These are likely to progress towards saturation (100%) as snowmelt and spring rains occur. Pockets of low soil moisture still exist in northeastern and southwestern Montana and are associated with last summer’s drought conditions and lower than normal precipitation in these areas.
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-scratch <- mtd_plot_smap(date = "2018-04-01",
+scratch <- mtd_plot_smap(date = "2018-03-31",
                          variable = "sm_rootzone",
                          data_out = "../data/SMAP")$map
 ```
 
 
 ```{r past-seasonal-smap-grid-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-mtd_plot_smap(date = "2018-04-01",
+mtd_plot_smap(date = "2018-03-31",
               variable = "sm_rootzone_wetness",
               data_out = "../data/SMAP")$map
 ```
 
 
 ```{r past-seasonal-smap-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-scratch <- mtd_plot_smap(date = "2018-04-01",
+scratch <- mtd_plot_smap(date = "2018-03-31",
                          variable = "sm_rootzone",
                          data_out = "../data/SMAP",
                          agg_sf = mt_counties_simple,
@@ -192,7 +192,7 @@ scratch <- mtd_plot_smap(date = "2018-04-01",
 
 
 ```{r past-seasonal-smap-counties-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-scratch <- mtd_plot_smap(date = "2018-04-01",
+scratch <- mtd_plot_smap(date = "2018-03-31",
                          variable = "sm_rootzone_wetness",
                          data_out = "../data/SMAP",
                          agg_sf = mt_counties_simple,
@@ -201,7 +201,7 @@ scratch <- mtd_plot_smap(date = "2018-04-01",
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
 
-Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding as we move into the spring. Pockets of Northwestern and Southcentral Montana have soil moisture surpluses due to the high precipitation in the last couple of months. The majority of the state has near normal soil moisture saturation percentages (50--60%) for this time of the year. These are likely to progress towards saturation (100%) as snowmelt and spring rains occur. Pockets of soil moisture deficit still exist in northeastern Montana and southwestern Montana and are associated with last summer’s drought conditions and precipitation deficits.
+Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding as we move into the spring. Pockets of northwestern and south-central Montana have soil moisture surpluses due to the high precipitation in the last couple of months. The majority of the state has near normal soil moisture saturation (50--60%) for this time of the year. These are likely to progress towards saturation (100%) as snowmelt and spring rains occur. Pockets of low soil moisture still exist in northeastern and southwestern Montana and are associated with last summer’s drought conditions and lower than normal precipitation in these areas.
 
 ```{r past-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

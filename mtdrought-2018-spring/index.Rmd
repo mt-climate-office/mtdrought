@@ -4,26 +4,26 @@ title: "2018 Spring Outlook"
 
 ## {-}
 
-Welcome to the April 2018 Montana Drought & Climate newsletter. We are working to provide and interpret climate data for agricultural producers in Montana. With our seasonal newsletters, we hope to transform existing forecasts and projections into useful climate information that meet producer needs. Please [send us your feedback](mailto:mtdrought@umontana.org)!
+Welcome to the April 2018 Montana Drought & Climate newsletter. We are working to provide and interpret climate data for agricultural producers in Montana. With our seasonal newsletters, we hope to transform existing forecasts and projections into useful climate information that meet producer needs. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
 Here's what you'll find in this newsletter:
 
 [**Conditions**](./jfm-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the season and allows producers to reflect on years past in comparison.
 
-[**Forecast**](./amj-2018-forecast.html) --- The seasonal forecast is generally the most frequently requested dataset by producers. Here Temperature, Precipitation, Drought and influential global air circulation patterns are discussed in regional detail.
+[**Forecast**](./amj-2018-forecast.html) --- The seasonal forecast is generally the most frequently requested dataset by producers. Here temperature, precipitation, drought, and influential global air circulation patterns are discussed in regional detail.
 
-[**2040--2069 Outlook**](./amj-2018-midcentury.html) --- Modeling allows for a better idea of what mid-century conditions could look like in Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
+[**2040--2069 Outlook**](./amj-2018-midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
 
 -----
 
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
--	Montana experienced a cold and wet February and winter, resulting in near-record high snowpack across the western mountains and eastern plains.
--	Significant precipitation alleviated drought conditions that remained from summer 2017. As a result, drought has contracted to northeastern Montana, with severe drought remaining in Daniels, Roosevelt, and Sheridan counties.
--	The La Niña conditions that brought above average winter precipitation and cooler temperatures are expected to dissipate to ENSO neutral conditions by early spring. 
--	The spring outlook for temperature is cooler than normal across eastern, central, and northwestern portions of the state. Equal chances of above, below, or normal spring temperatures are expected for the southwestern portions of the state. 
--	The spring outlook for precipitation is for wetter than normal conditions in portions of northeastern and northcentral Montana. Equal chances of above, below, or normal precipitation is forecast for the rest of the state.
+-	Montana experienced a cold and wet winter, resulting in near-record high snowpack across the western mountains and eastern plains.
+-	Above average precipitation alleviated the drought conditions lingering on from summer 2017. As a result, drought is now only present in Daniels, Roosevelt, and Sheridan counties.
+-	The La Niña conditions that brought above average winter precipitation and cooler temperatures are expected to dissipate by early spring. 
+-	The spring outlook is for cooler than normal temperatures across the eastern, central, and northwestern portions of the state. There is an equal chance of above, below, or normal spring temperatures for the southwestern portion of the state.
+-	The spring outlook is for wetter than normal precipitation in northeastern and northcentral Montana. There is an equal chance of above, below, or normal precipitation for the rest of the state.
 
 </div>
 
@@ -95,5 +95,5 @@ University of Montana<br>
 Missoula, MT 59812<br>
 
 P: (406) 243-6793<br>
-E: [mtdrought@umontana.org](mailto:mtdrought@umontana.edu)<br>
+E: [mtdrought@umontana.edu](mailto:mtdrought@umontana.edu)<br>
 W: [http://climate.umt.edu/](http://climate.umt.edu/)
