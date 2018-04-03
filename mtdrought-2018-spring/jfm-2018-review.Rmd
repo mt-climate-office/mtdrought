@@ -169,21 +169,21 @@ past_seasonal_swe$map
 Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding as we move into the spring. Pockets of northwestern and south-central Montana have soil moisture surpluses due to the high precipitation in the last couple of months. The majority of the state has near normal soil moisture saturation (50--60%) for this time of the year. These are likely to progress towards saturation (100%) as snowmelt and spring rains occur. Pockets of low soil moisture still exist in northeastern and southwestern Montana and are associated with last summer’s drought conditions and lower than normal precipitation in these areas.
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-scratch <- mtd_plot_smap(date = "2018-03-31",
+scratch <- mtd_plot_smap(date = "2018-04-01",
                          variable = "sm_rootzone",
                          data_out = "../data/SMAP")$map
 ```
 
 
 ```{r past-seasonal-smap-grid-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-mtd_plot_smap(date = "2018-03-31",
+mtd_plot_smap(date = "2018-04-01",
               variable = "sm_rootzone_wetness",
               data_out = "../data/SMAP")$map
 ```
 
 
 ```{r past-seasonal-smap-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-scratch <- mtd_plot_smap(date = "2018-03-31",
+scratch <- mtd_plot_smap(date = "2018-04-01",
                          variable = "sm_rootzone",
                          data_out = "../data/SMAP",
                          agg_sf = mt_counties_simple,
@@ -192,7 +192,7 @@ scratch <- mtd_plot_smap(date = "2018-03-31",
 
 
 ```{r past-seasonal-smap-counties-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-scratch <- mtd_plot_smap(date = "2018-03-31",
+scratch <- mtd_plot_smap(date = "2018-04-01",
                          variable = "sm_rootzone_wetness",
                          data_out = "../data/SMAP",
                          agg_sf = mt_counties_simple,

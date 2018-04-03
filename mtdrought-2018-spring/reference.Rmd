@@ -56,7 +56,7 @@ Weather and climate forecasters use words and information in very particular way
 
 <!-- <div class="clearfix"></div> -->
 
-![](./icons/midcentury.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Mid-century Projections** --- We present temperature and precipitation projections for the mid-century, or AD 2040--2069. These projections are *ensemble projections*: averages of 20 global climate models that were run as part of the [Coupled Model Intercomparison Project Phase 5](https://cmip.llnl.gov/cmip5/). All models have uncertainty; climate scientists use ensembles as a way of increasing confidence in future climate projections.
+![](./icons/midcentury.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Mid-century Projections** --- We present temperature and precipitation projections for the mid-century, or AD 2040--2069. These projections are *ensemble projections*: averages of 20 global climate models that were run as part of the [Coupled Model Intercomparison Project Phase 5 (CMIP5)](https://cmip.llnl.gov/cmip5/). All models have uncertainty; climate scientists use ensembles as a way of increasing confidence in future climate projections.
 The projections were downscaled to the same 4 km grid as used for the [GridMET](http://www.climatologylab.org/gridmet.html) gridded weather dataset from the University of Idaho. More information on the downscaling method and the raw data for each of the projections can be found at [https://climate.northwestknowledge.net/MACA/](https://climate.northwestknowledge.net/MACA/).
 
 <div class="clearfix"></div>
