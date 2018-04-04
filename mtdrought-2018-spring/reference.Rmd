@@ -18,7 +18,7 @@ Weather and climate forecasters use words and information in very particular way
 <div class="clearfix"></div>
 ![](./icons/precipitation.svg){style="height:50px; margin:10px 10px; float:left;"}
 </div>
-<br>**Temperature and Precipitation** --- Throughout this newsletter, we report past temperature and precipitation data derived directly from the [GridMET](http://www.climatologylab.org/gridmet.html) daily 4-km-gridded meteorological dataset from the University of Idaho. Temperature data are reported as seasonal averages; precipitation data are reported as seasonal total precipitation.
+<br>**Temperature and Precipitation** --- Throughout this newsletter, we report past temperature and precipitation data derived directly from the [GridMET](http://www.climatologylab.org/gridmet.html) daily 4-km-gridded meteorological dataset from the University of Idaho. Temperature data are reported as seasonal averages; precipitation data are reported as seasonal total precipitation. Our three-month temperature and precipitation forecasts come from NOAA's [Climate Prediction Center](http://www.cpc.noaa.gov/).
 
 <div class="clearfix"></div>
 
@@ -27,7 +27,7 @@ Weather and climate forecasters use words and information in very particular way
 
 <div class="clearfix"></div>
 
-![](./icons/drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Drought** --- The US Drought Monitor identifies general areas of drought and labels them by intensity. Maps of drought intensity are used by policy-makers, resource managers, and agricultural producers to make decisions. More information about the US Drought Monitor can be found at [the US Drought Monitor website](http://droughtmonitor.unl.edu/).
+![](./icons/drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Drought** --- The US Drought Monitor identifies general areas of drought and labels them by intensity. Maps of drought intensity are used by policy-makers, resource managers, and agricultural producers to make decisions. More information about the US Drought Monitor can be found at the [US Drought Monitor website](http://droughtmonitor.unl.edu/).
 
 <div class="clearfix"></div>
 
@@ -35,7 +35,7 @@ Weather and climate forecasters use words and information in very particular way
 
 <div class="clearfix"></div>
 
-![](./icons/swe.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Snow Water Equivalent (SWE)** --- SWE is the amount of water contained within the snowpack. It can be thought of as the depth of water that would theoretically result if you melted the entire snowpack. SWE is measured across the West by the [SNOTEL network](https://www.wcc.nrcs.usda.gov/about/mon_automate.html) of snow monitoring stations. The SWE percent of normal represents the current snow water equivalent found at selected SNOTEL sites in the basin compared to the normal value for those sites from 1981--2010.
+![](./icons/swe.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Snow Water Equivalent (SWE)** --- SWE is the amount of water contained within the snowpack. It can be thought of as the depth of water that would theoretically result if you melted the entire snowpack. SWE is measured across the West by the USDA Natural Resources Conservation Service's [SNOTEL network](https://www.wcc.nrcs.usda.gov/about/mon_automate.html) of snow monitoring stations. The SWE percent of normal represents the current snow water equivalent found at selected SNOTEL sites in the basin compared to the normal value for those sites from 1981--2010.
 
 <div class="clearfix"></div>
 
