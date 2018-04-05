@@ -1,0 +1,32 @@
+---
+title: "About **Montana Drought & Climate**<br>and the **Montana Climate Office**"
+---
+
+## {-}
+Montana Drought and Climate is a USDA-funded product of the Montana Climate Office (MCO) at the W.A. Franke College of Forestry & Conservation at the University of Montana, in collaboration with the Montana State University Extension Service. The MCO is an independent state-designated body that provides Montanans with high-quality, timely, relevant, and scientifically-based climate information and services. We strive to be a credible and expert source of information for decision makers that rely on the most current information on climate to make important decisions. It is also the role of the MCO to assist stakeholders in interpreting climate information or adapting climate products to their needs.
+
+Production of this newsletter is supported by Water for Agriculture Challenge Area grant no. 2017-67027-26313 from the USDA National Institute of Food and Agriculture. Any opinions, findings, conclusions, or recommendations expressed in this publication are those of the author(s) and do not necessarily reflect the view of the U.S. Department of Agriculture.
+
+<br>
+<div style="text-align: center;">
+![](./img/NIFA_logo.jpg){style="width:400px;"}
+</div>
+
+
+-----
+
+## Contact Us {-}
+
+<br>
+![](./img/MCO_logo.svg){style="width:300px;"}
+<br>
+<br>
+Montana Climate Office<br>
+Montana Forest & Conservation Experiment Station<br>
+University of Montana<br>
+32 Campus Drive<br>
+Missoula, MT 59812<br>
+
+P: (406) 243-6793<br>
+E: [mtdrought@umontana.org](mailto:mtdrought@umontana.org)<br>
+W: [http://climate.umt.edu/](http://climate.umt.edu/)

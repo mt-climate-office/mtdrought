@@ -1,0 +1,101 @@
+---
+title: "2018 Summer Outlook"
+---
+
+## {-}
+
+Welcome to the June 2018 Montana Drought & Climate newsletter. We are working to provide and interpret climate data for agricultural producers in Montana. With our seasonal newsletters, we hope to transform existing forecasts and projections into useful climate information that meet producer needs. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+
+Here's what you'll find in this newsletter:
+
+[**Conditions**](./am-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the season and allows producers to reflect on years past in comparison.
+
+[**Forecast**](./jja-2018-forecast.html) --- The seasonal forecast is generally the most frequently requested dataset by producers. Here temperature, precipitation, drought, and influential global air circulation patterns are discussed in regional detail.
+
+[**2040--2069 Outlook**](./am-2018-midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
+
+[**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
+
+-----
+
+### In Brief {-}
+
+<div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
+<!-- -	Montana experienced a cold and wet winter, resulting in near-record high snowpack across the western mountains and eastern plains. -->
+<!-- -	Above average precipitation alleviated the drought conditions lingering on from summer 2017. As a result, drought is now only present in Daniels, Roosevelt, and Sheridan counties. -->
+<!-- -	The La Niña conditions that brought above average winter precipitation and cooler temperatures are expected to dissipate by early spring.  -->
+<!-- -	The spring outlook is for cooler than normal temperatures across the eastern, central, and northwestern portions of the state. There is an equal chance of above, below, or normal spring temperatures for the southwestern portion of the state. -->
+<!-- -	The spring outlook is for wetter than normal precipitation in northeastern and northcentral Montana. There is an equal chance of above, below, or normal precipitation for the rest of the state. -->
+
+</div>
+
+-----
+
+### Expert summary {-}
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      results = "hold",
+                      eval.after = "fig.cap",
+                      fig.width = 4.45,
+                      fig.height = 2.54,
+                      fig.retina = 4, 
+                      fig.align = "center", 
+                      out.width = '100%', 
+                      collapse=TRUE,
+                      cache=TRUE
+)
+
+# install.packages("devtools")
+# devtools::install_github("mt-climate-office/mcor")
+# devtools::install_github("ecohealthalliance/fasterize")
+# devtools::install_bioc("rhdf5")
+
+## Load all packages
+all_packages <- c("mcor", # The Core MCO package
+                  "FedData", "smapr", "rhdf5", # Package for data aquisition
+                  "sf", "raster", "rgeos", "fasterize", "velox", # Packages for spatial processing
+                  "magrittr", "tidyverse", "purrrlyr", # Packages for tidy code
+                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
+                  "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
+
+# purrr::walk(all_packages, devtools::install_cran, character.only = TRUE)
+purrr::walk(all_packages, library, character.only = TRUE)
+
+# Load other useful functions
+list.files("../R", full.names = T) %>%
+  purrr::walk(source)
+
+```
+
+-----
+
+### About **Montana Drought & Climate**<br>and the **Montana Climate Office** {-}
+[Montana Drought and Climate](https://climate.umt.edu/mtdrought/) is a USDA-funded project of the [Montana Climate Office (MCO)](https://climate.umt.edu/) at the W.A. Franke College of Forestry & Conservation at the University of Montana, in collaboration with the Montana State University Extension Service. The MCO is an independent state-designated body that provides Montanans with high-quality, timely, relevant, and scientifically-based climate information and services. We strive to be a credible and expert source of information for decision makers that rely on the most current information on climate to make important decisions. It is also the role of the MCO to assist stakeholders in interpreting climate information or adapting climate products to their needs.
+
+Production of this newsletter is supported by Water for Agriculture Challenge Area grant no. 2017-67027-26313 from the [USDA National Institute of Food and Agriculture](https://nifa.usda.gov/). Any opinions, findings, conclusions, or recommendations expressed in this publication are those of the author(s) and do not necessarily reflect the view of the U.S. Department of Agriculture.
+
+<br>
+<div style="text-align: left;">
+![](./img/NIFA_logo.jpg){style="width:400px;"}
+</div>
+
+
+-----
+
+<br>
+<a href="https://climate.umt.edu/" target="_blank">
+  <img src="./img/MCO_logo.svg" alt="Montana Climate Office logo" style="width:250px;float:right;">
+</a>
+[Montana Climate Office](https://climate.umt.edu/)<br>
+Montana Forest & Conservation Experiment Station<br>
+University of Montana<br>
+32 Campus Drive<br>
+Missoula, MT 59812<br>
+
+P: (406) 243-6793<br>
+E: [mtdrought@umontana.edu](mailto:mtdrought@umontana.edu)<br>
+W: [http://climate.umt.edu/](http://climate.umt.edu/)

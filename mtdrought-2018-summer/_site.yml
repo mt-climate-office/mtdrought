@@ -1,0 +1,28 @@
+name: MT Drought & Climate — June 2018
+navbar:
+  title: <img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left;
+    vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
+    and Forecasting<br>for Agricultural Producers<br><b>April 2018</b></ht>
+  right:
+  - text: Apr–May 2018
+    href: am-2018-review.html
+  - text: Jun–Aug 2018
+    href: jja-2018-forecast.html
+  - text: Apr–May Mid-century
+    href: am-2018-midcentury.html
+  - text: Reference
+    href: reference.html
+output:
+  html_document:
+    theme: simplex
+    highlight: textmate
+    css: style.css
+    df_print: paged
+    includes:
+      in_header: header.html
+      before_body: open_review_block.html
+      after_body: after_body.html
+    lib_dir: site_libs
+    self_contained: no
+output_dir: ../docs/mtdrought-2018-summer
+

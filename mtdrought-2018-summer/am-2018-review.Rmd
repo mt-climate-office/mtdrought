@@ -1,0 +1,204 @@
+---
+title: "April--May, 2018: Current conditions"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+source("./R/setup.R")
+
+```
+
+## {- .tabset .tabset-fade .tabset-pills}
+
+### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
+
+```{r past-seasonal-gridmet, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+gridmet <- mtd_get_gridmet(dates = c("2018-04-01",
+                                     "2018-05-31"),
+                           raw_dir = "../data/gridmet")
+
+gridmet_dates <- attr(gridmet,"dates")
+gridmet_sf_cropped <- gridmet %>%
+  mtd_as_sf_gridmet() %>%
+    purrr::map(sf::st_intersection,
+               y = mt_state_simple)
+attr(gridmet_sf_cropped,"dates") <- gridmet_dates
+
+gridmet_agg <- gridmet %>%
+  mtd_aggregate_gridmet(mt_counties)
+
+```
+
+
+```{r past-seasonal-temp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "tmean") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              # "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+
+```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "tmean",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              # "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+
+```{r past-seasonal-temp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "tmean") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+
+```{r past-seasonal-temp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "tmean",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+
+### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
+
+```{r past-seasonal-prcp-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "prcp") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              # "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
+
+```
+
+
+```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "prcp",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              # "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+
+```{r past-seasonal-prcp-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "prcp") %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              "aggregated",
+                              # "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+
+```{r past-seasonal-prcp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- gridmet_agg %>%
+  mtd_plot_gridmet(element = "prcp",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
+```
+
+<!-- ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-} -->
+
+<!-- ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
+<!-- past_seasonal_swe <- mtd_plot_swe_basins(date="2018-04-01") -->
+
+<!-- past_seasonal_swe$map -->
+
+<!-- ``` -->
+
+<!-- #### Big Story: Blizzard affects Blackfeet Nation --- Feb 23--27 & March 6 {-} -->
+
+<!-- •	Winds 60--75 mph combined with recent heavy snow & extreme cold temperatures led to a blizzard --- 10 to 15+ foot snow drifts -->
+<!-- •	Impassable roads and driveways caused people to be trapped in their homes & stranded on roadways --- numerous road closures -->
+<!-- •	Dennis Longknife --- No work for the tribe here in north central Montana. Another blizzard hit and dropped at least 2 more feet of snow, shutting down all travel. -->
+<!-- •	State of emergency on the Blackfeet, Fort Belknap, and Northern Cheyenne reservations and in Glacier and Golden Valley counties -->
+
+### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
+
+```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- mtd_plot_smap(date = "2018-06-01",
+                         variable = "sm_rootzone",
+                         data_out = "../data/SMAP")$map
+```
+
+
+```{r past-seasonal-smap-grid-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+mtd_plot_smap(date = "2018-06-01",
+              variable = "sm_rootzone_wetness",
+              data_out = "../data/SMAP")$map
+```
+
+
+```{r past-seasonal-smap-counties, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- mtd_plot_smap(date = "2018-06-01",
+                         variable = "sm_rootzone",
+                         data_out = "../data/SMAP",
+                         agg_sf = mt_counties_simple,
+                         agg_fun = mean)$map
+```
+
+
+```{r past-seasonal-smap-counties-wetness, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+scratch <- mtd_plot_smap(date = "2018-06-01",
+                         variable = "sm_rootzone_wetness",
+                         data_out = "../data/SMAP",
+                         agg_sf = mt_counties_simple,
+                         agg_fun = mean)$map
+```
+
+### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+
+```{r past-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+past_seasonal_drought <- mtd_plot_usdm(date = "2018-06-01",
+                                       data_out = "../data/USDM")
+
+past_seasonal_drought$map
+
+```
+
