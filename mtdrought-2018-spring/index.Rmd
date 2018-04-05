@@ -31,48 +31,6 @@ Here's what you'll find in this newsletter:
 
 -----
 
-### Expert summary {-}
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,
-                      message = FALSE,
-                      warning = FALSE,
-                      results = "hold",
-                      eval.after = "fig.cap",
-                      fig.width = 4.45,
-                      fig.height = 2.54,
-                      fig.retina = 4, 
-                      fig.align = "center", 
-                      out.width = '100%', 
-                      collapse=TRUE,
-                      cache=TRUE
-)
-
-# install.packages("devtools")
-# devtools::install_github("mt-climate-office/mcor")
-# devtools::install_github("ecohealthalliance/fasterize")
-# devtools::install_bioc("rhdf5")
-
-## Load all packages
-all_packages <- c("mcor", # The Core MCO package
-                  "FedData", "smapr", "rhdf5", # Package for data aquisition
-                  "sf", "raster", "rgeos", "fasterize", "velox", # Packages for spatial processing
-                  "magrittr", "tidyverse", "purrrlyr", # Packages for tidy code
-                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
-                  "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
-
-# purrr::walk(all_packages, devtools::install_cran, character.only = TRUE)
-purrr::walk(all_packages, library, character.only = TRUE)
-
-# Load other useful functions
-list.files("../R", full.names = T) %>%
-  purrr::walk(source)
-
-```
-
------
-
 ### About **Montana Drought & Climate**<br>and the **Montana Climate Office** {-}
 [Montana Drought and Climate](https://climate.umt.edu/mtdrought/) is a USDA-funded project of the [Montana Climate Office (MCO)](https://climate.umt.edu/) at the W.A. Franke College of Forestry & Conservation at the University of Montana, in collaboration with the Montana State University Extension Service. The MCO is an independent state-designated body that provides Montanans with high-quality, timely, relevant, and scientifically-based climate information and services. We strive to be a credible and expert source of information for decision makers that rely on the most current information on climate to make important decisions. It is also the role of the MCO to assist stakeholders in interpreting climate information or adapting climate products to their needs.
 

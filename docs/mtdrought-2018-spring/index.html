@@ -200,9 +200,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<div class = "rmdreview">
-This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hypothes.is</a></b> through April 2, 2018. We want your feedback to make it better for you and other readers. To add your annotation, <span style="background-color: #3297FD; color: white">select some text</span> and then click the <i class="h-icon-annotate"></i> on the pop-up menu. To see the annotations of others, click the <i class="h-icon-chevron-left"></i> in the upper right hand corner of the page <i class="fa fa-arrow-circle-right  fa-rotate-315" aria-hidden="true"></i>
-</div>
 
 <div class="fluid-row" id="header">
 
@@ -235,10 +232,6 @@ This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hyp
 </div>
 <hr />
 </div>
-<div id="expert-summary" class="section level3 unnumbered">
-<h3>Expert summary</h3>
-<hr />
-</div>
 <div id="about-montana-drought-climate-and-the-montana-climate-office" class="section level3 unnumbered">
 <h3>About <strong>Montana Drought &amp; Climate</strong><br>and the <strong>Montana Climate Office</strong></h3>
 <p><a href="https://climate.umt.edu/mtdrought/">Montana Drought and Climate</a> is a USDA-funded project of the <a href="https://climate.umt.edu/">Montana Climate Office (MCO)</a> at the W.A. Franke College of Forestry &amp; Conservation at the University of Montana, in collaboration with the Montana State University Extension Service. The MCO is an independent state-designated body that provides Montanans with high-quality, timely, relevant, and scientifically-based climate information and services. We strive to be a credible and expert source of information for decision makers that rely on the most current information on climate to make important decisions. It is also the role of the MCO to assist stakeholders in interpreting climate information or adapting climate products to their needs.</p>
@@ -254,7 +247,7 @@ This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hyp
 </div>
 
 <!-- hypothes.is -->
-<script async defer src="https://hypothes.is/embed.js"></script>
+<!-- <script async defer src="https://hypothes.is/embed.js"></script> -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115446204-1"></script>
@@ -265,41 +258,6 @@ This newsletter is in Open Review with <b><a href="https://web.hypothes.is/">hyp
 
   gtag('config', 'UA-115446204-1');
 </script>
-
-
-    <!-- ============= Outdated Browser ============= -->
-    <div id="outdated"></div>
-
-
-    <!-- javascript includes -->
-    <script src="lib/outdatedbrowser/outdatedbrowser.min.js"></script>
-
-    <!-- plugin call -->
-    <script>
-        //event listener form DOM ready
-        function addLoadEvent(func) {
-            var oldonload = window.onload;
-            if (typeof window.onload != 'function') {
-                window.onload = func;
-            } else {
-                window.onload = function() {
-                    if (oldonload) {
-                        oldonload();
-                    }
-                    func();
-                }
-            }
-        }
-        //call function after DOM ready
-        addLoadEvent(function(){
-            outdatedBrowser({
-                bgColor: '#f25648',
-                color: '#ffffff',
-                lowerThan: 'transform',
-                languagePath: 'lib/outdatedbrowser/lang/en.html'
-            })
-        });
-    </script>
 
 
 

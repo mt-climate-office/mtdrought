@@ -20,7 +20,6 @@ output:
     df_print: paged
     includes:
       in_header: header.html
-      before_body: open_review_block.html
       after_body: after_body.html
     lib_dir: site_libs
     self_contained: no

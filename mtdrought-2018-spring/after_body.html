@@ -1,5 +1,5 @@
 <!-- hypothes.is -->
-<script async defer src="https://hypothes.is/embed.js"></script>
+<!-- <script async defer src="https://hypothes.is/embed.js"></script> -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115446204-1"></script>
@@ -10,39 +10,3 @@
 
   gtag('config', 'UA-115446204-1');
 </script>
-
-
-    <!-- ============= Outdated Browser ============= -->
-    <div id="outdated"></div>
-
-
-    <!-- javascript includes -->
-    <script src="lib/outdatedbrowser/outdatedbrowser.min.js"></script>
-
-    <!-- plugin call -->
-    <script>
-        //event listener form DOM ready
-        function addLoadEvent(func) {
-            var oldonload = window.onload;
-            if (typeof window.onload != 'function') {
-                window.onload = func;
-            } else {
-                window.onload = function() {
-                    if (oldonload) {
-                        oldonload();
-                    }
-                    func();
-                }
-            }
-        }
-        //call function after DOM ready
-        addLoadEvent(function(){
-            outdatedBrowser({
-                bgColor: '#f25648',
-                color: '#ffffff',
-                lowerThan: 'transform',
-                languagePath: 'lib/outdatedbrowser/lang/en.html'
-            })
-        });
-    </script>
-    
