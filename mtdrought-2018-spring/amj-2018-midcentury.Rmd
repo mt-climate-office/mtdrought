@@ -1,5 +1,5 @@
 ---
-title: "April–June Mid-century Outlook"
+title: "January--March Mid-century Outlook"
 editor_options: 
   chunk_output_type: console
 ---
@@ -87,7 +87,7 @@ scratch <- macav2_midcentury %>%
 ```
 
 ### <img src="icons/swe.svg" width="35px"/> Snowpack {-}
-Due to increasing temperatures a larger proportion of Montana’s total winter precipitation will in the form of rain as opposed to snow. Increased temperatures will result in earlier snowmelt and a significant decline in our April 1<sup>st</sup> snowpack. By mid-century (2040--2069), it is expected that April 1<sup>st</sup> SWE in western and southcentral Montana will decrease to 25–67% of our current normal values. Progressing further east, snowpack in central to eastern Montana is expected to decrease to between 10–1% of its current normal April 1<sup>st</sup>d snow water equivalent. By mid-century, very little snowpack will persist into April in central to eastern Montana.
+Due to increasing temperatures a larger proportion of Montana’s total winter precipitation will in the form of rain as opposed to snow. Increased temperatures will result in earlier snowmelt and a significant decline in our April 1<sup>st</sup> snowpack. By mid-century (2040--2069), it is expected that April 1<sup>st</sup> SWE in western and southcentral Montana will decrease to 25–67% of our current normal values. Progressing further east, snowpack in central to eastern Montana is expected to decrease to between 1--10% of its current normal April 1<sup>st</sup> snow water equivalent. By mid-century, very little snowpack will persist into April in central to eastern Montana.
 
 ```{r midcentury-swe, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
 

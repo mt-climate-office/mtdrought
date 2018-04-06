@@ -13,6 +13,10 @@ Weather and climate forecasters use words and information in very particular way
 
 <div style="-webkit-columns: 3 250px;-moz-columns: 3 250px;columns: 3 250px;">
 
+![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Weather and Climate** --- The difference between weather and climate is timescale. *Weather* is the day-to-day interaction of factors like temperature, humidity, precipitation, cloudiness, visibility, and wind. To understand *climate* at a given place requires looking at weather trends over relatively long periods of time---months, years, and decades. In addition to studying weather, scientists examine climate trends or cycles of variability to understand the bigger picture of long-term changes.
+
+<div class="clearfix"></div>
+
 <div style="float:left;">
 ![](./icons/temperature.svg){style="height:50px; margin:10px 10px; float:left;"}
 <div class="clearfix"></div>
@@ -22,7 +26,7 @@ Weather and climate forecasters use words and information in very particular way
 
 <div class="clearfix"></div>
 
-  ![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Normal(s)** --- Climatologists use the term "normal" to compare current conditions or forecasts, such as  temperature or precipitation, to the past. Here, the normal value is the statistical mean (the average) for a given measurement in a specific place during a specific period of time. Climatologists use the most recent 30-year period, rounded to the nearest decade, to define normal in North America: 1981--2010. The goal is to look far enough back in time to capture variation in weather patterns, but not so far as to be irrelevant to recent conditions. In 2021, we will start using the 1991--2020 period.
+![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Normal(s)** --- Climatologists use the term "normal" to compare current conditions or forecasts, such as  temperature or precipitation, to the past. Here, the normal value is the statistical mean (the average) for a given measurement in a specific place during a specific period of time. Climatologists use the most recent 30-year period, rounded to the nearest decade, to define normal in North America: 1981--2010. The goal is to look far enough back in time to capture variation in weather patterns, but not so far as to be irrelevant to recent conditions. In 2021, we will start using the 1991--2020 period.
 <!-- The median is the middle value among observed values when arranged from smallest to largest. 50 percent of the values are above the median, and 50 percent are below it. -->
 
 <div class="clearfix"></div>
