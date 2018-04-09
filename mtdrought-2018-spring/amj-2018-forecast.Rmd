@@ -2,11 +2,13 @@
 title: "April–June 2018 Forecast"
 ---
 
-## {- .tabset .tabset-fade .tabset-pills}
-
 ```{r setup, include=FALSE}
 source("./R/setup.R")
 ```
+
+![Spring runoff from heavy mountain snows could potentially cause flooding in some areas, especially if there is rapid snow melt. Photo by Collin Kuske.](./img/Collin_Kuske_flooded_field.jpg)
+
+## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-}
 

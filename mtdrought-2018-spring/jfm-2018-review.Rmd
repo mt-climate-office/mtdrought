@@ -9,6 +9,8 @@ source("./R/setup.R")
 
 ```
 
+![A cold and snowy winter was a challenge for some ranchers, especially in north-central Montana where February brought well over 200 percent of normal snow fall. Photo by Laurie Yung.](./img/Laurie_Yung_cows.jpg)
+
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
