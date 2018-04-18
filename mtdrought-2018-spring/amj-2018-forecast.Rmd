@@ -123,6 +123,7 @@ noaa_seasonal$map +
 ```
 
 ### <img src="icons/drought.svg" width="35px"/> Drought {-}
+Due to an above normal precipitation forecast for April through June, as spring continues drought conditions are likely to be removed from the northeastern region of the Montana.
 
 ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

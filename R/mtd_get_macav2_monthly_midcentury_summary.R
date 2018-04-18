@@ -11,23 +11,27 @@ mtd_get_macav2_monthly_midcentury_summary <-
     if(!file.exists(stringr::str_c(data_out,"/macav2_monthly/macav2_monthly_midcentury_medians.Rds"))){
       
       maca_midcentury_medians <- 
-        get_macav2_monthly(x = mt_state %>%
-                             sf::st_buffer(10000),
-                           raw_dir = stringr::str_c(data_out,"/macav2_monthly/raw_data/"),
-                           scenarios = c("rcp45")) %>%
-        purrr::compact() %>%
-        purrr::map(function(x){
-          x %>%
-            raster::subset(
-              x %>%
-                names() %>%
-                gsub("X","",.) %>%
-                as.Date(format = "%Y.%m.%d") %>%
-                lubridate::year() %in%
-                c(2040:2069) %>%
-                which()
-            ) 
-        })
+        mcor::mco_get_macav2_monthly(x = mt_state %>%
+                                       sf::st_buffer(10000),
+                                     out_dir = stringr::str_c(data_out,"/macav2_monthly/raw_data/"),
+                                     elements = c("pr",
+                                                  "tasmin",
+                                                  "tasmax"),
+                                     scenarios = c("rcp45")) %>%
+        dplyr::mutate(data = purrr::map(data,
+                                        function(x){
+                                          x %>%
+                                            raster::subset(
+                                              x %>%
+                                                names() %>%
+                                                gsub("X","",.) %>%
+                                                as.Date(format = "%Y.%m.%d") %>%
+                                                lubridate::year() %in%
+                                                c(2040:2069) %>%
+                                                which()
+                                            ) 
+                                        }))
+      
       
       elements <- names(maca_midcentury_medians) %>%
         purrr::map(stringr::str_split, pattern = "_") %>%
@@ -52,7 +56,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
         }) %>%
         magrittr::set_names(models) %>%
         split(elements)
-
+      
       
       maca_midcentury_medians %<>%
         magrittr::set_names(c("precipitation_amount",
@@ -64,7 +68,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
                          compress = "xz")
     }
     
-    normals <- mco_get_gridmet_normals(raw_dir = stringr::str_c(data_out,"/gridmet/normals/"))
+    normals <- mcor::mco_get_gridmet_normals(out_dir = stringr::str_c(data_out,"/gridmet/normals/"))
     
     normals$precipitation_amount %<>%
       magrittr::extract2((1:365) %>%
@@ -74,7 +78,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
                            lubridate::month() %>%
                            magrittr::is_in(months) %>%
                            which()
-                           ) %>%
+      ) %>%
       raster::calc(pcpn_fun) %>%
       mm_to_in(.)
     
@@ -102,56 +106,54 @@ mtd_get_macav2_monthly_midcentury_summary <-
       raster::calc(temp_fun) %>%
       k_to_f(.)
     
-    
-    
     maca_midcentury_medians <- 
       stringr::str_c(data_out,"/macav2_monthly/macav2_monthly_midcentury_medians.Rds") %>%
       readr::read_rds()
     
-   suppressWarnings(
-     maca_midcentury_medians$precipitation_amount %<>%
-          purrr::map(function(x){
-            x[[months]] %>%
-              pcpn_fun()
-          }) %>%
-          raster::brick() %>%
-          raster::calc(fun=function(z){quantile(z, probs = c(0.25, 0.5, 0.75), na.rm = T)}) %>%
-      magrittr::set_names(c("lower","value","upper")) %>%
-      mm_to_in(.) %>%
-      raster::rotate() %>%
-      raster::projectRaster(normals$precipitation_amount,
-                            method = "ngb")
-   )
-        
-   suppressWarnings(
-    maca_midcentury_medians$daily_minimum_temperature %<>%
-      purrr::map(function(x){
-        x[[months]] %>%
-          temp_fun()
-      }) %>%
-      raster::brick() %>%
-      raster::calc(fun=function(z){quantile(z, probs = c(0.25, 0.5, 0.75), na.rm = T)}) %>%
-      magrittr::set_names(c("lower","value","upper")) %>%
-      k_to_f(.) %>%
-      raster::rotate() %>%
-      raster::projectRaster(normals$daily_minimum_temperature,
-                            method = "ngb")
-   )
+    suppressWarnings(
+      maca_midcentury_medians$precipitation_amount %<>%
+        purrr::map(function(x){
+          x[[months]] %>%
+            pcpn_fun()
+        }) %>%
+        raster::brick() %>%
+        raster::calc(fun=function(z){quantile(z, probs = c(0.25, 0.5, 0.75), na.rm = T)}) %>%
+        magrittr::set_names(c("lower","value","upper")) %>%
+        mm_to_in(.) %>%
+        raster::rotate() %>%
+        raster::projectRaster(normals$precipitation_amount,
+                              method = "ngb")
+    )
     
-   suppressWarnings(
-    maca_midcentury_medians$daily_maximum_temperature %<>%
-      purrr::map(function(x){
-        x[[months]] %>%
-          temp_fun()
-      }) %>%
-      raster::brick() %>%
-      raster::calc(fun=function(z){quantile(z, probs = c(0.25, 0.5, 0.75), na.rm = T)}) %>%
-      magrittr::set_names(c("lower","value","upper")) %>%
-      k_to_f(.) %>%
-      raster::rotate() %>%
-      raster::projectRaster(normals$daily_maximum_temperature,
-                            method = "ngb")
-   )
+    suppressWarnings(
+      maca_midcentury_medians$daily_minimum_temperature %<>%
+        purrr::map(function(x){
+          x[[months]] %>%
+            temp_fun()
+        }) %>%
+        raster::brick() %>%
+        raster::calc(fun=function(z){quantile(z, probs = c(0.25, 0.5, 0.75), na.rm = T)}) %>%
+        magrittr::set_names(c("lower","value","upper")) %>%
+        k_to_f(.) %>%
+        raster::rotate() %>%
+        raster::projectRaster(normals$daily_minimum_temperature,
+                              method = "ngb")
+    )
+    
+    suppressWarnings(
+      maca_midcentury_medians$daily_maximum_temperature %<>%
+        purrr::map(function(x){
+          x[[months]] %>%
+            temp_fun()
+        }) %>%
+        raster::brick() %>%
+        raster::calc(fun=function(z){quantile(z, probs = c(0.25, 0.5, 0.75), na.rm = T)}) %>%
+        magrittr::set_names(c("lower","value","upper")) %>%
+        k_to_f(.) %>%
+        raster::rotate() %>%
+        raster::projectRaster(normals$daily_maximum_temperature,
+                              method = "ngb")
+    )
     
     
     out <- list(maca_midcentury_medians,normals) %>%
