@@ -1,12 +1,14 @@
 ---
-title: "June–August 2018 Forecast"
+title: "April–June 2018 Forecast"
 ---
-
-## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
 ```
+
+<!-- ![Spring runoff from heavy mountain snows could potentially cause flooding in some areas, especially if there is rapid snow melt. Photo by Collin Kuske.](./img/Collin_Kuske_flooded_field.jpg) -->
+
+## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-}
 
@@ -18,8 +20,7 @@ enso_temp <- mtd_plot_enso(months = 6:8,
                                 element = "tmpc",
                                 agg_fun = mean)
  
-enso_temp$map +
-  add_climate_divisions()
+enso_temp$map
 ```
 
 #### Precipitation {-}
@@ -29,12 +30,12 @@ enso_prcp <- mtd_plot_enso(months = 6:8,
                                 element = "pcpn",
                                 agg_fun = sum)
  
-enso_prcp$map +
-  add_climate_divisions()
+enso_prcp$map
 ```
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
+
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -48,31 +49,7 @@ noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-06-01",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
-noaa_seasonal$map +
-  add_climate_divisions() +
-  geom_label(data = climdiv_tmpc$normals %>%
-               left_join(mt_climate_divisions_simple %>%
-                           dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
-                                           sf::st_centroid() %>%
-                                           sf::st_coordinates() %>%
-                                           tibble::as_tibble() %$%
-                                           X,
-                                         Centroid_y = mt_climate_divisions_simple %>%
-                                           sf::st_centroid() %>%
-                                           sf::st_coordinates() %>%
-                                           tibble::as_tibble() %$%
-                                           Y),
-                         .,
-                         by = "Division code"),
-             aes(x = Centroid_x,
-                 y = Centroid_y,
-                 label = stringr::str_c("Normal: \n",
-                                        Normal %>%
-                                          round(digits = 1) %>%
-                                          paste0(" ºF"))),
-             alpha = 1,
-             size = 2.25)
-
+noaa_seasonal$map
 ```
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
@@ -88,30 +65,7 @@ noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-06-01",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 
-noaa_seasonal$map +
-  add_climate_divisions() +
-  geom_label(data = climdiv_pcpn$normals %>%
-               left_join(mt_climate_divisions_simple %>%
-                           dplyr::mutate(Centroid_x = mt_climate_divisions_simple %>%
-                                           sf::st_centroid() %>%
-                                           sf::st_coordinates() %>%
-                                           tibble::as_tibble() %$%
-                                           X,
-                                         Centroid_y = mt_climate_divisions_simple %>%
-                                           sf::st_centroid() %>%
-                                           sf::st_coordinates() %>%
-                                           tibble::as_tibble() %$%
-                                           Y),
-                         .,
-                         by = "Division code"),
-             aes(x = Centroid_x,
-                 y = Centroid_y,
-                 label = stringr::str_c("Normal: \n",
-                                        Normal %>%
-                                          round(digits = 1) %>%
-                                          paste0(" in."))),
-             alpha = 1,
-             size = 2.25)
+noaa_seasonal$map
 
 ```
 
@@ -123,5 +77,6 @@ future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2018-06-01",
                               data_out = "../data/NOAA_droughtlook")
 
 future_seasonal_drought$map
+
 ```
 

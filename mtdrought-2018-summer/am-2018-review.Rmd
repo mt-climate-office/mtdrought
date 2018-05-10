@@ -9,6 +9,8 @@ source("./R/setup.R")
 
 ```
 
+<!-- ![A cold and snowy winter was a challenge for some ranchers, especially in north-central Montana where February brought well over 200 percent of normal snowfall.](./img/Laurie_Yung_cows.jpg) -->
+
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
@@ -20,6 +22,7 @@ gridmet <- mtd_get_gridmet(dates = c("2018-04-01",
                            raw_dir = "../data/gridmet")
 
 gridmet_dates <- attr(gridmet,"dates")
+
 gridmet_sf_cropped <- gridmet %>%
   mtd_as_sf_gridmet() %>%
     purrr::map(sf::st_intersection,
@@ -142,14 +145,14 @@ scratch <- gridmet_agg %>%
                               sep = "."))
 ```
 
-<!-- ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-} -->
+### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
 
-<!-- ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- past_seasonal_swe <- mtd_plot_swe_basins(date="2018-04-01") -->
+```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+past_seasonal_swe <- mtd_plot_swe_basins(date="2018-06-01")
 
-<!-- past_seasonal_swe$map -->
+past_seasonal_swe$map
 
-<!-- ``` -->
+```
 
 <!-- #### Big Story: Blizzard affects Blackfeet Nation --- Feb 23--27 & March 6 {-} -->
 
@@ -164,6 +167,7 @@ scratch <- gridmet_agg %>%
 scratch <- mtd_plot_smap(date = "2018-06-01",
                          variable = "sm_rootzone",
                          data_out = "../data/SMAP")$map
+
 ```
 
 
@@ -171,6 +175,7 @@ scratch <- mtd_plot_smap(date = "2018-06-01",
 mtd_plot_smap(date = "2018-06-01",
               variable = "sm_rootzone_wetness",
               data_out = "../data/SMAP")$map
+
 ```
 
 
@@ -192,6 +197,8 @@ scratch <- mtd_plot_smap(date = "2018-06-01",
 ```
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+
+With winter precipitation levels well above normal, the US Drought Monitor has removed drought conditions across most of the state. Northeastern Montana remains abnormally dry or under moderate drought conditions, with Daniels, Sheridan, and Roosevelt counties remaining under severe drought conditions.
 
 ```{r past-seasonal-drought, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

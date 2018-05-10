@@ -1,4 +1,4 @@
-name: MT Drought & Climate — June 2018
+name: MT Drought & Climate — April–May 2018
 navbar:
   title: <img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left;
     vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
@@ -20,7 +20,6 @@ output:
     df_print: paged
     includes:
       in_header: header.html
-      before_body: open_review_block.html
       after_body: after_body.html
     lib_dir: site_libs
     self_contained: no
