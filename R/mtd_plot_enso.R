@@ -13,13 +13,13 @@ mtd_plot_enso <- function (months,
   
   if(element == "tmax"){
     unit_symbol <- "ºF"
-    long_name <- "Max. Temperature"
+    long_name <- "Max. temperature"
   }else if(element == "pcpn"){
     unit_symbol <- "in."
-    long_name <- "Net Precipitation"
+    long_name <- "Net precipitation"
   }else if(element == "tmpc"){
     unit_symbol <- "ºF"
-    long_name <- "Avg. Temperature"
+    long_name <- "Avg. temperature"
   }
   
   climdiv_data <- climdiv_summary(months = months,
@@ -48,14 +48,15 @@ mtd_plot_enso <- function (months,
     max() %>%
     ceiling()
   
+  legend.name <- stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],", ",
+                                enso,"\n",long_name,"\nDeviation from norm. (",unit_symbol,")")
+  
   climdiv_map <- (climdiv_data %>%
                     ggplot2::ggplot() +
                     geom_sf(aes(geometry = Shape,
                                 fill = `ENSO`-Normal),
                             color = "white") +
-                    scale_fill_distiller(name = stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],", ",
-                                                               enso,"\n",long_name,"\nDeviation from Norm. (",unit_symbol,")"),
-                                         #limits = c(0,1),
+                    scale_fill_distiller(name = legend.name,
                                          direction = if(element == "pcpn") 1 else -1,
                                          limits = c(0-range,range),
                                          breaks = c(0-range,0,range),
@@ -69,7 +70,8 @@ mtd_plot_enso <- function (months,
                                    label = stringr::str_c(round(Value, digits = 1)," ",unit_symbol,"\n",
                                                           print_sign(`ENSO`-Normal), round(`ENSO`-Normal, digits = 1), " from norm.")),
                                alpha = 1,
-                               size = 2.25)) %T>%
+                               size = 2.25) +
+                    add_climate_divisions()) %T>%
     save_mt_map(stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],"-",
                                enso,"-",element,".pdf"))
   

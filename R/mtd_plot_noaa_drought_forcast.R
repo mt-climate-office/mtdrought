@@ -64,12 +64,14 @@ mtd_plot_noaa_drought_outlook <- function(date,
                                                         "Drought removal likely",
                                                         "Drought development likely")))
   
+  legend.name <- stringr::str_c("Three-month drought outlook\nas of ",
+                                format(lubridate::ymd(noaa_date), '%B %d, %Y'))
+  
   noaa_map <- (noaa_data  %>%
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = `Drought Outlook`),
                          color = NA) +
-                 scale_fill_manual(name = stringr::str_c("Three-month Drought Outlook\nas of ",
-                                                         format(lubridate::ymd(noaa_date), '%B %d, %Y')),
+                 scale_fill_manual(name = legend.name,
                                    limits = c("Drought persists",
                                               "Drought remains but improves",
                                               "Drought removal likely",
@@ -83,11 +85,9 @@ mtd_plot_noaa_drought_outlook <- function(date,
                                               "Drought removal likely" = rgb(190, 232, 255, maxColorValue = 255),
                                               "Drought development likely" = rgb(255, 255, 0, maxColorValue = 255)),
                                    guide = guide_legend(title.position = "bottom")) +
-                 # add_hillshade() +
-                 # add_counties() +
-                 # add_climate_divisions() +
-                 mtd_plot() +
-                 ggplot2::theme(legend.key.height = unit(0.15,"in"))) %T>%
+                 mtd_plot()# + 
+                 # ggplot2::theme(legend.key.height = unit(0.15,"in"))
+               ) %T>%
     save_mt_map(stringr::str_c(noaa_date,"-seasonal-drought-outlook.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%

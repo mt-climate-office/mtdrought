@@ -94,8 +94,9 @@ mtd_plot_smap <- function(date,
                                                 "50-60%" = rgb(0, 112, 255, maxColorValue = 255),
                                                 ">60%" = rgb(0, 38, 115, maxColorValue = 255)),
                                      guide = guide_legend(title.position = "bottom")) +
-                   mtd_plot() +
-                   ggplot2::theme(legend.key.height = unit(0.15,"in"))) %T>%
+                   mtd_plot()# +
+                   # ggplot2::theme(legend.key.height = unit(0.15,"in"))
+                 ) %T>%
       save_mt_map(stringr::str_c(soil_moisture_date,"-soil-moisture-",variable,".pdf"))
     
     return(list(data = soil_moisture,
@@ -154,8 +155,6 @@ mtd_plot_smap <- function(date,
                       ggplot2::geom_sf(aes(geometry = Shape,
                                            fill = Value),
                                        color = NA) +
-                      # add_hillshade() +
-                      # add_counties() +
                     scale_fill_manual(name = var_label,
                                       limits = c("<10%",
                                                  "10-20%",
@@ -176,8 +175,9 @@ mtd_plot_smap <- function(date,
                                                  "50-60%" = rgb(0, 112, 255, maxColorValue = 255),
                                                  ">60%" = rgb(0, 38, 115, maxColorValue = 255)),
                                       guide = guide_legend(title.position = "bottom")) +
-                 mtd_plot() +
-                 ggplot2::theme(legend.key.height = unit(0.15,"in"))) %T>%
+                 mtd_plot()# +
+                 # ggplot2::theme(legend.key.height = unit(0.15,"in"))
+               ) %T>%
     save_mt_map(stringr::str_c(soil_moisture_date,"-soil-moisture-",variable,"-aggregated.pdf"))
   
   return(list(data = soil_moisture,

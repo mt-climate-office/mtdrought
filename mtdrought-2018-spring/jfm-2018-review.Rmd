@@ -9,13 +9,13 @@ source("./R/setup.R")
 
 ```
 
-![A cold and snowy winter was a challenge for some ranchers, especially in north-central Montana where February brought well over 200 percent of normal snow fall.](./img/Laurie_Yung_cows.jpg)
+![A cold and snowy winter was a challenge for some ranchers, especially in north-central Montana where February brought well over 200 percent of normal snowfall.](./img/Laurie_Yung_cows.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
 
-La Niña conditions certainly didn’t disappoint in terms of this winter’s conditions. January--March Temperatures were between 2 to 6 degrees below normal for central to eastern portions of the state. Western Montana experienced near normal temperatures except for isolated locations within mountain valley bottoms that were below normal. February was the 6th coolest on record since 1895 for the state as whole.
+La Niña conditions certainly didn’t disappoint in terms of this winter’s conditions. January--March temperatures were between 2 to 6 degrees below normal for central to eastern portions of the state. Western Montana experienced near normal temperatures except for isolated locations within mountain valley bottoms that were below normal. February was the 6th coolest on record since 1895 for the state as whole.
 
 ```{r past-seasonal-gridmet, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -24,6 +24,7 @@ gridmet <- mtd_get_gridmet(dates = c("2018-01-01",
                            raw_dir = "../data/gridmet")
 
 gridmet_dates <- attr(gridmet,"dates")
+
 gridmet_sf_cropped <- gridmet %>%
   mtd_as_sf_gridmet() %>%
     purrr::map(sf::st_intersection,
@@ -150,7 +151,7 @@ scratch <- gridmet_agg %>%
 
 ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
 
-Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the UMRB above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
+Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the Upper Missouri River Basin above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 past_seasonal_swe <- mtd_plot_swe_basins(date="2018-04-01")
@@ -174,6 +175,7 @@ Soil moisture is factored into forecasts as an indicator of wet or dry basin con
 scratch <- mtd_plot_smap(date = "2018-04-01",
                          variable = "sm_rootzone",
                          data_out = "../data/SMAP")$map
+
 ```
 
 
@@ -181,6 +183,7 @@ scratch <- mtd_plot_smap(date = "2018-04-01",
 mtd_plot_smap(date = "2018-04-01",
               variable = "sm_rootzone_wetness",
               data_out = "../data/SMAP")$map
+
 ```
 
 

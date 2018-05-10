@@ -1,6 +1,6 @@
 mtd_get_macav2_monthly_midcentury_summary <- 
   function (months = 1:12,
-            data_out = "./data/macav2_monthly",
+            data_out = "./data/",
             pcpn_fun = function(x){sum(x, na.rm = TRUE)},
             temp_fun = function(x){mean(x, na.rm = TRUE)})
   {

@@ -60,8 +60,8 @@ mtd_plot_midcentury_swe_basins <- function(month,
                                           color = NA) +
                                   scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d') %>%
                                                                                stringr::str_replace(" 0"," "),", ",
-                                                                             "AD 2040 - 2069\n",
-                                                                             "Snow Water Equivalent","\n",
+                                                                             "2040-2069\n",
+                                                                             "Snow water equivalent","\n",
                                                                              "Percent of normal"),
                                                        #limits = c(0,1),
                                                        direction = 1,

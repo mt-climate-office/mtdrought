@@ -6,15 +6,15 @@ title: "2018 Spring Outlook"
 
 ## {-}
 
-Welcome to the April 2018 Montana Drought & Climate newsletter. We are working to provide and interpret climate data for agricultural producers in Montana. With our seasonal newsletters, we hope to transform existing forecasts and projections into useful climate information that meet producer needs. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+Welcome to the April 2018 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
 Here's what you'll find in this newsletter:
 
-[**Conditions**](./jfm-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the season and allows producers to reflect on years past in comparison.
+[**Conditions**](./jfm-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the previous season and allows producers to reflect how conditions compare to past years.
 
-[**Forecast**](./amj-2018-forecast.html) --- The seasonal forecast is generally the most frequently requested dataset by producers. Here temperature, precipitation, drought, and influential global air circulation patterns are discussed in regional detail.
+[**Seasonal Forecast**](./amj-2018-forecast.html) --- The seasonal forecast is particularly useful for agricultural producers. Here temperature, precipitation, drought, and global air circulation patterns are discussed in detail.
 
-[**2040--2069 Outlook**](./amj-2018-midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
+[**Mid-Century Outlook**](./amj-2018-midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 

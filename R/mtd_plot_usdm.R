@@ -45,17 +45,19 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                           sf::st_union()) %>%
     dplyr::mutate(DM = as.character(DM)) 
   
+  legend.name <- stringr::str_c(format(lubridate::ymd(usdm_date), '%B %d, %Y'),"\n",
+                                "Drought intensity")
+  
   usdm_map <- (usdm_data %>%
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = DM),
                          color = NA) +
-                 scale_fill_manual(name = stringr::str_c(format(lubridate::ymd(usdm_date), '%B %d, %Y'),"\n",
-                                                         "Drought Intensity"),
-                                   labels = c("Abnormally\nDry",
-                                              "Moderate\nDrought",
-                                              "Severe\nDrought",
-                                              "Extreme\nDrought",
-                                              "Exceptional\nDrought"),
+                 scale_fill_manual(name = legend.name,
+                                   labels = c("Abnormally\ndry",
+                                              "Moderate\ndrought",
+                                              "Severe\ndrought",
+                                              "Extreme\ndrought",
+                                              "Exceptional\ndrought"),
                                    values = c("0" = rgb(255, 255, 0, maxColorValue = 255),
                                               "1" = rgb(215, 194, 158, maxColorValue = 255),
                                               "2" = rgb(255, 170, 0, maxColorValue = 255),
@@ -63,11 +65,9 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                                               "4" = rgb(115, 0, 0, maxColorValue = 255)),
                                    limits = c("0","1","2","3","4"),
                                    guide = guide_legend(title.position = "bottom")) +
-                 # add_hillshade() +
-                 # add_counties() +
-                 # add_climate_divisions() +
-                 mtd_plot() +
-                 ggplot2::theme(legend.key.height = unit(0.15,"in"))) %T>%
+                 mtd_plot()# +
+                 # ggplot2::theme(legend.key.height = unit(0.15,"in"))
+               ) %T>%
     save_mt_map(stringr::str_c(usdm_date,"-drought-intensity.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%

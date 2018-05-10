@@ -15,6 +15,7 @@ mdt_theme_map <- function(base_size = 6.5,
                    legend.position = c(0,0),
                    legend.background = ggplot2::element_blank(),
                    legend.key.width = unit(0.15,"in"),
+                   legend.key.height = unit(0.15,"in"),
                    legend.text = element_text(size = ggplot2::rel(1)),
                    plot.background = ggplot2::element_blank(),
                    plot.margin = ggplot2::margin(t = 0, r = 0, b = 0, l = 0, unit = "npc")

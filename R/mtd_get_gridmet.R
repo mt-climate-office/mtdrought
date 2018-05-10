@@ -13,7 +13,7 @@ mtd_get_gridmet <- function(dates = "latest",
   gridmet <- mcor::mco_get_gridmet(dates = dates,
                                    out_dir = raw_dir)
   
-  normals <- mtd_get_gridmet_normals(raw_dir = stringr::str_c(raw_dir,"/normals"))
+  normals <- mcor::mco_get_gridmet_normals(out_dir = stringr::str_c(raw_dir,"/normals/"))
   
   gridmet_dates <- gridmet[[1]] %>%
     names() %>%

@@ -34,12 +34,6 @@ knitr::opts_chunk$set(echo = FALSE,
                       cache=TRUE
 )
 
-# install.packages("devtools")
-# devtools::install_github("mt-climate-office/mcor")
-# source("https://bioconductor.org/biocLite.R")
-# devtools::install_github("ecohealthalliance/fasterize")
-# biocLite("rhdf5")
-
 ## Load all packages
 all_packages <- c("mcor", "thredds",# The Core MCO package
                   "FedData", "smapr", "rhdf5", # Package for data aquisition
@@ -48,8 +42,16 @@ all_packages <- c("mcor", "thredds",# The Core MCO package
                   "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
                   "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
 
+# # install.packages("devtools")
+# devtools::install_cran("rmarkdown")
+# devtools::install_cran("roxygen2")
+# # devtools::install_github("r-lib/devtools")
 # devtools::install_bioc("rhdf5")
-# purrr::walk(all_packages, devtools::install_cran, character.only = TRUE)
+# purrr::walk(all_packages, install.packages, character.only = TRUE)
+# remotes::install_github("mt-climate-office/mcor")
+# remotes::install_github("mt-climate-office/thredds")
+# remotes::install_github("tidyverse/ggplot2")
+
 purrr::walk(all_packages, library, character.only = TRUE)
 
 # Load other useful functions
