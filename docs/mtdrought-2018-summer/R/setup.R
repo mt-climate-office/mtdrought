@@ -23,7 +23,8 @@ fig_width <- fig_height / mt_plot_ratio
 knitr::opts_chunk$set(echo = FALSE,
                       message = FALSE,
                       warning = FALSE,
-                      results = "hold",
+                      results = "hide",
+                      fig.keep = "all",
                       eval.after = "fig.cap",
                       fig.width = fig_width,
                       fig.height = fig_height,
@@ -38,8 +39,8 @@ knitr::opts_chunk$set(echo = FALSE,
 all_packages <- c("mcor", "thredds",# The Core MCO package
                   "FedData", "smapr", "rhdf5", # Package for data aquisition
                   "sf", "raster", "rgeos", "fasterize", "velox", "spex", "lwgeom",# Packages for spatial processing
-                  "magrittr", "tidyverse", "purrrlyr", # Packages for tidy code
-                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly",
+                  "magrittr", "tidyverse", "purrrlyr", "matrixStats",# Packages for tidy code
+                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly", "mgcv",
                   "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
 
 # # install.packages("devtools")
@@ -47,7 +48,7 @@ all_packages <- c("mcor", "thredds",# The Core MCO package
 # devtools::install_cran("roxygen2")
 # # devtools::install_github("r-lib/devtools")
 # devtools::install_bioc("rhdf5")
-# purrr::walk(all_packages, install.packages, character.only = TRUE)
+# devtools::install_cran(all_packages)
 # remotes::install_github("mt-climate-office/mcor")
 # remotes::install_github("mt-climate-office/thredds")
 # remotes::install_github("tidyverse/ggplot2")

@@ -71,6 +71,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
     normals <- mcor::mco_get_gridmet_normals(out_dir = stringr::str_c(data_out,"/gridmet/normals/"))
     
     normals$precipitation_amount %<>%
+      magrittr::extract2("mean") %>%
       magrittr::extract2((1:365) %>%
                            as.character() %>%
                            lubridate::as_date(tz = "America/Denver",
@@ -83,6 +84,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
       mm_to_in(.)
     
     normals$daily_minimum_temperature %<>%
+      magrittr::extract2("mean") %>%
       magrittr::extract2((1:365) %>%
                            as.character() %>%
                            lubridate::as_date(tz = "America/Denver",
@@ -95,6 +97,7 @@ mtd_get_macav2_monthly_midcentury_summary <-
       k_to_f(.)
     
     normals$daily_maximum_temperature %<>%
+      magrittr::extract2("mean") %>%
       magrittr::extract2((1:365) %>%
                            as.character() %>%
                            lubridate::as_date(tz = "America/Denver",

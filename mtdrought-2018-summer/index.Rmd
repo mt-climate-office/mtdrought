@@ -4,6 +4,10 @@ title: "2018 Summer Outlook"
 
 <!-- ![Cool spring conditions should help maintain mountain heavy snowpack across Montana---welcome news for irrigated operations.](./img/Laurie_Yung_drip_line.jpg) -->
 
+```{r setup, include=FALSE}
+source("./R/setup.R")
+```
+
 ## {-}
 
 Welcome to the June 2018 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
@@ -25,6 +29,36 @@ Here's what you'll find in this newsletter:
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
 
 </div>
+
+-----
+
+### Contribute to the CoCoRaHS network {-}
+
+The Community Collaborative Rain Hail & Snow Network (CoCoRaHS) is a volunteer program to enhance precipitation records across North America, and deliver those records via a simple to use database. People across Montana have been involved in CoCoRaHS data collection for over twenty years. The CoCoRaHS network data is frequently used by the scientific community for management, research, and monitoring applications. This map shows the locations of all active CoCoRaHS stations in the state. To learn more, search the data, or get involved, visit [https://www.cocorahs.org/](https://www.cocorahs.org/).
+
+```{r cocorahs, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+cocorahs <- readr::read_csv("../data/CoCoRaHS/CoCoRaHS_20180509.csv") %>%
+  dplyr::mutate(LastObsDate = lubridate::as_date(LastObsDate, 
+                                                 tz = "US/Mountain",
+                                                 format = "%m/%d/%Y")) %>%
+  dplyr::filter(!is.na(Longitude),
+                !is.na(Latitude),
+                LastObsDate > (lubridate::today() - 90)) %>%
+  sf::st_as_sf(coords = c("Longitude","Latitude"),
+               crs = 4326,
+               remove = FALSE) %>%
+  sf::st_transform(mt_state_plane)
+
+
+(cocorahs %>%
+      ggplot2::ggplot() +
+      ggplot2::geom_sf(color = "dodgerblue",
+                       size = 1) +
+      mtd_plot()) %T>%
+  save_mt_map("CoCoRaHS.pdf")
+
+```
 
 -----
 

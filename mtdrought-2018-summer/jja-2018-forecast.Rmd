@@ -1,5 +1,5 @@
 ---
-title: "April–June 2018 Forecast"
+title: "June--August 2018 Forecast"
 ---
 
 ```{r setup, include=FALSE}

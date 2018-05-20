@@ -1,5 +1,5 @@
 ---
-title: "January--March Mid-century Outlook"
+title: "April--May Mid-century Outlook"
 editor_options: 
   chunk_output_type: console
 ---
@@ -48,7 +48,7 @@ scratch <- macav2_midcentury %>%
 ```
 
 
-```{r midcenturyt-seasonal-temp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r midcentury-seasonal-temp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 scratch <- macav2_midcentury %>%
   mtd_plot_macav2_monthly_midcentury_summary(element = "tmpc",
                    agg_sf = mt_counties_simple,
@@ -80,7 +80,7 @@ scratch <- macav2_midcentury %>%
 ```
 
 
-```{r midcenturyt-seasonal-prcp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r midcentury-seasonal-prcp-counties-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 scratch <- macav2_midcentury %>%
   mtd_plot_macav2_monthly_midcentury_summary(element = "pcpn",
                    agg_sf = mt_counties_simple,
