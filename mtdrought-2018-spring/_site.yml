@@ -9,7 +9,7 @@ navbar:
   - text: Apr–Jun 2018
     href: amj-2018-forecast.html
   - text: Apr–Jun Mid-century
-    href: amj-2018-midcentury.html
+    href: jfm-2018-midcentury.html
   - text: Reference
     href: reference.html
 output:
