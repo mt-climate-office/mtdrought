@@ -134,21 +134,32 @@ mtd_plot_macav2_monthly_midcentury_summary <- function(macav2,
                               ifelse(use_normals,"-normals",""),
                               ".pdf")
   
+  if(element == "pcpn") {
+    direction = 1
+    if(use_normals)
+      palette = "BrBG"
+    else
+      palette = "BuGn"
+  }else {
+    direction = -1
+    if(use_normals)
+      palette = "RdBu"
+    else{
+      direction = 1
+      palette = "Reds"
+    }
+  }
+  
+  
   (map_data %>%
       ggplot2::ggplot() +
       ggplot2::geom_sf(aes(fill = value),
                        color = NA) +
       scale_fill_distiller(name = legend_title,
-                           direction = if(element == "pcpn") 
-                             1 
-                           else 
-                             -1,
+                           direction = direction,
                            limits = limits,
                            # breaks = breaks,
-                           palette = if(element == "pcpn") 
-                             "BrBG" 
-                           else 
-                             "RdBu",
+                           palette = palette,
                            expand = FALSE,
                            guide = guide_colourbar(title.position = "bottom")) +
       mtd_plot()) %T>%

@@ -14,7 +14,7 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-In the graphs below, the bands represent the normal conditions across Montana (red: daily high temperatures, blue: daily low temperatures). The smooth lines are the daily medians; half of the normal values fall within the darker bars; and the lighter bars represent the extremes recorded during the 1981--2010 period. The jagged lines represent this year's conditions.
+The lingering effects of this winter’s La Niña contributed to below normal temperatures in early spring. As the La Niña transitioned to ENSO neutral in May we began to experience normal to above normal temperatures for the state as a whole. The cooler than normal temperatures in March and through late April contributed to a delay in the growing season onset and a protracted snowmelt. Increased temperatures in May initiated melt of the above normal snowpack in the Western portions of the state and contributed to significant flooding.
 
 ```{r past-seasonal-gridmet, cache=TRUE}
 
@@ -137,8 +137,22 @@ gridmet_sf_cropped %>%
                              sep = "."))
 ```
 
+```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "tmean",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "tmean",
+                              # "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
+```
 
-```{r past-seasonal-temp-grid-normals, cache=FALSE}
+In the graphs below, the bands represent the normal conditions across Montana (red: daily high temperatures, blue: daily low temperatures). The smooth lines are the daily medians; half of the normal values fall within the darker bars; and the lighter bars represent the extremes recorded during the 1981--2010 period. The jagged lines represent this year's conditions.
+
+```{r past-seasonal-temp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximum_temperature")],
                      col = c("#0571b0","#ca0020"),
                      ybreaks = seq(-25,100,25),
@@ -156,8 +170,7 @@ mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximu
 
 ```
 
-```{r past-seasonal-temp-grid-normals-polar, cache=FALSE, fig.width = 4, fig.height = 4}
-
+```{r past-seasonal-temp-grid-climatology-polar, cache=FALSE, fig.width = 4, fig.height = 4}
 
 mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximum_temperature")],
                      col = c("#0571b0","#ca0020"),
@@ -177,7 +190,7 @@ mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximu
 
 ### <img src="./icons/temperature.svg" width="35px"/> GDD {-}
 
-The map below shows the accumulated growing degree days (GDDs) since the last day below 24ºF, which is the temperature damaging to wheat once it reaches the jointing growth phase.
+The map below shows the accumulated growing degree days (GDDs) since the last day below 24ºF, which is the temperature damaging to wheat once it reaches the jointing growth phase. The cooler than normal spring temperatures contributed to slightly lower than normal growing degree days across the majority of eastern and central Montana. Here, growing degree days as of May 18th range from ~300 to 600. The mountain and valley regions of north western Montana have experienced slightly higher than normal growing degree days (+50--100) and the current number of accumulated growing degree days range from 100 to 600.  
 
 ```{r past-seasonal-gdd, cache=TRUE}
 
@@ -234,13 +247,10 @@ gdd %<>%
   dplyr::group_by(layer) %>%
   dplyr::summarise()
 
-
-
 ```
 
-
 ```{r past-seasonal-gdd-above-24-grid, cache=TRUE}
-limits <- c(0,600)
+limits <- c(0,max(gdd$layer, na.rm = T))
 
 (gdd %>%
   ggplot2::ggplot() +
@@ -248,10 +258,10 @@ limits <- c(0,600)
                    color = NA) +
   scale_fill_distiller(name = stringr::str_c(format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
                                    "Accumulated GDDs since\nlast 24ºF period"),
-                       direction = -1,
+                       direction = 1,
                        limits = limits,
                        # breaks = breaks,
-                       palette = "RdBu",
+                       palette = "Reds",
                        expand = FALSE,
                        guide = guide_colourbar(title.position = "bottom")) +
   mtd_plot()) %T>% save_mt_map(stringr::str_c(tail(gridmet_dates,1),
@@ -318,7 +328,7 @@ limits <- c(-200,200)
 
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-In the graphs below, the bands represent the normal conditions across Montana. The smooth solid line is the daily median; the smooth solid line is the daily mean; half of the normal values fall within the darker bars; and the lighter bars represent the extremes recorded during the 1981--2010 period. The jagged line represents this year's conditions.
+In general precipitation was much above normal for the state as a whole during the spring season. However, there were isolated pockets of below normal precipitation (0.75 to 2.2 inches below normal) in portions of Northeastern Montana, extending along the highline from Sheridan to Hill counties and for Southwestern Montana in Beaverhead County. These were counties that already had dry conditions from last summer’s drought. 
 
 ```{r past-seasonal-prcp-grid, cache=TRUE}
 gridmet_sf_cropped %>%
@@ -333,8 +343,22 @@ gridmet_sf_cropped %>%
 
 ```
 
+```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+gridmet_sf_cropped %>%
+  mtd_plot_gridmet(element = "prcp",
+                   use_normals = TRUE) %T>%
+    save_mt_map(stringr::str_c(head(gridmet_dates,1),
+                              tail(gridmet_dates,1),
+                              "prcp",
+                              # "aggregated",
+                              "normals",
+                              "pdf",
+                              sep = "."))
+```
 
-```{r past-seasonal-prcp-grid-normals, cache=FALSE}
+In the graphs below, the bands represent the normal conditions across Montana. The smooth solid line is the daily median; the smooth solid line is the daily mean; half of the normal values fall within the darker bars; and the lighter bars represent the extremes recorded during the 1981--2010 period. The jagged line represents this year's conditions.
+
+```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = climatology[c("precipitation_amount")],
                      col = c("forestgreen"),
                      ybreaks = seq(0,0.8,0.1),
@@ -351,6 +375,7 @@ mtd_plot_climatology(x = climatology[c("precipitation_amount")],
 
 
 ### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
+Snowmelt still continues at higher elevations across the state due to the cooler than normal spring temperatures and above average winter snowfall. This will contribute to elevated soil moisture and higher streamflow into June and reduces the potential for drought and wildfire.
 
 ```{r past-seasonal-swe, cache=TRUE}
 past_seasonal_swe <- mtd_plot_swe_basins(date="2018-06-01")
@@ -360,17 +385,20 @@ past_seasonal_swe$map
 ```
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
+Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding. The majority of Montana has soil moisture surpluses due to our above normal winter snowpack and above normal rainfall over the last couple of months. Pockets of soil moisture deficit exist in Northeastern Montana and Southwestern Montana and are associated with last summer drought (i.e. eastern MT) and precipitation deficits this winter and spring.
 
-```{r past-seasonal-smap-grid, cache=TRUE}
-mtd_plot_smap(date = "2018-06-01",
-              variable = "sm_rootzone_wetness",
-              data_out = "../data/SMAP")$map
+<!-- ```{r past-seasonal-smap-grid, cache=TRUE} -->
+<!-- mtd_plot_smap(date = "2018-06-01", -->
+<!--               variable = "sm_rootzone_wetness", -->
+<!--               data_out = "../data/SMAP")$map -->
 
-```
+<!-- ``` -->
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Evapotranspiration {-}
 
 The plot and graph below show the deviation from normal evapotranspiration (ET) so far this year, as estimated from the MODIS satellite. In the map, the green areas are currently experiencing greater amounts of ET than their median amounts from 2000--2017 (the period of record); the brown areas are experiencing less ET. In the graph, the bands represent the normal conditions across Montana; half of the normal values fall within the darker band; and the lighter band represent the extremes recorded during the 2000--2017 period. The jagged black line represent this year's conditions; the jagged red line represents the 2017 conditions, for reference.
+
+ET across Montana has been lower than normal throughout the spring, and has only approached normal values in early May.
 
 ```{r past-seasonal-ET, cache=TRUE}
 mod16_2018 <- raster::brick("../data/MOD16A2/MOD16A2_MT_2018.tif") %>%
@@ -384,6 +412,14 @@ mod16_2018[][is.na(mod16_2018[])] <- 0
 
 mod16_2018 %<>%
   mcor::mco_mask(mcor::mt_state)
+
+ET_date <- lubridate::as_date("2018-01-01") %>%
+  magrittr::add(mod16_2018 %>%
+                  names() %>%
+                  stringr::str_remove("X") %>%
+                  as.integer() %>%
+                  tail(1) %>%
+                  magrittr::add(7))
 
 mod16_2017 <- raster::brick("../data/MOD16A2/MOD16A2_MT_2017.tif") %>%
   raster::readAll() %>%
@@ -482,7 +518,7 @@ mod16_2018_dev_sf %<>%
   ggplot2::ggplot() +
   ggplot2::geom_sf(aes(fill = X113),
                    color = NA) +
-  scale_fill_distiller(name = stringr::str_c(format(lubridate::as_date("2018-04-23"), '%B %d, %Y'),"\n",
+  scale_fill_distiller(name = stringr::str_c(format(ET_date, '%B %d, %Y'),"\n",
                                    "Evapotranspiration (mm / 8 days)"),
                        direction = 1,
                        limits = limits,
@@ -490,7 +526,8 @@ mod16_2018_dev_sf %<>%
                        palette = "BrBG",
                        expand = FALSE,
                        guide = guide_colourbar(title.position = "bottom")) +
-  mtd_plot()) %T>% save_mt_map(stringr::str_c("2018-04-23",
+  mtd_plot()) %T>% 
+  save_mt_map(stringr::str_c(ET_date,
                              "ET",
                              "pdf",
                              sep = "."))
@@ -528,6 +565,7 @@ mtd_plot_climatology(x = list(mod16_normals_summary_dev),
 
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+Drought conditions continued in northeastern Montana through April and May. Along the highline in north-central Montana, lower than normal precipitation has led to abnormally dry conditions.
 
 ```{r past-seasonal-drought, cache=TRUE}
 

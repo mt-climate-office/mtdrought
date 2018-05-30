@@ -1,5 +1,7 @@
 ---
 title: "2018 Summer Outlook"
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- ![Cool spring conditions should help maintain mountain heavy snowpack across Montana---welcome news for irrigated operations.](./img/Laurie_Yung_drip_line.jpg) -->
@@ -27,24 +29,42 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-
+* Montana experienced a cooler and wetter than normal spring that contributed to the delayed onset of melt to our significant winter snowpack.
+* Protracted snowmelt contributed to significant recharge of soil moisture and widespread flooding across the state. 
+* Significant soil moisture reserves associated with snowmelt and above normal spring precipitation will reduce the likelihood of drought and fire in the early summer.
+* La Niña conditions dissipated to ENSO neutral conditions in late April.
+* The summer outlook for temperature is warmer than normal across western and central portions of the state. The forecast is less certain for the remainder of the state.
+* The summer outlook for precipitation is drier than normal across northwestern, southwestern, and northcentral portions of the state. The forecast is less certain for the remainder of the state.
+* If warmer and drier conditions are realized in western and central regions, there is potential for increased evapotranspiration, drying of soils, and drought.
 </div>
 
 -----
 
 ### Contribute to the CoCoRaHS network {-}
 
-The Community Collaborative Rain Hail & Snow Network (CoCoRaHS) is a volunteer program to enhance precipitation records across North America, and deliver those records via a simple to use database. People across Montana have been involved in CoCoRaHS data collection for over twenty years. The CoCoRaHS network data is frequently used by the scientific community for management, research, and monitoring applications. This map shows the locations of all active CoCoRaHS stations in the state. To learn more, search the data, or get involved, visit [https://www.cocorahs.org/](https://www.cocorahs.org/).
+The Community Collaborative Rain Hail & Snow Network (CoCoRaHS) is a volunteer program to enhance precipitation records across North America, and deliver those records via a simple to use database. People throughout Montana have been involved in CoCoRaHS data collection for over twenty years. The CoCoRaHS network data is frequently used by the land managers and climatologists for management, research, and monitoring applications. This map shows the locations of all active CoCoRaHS stations in the state, and their recorded net precipitation in April and May. To learn more, search the data, or get involved, visit [https://www.cocorahs.org/](https://www.cocorahs.org/).
 
 ```{r cocorahs, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-cocorahs <- readr::read_csv("../data/CoCoRaHS/CoCoRaHS_20180509.csv") %>%
-  dplyr::mutate(LastObsDate = lubridate::as_date(LastObsDate, 
-                                                 tz = "US/Mountain",
-                                                 format = "%m/%d/%Y")) %>%
-  dplyr::filter(!is.na(Longitude),
-                !is.na(Latitude),
-                LastObsDate > (lubridate::today() - 90)) %>%
+cocorahs <- httr::GET(url = "http://data.cocorahs.org/export/exportreports.aspx",
+                           query = list(ReportType="Daily",
+                                        dtf=1,
+                                        Format="CSV",
+                                        State="MT",
+                                        ReportDateType="reportdate",
+                                        StartDate = "4/1/2018",
+                                        EndDate="5/31/2018",
+                                        TimesInGMT="False")) %>%
+  httr::content() %>%
+  dplyr::group_by(StationNumber,
+                  Latitude,
+                  Longitude) %>%
+  dplyr::mutate(TotalPrecipAmt = as.numeric(TotalPrecipAmt),
+                TotalPrecipAmt = ifelse(is.na(TotalPrecipAmt),0,TotalPrecipAmt)) %>%
+  dplyr::summarise(TotalPrecipAmt = sum(TotalPrecipAmt)) %>%
+  dplyr::ungroup() %>%
+    dplyr::filter(!is.na(Longitude),
+                !is.na(Latitude)) %>%
   sf::st_as_sf(coords = c("Longitude","Latitude"),
                crs = 4326,
                remove = FALSE) %>%
@@ -53,8 +73,17 @@ cocorahs <- readr::read_csv("../data/CoCoRaHS/CoCoRaHS_20180509.csv") %>%
 
 (cocorahs %>%
       ggplot2::ggplot() +
-      ggplot2::geom_sf(color = "dodgerblue",
+      ggplot2::geom_sf(ggplot2::aes(color = TotalPrecipAmt),
                        size = 1) +
+          ggplot2::scale_color_distiller(name = stringr::str_c(format(lubridate::as_date("2018-04-01"), '%B %d, %Y')," - \n",
+                                   format(lubridate::as_date("2018-05-31"), '%B %d, %Y'),"\n",
+                                   "Net precipitation (in.)"),
+                           direction = 1,
+                           limits = range(cocorahs$TotalPrecipAmt),
+                           # breaks = breaks,
+                           palette = "YlGn",
+                           expand = FALSE,
+                           guide = guide_colourbar(title.position = "bottom")) +
       mtd_plot()) %T>%
   save_mt_map("CoCoRaHS.pdf")
 

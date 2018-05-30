@@ -17,22 +17,113 @@ source("./R/setup.R")
 
 La Niña conditions certainly didn’t disappoint in terms of this winter’s conditions. January--March temperatures were between 2 to 6 degrees below normal for central to eastern portions of the state. Western Montana experienced near normal temperatures except for isolated locations within mountain valley bottoms that were below normal. February was the 6th coolest on record since 1895 for the state as whole.
 
-```{r past-seasonal-gridmet, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-gridmet, cache=TRUE}
 
-gridmet <- mtd_get_gridmet(dates = c("2018-01-01",
-                                     "2018-03-31"),
-                           raw_dir = "../data/gridmet")
+dates <- seq(lubridate::as_date("2018-01-01"),
+             lubridate::as_date("2018-03-31"),1)
 
-gridmet_dates <- attr(gridmet,"dates")
+gridmet <- mcor::mco_get_gridmet(dates = range(dates),
+                                   out_dir = "../data/gridmet")
 
-gridmet_sf_cropped <- gridmet %>%
+# gridmet <- list(precipitation_amount = raster::brick("~/Google Drive/GRIDMET_NEW/GRIDMET_MT_PR.tif"),
+#                 daily_minimum_temperature = raster::brick("~/Google Drive/GRIDMET_NEW/GRIDMET_MT_TMMN.tif"),
+#                 daily_maximum_temperature = raster::brick("~/Google Drive/GRIDMET_NEW/GRIDMET_MT_TMMX.tif")) %>%
+#   purrr::map(~ magrittr::set_names(.x, dates[1:nlayers(.x)]))
+
+gridmet_dates <- gridmet[[1]] %>%
+  names() %>%
+  stringr::str_replace("X","") %>%
+  lubridate::as_date()
+
+gridmet$precipitation_amount %<>%
+  # raster::calc(pcpn_fun) %>%
+  mm_to_in(.)
+
+gridmet$daily_minimum_temperature %<>%
+  # raster::calc(temp_fun) %>%
+  k_to_f(.)
+
+gridmet$daily_maximum_temperature %<>%
+  # raster::calc(temp_fun) %>%
+  k_to_f(.)
+
+
+## Normals
+normals <- mcor::mco_get_gridmet_normals(out_dir = stringr::str_c("../data/gridmet/normals/"))
+
+normals$precipitation_amount %<>% 
+  purrr::map(mm_to_in)
+
+normals$daily_minimum_temperature %<>% 
+  purrr::map(k_to_f)
+
+normals$daily_maximum_temperature %<>% 
+  purrr::map(k_to_f)
+
+climatology <- 
+  normals %>%
+  purrr::map(function(x){
+    x %>%
+      purrr::map(mtd_aggregate_normals) %>%
+      tibble::as_tibble() %>% 
+      dplyr::mutate(YDAY = 1:365)
+  })
+
+normals$precipitation_amount$mean %<>%
+  magrittr::extract2(gridmet_dates %>%
+                       lubridate::yday()) %>%
+  raster::calc(sum)
+
+normals$daily_minimum_temperature$mean %<>%
+  magrittr::extract2(gridmet_dates %>%
+                       lubridate::yday()) %>%
+  raster::calc(mean)
+
+normals$daily_maximum_temperature$mean %<>%
+  magrittr::extract2(gridmet_dates %>%
+                       lubridate::yday()) %>%
+  raster::calc(mean)
+
+normals %<>% purrr::transpose()
+
+gridmet %<>%
+  purrr::map(raster::resample, 
+             y = normals$mean$precipitation_amount)
+
+gridmet_agg <- gridmet
+gridmet_agg$precipitation_amount %<>%
+  raster::calc(sum)
+
+gridmet_agg$daily_minimum_temperature %<>%
+  raster::calc(mean)
+
+gridmet_agg$daily_maximum_temperature %<>%
+  raster::calc(mean)
+
+gridmet_agg <- list(gridmet_agg,
+                    normals$mean) %>%
+  purrr::transpose() %>%
+  purrr::map(function(x){
+    raster::brick(x) %>%
+      magrittr::set_names(c("value","normals"))
+  })
+
+attr(gridmet_agg,"dates") <- gridmet_dates
+
+gridmet_sum <- gridmet %>%
+  purrr::imap(function(x,name){
+    tibble::tibble(value = mtd_aggregate_normals(x)) %>%
+      magrittr::set_names(name)
+  }) %>%
+  dplyr::bind_cols() %>%
+  dplyr::mutate(YDAY = gridmet_dates %>%
+                  lubridate::yday())
+
+gridmet_sf_cropped <- gridmet_agg %>%
   mtd_as_sf_gridmet() %>%
-    purrr::map(sf::st_intersection,
-               y = mt_state_simple)
+  purrr::map(sf::st_intersection,
+             y = mt_state_simple)
 attr(gridmet_sf_cropped,"dates") <- gridmet_dates
-
-gridmet_agg <- gridmet %>%
-  mtd_aggregate_gridmet(mt_counties)
 
 ```
 

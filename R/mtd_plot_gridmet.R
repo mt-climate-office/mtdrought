@@ -125,10 +125,18 @@ mtd_plot_gridmet <- function(gridmet,
   
   if(element == "prcp") {
     direction = 1
-    palette = "BrBG"
+    if(use_normals)
+      palette = "BrBG"
+    else
+    palette = "BuGn"
   }else {
     direction = -1
-    palette = "RdBu"
+    if(use_normals)
+      palette = "RdBu"
+    else{
+      direction = 1
+      palette = "Reds"
+    }
   }
   
   map_data %<>%
