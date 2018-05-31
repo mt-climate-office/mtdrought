@@ -36,7 +36,7 @@ source("./R/setup.R")
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-The summer outlook for temperature is warmer than normal across western and central portions of the state. If the warmer temperatures occur as forecasted, they will contribute to increased evapotranspiration and the potential dry down of spring soil moisture reserves. The forecast is less certain in eastern portions of the state with equal chances of above, below, or normal summer temperatures.
+The summer outlook is for warmer than normal temperatures across western and central portions of the state. If the warmer temperatures occur as forecasted, they will contribute to increased evapotranspiration and the potential dry down of spring soil moisture reserves. The forecast is less certain in eastern portions of the state which means that there are equal chances of above, below, or normal summer temperatures.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -54,7 +54,7 @@ noaa_seasonal$map
 ```
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
-The summer outlook for precipitation is drier than normal across northwestern, southwestern, and northcentral portions of the state. There may be potential for the development of drought conditions as the summer progresses in these regions if we do indeed experience drier than normal conditions in conjunction with above normal temperatures (above). The forecast is less certain in eastern portions of the state with equal chances of above, below, or normal summer precipitation. 
+The summer outlook for precipitation is drier than normal across northwestern, southwestern, and north-central portions of the state. There may be potential for the development of drought conditions as the summer progresses in these regions if we do indeed experience drier than normal conditions in conjunction with above normal temperatures (see above). The forecast is less certain in eastern portions of the state which means that there are equal chances of above, below, or normal summer precipitation. 
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -72,6 +72,7 @@ noaa_seasonal$map
 ```
 
 ### <img src="icons/drought.svg" width="35px"/> Drought {-}
+The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions.
 
 ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

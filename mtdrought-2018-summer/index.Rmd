@@ -18,7 +18,7 @@ Here's what you'll find in this newsletter:
 
 [**Conditions**](./am-2018-review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the previous season and allows producers to reflect how conditions compare to past years.
 
-[**Seasonal Forecast**](./jja-2018-forecast.html) --- The seasonal forecast is particularly useful for agricultural producers. Here temperature, precipitation, drought, and global air circulation patterns are discussed in detail.
+[**Seasonal Forecast**](./jja-2018-forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, drought, and global air circulation patterns that impact growing conditions and water availability in Montana.
 
 [**Mid-Century Outlook**](./am-2018-midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
 
@@ -29,13 +29,13 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Montana experienced a cooler and wetter than normal spring that contributed to the delayed onset of melt to our significant winter snowpack.
-* Protracted snowmelt contributed to significant recharge of soil moisture and widespread flooding across the state. 
+* Spring in Montana was cooler and wetter than normal which delayed the melting of our heavy winter snowpack.
+* A longer snowmelt contributed to more recharge of soil moisture and widespread flooding across the state.
 * Significant soil moisture reserves associated with snowmelt and above normal spring precipitation will reduce the likelihood of drought and fire in the early summer.
-* La Niña conditions dissipated to ENSO neutral conditions in late April.
-* The summer outlook for temperature is warmer than normal across western and central portions of the state. The forecast is less certain for the remainder of the state.
-* The summer outlook for precipitation is drier than normal across northwestern, southwestern, and northcentral portions of the state. The forecast is less certain for the remainder of the state.
-* If warmer and drier conditions are realized in western and central regions, there is potential for increased evapotranspiration, drying of soils, and drought.
+* La Niña conditions dissipated in late April.
+* The summer outlook is for warmer than normal temperatures across the western and central portions of the state. The forecast is less certain for the remainder of the state.
+* The summer outlook for precipitation is drier than normal across northwestern, southwestern, and north-central portions of the state. The forecast is less certain for the remainder of the state.
+* If warmer and drier conditions are realized in western and central regions, there is potential for soils to dry out and drought to set in.
 </div>
 
 -----
@@ -74,7 +74,7 @@ cocorahs <- httr::GET(url = "http://data.cocorahs.org/export/exportreports.aspx"
 (cocorahs %>%
       ggplot2::ggplot() +
       ggplot2::geom_sf(ggplot2::aes(color = TotalPrecipAmt),
-                       size = 1) +
+                       size = 1.5) +
           ggplot2::scale_color_distiller(name = stringr::str_c(format(lubridate::as_date("2018-04-01"), '%B %d, %Y')," - \n",
                                    format(lubridate::as_date("2018-05-31"), '%B %d, %Y'),"\n",
                                    "Net precipitation (in.)"),

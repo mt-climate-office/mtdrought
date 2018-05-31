@@ -8,11 +8,6 @@ get_bcsd_swe_midcentury_summary <-
     
     if(!file.exists(stringr::str_c(data_out,"/bcsd_swe_midcentury_medians.Rds"))){
       
-      macav2_datasets <- get_macav2_monthly_datasets() %>%
-        stringr::str_subset("_pr_") %>%
-        stringr::str_subset("_rcp45_") %>%
-        sort()
-      
       BCSD_swe_vars <- thredds::tds_ncss_list_vars("https://cida.usgs.gov/thredds/ncss/BCSD_mon_VIC/dataset.html") %$%
         name %>%
         stringr::str_subset("swe") %>%
