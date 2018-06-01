@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-<!-- ![By mid-century, less precipitation will fall as snow during the winter, lessening April snowpack. Photo by Kevin Hyde.](./img/Kevin_Hyde_dry.jpg) -->
+![Photo: Kevin Hyde](./img/Kevin_Hyde_Yellowstone.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 

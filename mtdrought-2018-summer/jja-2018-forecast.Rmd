@@ -6,7 +6,7 @@ title: "June--August 2018 Forecast"
 source("./R/setup.R")
 ```
 
-<!-- ![Spring runoff from heavy mountain snows could potentially cause flooding in some areas, especially if there is rapid snow melt. Photo by Collin Kuske.](./img/Collin_Kuske_flooded_field.jpg) -->
+![Photo: Kevin Hyde](./img/Kevin_Hyde_green.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 

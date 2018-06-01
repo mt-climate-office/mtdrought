@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-<!-- ![A cold and snowy winter was a challenge for some ranchers, especially in north-central Montana where February brought well over 200 percent of normal snowfall.](./img/Laurie_Yung_cows.jpg) -->
+![Fish Creek, April 23, 2018. Photo: Collin Kuske](./img/Collin_Kuske_snowpack_April_23.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
@@ -172,23 +172,24 @@ mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximu
 
 ```
 
-<!-- ```{r past-seasonal-temp-grid-climatology-polar, cache=FALSE, fig.width = 4, fig.height = 4} -->
+```{r past-seasonal-temp-grid-climatology-polar, cache=FALSE, fig.width = 4, fig.height = 4}
 
-<!-- mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximum_temperature")], -->
-<!--                      col = c("#0571b0","#ca0020"), -->
-<!--                      ybreaks = seq(-25,100,25), -->
-<!--                      title = "Temperature (ºF)", -->
-<!--                      polar = TRUE, -->
-<!--                      smooth = TRUE) + -->
-<!--   ggplot2::geom_line(ggplot2::aes(x = YDAY, -->
-<!--                                   y = daily_minimum_temperature), -->
-<!--                      col = "#0571b0", -->
-<!--                      data = gridmet_sum) + -->
-<!--   ggplot2::geom_line(ggplot2::aes(x = YDAY, -->
-<!--                                   y = daily_maximum_temperature), -->
-<!--                      col = "#ca0020", -->
-<!--                      data = gridmet_sum) -->
-<!-- ``` -->
+mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximum_temperature")],
+                     col = c("#0571b0","#ca0020"),
+                     ybreaks = seq(-25,100,25),
+                     title = "Temperature (ºF)",
+                     polar = TRUE,
+                     smooth = TRUE,
+                     mean = TRUE) +
+  ggplot2::geom_line(ggplot2::aes(x = YDAY,
+                                  y = daily_minimum_temperature),
+                     col = "#0571b0",
+                     data = gridmet_sum) +
+  ggplot2::geom_line(ggplot2::aes(x = YDAY,
+                                  y = daily_maximum_temperature),
+                     col = "#ca0020",
+                     data = gridmet_sum)
+```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Growing Degree Days (GDDs) {-}
 
