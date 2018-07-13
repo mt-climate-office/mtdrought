@@ -4,22 +4,22 @@ mtd_plot_gridmet <- function(gridmet,
                              # data_out = "./data/gridmet",
                              # agg_sf,
                              # agg_sf_fun = mean,
-                             use_normals = FALSE){
+                             use_normal = FALSE){
   
   if(element == "tmax"){
-    gridmet_element = "daily_maximum_temperature"
+    gridmet_element = "tmax"
     unit_symbol <- "ºF"
     long_name <- "Maximum temperature"
   } else if(element == "tmin"){
-    gridmet_element = "daily_minimum_temperature"
+    gridmet_element = "tmin"
     unit_symbol <- "ºF"
     long_name <- "Minimum temperature"
   }else if(element == "prcp"){
-    gridmet_element = "precipitation_amount"
+    gridmet_element = "prcp"
     unit_symbol <- "in."
     long_name <- "Net precipitation"
   }else if(element == "tmean"){
-    gridmet_element = c("daily_maximum_temperature","daily_minimum_temperature")
+    gridmet_element = c("tmax","tmin")
     unit_symbol <- "ºF"
     long_name <- "Average temperature"
   } else {
@@ -40,7 +40,7 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet %<>%
       purrr::map(function(x){
         x %>%
-          magrittr::extract(c("value","normals"))
+          magrittr::extract(c("value","normal"))
       })
   }
   
@@ -48,7 +48,7 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet_out <- gridmet[[1]]
     
     gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
-    gridmet_out$normals <- (gridmet[[1]]$normals + gridmet[[2]]$normals) / 2
+    gridmet_out$normal <- (gridmet[[1]]$normal + gridmet[[2]]$normal) / 2
     gridmet <- gridmet_out
     
   } else {
@@ -60,10 +60,10 @@ mtd_plot_gridmet <- function(gridmet,
       mtd_as_sf_gridmet()
   }
   
-  if(use_normals){
+  if(use_normal){
     if(element == "prcp") {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value / normals) %>%
+        dplyr::mutate(value = (value / normal) %>%
                         magrittr::multiply_by(100) %>%
                         round()) %>%
         dplyr::select(value)
@@ -73,7 +73,7 @@ mtd_plot_gridmet <- function(gridmet,
                                      long_name,"\nPercent of normal")
     } else {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value - normals) %>%
+        dplyr::mutate(value = (value - normal) %>%
                         round(digits = 1)) %>%
         dplyr::select(value)
       
@@ -101,7 +101,7 @@ mtd_plot_gridmet <- function(gridmet,
   map_data %<>%
     dplyr::rename(geometry = !!sf_column)
   
-  if(use_normals){
+  if(use_normal){
     if(element == "prcp") {
       limits <- c(0,200)
       
@@ -125,13 +125,13 @@ mtd_plot_gridmet <- function(gridmet,
   
   if(element == "prcp") {
     direction = 1
-    if(use_normals)
+    if(use_normal)
       palette = "BrBG"
     else
     palette = "BuGn"
   }else {
     direction = -1
-    if(use_normals)
+    if(use_normal)
       palette = "RdBu"
     else{
       direction = 1

@@ -44,14 +44,15 @@ mtd_plot_swe_basins <- function(date = "latest",
                 # Plot the polygon boundaries
                 geom_sf(fill = NA,
                         color = "white",
-                        size = 0.5) +
-                # Plot the labels
-                geom_label(aes(x = Centroid_x,
-                               y = Centroid_y,
-                               label = percent %>%
-                                 paste0("%")),
-                           alpha = 1,
-                           size = 2.25)) %T>%
+                        size = 0.5)# +
+                # # Plot the labels
+                # geom_label(aes(x = Centroid_x,
+                #                y = Centroid_y,
+                #                label = percent %>%
+                #                  paste0("%")),
+                #            alpha = 1,
+                #            size = 2.25)
+              ) %T>%
     save_mt_map(stringr::str_c(date,"-swe.pdf"))
   
   
