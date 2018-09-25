@@ -1,10 +1,10 @@
 ---
-title: "2018 Fall Outlook"
+title: "2018–2019 Winter Outlook"
 editor_options: 
   chunk_output_type: console
 ---
 
-![Flooding from spring runoff affected much of Montana in April and May, including in Missoula. Photo: https://inciweb.nwcg.gov/incident/photograph/5787/17/77904](./img/Missoula_Floods.jpg)
+![A new Montana Mesonet station near Miles City, MT. Photo: Kevin Hyde.](./img/Kevin_Hyde_fort_keogh.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
@@ -12,15 +12,13 @@ source("./R/setup.R")
 
 ## {-}
 
-Welcome to the September 2018 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+Welcome to the October 2018 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
 Here's what you'll find in this newsletter:
 
-[**Conditions**](./review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened over the previous season and allows producers to reflect how conditions compare to past years.
+[**Growing Season 2018**](./review.html) --- Understanding current conditions aids in predicting future conditions. This section provides an overview of what happened this past summer.
 
-[**Seasonal Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, drought, and global air circulation patterns that impact growing conditions and water availability in Montana.
-
-[**Mid-Century Outlook**](./midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
+[**Winter 2018--2019**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, drought, and global air circulation patterns that impact growing conditions and water availability in Montana.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 
@@ -29,13 +27,10 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Spring in Montana was cooler and wetter than normal which delayed the melting of our heavy winter snowpack.
-* A longer snowmelt contributed to more recharge of soil moisture and widespread flooding across the state.
-* Significant soil moisture reserves associated with snowmelt and above normal spring precipitation will reduce the likelihood of drought and fire in the early summer.
-* La Niña conditions dissipated in late April.
-* The summer outlook is for warmer than normal temperatures across the western and central portions of the state. The forecast is less certain for the remainder of the state.
-* The summer outlook for precipitation is drier than normal across northwestern, southwestern, and north-central portions of the state. The forecast is less certain for the remainder of the state.
-* If warmer and drier conditions are realized in western and central regions, there is potential for soils to dry out and drought to set in.
+* This past summer was drier than normal in north and northwest Montana, while the south and east of the state had much more precipitation than normal.
+* Soil moisture in much of the state remained high throughout the summer.
+* Drought declarations in Montana were mainly in response to climate, as opposed to hydrologic or agricultural conditions on the ground.
+* There is a high probability of El Niño conditions arriving this winter, which historically leads to slightly drier and warmer conditions across central Montana.
 </div>
 
 -----

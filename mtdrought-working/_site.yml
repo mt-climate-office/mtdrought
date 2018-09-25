@@ -1,15 +1,15 @@
-name: MT Drought & Climate — September–December 2018
+name: MT Drought & Climate — Winter Outlook 2018–2019
 navbar:
   title: <img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left;
     vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
-    and Forecasting<br>for Agricultural Producers<br><b>June 2018</b></ht>
+    and Forecasting<br>for Agricultural Producers<br><b>October 2018</b></ht>
   right:
-  - text: Jun–Aug 2018
+  - text: Growing Season 2018
     href: review.html
-  - text: Sept–Dec 2018
+  - text: Winter 2018–2019
     href: forecast.html
-  - text: Jun–Aug Mid-century
-    href: midcentury.html
+#  - text: Jun–Aug Mid-century
+#    href: midcentury.html
   - text: Reference
     href: reference.html
 output:
@@ -24,5 +24,5 @@ output:
     lib_dir: site_libs
     self_contained: no
   word_document:
-output_dir: ../docs/mtdrought-2018-fall
+output_dir: ../docs/mtdrought-2019-winter
 

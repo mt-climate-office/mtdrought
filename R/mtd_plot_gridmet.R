@@ -7,19 +7,19 @@ mtd_plot_gridmet <- function(gridmet,
                              use_normal = FALSE){
   
   if(element == "tmax"){
-    gridmet_element = "tmax"
+    gridmet_element = "tmmx"
     unit_symbol <- "ºF"
     long_name <- "Maximum temperature"
   } else if(element == "tmin"){
-    gridmet_element = "tmin"
+    gridmet_element = "tmmn"
     unit_symbol <- "ºF"
     long_name <- "Minimum temperature"
   }else if(element == "prcp"){
-    gridmet_element = "prcp"
+    gridmet_element = "pr"
     unit_symbol <- "in."
     long_name <- "Net precipitation"
   }else if(element == "tmean"){
-    gridmet_element = c("tmax","tmin")
+    gridmet_element = c("tmmx","tmmn")
     unit_symbol <- "ºF"
     long_name <- "Average temperature"
   } else {
@@ -40,7 +40,7 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet %<>%
       purrr::map(function(x){
         x %>%
-          magrittr::extract(c("value","normal"))
+          magrittr::extract(c("value","normal.mean"))
       })
   }
   
@@ -48,7 +48,7 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet_out <- gridmet[[1]]
     
     gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
-    gridmet_out$normal <- (gridmet[[1]]$normal + gridmet[[2]]$normal) / 2
+    gridmet_out$normal.mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
     gridmet <- gridmet_out
     
   } else {
@@ -63,7 +63,7 @@ mtd_plot_gridmet <- function(gridmet,
   if(use_normal){
     if(element == "prcp") {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value / normal) %>%
+        dplyr::mutate(value = (value / normal.mean) %>%
                         magrittr::multiply_by(100) %>%
                         round()) %>%
         dplyr::select(value)
@@ -73,7 +73,7 @@ mtd_plot_gridmet <- function(gridmet,
                                      long_name,"\nPercent of normal")
     } else {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value - normal) %>%
+        dplyr::mutate(value = (value - normal.mean) %>%
                         round(digits = 1)) %>%
         dplyr::select(value)
       

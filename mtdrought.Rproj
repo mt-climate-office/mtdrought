@@ -15,6 +15,6 @@ LaTeX: pdfLaTeX
 AutoAppendNewline: Yes
 
 BuildType: Website
-WebsitePath: mtdrought-2018-spring
+WebsitePath: mtdrought-working
 
 QuitChildProcessesOnExit: Yes

@@ -11,7 +11,7 @@
 
 
 
-<title>June–August, 2018: Current conditions</title>
+<title>Summer 2018: Drought?</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,6 +93,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -185,13 +188,10 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="review.html">Jun–Aug 2018</a>
+  <a href="review.html">Growing Season 2018</a>
 </li>
 <li>
-  <a href="forecast.html">Sept–Dec 2018</a>
-</li>
-<li>
-  <a href="midcentury.html">Jun–Aug Mid-century</a>
+  <a href="forecast.html">Winter 2018--2019</a>
 </li>
 <li>
   <a href="reference.html">Reference</a>
@@ -205,7 +205,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">June–August, 2018: Current conditions</h1>
+<h1 class="title toc-ignore">Summer 2018: Drought?</h1>
 
 </div>
 
@@ -219,49 +219,16 @@ $(document).ready(function () {
 <div id="temperature" class="section level3 unnumbered">
 <h3><img src="icons/temperature.svg" width="35px"/> Temperature</h3>
 <p>The lingering effects of this winter’s La Niña contributed to below normal temperatures in early spring. As the La Niña transitioned to ENSO neutral in May, we began to experience normal to above normal temperatures across the state. The cooler than normal temperatures lasted through late April and contributed to a delay in growing season onset and a protracted snowmelt. When temperatures began to increase in May, our above normal snowpack started to melt and contributed to significant flooding.</p>
-<!-- ```{r past-seasonal-temp-grid, cache=TRUE} -->
-<!-- gridmet_sf_cropped %>% -->
-<!--   mtd_plot_gridmet(element = "tmean") %T>% -->
-<!--   save_mt_map(stringr::str_c(head(gridmet_dates,1), -->
-<!--                              tail(gridmet_dates,1), -->
-<!--                              "tmean", -->
-<!--                              "pdf", -->
-<!--                              sep = ".")) -->
-<!-- ``` -->
 <p><img src="review_files/figure-html/past-seasonal-temp-grid-normals-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>The graph below compares historic daily temperatures (bands and dashed lines) to current daily temperatures in April and May 2018 (jagged lines) across Montana. Red colors are the high temperatures, and blue colors are the low temperatures. The bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The dashed lines represent the average high and low temperatures during the 1981–2010 period.</p>
 <p><img src="review_files/figure-html/past-seasonal-temp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><img src="review_files/figure-html/past-seasonal-temp-grid-climatology-polar-1.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="growing-degree-days-gdds" class="section level3 unnumbered">
-<h3><img src="icons/temperature.svg" width="35px"/> Growing Degree Days (GDDs)</h3>
-<p>The map below shows the accumulated growing degree days (GDDs) since the last day below 24ºF, which is the temperature damaging to wheat once it reaches the jointing growth phase. The cooler than normal spring temperatures contributed to slightly lower than normal growing degree days across the majority of eastern and central Montana. Here, growing degree days as of May 18th range from ~300 to 600. The mountain and valley regions of northwestern Montana have experienced slightly higher than normal growing degree days (+50 to +100) and the current number of accumulated growing degree days range from 100 to 600.</p>
-<p><img src="review_files/figure-html/past-seasonal-gdd-above-24-grid-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p><img src="review_files/figure-html/past-seasonal-gdd-above-24-normals-grid-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="precipitation" class="section level3 unnumbered">
 <h3><img src="icons/precipitation.svg" width="35px"/> Precipitation</h3>
 <p>In general precipitation was above normal most of the state during the spring. However, there were isolated pockets of below normal precipitation (0.75 to 2.2 inches below normal) in portions of northeastern Montana, extending along the highline from Sheridan to Hill counties and for southwestern Montana in Beaverhead County. These were counties that already had dry conditions from last summer’s drought.</p>
-<!-- # ```{r past-seasonal-prcp-grid, cache=TRUE} -->
-<!-- # gridmet_sf_cropped %>% -->
-<!-- #   mtd_plot_gridmet(element = "prcp") %T>% -->
-<!-- #   save_mt_map(stringr::str_c(head(gridmet_dates,1), -->
-<!-- #                              tail(gridmet_dates,1), -->
-<!-- #                              "prcp", -->
-<!-- #                              # "aggregated", -->
-<!-- #                              # "normals", -->
-<!-- #                              "pdf", -->
-<!-- #                              sep = ".")) -->
-<!-- #  -->
-<!-- # ``` -->
 <p><img src="review_files/figure-html/past-seasonal-prcp-grid-normals-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>The graph below compares historic daily precipitation (band and dashed line) to current daily precipitation in April and May 2018 (jagged line) across Montana. The band represents the range of recorded precipitation during the 1981–2010 period on any given day. The dashed line represents the average precipitation during the 1981–2010 period.</p>
 <p><img src="review_files/figure-html/past-seasonal-prcp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="snowpack" class="section level3 unnumbered">
-<h3><img src="icons/swe.svg" width="35px"/> Snowpack</h3>
-<p>Snowmelt still continues at higher elevations across the state due to the cooler than normal spring temperatures and above average winter snowfall. This will contribute to elevated soil moisture and higher streamflow into June and reduces the potential for drought and wildfire.</p>
-<p><img src="review_files/figure-html/past-seasonal-swe-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="soil-moisture" class="section level3 unnumbered">
 <h3><img src="icons/soil_saturation.svg" width="35px"/> Soil Moisture</h3>

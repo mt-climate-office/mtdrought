@@ -61,7 +61,10 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
   
   months <- lubridate::as_date(date) %>%
     lubridate::month() %>%
-    magrittr::add(0:2) %>%
+    magrittr::add(0:2)
+  months[months>12] <- months[months>12] - 12
+  
+  months %<>%
     magrittr::extract(month.name, .) %>%
     stringr::str_sub(1,1) %>%
     stringr::str_flatten()
@@ -84,7 +87,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                                            0,
                                            33,
                                            seq(40,100,10)),
-                                ordered = TRUE)) 
+                                ordered = TRUE))
   
   legend.name <- stringr::str_c(lubridate::as_date(date) %>%
                             lubridate::month() %>%

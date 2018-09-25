@@ -11,7 +11,7 @@
 
 
 
-<title>September–November 2018 Forecast</title>
+<title>Winter Outlook: Return of El Niño?</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -93,6 +93,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -185,13 +188,10 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="review.html">Jun–Aug 2018</a>
+  <a href="review.html">Growing Season 2018</a>
 </li>
 <li>
-  <a href="forecast.html">Sept–Dec 2018</a>
-</li>
-<li>
-  <a href="midcentury.html">Jun–Aug Mid-century</a>
+  <a href="forecast.html">Winter 2018--2019</a>
 </li>
 <li>
   <a href="reference.html">Reference</a>
@@ -205,7 +205,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">September–November 2018 Forecast</h1>
+<h1 class="title toc-ignore">Winter Outlook: Return of El Niño?</h1>
 
 </div>
 
@@ -216,36 +216,34 @@ $(document).ready(function () {
 </div>
 <div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills">
 <h2></h2>
-<!-- ### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-} -->
-<!-- This past winter and spring the Pacific sea surface temperatures remained below average, maintaining La Niña conditions in the ocean and lower atmosphere. This resulted in a significant winter snowpack, wet conditions and much below normal spring temperatures. In late April the La Niña transitioned to ENSO neutral. During ENSO-neutral phases, ocean temperatures and atmospheric conditions are near the long-term average and there is often less predictability in the three month summer outlook (e.g., the seasonal outlook for temperature and precipitation in Eastern MT below). -->
-<!-- #### Temperature {-} -->
-<!-- ```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- enso_temp <- mtd_plot_enso(months = 6:8, -->
-<!--                                 element = "tmpc", -->
-<!--                                 agg_fun = mean) -->
-<!-- enso_temp$map -->
-<!-- ``` -->
-<!-- #### Precipitation {-} -->
-<!-- ```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- enso_prcp <- mtd_plot_enso(months = 6:8, -->
-<!--                                 element = "pcpn", -->
-<!--                                 agg_fun = sum) -->
-<!-- enso_prcp$map -->
-<!-- ``` -->
-<div id="temperature" class="section level3 unnumbered">
+<div id="el-nino-outlook" class="section level3 unnumbered">
+<h3><img src="icons/enso.svg" width="35px"/> El Niño Outlook</h3>
+<p>This past winter and spring the Pacific sea surface temperatures remained below average, maintaining La Niña conditions in the ocean and lower atmosphere. This resulted in a significant winter snowpack, wet conditions and much below normal spring temperatures. In late April the La Niña transitioned to ENSO neutral. During ENSO-neutral phases, ocean temperatures and atmospheric conditions are near the long-term average and there is often less predictability in the three month summer outlook (e.g., the seasonal outlook for temperature and precipitation in Eastern MT below).</p>
+<div id="temperature" class="section level4 unnumbered">
+<h4>Temperature</h4>
+<p><img src="forecast_files/figure-html/future-seasonal-enso-temp-1.png" width="100%" style="display: block; margin: auto;" /><img src="forecast_files/figure-html/future-seasonal-enso-temp-2.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="precipitation" class="section level4 unnumbered">
+<h4>Precipitation</h4>
+<p><img src="forecast_files/figure-html/future-seasonal-enso-prcp-1.png" width="100%" style="display: block; margin: auto;" /><img src="forecast_files/figure-html/future-seasonal-enso-prcp-2.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="temperature-1" class="section level3 unnumbered">
 <h3><img src="icons/temperature.svg" width="35px"/> Temperature</h3>
 <p>The summer outlook is for warmer than normal temperatures across western and central portions of the state. If the warmer temperatures occur as forecasted, they will contribute to increased evapotranspiration and the potential dry down of spring soil moisture reserves. The forecast is less certain in eastern portions of the state which means that there are equal chances of above, below, or normal summer temperatures.</p>
 <p><img src="forecast_files/figure-html/future-seasonal-temp-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="precipitation" class="section level3 unnumbered">
+<div id="precipitation-1" class="section level3 unnumbered">
 <h3><img src="icons/precipitation.svg" width="35px"/> Precipitation</h3>
 <p>The summer outlook for precipitation is drier than normal across northwestern, southwestern, and north-central portions of the state. There may be potential for the development of drought conditions as the summer progresses in these regions if we do indeed experience drier than normal conditions in conjunction with above normal temperatures (see above). The forecast is less certain in eastern portions of the state which means that there are equal chances of above, below, or normal summer precipitation.</p>
 <p><img src="forecast_files/figure-html/future-seasonal-prcp-1.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
-<div id="drought" class="section level3 unnumbered">
-<h3><img src="icons/drought.svg" width="35px"/> Drought</h3>
-<p>The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions.</p>
-<p><img src="forecast_files/figure-html/future-seasonal-drought-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<!-- ### <img src="icons/drought.svg" width="35px"/> Drought {-} -->
+<!-- The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions. -->
+<!-- ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
+<!-- future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2019-03-01", -->
+<!--                               data_out = "../data/NOAA_droughtlook") -->
+<!-- future_seasonal_drought$map -->
+<!-- ``` -->
 </div>
 </div>
 

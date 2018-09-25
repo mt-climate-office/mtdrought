@@ -2,10 +2,10 @@ mtd_plot_add_climatology <- function(x,
                                      col = "black",
                                      mean = FALSE){
   list(
-    if("0%" %in% names(x))
-      ggplot2::geom_ribbon(ggplot2::aes(x = YDAY,
-                                        ymin = `0%`,
-                                        ymax = `100%`),
+    if("normal.000" %in% names(x))
+      ggplot2::geom_ribbon(ggplot2::aes(x = day,
+                                        ymin = normal.000,
+                                        ymax = normal.100),
                            data = x,
                            fill = col,
                            alpha = 0.2),
@@ -29,9 +29,9 @@ mtd_plot_add_climatology <- function(x,
     #                      color = col,
     #                      alpha = 1,
     #                      linetype = 2),
-    if(mean && "mean" %in% names(x))
-      ggplot2::geom_line(ggplot2::aes(x = YDAY,
-                                      y = `mean`),
+    if(mean && "normal.mean" %in% names(x))
+      ggplot2::geom_line(ggplot2::aes(x = day,
+                                      y = normal.mean),
                          data = x,
                          color = col,
                          linetype = 2,

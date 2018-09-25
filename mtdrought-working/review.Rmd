@@ -1,5 +1,5 @@
 ---
-title: "June--August, 2018: Current conditions"
+title: "Summer 2018: Drought?"
 editor_options: 
   chunk_output_type: console
 ---
@@ -9,352 +9,115 @@ source("./R/setup.R")
 
 ```
 
-![Fish Creek, April 23, 2018. Photo: Collin Kuske](./img/Collin_Kuske_snowpack_April_23.jpg)
+![Four-footed fans of the Montana Mesonet visit the new station near Broadus, MT. Photo: Kevin Hyde.](./img/Kevin_Hyde_broadus.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
-### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-The lingering effects of this winter’s La Niña contributed to below normal temperatures in early spring. As the La Niña transitioned to ENSO neutral in May, we began to experience normal to above normal temperatures across the state. The cooler than normal temperatures lasted through late April and contributed to a delay in growing season onset and a protracted snowmelt. When temperatures began to increase in May, our above normal snowpack started to melt and contributed to significant flooding.
+```{r load gridmet, cache=TRUE}
+gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
+                              vars = list("pr" = "sum", 
+                                          "tmmn" = "mean", 
+                                          "tmmx" = "mean"),
+                              start_date = "2018-06-01", 
+                              end_date = "2018-09-01",
+                              raw_dir = "../data/GRIDMET",
+                              overwrite = FALSE)
 
-```{r past-seasonal-gridmet, cache=TRUE}
+gridmet$pr %<>%
+  mm_to_in()
 
-gridmet <- mtd_get_gridmet_ee(start_date = "2018-06-01", 
-                            end_date = "2018-08-31", 
-                            base_name = 'GRIDMET',
-                            raw_dir = "../data/GRIDMET",
-                            overwrite = TRUE)
+gridmet$tmmn %<>%
+  k_to_f()
 
-climatology_gridmet <- mtd_get_gridmet_climatology_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
-                                           vars = c("pr", "tmmn", "tmmx"),
-                                           start_date = '1981-01-01', 
-                                           end_date = '2011-01-01')
+gridmet$tmmx %<>%
+  k_to_f()
 
-climatology_MACA <- mtd_get_gridmet_climatology_ee(collection = "IDAHO_EPSCOR/MACAv2_METDATA", 
-                                           vars = c("pr", "tasmax", "tasmin"),
-                                           start_date = '1981-01-01', 
-                                           end_date = '2011-01-01')
+gridmet_series <- mtd_get_gridmet_series_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
+                                            vars = c("pr", "tmmn", "tmmx"),
+                                            start_date = "2018-01-01", 
+                                            end_date = "2018-12-31")
 
-midcentury_MACA <- mtd_get_gridmet_climatology_ee(collection = "IDAHO_EPSCOR/MACAv2_METDATA", 
-                                           vars = c("pr", "tasmax", "tasmin"),
-                                           start_date = '2040-01-01', 
-                                           end_date = '2070-01-01')
+gridmet_series$pr %<>%
+  dplyr::mutate_at(.vars = dplyr::vars(value:normal.100),
+                   .funs = mm_to_in)
 
-## Normals
-normals <- mcor::mco_get_gridmet_normals(out_dir = stringr::str_c("../data/gridmet/normals/"))
+gridmet_series$tmmn %<>%
+  dplyr::mutate_at(.vars = dplyr::vars(value:normal.100),
+                   .funs = k_to_f)
 
-normals$precipitation_amount %<>% 
-  purrr::map(mm_to_in)
-
-normals$daily_minimum_temperature %<>% 
-  purrr::map(k_to_f)
-
-normals$daily_maximum_temperature %<>% 
-  purrr::map(k_to_f)
-
-climatology <- 
-  normals %>%
-  purrr::map(function(x){
-    x %>%
-      purrr::map(mtd_aggregate_normals) %>%
-      tibble::as_tibble() %>% 
-      dplyr::mutate(YDAY = 1:365)
-  })
-
-normals$precipitation_amount$mean %<>%
-  magrittr::extract2(gridmet_dates %>%
-                       lubridate::yday()) %>%
-  raster::calc(sum)
-
-normals$daily_minimum_temperature$mean %<>%
-  magrittr::extract2(gridmet_dates %>%
-                       lubridate::yday()) %>%
-  raster::calc(mean)
-
-normals$daily_maximum_temperature$mean %<>%
-  magrittr::extract2(gridmet_dates %>%
-                       lubridate::yday()) %>%
-  raster::calc(mean)
-
-normals %<>% purrr::transpose()
-
-gridmet %<>%
-  purrr::map(raster::resample, 
-             y = normals$mean$precipitation_amount)
-
-gridmet_agg <- gridmet
-gridmet_agg$precipitation_amount %<>%
-  raster::calc(sum)
-
-gridmet_agg$daily_minimum_temperature %<>%
-  raster::calc(mean)
-
-gridmet_agg$daily_maximum_temperature %<>%
-  raster::calc(mean)
-
-gridmet_agg <- list(gridmet_agg,
-                    normals$mean) %>%
-  purrr::transpose() %>%
-  purrr::map(function(x){
-    raster::brick(x) %>%
-      magrittr::set_names(c("value","normals"))
-  })
-
-attr(gridmet_agg,"dates") <- gridmet_dates
-
-gridmet_sum <- gridmet %>%
-  purrr::imap(function(x,name){
-    tibble::tibble(value = mtd_aggregate_normals(x)) %>%
-      magrittr::set_names(name)
-  }) %>%
-  dplyr::bind_cols() %>%
-  dplyr::mutate(YDAY = gridmet_dates %>%
-                  lubridate::yday())
+gridmet_series$tmmx %<>%
+  dplyr::mutate_at(.vars = dplyr::vars(value:normal.100),
+                   .funs = k_to_f)
 
 gridmet_sf <- gridmet %>%
   mtd_as_sf_gridmet() %>%
   purrr::map(sf::st_intersection,
              y = mt_state_simple)
-attr(gridmet_sf,"dates") <- gridmet_dates
+attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 
 ```
 
-
-<!-- ```{r past-seasonal-temp-grid, cache=TRUE} -->
-<!-- gridmet_sf_cropped %>% -->
-<!--   mtd_plot_gridmet(element = "tmean") %T>% -->
-<!--   save_mt_map(stringr::str_c(head(gridmet_dates,1), -->
-<!--                              tail(gridmet_dates,1), -->
-<!--                              "tmean", -->
-<!--                              "pdf", -->
-<!--                              sep = ".")) -->
-<!-- ``` -->
+### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
+Aside from a period in early August, temperatures this summer were below normal across much of central Montana, while being above normal in northeastern Montana and west of the Rocky Mountain front. Warm conditions in the west contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn't materialize.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 gridmet_sf %>%
   mtd_plot_gridmet(element = "tmean",
                    use_normal = TRUE) %T>%
-  save_mt_map(stringr::str_c(head(gridmet_dates,1),
-                             tail(gridmet_dates,1),
+  save_mt_map(stringr::str_c(head(attr(gridmet_sf,"dates"),1),
+                             tail(attr(gridmet_sf,"dates"),1),
                              "tmean",
-                             # "aggregated",
                              "normals",
                              "pdf",
                              sep = "."))
 ```
 
-The graph below compares historic daily temperatures (bands and dashed lines) to current daily temperatures in April and May 2018 (jagged lines) across Montana. Red colors are the high temperatures, and blue colors are the low temperatures. The bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The dashed lines represent the average high and low temperatures during the 1981--2010 period.
+The graph below compares historic daily temperatures (bands and dashed lines) to current daily temperatures in June--August 2018 (jagged lines) across Montana. Red colors are the high temperatures, and blue colors are the low temperatures. The bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The dashed lines represent the average high and low temperatures during the 1981--2010 period.
 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
-mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximum_temperature")],
+gridmet_sum <-
+  gridmet %>%
+  purrr::map(raster::cellStats, mean)
+
+mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
                      col = c("#0571b0","#ca0020"),
                      ybreaks = seq(-25,100,25),
                      title = "Temperature (ºF)",
                      polar = FALSE,
                      smooth = TRUE,
                      mean = TRUE) +
-  ggplot2::geom_line(ggplot2::aes(x = YDAY,
-                                  y = daily_minimum_temperature),
+  ggplot2::geom_line(ggplot2::aes(x = day,
+                                  y = value),
                      col = "#0571b0",
-                     data = gridmet_sum) +
-  ggplot2::geom_line(ggplot2::aes(x = YDAY,
-                                  y = daily_maximum_temperature),
+                     data = gridmet_series$tmmn) +
+  ggplot2::geom_line(ggplot2::aes(x = day,
+                                  y = value),
                      col = "#ca0020",
-                     data = gridmet_sum)
+                     data = gridmet_series$tmmx)
 
 
 ```
-
-```{r past-seasonal-temp-grid-climatology-polar, cache=FALSE, fig.width = 4, fig.height = 4}
-
-mtd_plot_climatology(x = climatology[c("daily_minimum_temperature","daily_maximum_temperature")],
-                     col = c("#0571b0","#ca0020"),
-                     ybreaks = seq(-25,100,25),
-                     title = "Temperature (ºF)",
-                     polar = TRUE,
-                     smooth = TRUE,
-                     mean = TRUE) +
-  ggplot2::geom_line(ggplot2::aes(x = YDAY,
-                                  y = daily_minimum_temperature),
-                     col = "#0571b0",
-                     data = gridmet_sum) +
-  ggplot2::geom_line(ggplot2::aes(x = YDAY,
-                                  y = daily_maximum_temperature),
-                     col = "#ca0020",
-                     data = gridmet_sum)
-```
-
-<!-- ### <img src="./icons/temperature.svg" width="35px"/> Growing Degree Days (GDDs) {-} -->
-
-<!-- The map below shows the accumulated growing degree days (GDDs) since the last day below 24ºF, which is the temperature damaging to wheat once it reaches the jointing growth phase. The cooler than normal spring temperatures contributed to slightly lower than normal growing degree days across the majority of eastern and central Montana. Here, growing degree days as of May 18th range from ~300 to 600. The mountain and valley regions of northwestern Montana have experienced slightly higher than normal growing degree days (+50 to +100) and the current number of accumulated growing degree days range from 100 to 600. -->
-
-<!-- ```{r past-seasonal-gdd, cache=TRUE} -->
-
-<!-- rast_rle <- function(x){ -->
-
-<!--   if(any(is.na(x))) -->
-<!--     return(rep(NA,length(x))) -->
-
-<!--   x_rle <- rle(x) -->
-<!--   if(!tail(x_rle$values, 1)) -->
-<!--     return(rep(FALSE,length(x))) -->
-
-<!--   trues <- rep(TRUE, -->
-<!--                tail(x_rle$lengths,1)) -->
-
-<!--   return( -->
-<!--     c(rep(FALSE, length(x) - length(trues)),  -->
-<!--       trues) -->
-<!--   ) -->
-<!-- } -->
-
-<!-- accumulate_gdd <- function(tmin,  -->
-<!--                            tmax,  -->
-<!--                            tbase = 41.9,  -->
-<!--                            freeze = 30){ -->
-<!--   tmin_rle <- tmin %>% -->
-<!--     magrittr::is_greater_than(freeze) %>% -->
-<!--     raster::calc(rast_rle) -->
-
-<!--   tmin[tmin < 41.9] <- 41.9 -->
-<!--   tmax[tmax < 41.9] <- 41.9 -->
-
-<!--   gdd <- ((tmin + tmax) / 2) - 41.9 -->
-
-<!--   return( -->
-<!--     sum(gdd * tmin_rle) -->
-<!--   ) -->
-<!-- } -->
-
-<!-- ``` -->
-
-
-<!-- ```{r past-seasonal-gdd-above-24, cache=TRUE} -->
-
-<!-- gdd <- accumulate_gdd(tmin = gridmet$daily_minimum_temperature, -->
-<!--                       tmax = gridmet$daily_maximum_temperature, -->
-<!--                       freeze = 24) %>% -->
-<!--   spex::qm_rasterToPolygons(na.rm = T) %>% -->
-<!--   lwgeom::st_transform_proj(mt_state_plane) %>% -->
-<!--   sf::st_intersection(mt_state_simple)  -->
-
-<!-- gdd %<>% -->
-<!--   dplyr::mutate(layer = round(layer)) %>% -->
-<!--   dplyr::group_by(layer) %>% -->
-<!--   dplyr::summarise() -->
-
-<!-- ``` -->
-
-<!-- ```{r past-seasonal-gdd-above-24-grid, cache=TRUE} -->
-<!-- limits <- c(0,max(gdd$layer, na.rm = T)) -->
-
-<!-- (gdd %>% -->
-<!--     ggplot2::ggplot() + -->
-<!--     ggplot2::geom_sf(aes(fill = layer), -->
-<!--                      color = NA) + -->
-<!--     scale_fill_distiller(name = stringr::str_c(format(tail(gridmet_dates,1), '%B %d, %Y'),"\n", -->
-<!--                                                "Accumulated GDDs since\nlast 24ºF period"), -->
-<!--                          direction = 1, -->
-<!--                          limits = limits, -->
-<!--                          # breaks = breaks, -->
-<!--                          palette = "Reds", -->
-<!--                          expand = FALSE, -->
-<!--                          guide = guide_colourbar(title.position = "bottom")) + -->
-<!--     mtd_plot()) %T>% save_mt_map(stringr::str_c(tail(gridmet_dates,1), -->
-<!--                                                 "GDD", -->
-<!--                                                 "pdf", -->
-<!--                                                 sep = ".")) -->
-
-<!-- ``` -->
-
-<!-- ```{r past-seasonal-gdd-above-24-normals, cache=TRUE} -->
-<!-- all_normals <- mcor::mco_get_gridmet_normals(out_dir = stringr::str_c("../data/gridmet/normals/")) -->
-
-<!-- all_normals %<>%  -->
-<!--   magrittr::extract(c("daily_minimum_temperature", -->
-<!--                       "daily_maximum_temperature")) %>% -->
-<!--   purrr::transpose() %$% -->
-<!--   mean %>% -->
-<!--   purrr::map(k_to_f) %>% -->
-<!--   purrr::map(magrittr::extract2, -->
-<!--              gridmet_dates %>% -->
-<!--                lubridate::yday()) -->
-
-
-<!-- gdd_dev <- accumulate_gdd(tmin = gridmet$daily_minimum_temperature, -->
-<!--                           tmax = gridmet$daily_maximum_temperature, -->
-<!--                           freeze = 24) %>% -->
-<!--   magrittr::subtract(accumulate_gdd(tmin = all_normals$daily_minimum_temperature, -->
-<!--                                     tmax = all_normals$daily_maximum_temperature, -->
-<!--                                     freeze = 24)) %>% -->
-<!--   spex::qm_rasterToPolygons(na.rm = T) %>% -->
-<!--   lwgeom::st_transform_proj(mt_state_plane) %>% -->
-<!--   sf::st_intersection(mt_state_simple)  -->
-
-<!-- gdd_dev %<>% -->
-<!--   dplyr::mutate(layer = round(layer)) %>% -->
-<!--   dplyr::group_by(layer) %>% -->
-<!--   dplyr::summarise() -->
-
-<!-- ``` -->
-
-<!-- ```{r past-seasonal-gdd-above-24-normals-grid, cache=TRUE} -->
-
-<!-- limits <- c(-200,200) -->
-
-<!-- (gdd_dev %>% -->
-<!--     ggplot2::ggplot() + -->
-<!--     ggplot2::geom_sf(aes(fill = layer), -->
-<!--                      color = NA) + -->
-<!--     scale_fill_distiller(name = stringr::str_c(format(tail(gridmet_dates,1), '%B %d, %Y'),"\n", -->
-<!--                                                "Accumulated GDDs since\nlast 24ºF period\nDeviation from normal"), -->
-<!--                          direction = -1, -->
-<!--                          limits = limits, -->
-<!--                          # breaks = breaks, -->
-<!--                          palette = "RdBu", -->
-<!--                          expand = FALSE, -->
-<!--                          guide = guide_colourbar(title.position = "bottom")) + -->
-<!--     mtd_plot()) %T>% save_mt_map(stringr::str_c(tail(gridmet_dates,1), -->
-<!--                                                 "GDD", -->
-<!--                                                 "normal", -->
-<!--                                                 "pdf", -->
-<!--                                                 sep = ".")) -->
-
-<!-- ``` -->
-
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-In general precipitation was above normal most of the state during the spring. However, there were isolated pockets of below normal precipitation (0.75 to 2.2 inches below normal) in portions of northeastern Montana, extending along the highline from Sheridan to Hill counties and for southwestern Montana in Beaverhead County. These were counties that already had dry conditions from last summer’s drought. 
-
-<!-- # ```{r past-seasonal-prcp-grid, cache=TRUE} -->
-<!-- # gridmet_sf_cropped %>% -->
-<!-- #   mtd_plot_gridmet(element = "prcp") %T>% -->
-<!-- #   save_mt_map(stringr::str_c(head(gridmet_dates,1), -->
-<!-- #                              tail(gridmet_dates,1), -->
-<!-- #                              "prcp", -->
-<!-- #                              # "aggregated", -->
-<!-- #                              # "normals", -->
-<!-- #                              "pdf", -->
-<!-- #                              sep = ".")) -->
-<!-- #  -->
-<!-- # ``` -->
+In general precipitation was above normal across south-central and eastern Montana this summer, and below normal across nothern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
 gridmet_sf %>%
   mtd_plot_gridmet(element = "prcp",
                    use_normal = TRUE) %T>%
-  save_mt_map(stringr::str_c(head(gridmet_dates,1),
-                             tail(gridmet_dates,1),
+  save_mt_map(stringr::str_c(head(attr(gridmet_sf,"dates"),1),
+                             tail(attr(gridmet_sf,"dates"),1),
                              "prcp",
-                             # "aggregated",
                              "normals",
                              "pdf",
                              sep = "."))
 ```
 
-The graph below compares historic daily precipitation (band and dashed line) to current daily precipitation in April and May 2018 (jagged line) across Montana. The band represents the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
+The graph below compares historic daily precipitation (band and dashed line) to current daily precipitation in June--August 2018 (jagged line) across Montana. The band represents the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
 ```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
-mtd_plot_climatology(x = climatology[c("precipitation_amount")],
+mtd_plot_climatology(x = gridmet_series[c("pr")],
                      col = c("forestgreen"),
                      ybreaks = seq(0,0.8,0.1),
                      title = "Precipitation (in.)",
@@ -362,27 +125,27 @@ mtd_plot_climatology(x = climatology[c("precipitation_amount")],
                      smooth = TRUE,
                      mean = TRUE,
                      family = tw()) +
-  ggplot2::geom_line(ggplot2::aes(x = YDAY,
-                                  y = precipitation_amount),
-                     col = "forestgreen",
-                     data = gridmet_sum)
+  ggplot2::geom_col(ggplot2::aes(x = day,
+                                 y = value),
+                    col = "forestgreen",
+                    data = gridmet_series$pr)
 
 ```
 
+### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but soil moisture and evapotranspiration tell a slightly different story.
 
-### <img src="./icons/swe.svg" width="35px"/> Snowpack {-}
-Snowmelt still continues at higher elevations across the state due to the cooler than normal spring temperatures and above average winter snowfall. This will contribute to elevated soil moisture and higher streamflow into June and reduces the potential for drought and wildfire.
+```{r past-seasonal-drought, cache=TRUE}
 
-```{r past-seasonal-swe, cache=TRUE}
-past_seasonal_swe <- mtd_plot_swe_basins(date="2018-09-01",
-                                         huc = 8)
+past_seasonal_drought <- mtd_plot_usdm(date = "2018-09-01",
+                                       data_out = "../data/USDM")
 
-past_seasonal_swe$map
+past_seasonal_drought$map
 
 ```
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
-Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding. The majority of Montana has soil moisture surpluses due to our above normal winter snowpack and above normal rainfall over the last couple of months. Pockets of soil moisture deficit exist in northeastern Montana and southwestern Montana and are associated with last summer's drought (e.g., eastern Montana) and precipitation deficits this winter and spring.
+Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding. Throughout the summer, the majority of Montana east of the Rockies enjoyed soil moisture surpluses (the blue areas in the map below), due to our above normal winter snowpack, protracted snowmelt, and above-average summer precipitation in south-central Montana. However, the west of the Rockies experienced a soil moisture deficit (the yellow and orange areas) due primarily to below-normal precipitation.
 
 ```{r past-seasonal-smap-grid, cache=TRUE}
 mtd_plot_smap(date = "2018-09-01",
@@ -393,9 +156,7 @@ mtd_plot_smap(date = "2018-09-01",
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Evapotranspiration {-}
 
-The plot and graph below show the deviation from normal evapotranspiration (ET) so far this year, as estimated from the MODIS satellite. In the map, the green areas are currently experiencing greater amounts of ET than their median amounts from 2000--2017 (the period of record); the brown areas are experiencing less ET. In the graph, the bands represent the normal conditions across Montana; half of the normal values fall within the darker band; and the lighter band represent the extremes recorded during the 2000--2017 period. The jagged black line represent this year's conditions; the jagged red line represents the 2017 conditions, for reference.
-
-ET across Montana has been lower than normal throughout the spring, and has only approached normal values in early May.
+Evapotranspiration (ET), or the amount of water vapor leaving the Earth's surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). The plot and graph below show the deviation from normal ET at the end of this summer. In the map, the green areas experienced greater amounts of ET than their normal amounts from 2000--2016 (the period of record); the brown areas experienced less ET. In the graph, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000--2016 period. The jagged black line represent this year's conditions; the jagged red line represents the 2017 conditions, for reference. Across Montana, 2018 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions. In contrast, 2017 ET declined to below-normal values from early June through the early September, reflecting last summer's drought conditions.
 
 ```{r past-seasonal-ET, cache=TRUE}
 mod16_2018 <- mtd_get_mod16a2(start_date = "2018-01-01", 
@@ -423,7 +184,7 @@ mod16_2017 <- mtd_get_mod16a2(start_date = "2017-01-01",
 # mod16_2017[][is.na(mod16_2017[])] <- 0
 
 mod16_2017 %<>%
-mcor::mco_mask(mcor::mt_state)
+  mcor::mco_mask(mcor::mt_state)
 
 mod16_normals <-
   mtd_get_mod16a2_normals(base_name = 'MOD16A2',
@@ -461,15 +222,15 @@ mod16_2017_summary <- tibble::tibble(mean = mod16_2017 %>%
                                        lubridate::yday())
 
 mod16_2018_dev <- mod16_2018 - mod16_normals$p50[[names(mod16_2018) %>%
-                                                      stringr::str_remove("X") %>%
-                                                      lubridate::as_date() %>%
-                                                      lubridate::yday() %>%
-                                                      stringr::str_c("X",.)]]
+                                                    stringr::str_remove("X") %>%
+                                                    lubridate::as_date() %>%
+                                                    lubridate::yday() %>%
+                                                    stringr::str_c("X",.)]]
 mod16_2017_dev <- mod16_2017 - mod16_normals$p50[[names(mod16_2017) %>%
-                                                      stringr::str_remove("X") %>%
-                                                      lubridate::as_date() %>%
-                                                      lubridate::yday() %>%
-                                                      stringr::str_c("X",.)]]
+                                                    stringr::str_remove("X") %>%
+                                                    lubridate::as_date() %>%
+                                                    lubridate::yday() %>%
+                                                    stringr::str_c("X",.)]]
 
 mod16_normals_summary_dev <- mod16_normals_summary %>%
   dplyr::mutate(median = `p50`) %>%
@@ -494,7 +255,8 @@ mod16_2018_dev_sf <-
   magrittr::extract2(1) %>%
   mtd_as_sf_gridmet() %>%
   spex::qm_rasterToPolygons(na.rm = T) %>%
-  lwgeom::st_transform_proj(mt_state_plane)
+  lwgeom::st_transform_proj(mt_state_plane) %>%
+  sf::st_intersection(mcor::mt_state_simple)
 
 limits <- c(-100,100)
 
@@ -511,8 +273,9 @@ col <- names(mod16_2018_dev_sf)[[1]]
     ggplot2::ggplot() +
     ggplot2::geom_sf(aes_string(fill = col),
                      color = NA) +
-    scale_fill_distiller(name = stringr::str_c(format(ET_date, '%B %d, %Y'),"\n",
-                                               "Evapotranspiration (mm / 8 days)"),
+    scale_fill_distiller(name = stringr::str_c(format(tail(ET_date, 1), '%B %d, %Y'),"\n",
+                                               "Evapotranspiration (mm / 8 days)\n",
+                                               "Deviation from normal"),
                          direction = 1,
                          limits = limits,
                          # breaks = breaks,
@@ -530,55 +293,29 @@ col <- names(mod16_2018_dev_sf)[[1]]
 ```{r past-seasonal-ET-plot, cache=FALSE}
 mtd_plot_climatology(x = list(mod16_normals_summary %>%
                                 dplyr::rename(
-                                  `0%` = p0,
-                                  `25%` = p25,
-                                  `50%` = p50,
-                                  `75%` = p75,
-                                  `100%` = p100)),
+                                  `normal.000` = p0,
+                                  `normal.025` = p25,
+                                  `normal.050` = p50,
+                                  `normal.075` = p75,
+                                  `normal.100` = p100,
+                                  `normal.mean` = mean,
+                                  day = YDAY)),
                      col = c("forestgreen"),
                      ybreaks = seq(0, 240, 20),
                      title = NULL,
                      polar = FALSE,
                      # smooth = TRUE,
                      mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2018_summary,
+  mtd_plot_add_climatology(x = mod16_2018_summary %>%
+                             dplyr::rename(
+                               `normal.mean` = mean,
+                               day = YDAY),
                            mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2017_summary,
-                           mean = TRUE,
-                           col = "red")
-
-mtd_plot_climatology(x = list(mod16_normals_summary_dev %>%
-                                dplyr::rename(
-                                  `0%` = p0,
-                                  `25%` = p25,
-                                  `50%` = p50,
-                                  `75%` = p75,
-                                  `100%` = p100)),
-                     col = c("forestgreen"),
-                     ybreaks = seq(-100, 100, 20),
-                     title = NULL,
-                     polar = FALSE,
-                     smooth = TRUE,
-                     mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2018_summary_dev,
-                           mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2017_summary_dev,
+  mtd_plot_add_climatology(x = mod16_2017_summary %>%
+                             dplyr::rename(
+                               `normal.mean` = mean,
+                               day = YDAY),
                            mean = TRUE,
                            col = "red")
 
 ```
-
-
-
-### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
-As of late May, lower than normal precipitation has led to abnormally dry conditions along the highline in north-central and northeastern Montana.
-
-```{r past-seasonal-drought, cache=TRUE}
-
-past_seasonal_drought <- mtd_plot_usdm(date = "2018-09-01",
-                                       data_out = "../data/USDM")
-
-past_seasonal_drought$map
-
-```
-

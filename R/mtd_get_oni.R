@@ -42,3 +42,59 @@ mtd_get_oni <- function(){
   
   oni
 }
+
+mtd_season_to_dates <- function(season, year){
+  seasons <- list(
+    "DJF" = c("Dec","Jan","Feb"),
+    "JFM" = c("Jan","Feb","Mar"),
+    "FMA" = c("Feb","Mar","Apr"),
+    "MAM" = c("Mar","Apr","May"),
+    "AMJ" = c("Apr","May","Jun"),
+    "MJJ" = c("May","Jun","Jul"),
+    "JJA" = c("Jun","Jul","Aug"),
+    "JAS" = c("Jul","Aug","Sep"),
+    "ASO" = c("Aug","Sep","Oct"),
+    "SON" = c("Sep","Oct","Nov"),
+    "OND" = c("Oct","Nov","Dec"),
+    "NDJ" = c("Nov","Dec","Jan")
+  )
+  
+  if(season == "DJF"){
+    years <- c(year-1,year,year)
+  }else if(season == "NDJ"){
+    years <- c(year,year,year+1)
+  }else{
+    years <- c(year,year,year)
+  }
+  
+  months <- match(seasons[[season]], month.abb)
+  
+  purrr::pmap(.l = list(x = months, y = years), 
+              .f = function(x,y){
+                lubridate::ymd(stringr::str_c(y,"-",x), truncated = 1)
+              }) %>% 
+    purrr::map(.f = function(x){
+      seq(from = x,
+          by = 1,
+          length.out = lubridate::days_in_month(x))
+    }) %>%
+    do.call(c, .)
+  
+}
+
+mtd_get_enso_dates <- function(){
+  
+  mtd_get_oni() %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(Days = list(
+      mtd_season_to_dates(season = Season,
+                          year = Year))
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(ENSO) %>%
+    dplyr::summarise(Days = list(do.call(c, Days) %>%
+                                   unique() %>%
+                                   sort())) %>%
+    tidyr::unnest()
+  
+}

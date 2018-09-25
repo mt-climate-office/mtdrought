@@ -1,0 +1,13 @@
+name: ee
+dependencies:
+  - python=3.7   # or 2.7
+  - numpy
+  - scipy
+  - PyCrypto
+  - pandas
+  - pyOpenSSL
+  - pip:
+    - google-api-python-client
+    - oauth2client
+    - earthengine-api
+    

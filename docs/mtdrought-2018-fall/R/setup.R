@@ -56,7 +56,7 @@ all_packages <- c("mcor", "thredds",# The Core MCO package
 
 purrr::walk(all_packages, library, character.only = TRUE)
 
-use_python("/usr/local/bin/python")
+reticulate::use_condaenv("ee")
 
 # Load other useful functions
 list.files("../R", full.names = T) %>%

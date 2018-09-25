@@ -1,0 +1,40 @@
+2018-09-17 19:02:13,724 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:02:13,725 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:04:09,911 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:04:09,911 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:05:34,350 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:05:34,351 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:05:56,490 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:05:56,490 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:41:43,204 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:41:43,205 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:48:10,391 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:48:10,391 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:48:29,232 :: root :: INFO :: Collection users/bocinsky/GRIDMET_MT_1971-2000_Normals removed
+2018-09-17 19:54:00,156 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:54:00,156 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:54:01,855 :: root :: WARNING :: Nothing to remove. Exiting.
+2018-09-17 19:55:21,969 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:55:21,969 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 19:55:39,359 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 19:55:39,359 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:00:43,652 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:00:43,652 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:00:50,369 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:00:50,369 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:01:07,973 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:01:07,973 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:03:34,862 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:03:34,863 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:03:38,963 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:03:38,963 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:04:14,296 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:04:14,297 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:04:54,566 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:04:54,567 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:05:31,614 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:05:31,614 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:06:49,181 :: root :: INFO :: Collection users/bocinsky/GRIDMET_MT_1981-2010_Normals removed
+2018-09-17 20:06:55,020 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2018-09-17 20:06:55,020 :: oauth2client.client :: INFO :: Refreshing access_token
+2018-09-17 20:06:56,429 :: root :: WARNING :: Nothing to remove. Exiting.

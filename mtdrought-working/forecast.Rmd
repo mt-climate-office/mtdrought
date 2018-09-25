@@ -1,52 +1,90 @@
 ---
-title: "September--November 2018 Forecast"
+title: "Winter Outlook: Return of El Niño?"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
 ```
 
-![Photo: Kevin Hyde](./img/Kevin_Hyde_green.jpg)
+![A new Montana Mesonet station near Absarokee, MT. Photo: Kevin Hyde.](./img/Kevin_Hyde_absarokee.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
-<!-- ### <img src="icons/enso.svg" width="35px"/> El Niño/La Niña {-} -->
-<!-- This past winter and spring the Pacific sea surface temperatures remained below average, maintaining La Niña conditions in the ocean and lower atmosphere. This resulted in a significant winter snowpack, wet conditions and much below normal spring temperatures. In late April the La Niña transitioned to ENSO neutral. During ENSO-neutral phases, ocean temperatures and atmospheric conditions are near the long-term average and there is often less predictability in the three month summer outlook (e.g., the seasonal outlook for temperature and precipitation in Eastern MT below). -->
+### <img src="icons/enso.svg" width="35px"/> El Niño Outlook {-}
+Winter weather in Montana is heavily influenced by the El Niño Southern Oscillation (ENSO)---natural seasonal fluctuations in sea surface temperature of the Pacific ocean near the equator. ENSO affects the position of the jet stream over North America. When the ocean is warmer than normal, Montana tends to experience warm, dry winters; we call this an "El Niño" event. When the ocean is cooler than normal, Montana tends to experience cool, wet winters; this is called a "La Niña". However, in the past there *have* been El Niño winters that were cooler or wetter than normal, and La Niña winters that were warmer and drier!
 
-<!-- #### Temperature {-} -->
-<!-- ```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
+According to NOAA, there is a 65--70% chance of El Niño conditions arriving this coming winter. These maps show what an average El Niño December--February looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head in to winter.
+
+```{r load enso, cache=TRUE}
+# enso <- mtd_get_all_enso_ee(start_date = "2018-12-01", 
+#                                 end_date = "2019-03-01") %T>%
+#   readr::write_rds("../Data/gridmet/ENSO_DJF.rds", 
+#                      compress = "gz")
+
+enso <- readr::read_rds("../Data/gridmet/ENSO_DJF.rds")
+
+enso %<>%
+  purrr::transpose()
+  
+enso$pr %<>%
+  purrr::map(mm_to_in)
+
+enso$tmmn %<>%
+  purrr::map(k_to_f)
+
+enso$tmmx %<>%
+  purrr::map(k_to_f)
+
+enso %<>%
+  purrr::transpose() %>%
+  purrr::map(function(x){
+    x$tmean <- (x$tmmn + x$tmmx)/2
+    return(x)
+  })
+
+enso_series <- mtd_get_enso_series_ee()
+
+```
+
+El Niño winters are on average warmer than normal winters across Montana, especially as you move towards northeastern Montana. They are also drier than normal years, but only slightly, and only in north-central Montana; the southwestern and far easters portions of the state actually experience slightly *wetter* conditions in El Niño years.
+
+```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+enso$`El Niño` %>%
+  mtd_plot_enso_grid(element = "tmean",
+                   use_normal = TRUE)
+
+enso$`El Niño` %>%
+  mtd_plot_enso_grid(element = "prcp",
+                   use_normal = TRUE)
 
 
-<!-- enso_temp <- mtd_plot_enso(months = 6:8, -->
-<!--                                 element = "tmpc", -->
-<!--                                 agg_fun = mean) -->
 
-<!-- enso_temp$map -->
-<!-- ``` -->
+```
 
-<!-- #### Precipitation {-} -->
-<!-- ```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
+These graphs of annual statewide ENSO patterns show how Montana is affected by El Niño. The solid lines represent the average conditions in each of El Niño (red), La Niña (blue), and ENSO Neutral (gray) conditions. The dashed lines represent the lower and upper extremes of each of those patterns. For temperature, ENSO conditions only have a strong influence on Montana climate in the winter months; the red line (El Niño) is above the other lines, indicating warmer conditions on average in El Niño years. For precipitation, however, it is very difficult to distinguish the three lines. El Niño conditions lead to slightly drier winters, while La Niña conditions are indistinguishable from ENSO Neutral conditions.
 
-<!-- enso_prcp <- mtd_plot_enso(months = 6:8, -->
-<!--                                 element = "pcpn", -->
-<!--                                 agg_fun = sum) -->
+```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-<!-- enso_prcp$map -->
-<!-- ``` -->
+enso_series %>%
+  mtd_plot_climatology_enso(element = "tmean",
+                            ybreaks = seq(-10, 80, 10))
+
+enso_series %>%
+  mtd_plot_climatology_enso(element = "prcp",
+                            ybreaks = seq(0,0.8,0.1))
+
+```
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-The summer outlook is for warmer than normal temperatures across western and central portions of the state. If the warmer temperatures occur as forecasted, they will contribute to increased evapotranspiration and the potential dry down of spring soil moisture reserves. The forecast is less certain in eastern portions of the state which means that there are equal chances of above, below, or normal summer temperatures.
+Because ENSO has such a strong influence on weather in North America, NOAA's Climate Prediction Center (CPC) seasonal projections typically match the ENSO projections, especially in El Niño or La Niña years. Because of the high probability of there being an El Niño event beginning this winter, the CPC is projecting warmer conditions across Montana, with more certainty for the northwestern part of the state.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-climdiv_tmpc <- climdiv_summary(months = 9:12,
-                                year = 2017,
-                                element = "tmpc",
-                                agg_fun = mean)
-
-
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-09-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-12-01",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -54,16 +92,11 @@ noaa_seasonal$map
 ```
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
-The summer outlook for precipitation is drier than normal across northwestern, southwestern, and north-central portions of the state. There may be potential for the development of drought conditions as the summer progresses in these regions if we do indeed experience drier than normal conditions in conjunction with above normal temperatures (see above). The forecast is less certain in eastern portions of the state which means that there are equal chances of above, below, or normal summer precipitation. 
+The CPC is projecting lower than normal precipitation across Montana, with the exception of the southeastern part of the state where it is predicting near-normal conditions.
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-climdiv_pcpn <- climdiv_summary(months = 9:12,
-                                year = 2017,
-                                element = "pcpn",
-                                agg_fun = sum)
-
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-09-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-12-01",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -71,15 +104,15 @@ noaa_seasonal$map
 
 ```
 
-### <img src="icons/drought.svg" width="35px"/> Drought {-}
-The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions.
+<!-- ### <img src="icons/drought.svg" width="35px"/> Drought {-} -->
+<!-- The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions. -->
 
-```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+<!-- ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
 
-future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2018-09-01",
-                              data_out = "../data/NOAA_droughtlook")
+<!-- future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2019-03-01", -->
+<!--                               data_out = "../data/NOAA_droughtlook") -->
 
-future_seasonal_drought$map
+<!-- future_seasonal_drought$map -->
 
-```
+<!-- ``` -->
 
