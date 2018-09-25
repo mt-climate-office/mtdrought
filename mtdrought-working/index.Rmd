@@ -29,8 +29,9 @@ Here's what you'll find in this newsletter:
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
 * This past summer was drier than normal in north and northwest Montana, while the south and east of the state had much more precipitation than normal.
 * Soil moisture in much of the state remained high throughout the summer.
-* Drought declarations in Montana were mainly in response to climate, as opposed to hydrologic or agricultural conditions on the ground.
+* Drought declarations in Montana were mainly in response to atmospheric weather, as opposed to hydrologic or agricultural conditions on the ground.
 * There is a high probability of El Niño conditions arriving this winter, which historically leads to slightly drier and warmer conditions across central Montana.
+* NOAA is predicting warmer conditions this winter, and drier conditions for all by southeastern Montana.
 </div>
 
 -----
