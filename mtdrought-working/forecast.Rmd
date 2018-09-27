@@ -48,7 +48,7 @@ enso_series <- mtd_get_enso_series_ee()
 
 ```
 
-El Niño winters are on average warmer than normal winters across Montana, especially as you move towards northeastern Montana. They are also drier than normal years, but only slightly, and only in north-central Montana; the southwestern and far easters portions of the state actually experience slightly *wetter* conditions in El Niño years.
+El Niño winters are on average warmer than normal winters across Montana, especially as you move towards northeastern Montana. They are also drier than normal years, but only slightly, and only in north-central Montana; the southwestern and far eastern portions of the state actually experience slightly *wetter* conditions in El Niño years.
 
 ```{r future-seasonal-enso-temp, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -64,9 +64,9 @@ enso$`El Niño` %>%
 
 ```
 
-These graphs of annual statewide ENSO patterns show how Montana is affected by El Niño. The solid lines represent the average conditions in each of El Niño (red), La Niña (blue), and ENSO Neutral (gray) conditions. The dashed lines represent the lower and upper extremes of each of those patterns. For temperature, ENSO conditions only have a strong influence on Montana climate in the winter months; the red line (El Niño) is above the other lines, indicating warmer conditions on average in El Niño years. For precipitation, however, it is very difficult to distinguish the three lines. El Niño conditions lead to slightly drier winters, while La Niña conditions are indistinguishable from ENSO Neutral conditions.
+These graphs of annual statewide ENSO patterns show how Montana is affected by El Niño. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions. The dashed lines represent the lower and upper extremes of each of those patterns. For temperature, ENSO conditions only have a strong influence on Montana climate in the winter months; the red line (El Niño) is above the other lines, indicating warmer conditions on average in El Niño years. For precipitation, however, it is very difficult to distinguish the three lines. El Niño conditions lead to slightly drier winters, while La Niña conditions are indistinguishable from ENSO Neutral conditions.
 
-```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r future-seasonal-enso-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 
 enso_series %>%
   mtd_plot_climatology_enso(element = "tmean",

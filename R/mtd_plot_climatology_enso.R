@@ -88,6 +88,8 @@ mtd_plot_climatology_enso <- function(x,
                        linetype = 1,
                        alpha = 1) +
     mtd_theme_climatology(ybreaks = ybreaks,
-                          title = title,
-                          polar = polar)
+                          title = stringr::str_c(long_name, " (",unit_symbol,")"),
+                          polar = polar) +
+    scale_colour_brewer(palette = "Dark2",
+                        name = "")
 }
