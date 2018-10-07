@@ -58,7 +58,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Aside from a period in early August, temperatures this summer were below normal across much of central Montana, while being above normal in northeastern Montana and west of the Rocky Mountain front. Warm conditions in the west contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn't materialize.
+Aside from a period in early August, temperatures this summer were below normal across much of central Montana, and above normal in northeastern and western Montana. Warm conditions in western Montana contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn't materialize.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 gridmet_sf %>%
@@ -72,7 +72,7 @@ gridmet_sf %>%
                              sep = "."))
 ```
 
-The graph below compares historic daily temperatures (bands and dashed lines) to current daily temperatures in June--August 2018 (jagged lines) across Montana. Red colors are the high temperatures, and blue colors are the low temperatures. The bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The dashed lines represent the average high and low temperatures during the 1981--2010 period.
+The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures in January thru August 2018 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
 gridmet_sum <-
@@ -99,7 +99,7 @@ mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
 ```
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-In general precipitation was above normal across south-central and eastern Montana this summer, and below normal across nothern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.
+In general, precipitation was above normal across south-central and eastern Montana this summer, and below normal across northern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -114,7 +114,7 @@ gridmet_sf %>%
                              sep = "."))
 ```
 
-The graph below compares historic daily precipitation (band and dashed line) to current daily precipitation in June--August 2018 (jagged line) across Montana. The band represents the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
+The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation in January thru August 2018 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
 ```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = gridmet_series[c("pr")],
@@ -133,7 +133,7 @@ mtd_plot_climatology(x = gridmet_series[c("pr")],
 ```
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
-By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but soil moisture and evapotranspiration tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season.
+By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but see the sections on soil moisture and evapotranspiration, which tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season.
 
 ```{r past-seasonal-drought, cache=TRUE}
 
@@ -156,7 +156,7 @@ mtd_plot_smap(date = "2018-09-01",
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Evapotranspiration {-}
 
-Evapotranspiration (ET), or the amount of water vapor leaving the Earth's surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). The plot and graph below show the deviation from normal ET at the end of this summer. In the map, the green areas experienced greater amounts of ET than their normal amounts from 2000--2016 (the period of record); the brown areas experienced less ET. In the graph, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000--2016 period. The jagged black line represent this year's conditions; the jagged red line represents the 2017 conditions, for reference. Across Montana, 2018 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions. In contrast, 2017 ET declined to below-normal values from early June through the early September, reflecting last summer's drought conditions.
+Evapotranspiration (ET), or the amount of water vapor leaving the Earth's surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). The plot and graph below show the deviation from normal ET at the end of this summer. In the map, the green areas experienced greater amounts of ET than their normal amounts from 2000--2016 (the period of record); the brown areas experienced less ET.
 
 ```{r past-seasonal-ET, cache=TRUE}
 mod16_2018 <- mtd_get_mod16a2(start_date = "2018-01-01", 
@@ -248,11 +248,12 @@ mod16_2017_summary_dev <- mod16_2017_summary %>%
 ```
 
 ```{r past-seasonal-ET-plot-grid, cache=TRUE}
+this.date <- which.min(abs(lubridate::as_date("2018-09-01")-ET_date))
+
 mod16_2018_dev_sf <-
   mod16_2018_dev %>%
   as.list() %>%
-  tail(1) %>%
-  magrittr::extract2(1) %>%
+  magrittr::extract2(this.date) %>%
   mtd_as_sf_gridmet() %>%
   spex::qm_rasterToPolygons(na.rm = T) %>%
   lwgeom::st_transform_proj(mt_state_plane) %>%
@@ -273,7 +274,7 @@ col <- names(mod16_2018_dev_sf)[[1]]
     ggplot2::ggplot() +
     ggplot2::geom_sf(aes_string(fill = col),
                      color = NA) +
-    scale_fill_distiller(name = stringr::str_c(format(tail(ET_date, 1), '%B %d, %Y'),"\n",
+    scale_fill_distiller(name = stringr::str_c(format(ET_date[this.date], '%B %d, %Y'),"\n",
                                                "Evapotranspiration (mm / 8 days)\n",
                                                "Deviation from normal"),
                          direction = 1,
@@ -289,6 +290,8 @@ col <- names(mod16_2018_dev_sf)[[1]]
                              sep = "."))
 
 ```
+
+In the graph below, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000--2016 period. The jagged black line represent this year's conditions; the jagged red line represents the 2017 conditions, for reference. Across Montana, 2018 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions. In contrast, 2017 ET declined to below-normal values from early June through the early September, reflecting last summer's drought conditions.
 
 ```{r past-seasonal-ET-plot, cache=FALSE}
 mtd_plot_climatology(x = list(mod16_normals_summary %>%

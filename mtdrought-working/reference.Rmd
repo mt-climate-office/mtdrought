@@ -35,7 +35,7 @@ Weather and climate forecasters use words and information in very particular way
 
 <div class="clearfix"></div>
 
-![](./icons/enso.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**La Niña/El Niño** --- El Niño and La Niña are the warm and cool phases of a recurring climate pattern across the tropical Pacific. The *El Niño Southern Oscillation (ENSO)* is one of several global climate phenomena that affect Montana's weather patterns. Current ENSO conditions and up-to-date projections are available on [NOAA's ENSO website](https://www.climate.gov/enso).
+![](./icons/enso.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**La Niña/El Niño** --- El Niño and La Niña are the warm and cool phases of a recurring climate pattern across the tropical Pacific, the *El Niño Southern Oscillation (ENSO)*. When ENSO is between warm and cool phases, conditions are called ENSO Neutral. ENSO is one of several global climate phenomena that affect Montana's weather patterns, and ENSO conditions often guide seasonal climate projections for Montana. Current ENSO conditions and up-to-date projections are available on [NOAA's ENSO website](https://www.climate.gov/enso).
 
 <!-- <div class="clearfix"></div> -->
 

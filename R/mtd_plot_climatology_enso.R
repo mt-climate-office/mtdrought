@@ -16,19 +16,19 @@ mtd_plot_climatology_enso <- function(x,
   if(element == "tmax"){
     gridmet_element = "tmmx"
     unit_symbol <- "ºF"
-    long_name <- "Maximum temperature"
+    long_name <- "Maximum daily temperature"
   } else if(element == "tmin"){
     gridmet_element = "tmmn"
     unit_symbol <- "ºF"
-    long_name <- "Minimum temperature"
+    long_name <- "Minimum daily temperature"
   }else if(element == "prcp"){
     gridmet_element = "pr"
     unit_symbol <- "in."
-    long_name <- "Net precipitation"
+    long_name <- "Average daily precipitation"
   }else if(element == "tmean"){
     gridmet_element = c("tmmx","tmmn")
     unit_symbol <- "ºF"
-    long_name <- "Average temperature"
+    long_name <- "Average daily temperature"
   } else {
     stop("Element passed was not allowed!")
   }

@@ -4,12 +4,10 @@ navbar:
     vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
     and Forecasting<br>for Agricultural Producers<br><b>October 2018</b></ht>
   right:
-  - text: Growing Season 2018
+  - text: Summer 2018 Review
     href: review.html
-  - text: Winter 2018–2019
+  - text: Winter 2018–2019 Forecast
     href: forecast.html
-#  - text: Jun–Aug Mid-century
-#    href: midcentury.html
   - text: Reference
     href: reference.html
 output:

@@ -43,31 +43,36 @@ mtd_plot_usdm <- function(date = "2017-08-30",
     lwgeom::st_transform_proj(mt_state_plane) %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
-    dplyr::mutate(DM = as.character(DM)) 
+    dplyr::mutate(DM = factor(DM,
+                              levels = seq(-1,4,1),
+                              labels = c("Near normal\nor wet",
+                                         "Abnormally\ndry",
+                                         "Moderate\ndrought",
+                                         "Severe\ndrought",
+                                         "Extreme\ndrought",
+                                         "Exceptional\ndrought"))) 
   
   legend.name <- stringr::str_c(format(lubridate::ymd(usdm_date), '%B %d, %Y'),"\n",
                                 "Drought intensity")
+  
+  usdm_cols <- c("Near normal\nor wet" = rgb(240, 240, 240, maxColorValue = 255),
+                 "Abnormally\ndry" = rgb(255, 255, 0, maxColorValue = 255),
+                 "Moderate\ndrought" = rgb(252, 211, 127, maxColorValue = 255),
+                 "Severe\ndrought" = rgb(255, 170, 0, maxColorValue = 255),
+                 "Extreme\ndrought" = rgb(230, 0, 0, maxColorValue = 255),
+                 "Exceptional\ndrought" = rgb(115, 0, 0, maxColorValue = 255))
   
   usdm_map <- (usdm_data %>%
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = DM),
                          color = NA) +
                  scale_fill_manual(name = legend.name,
-                                   labels = c("Abnormally\ndry",
-                                              "Moderate\ndrought",
-                                              "Severe\ndrought",
-                                              "Extreme\ndrought",
-                                              "Exceptional\ndrought"),
-                                   values = c("0" = rgb(255, 255, 0, maxColorValue = 255),
-                                              "1" = rgb(215, 194, 158, maxColorValue = 255),
-                                              "2" = rgb(255, 170, 0, maxColorValue = 255),
-                                              "3" = rgb(255, 0, 0, maxColorValue = 255),
-                                              "4" = rgb(115, 0, 0, maxColorValue = 255)),
-                                   limits = c("0","1","2","3","4"),
-                                   guide = guide_legend(title.position = "bottom")) +
+                                   values = usdm_cols,
+                                   guide = guide_legend(title.position = "bottom"),
+                                   drop = FALSE) +
                  mtd_plot()# +
-                 # ggplot2::theme(legend.key.height = unit(0.15,"in"))
-               ) %T>%
+               # ggplot2::theme(legend.key.height = unit(0.15,"in"))
+  ) %T>%
     save_mt_map(stringr::str_c(usdm_date,"-drought-intensity.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%
