@@ -72,8 +72,8 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                                    drop = FALSE) +
                  mtd_plot()# +
                # ggplot2::theme(legend.key.height = unit(0.15,"in"))
-  ) %T>%
-    save_mt_map(stringr::str_c(usdm_date,"-drought-intensity.pdf"))
+  )# %T>%
+   # save_mt_map(stringr::str_c(usdm_date,"-drought-intensity.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%
            tools::file_path_sans_ext())

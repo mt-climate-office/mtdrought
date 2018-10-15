@@ -1,6 +1,6 @@
 mtd_plot_enso_grid <- function(gridmet,
                              element = "tmean",
-                             Season = "Dec–Feb",
+                             Season = "Dec-Feb",
                              enso = "El Niño",
                              # data_out = "./data/gridmet",
                              # agg_sf,

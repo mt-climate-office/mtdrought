@@ -96,8 +96,8 @@ mtd_plot_smap <- function(date,
                                      guide = guide_legend(title.position = "bottom")) +
                    mtd_plot()# +
                    # ggplot2::theme(legend.key.height = unit(0.15,"in"))
-                 ) %T>%
-      save_mt_map(stringr::str_c(soil_moisture_date,"-soil-moisture-",variable,".pdf"))
+                 )# %T>%
+      # save_mt_map(stringr::str_c(soil_moisture_date,"-soil-moisture-",variable,".pdf"))
     
     return(list(data = soil_moisture,
                 map = smap_map))

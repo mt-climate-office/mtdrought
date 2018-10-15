@@ -122,7 +122,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                             magrittr::extract(month.name, .) %>%
                             stringr::str_flatten(collapse = "-"),
                           ", ",lubridate::year(lubridate::ymd(date)),
-                          if(add.year){stringr::str_c("–",lubridate::year(lubridate::ymd(date)) + 1)},"\n",
+                          if(add.year){stringr::str_c("-",lubridate::year(lubridate::ymd(date)) + 1)},"\n",
                           long_name)
   
   # noaa_map <- (noaa_data  %>%
@@ -174,8 +174,8 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                  
                  mtd_plot()# + 
                # ggplot2::theme(legend.key.height = unit(0.15,"in"))
-  ) %T>%
-    save_mt_map(stringr::str_c(noaa_date,"-",element,"-seasonal-forecast.pdf"))
+  ) #%T>%
+    #save_mt_map(stringr::str_c(noaa_date,"-",element,"-seasonal-forecast.pdf"))
   
   unlink(stringr::str_c(data_out,"/",closest_file) %>%
            tools::file_path_sans_ext())
