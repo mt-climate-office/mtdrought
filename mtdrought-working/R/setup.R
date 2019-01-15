@@ -41,18 +41,21 @@ all_packages <- c("mcor", "thredds",# The Core MCO package
                   "sf", "raster", "rgeos", "fasterize", "velox", "spex", "lwgeom",# Packages for spatial processing
                   "magrittr", "tidyverse", "purrrlyr", "matrixStats",# Packages for tidy code
                   "reticulate", # Python in R
-                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly", "mgcv",
+                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "mapview", "leaflet.extras","tmap", "plotly", "mgcv",
                   "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
 
 # # install.packages("devtools")
 # devtools::install_cran("rmarkdown")
 # devtools::install_cran("roxygen2")
 # # devtools::install_github("r-lib/devtools")
-# devtools::install_bioc("rhdf5")
-# devtools::install_cran(all_packages)
+# install.packages("BiocManager")
+# BiocManager::install()
+# BiocManager::install("rhdf5")
+# # devtools::install_bioc("rhdf5")
 # remotes::install_github("mt-climate-office/mcor")
 # remotes::install_github("mt-climate-office/thredds")
-# remotes::install_github("tidyverse/ggplot2")
+# devtools::install_cran(all_packages)
+# # remotes::install_github("tidyverse/ggplot2")
 
 purrr::walk(all_packages, library, character.only = TRUE)
 
@@ -63,6 +66,8 @@ list.files("../R", full.names = T) %>%
   purrr::walk(source)
 
 rasterOptions(maxmemory = 1e+09)
+tmap_mode("view")
+tmap_options(unit = "imperial")
 
 save_mt_map <- function(x, 
                         name,

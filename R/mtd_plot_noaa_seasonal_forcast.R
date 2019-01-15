@@ -23,12 +23,9 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
   # List the files available from the Drought Monitor
   noaa_files <- 
     suppressWarnings(
-      httr::GET(
-        noaa_url,
-        httr::authenticate("anonymous", "")
-      )
+      curl::curl("ftp://ftp.cpc.ncep.noaa.gov/GIS/us_tempprcpfcst/")
     ) %>%
-    httr::content() %>%
+    # httr::content() %>%
     readr::read_table(col_names = FALSE) %$%
     X9 %>%
     stringr::str_subset("seas") %>%

@@ -18,12 +18,12 @@ Winter weather in Montana is heavily influenced by the El Niño Southern Oscilla
 According to NOAA, there is a 65--70% chance of El Niño conditions arriving this coming winter. These maps show what an average El Niño December--February looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into winter.
 
 ```{r load enso, cache=TRUE}
-# enso <- mtd_get_all_enso_ee(start_date = "2018-12-01", 
-#                                 end_date = "2019-03-01") %T>%
-#   readr::write_rds("../Data/gridmet/ENSO_DJF.rds", 
+# enso <- mtd_get_all_enso_ee(start_date = "2019-03-01",
+#                                 end_date = "2019-06-01") %T>%
+#   readr::write_rds("../Data/gridmet/ENSO_MAM.rds",
 #                      compress = "gz")
 
-enso <- readr::read_rds("../Data/gridmet/ENSO_DJF.rds")
+enso <- readr::read_rds("../Data/gridmet/ENSO_MAM.rds")
 
 enso %<>%
   purrr::transpose()
@@ -92,7 +92,7 @@ ENSO has a strong influence on weather in North America, so NOAA's Climate Predi
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-12-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -105,7 +105,7 @@ The CPC is projecting this winter will likely be drier across Montana, with more
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2018-12-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 

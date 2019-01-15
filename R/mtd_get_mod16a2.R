@@ -1,7 +1,7 @@
 reticulate::source_python("../ee/getMOD16A2.py")
 
-mtd_get_mod16a2 <- function(start_date = "2018-01-01", 
-                            end_date = "2018-12-31", 
+mtd_get_mod16a2 <- function(start_date = "2019-01-01", 
+                            end_date = "2019-12-31", 
                             base_name = 'MOD16A2',
                             raw_dir = "./data/MOD16A2",
                             overwrite = FALSE){

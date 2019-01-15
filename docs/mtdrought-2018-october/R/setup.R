@@ -41,7 +41,7 @@ all_packages <- c("mcor", "thredds",# The Core MCO package
                   "sf", "raster", "rgeos", "fasterize", "velox", "spex", "lwgeom",# Packages for spatial processing
                   "magrittr", "tidyverse", "purrrlyr", "matrixStats",# Packages for tidy code
                   "reticulate", # Python in R
-                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "plotly", "mgcv",
+                  "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "mapview", "leaflet.extras","tmap", "plotly", "mgcv",
                   "bibtex", "knitcitations", "kableExtra") # Plotting and rmarkdown
 
 # # install.packages("devtools")
@@ -63,6 +63,8 @@ list.files("../R", full.names = T) %>%
   purrr::walk(source)
 
 rasterOptions(maxmemory = 1e+09)
+tmap_mode("view")
+tmap_options(unit = "imperial")
 
 save_mt_map <- function(x, 
                         name,

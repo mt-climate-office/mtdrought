@@ -14,14 +14,16 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
-                              vars = list("pr" = "sum", 
-                                          "tmmn" = "mean", 
+gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
+                              vars = list("pr" = "sum",
+                                          "tmmn" = "mean",
                                           "tmmx" = "mean"),
-                              start_date = "2018-06-01", 
-                              end_date = "2018-09-01",
+                              start_date = "2018-12-01",
+                              end_date = "2019-02-28",
                               raw_dir = "../data/GRIDMET",
                               overwrite = FALSE)
+
+# gridmet <- readr::read_rds("../data/gridmet/2018-12-01_2019-02-28.rds")
 
 gridmet$pr %<>%
   mm_to_in()
@@ -34,8 +36,8 @@ gridmet$tmmx %<>%
 
 gridmet_series <- mtd_get_gridmet_series_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
                                             vars = c("pr", "tmmn", "tmmx"),
-                                            start_date = "2018-01-01", 
-                                            end_date = "2018-12-31")
+                                            start_date = "2019-01-01", 
+                                            end_date = "2019-12-31")
 
 gridmet_series$pr %<>%
   dplyr::mutate_at(.vars = dplyr::vars(value:normal.100),
@@ -60,11 +62,28 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
 Aside from a period in early August, temperatures this summer were below normal across much of central Montana, and above normal in northeastern and western Montana. Warm conditions in western Montana contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn't materialize.
 
-```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE, eval=FALSE}
 gridmet_sf %>%
   mtd_plot_gridmet(element = "tmean",
                    use_normal = TRUE) %T>%
   save_mt_map("review_temperature.pdf")
+
+```
+
+```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
+
+x <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
+attr(x,"dates") <- attr(gridmet,"dates")
+
+mtd_leaflet(x) %T>%
+  # addLogo("../img/MCO_logo.svg", 
+  #         src = "local", 
+  #         width = 200, 
+  #         position = "topright") %T>%
+  htmltools::save_html("test.html")
+
 ```
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures in January thru August 2018 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
@@ -96,12 +115,39 @@ ggplot2::ggsave("./figures/review_climate_graph_temperature.pdf")
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
 In general, precipitation was above normal across south-central and eastern Montana this summer, and below normal across northern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.
 
-```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE, eval = FALSE}
 
 gridmet_sf %>%
   mtd_plot_gridmet(element = "prcp",
                    use_normal = TRUE) %T>%
   save_mt_map("review_precipitation.pdf")
+```
+
+
+```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+x <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
+                        magrittr::multiply_by(100) %>%
+                        round()
+attr(x,"dates") <- attr(gridmet,"dates")
+
+mtd_leaflet(x,
+            pal =  rev(RColorBrewer::brewer.pal(11,"BrBG")),
+            legend_title = stringr::str_c(format(head(attr(x,"dates"),1), '%B %d, %Y')," - ",
+                                          format(tail(attr(x,"dates"),1), '%B %d, %Y'),"<br>",
+                                          "Net precipitation",", ",
+                                          "percent of normal"),
+            image_query_title = "Net precipitation, percent of normal",
+            midpoint = 100,
+            digits = 0) %>%
+  htmltools::save_html("test.html")
+
+knitr::include_url("test.html")
+  # addLogo("../img/MCO_logo.svg", 
+  #         src = "local", 
+  #         width = 200, 
+  #         position = "topright") %T>%
+  # 
+
 ```
 
 The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation in January thru August 2018 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
@@ -129,7 +175,7 @@ By the end of the summer, the US Drought Monitor had declared most of the northe
 
 ```{r past-seasonal-drought, cache=TRUE}
 
-past_seasonal_drought <- mtd_plot_usdm(date = "2018-09-01",
+past_seasonal_drought <- mtd_plot_usdm(date = "2019-03-01",
                                        data_out = "../data/USDM")
 
 past_seasonal_drought$map %T>%
@@ -141,7 +187,7 @@ past_seasonal_drought$map %T>%
 Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding. Throughout the summer, the majority of Montana east of the Rockies enjoyed soil moisture surpluses (the blue areas in the map below), due to our above normal winter snowpack, protracted snowmelt, and above-average summer precipitation in south-central Montana. However, west of the Rockies experienced a soil moisture deficit (the yellow and orange areas) due primarily to below-normal precipitation.
 
 ```{r past-seasonal-smap-grid, cache=TRUE}
-mtd_plot_smap(date = "2018-09-01",
+mtd_plot_smap(date = "2019-03-01",
               variable = "sm_rootzone_wetness",
               data_out = "../data/SMAP")$map %T>%
   save_mt_map("review_soil_moisture.pdf")
@@ -153,6 +199,22 @@ mtd_plot_smap(date = "2018-09-01",
 Evapotranspiration (ET), or the amount of water vapor leaving the Earth's surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). The plot and graph below show the deviation from normal ET at the end of this summer. In the map, the green areas experienced greater amounts of ET than their normal amounts from 2000--2016 (the period of record); the brown areas experienced less ET.
 
 ```{r past-seasonal-ET, cache=TRUE}
+mod16_2019 <- mtd_get_mod16a2(start_date = "2019-01-01", 
+                              end_date = "2019-12-31", 
+                              base_name = 'MOD16A2',
+                              raw_dir = "../data/MOD16A2",
+                              overwrite = FALSE)
+
+# mod16_2019[][is.na(mod16_2019[])] <- 0
+
+mod16_2019 %<>%
+  mcor::mco_mask(mcor::mt_state)
+
+ET_date <- mod16_2019 %>%
+  names() %>%
+  stringr::str_remove("X") %>%
+  lubridate::as_date()
+
 mod16_2018 <- mtd_get_mod16a2(start_date = "2018-01-01", 
                               end_date = "2018-12-31", 
                               base_name = 'MOD16A2',
@@ -162,22 +224,6 @@ mod16_2018 <- mtd_get_mod16a2(start_date = "2018-01-01",
 # mod16_2018[][is.na(mod16_2018[])] <- 0
 
 mod16_2018 %<>%
-  mcor::mco_mask(mcor::mt_state)
-
-ET_date <- mod16_2018 %>%
-  names() %>%
-  stringr::str_remove("X") %>%
-  lubridate::as_date()
-
-mod16_2017 <- mtd_get_mod16a2(start_date = "2017-01-01", 
-                              end_date = "2017-12-31", 
-                              base_name = 'MOD16A2',
-                              raw_dir = "../data/MOD16A2",
-                              overwrite = FALSE)
-
-# mod16_2017[][is.na(mod16_2017[])] <- 0
-
-mod16_2017 %<>%
   mcor::mco_mask(mcor::mt_state)
 
 mod16_normals <-
@@ -201,6 +247,13 @@ mod16_normals_summary <-
   tibble::as_tibble() %>%
   dplyr::mutate(YDAY = seq(1, 365, 8))
 
+mod16_2019_summary <- tibble::tibble(mean = mod16_2019 %>%
+                                       mtd_aggregate_normals(),
+                                     YDAY = names(mod16_2019) %>%
+                                       stringr::str_remove("X") %>%
+                                       lubridate::as_date() %>%
+                                       lubridate::yday())
+
 mod16_2018_summary <- tibble::tibble(mean = mod16_2018 %>%
                                        mtd_aggregate_normals(),
                                      YDAY = names(mod16_2018) %>%
@@ -208,19 +261,12 @@ mod16_2018_summary <- tibble::tibble(mean = mod16_2018 %>%
                                        lubridate::as_date() %>%
                                        lubridate::yday())
 
-mod16_2017_summary <- tibble::tibble(mean = mod16_2017 %>%
-                                       mtd_aggregate_normals(),
-                                     YDAY = names(mod16_2017) %>%
-                                       stringr::str_remove("X") %>%
-                                       lubridate::as_date() %>%
-                                       lubridate::yday())
-
-mod16_2018_dev <- mod16_2018 - mod16_normals$p50[[names(mod16_2018) %>%
+mod16_2019_dev <- mod16_2019 - mod16_normals$p50[[names(mod16_2019) %>%
                                                     stringr::str_remove("X") %>%
                                                     lubridate::as_date() %>%
                                                     lubridate::yday() %>%
                                                     stringr::str_c("X",.)]]
-mod16_2017_dev <- mod16_2017 - mod16_normals$p50[[names(mod16_2017) %>%
+mod16_2018_dev <- mod16_2018 - mod16_normals$p50[[names(mod16_2018) %>%
                                                     stringr::str_remove("X") %>%
                                                     lubridate::as_date() %>%
                                                     lubridate::yday() %>%
@@ -233,19 +279,19 @@ mod16_normals_summary_dev <- mod16_normals_summary %>%
                                        -median),
                    .funs = dplyr::funs(. - mean))
 
+mod16_2019_summary_dev <- mod16_2019_summary %>%
+  dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2019_summary)])
+
 mod16_2018_summary_dev <- mod16_2018_summary %>%
   dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2018_summary)])
-
-mod16_2017_summary_dev <- mod16_2017_summary %>%
-  dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2017_summary)])
 
 ```
 
 ```{r past-seasonal-ET-plot-grid, cache=TRUE}
-this.date <- which.min(abs(lubridate::as_date("2018-09-01")-ET_date))
+this.date <- which.min(abs(lubridate::as_date("2019-03-01")-ET_date))
 
-mod16_2018_dev_sf <-
-  mod16_2018_dev %>%
+mod16_2019_dev_sf <-
+  mod16_2019_dev %>%
   as.list() %>%
   magrittr::extract2(this.date) %>%
   mtd_as_sf_gridmet() %>%
@@ -255,16 +301,16 @@ mod16_2018_dev_sf <-
 
 limits <- c(-100,100)
 
-mod16_2018_dev_sf[[1]][mod16_2018_dev_sf[[1]] > limits[2]] <- limits[2]
-mod16_2018_dev_sf[[1]][mod16_2018_dev_sf[[1]] < limits[1]] <- limits[1]
+mod16_2019_dev_sf[[1]][mod16_2019_dev_sf[[1]] > limits[2]] <- limits[2]
+mod16_2019_dev_sf[[1]][mod16_2019_dev_sf[[1]] < limits[1]] <- limits[1]
 
-mod16_2018_dev_sf %<>%
-  dplyr::group_by_at(names(mod16_2018_dev_sf)[[1]]) %>%
+mod16_2019_dev_sf %<>%
+  dplyr::group_by_at(names(mod16_2019_dev_sf)[[1]]) %>%
   dplyr::summarise()
 
-col <- names(mod16_2018_dev_sf)[[1]]
+col <- names(mod16_2019_dev_sf)[[1]]
 
-(mod16_2018_dev_sf %>%
+(mod16_2019_dev_sf %>%
     ggplot2::ggplot() +
     ggplot2::geom_sf(aes_string(fill = col),
                      color = NA) +
@@ -300,12 +346,12 @@ mtd_plot_climatology(x = list(mod16_normals_summary %>%
                      polar = FALSE,
                      # smooth = TRUE,
                      mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2018_summary %>%
+  mtd_plot_add_climatology(x = mod16_2019_summary %>%
                              dplyr::rename(
                                `normal.mean` = mean,
                                day = YDAY),
                            mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2017_summary %>%
+  mtd_plot_add_climatology(x = mod16_2018_summary %>%
                              dplyr::rename(
                                `normal.mean` = mean,
                                day = YDAY),

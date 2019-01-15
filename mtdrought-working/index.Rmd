@@ -1,5 +1,5 @@
 ---
-title: "2018–2019 Winter Outlook"
+title: "2019 Winter Update"
 editor_options: 
   chunk_output_type: console
 ---
@@ -12,13 +12,13 @@ source("./R/setup.R")
 
 ## {-}
 
-Welcome to the October 2018 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+Welcome to the March 2019 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
 Here's what you'll find in this newsletter:
 
-[**Summer 2018 Review**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of what happened this past summer.
+[**Winter 2019 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this winter is progressing.
 
-[**Winter 2018--2019 Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
+[**Spring 2019 Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 
@@ -41,8 +41,8 @@ The Community Collaborative Rain Hail & Snow Network (CoCoRaHS) is a volunteer p
 
 ```{r cocorahs, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-start_date = "6/1/2018"
-end_date = "8/31/2018"
+start_date = "12/1/2018"
+end_date = "2/28/2019"
 
 cocorahs <- httr::GET(url = "http://data.cocorahs.org/export/exportreports.aspx",
                            query = list(ReportType="Daily",
