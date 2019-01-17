@@ -1,5 +1,9 @@
 library(magrittr)
 
+dir.create("./figures", 
+           recursive = TRUE, 
+           showWarnings = FALSE)
+
 expansion <- list(left = 0.2,
                   right = 0.01,
                   bottom = 0.01,

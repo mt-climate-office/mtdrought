@@ -71,6 +71,7 @@ gridmet_sf %>%
 ```
 
 ```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 
 x <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
@@ -136,6 +137,7 @@ gridmet_sf %>%
 
 
 ```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
 x <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
   magrittr::multiply_by(100) %>%
   round()
@@ -188,7 +190,6 @@ ggplot2::ggsave("./figures/review_climate_graph_precipitation.pdf")
 Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the Upper Missouri River Basin above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
 
 knitr::include_url(past_seasonal_swe$leaflet$path,
