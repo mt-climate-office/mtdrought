@@ -21,6 +21,7 @@ output:
       after_body: after_body.html
     lib_dir: site_libs
     self_contained: no
-  word_document:
+#  word_document:
+#    always_allow_html: yes
 output_dir: ../docs/mtdrought-2019-march
 
