@@ -62,11 +62,12 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
 Aside from a period in early August, temperatures this summer were below normal across much of central Montana, and above normal in northeastern and western Montana. Warm conditions in western Montana contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn't materialize.
 
-```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE, eval=FALSE}
+```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
 gridmet_sf %>%
   mtd_plot_gridmet(element = "tmean",
-                   use_normal = TRUE) %T>%
-  save_mt_map("./figures/review_temperature.pdf")
+                   use_normal = TRUE) %>%
+  save_mt_map("review_temperature.pdf")
 
 ```
 
@@ -87,11 +88,10 @@ mtd_leaflet(x,
             reverse = TRUE,
             midpoint = 0,
             digits = 1) %>%
-  # addLogo("../img/MCO_logo.svg", 
-  #         src = "local", 
-  #         width = 200, 
-  #         position = "topright") %T>%
-  saveWidgetFix("./figures/review_temperature.html")
+  saveWidgetFix("./figures/review_temperature.html", 
+                selfcontained = FALSE,
+                libdir = "./site_libs"
+                )
 
 knitr::include_url("./figures/review_temperature.html",
                    height = "500px")
@@ -127,12 +127,12 @@ ggplot2::ggsave("./figures/review_temperature_climate.pdf")
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
 In general, precipitation was above normal across south-central and eastern Montana this summer, and below normal across northern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.
 
-```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE, eval = FALSE}
+```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
 gridmet_sf %>%
   mtd_plot_gridmet(element = "prcp",
-                   use_normal = TRUE) %T>%
-  save_mt_map("./figures/review_precipitation.pdf")
+                   use_normal = TRUE) %>%
+  save_mt_map("review_precipitation.pdf")
 ```
 
 
@@ -153,7 +153,9 @@ mtd_leaflet(x,
             reverse = TRUE,
             midpoint = 100,
             digits = 0) %>%
-  saveWidgetFix("./figures/review_precipitation.html")
+  saveWidgetFix("./figures/review_precipitation.html", 
+                selfcontained = FALSE,
+                libdir = "./site_libs")
 
 knitr::include_url("./figures/review_precipitation.html",
                    height = "500px")
@@ -181,7 +183,7 @@ mtd_plot_climatology(x = gridmet_series[c("pr")],
                     col = "forestgreen",
                     data = gridmet_series$pr)
 
-ggplot2::ggsave("./figures/review_climate_graph_precipitation.pdf")
+ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 ```
 
@@ -190,6 +192,7 @@ ggplot2::ggsave("./figures/review_climate_graph_precipitation.pdf")
 Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the Upper Missouri River Basin above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
 
 knitr::include_url(past_seasonal_swe$leaflet$path,

@@ -99,7 +99,9 @@ mtd_plot_swe_basins <- function(date = "latest",
   # setwd("./figures")
   
   out %>%
-    saveWidgetFix(stringr::str_c("./figures/",date,"-swe.html"))
+    saveWidgetFix(stringr::str_c("./figures/",date,"-swe.html"),
+                  selfcontained = FALSE,
+                  libdir = "./site_libs")
   
   # setwd("../")
   

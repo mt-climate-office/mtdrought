@@ -92,7 +92,7 @@ ENSO has a strong influence on weather in North America, so NOAA's Climate Predi
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-03-01",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -105,7 +105,7 @@ The CPC is projecting this winter will likely be drier across Montana, with more
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-03-01",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 
