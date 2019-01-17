@@ -3,8 +3,8 @@ data/
 data/*
 
 # Figures directory
-figures/
-figures/*
+#figures/
+#figures/*
 
 # History files
 .Rhistory
