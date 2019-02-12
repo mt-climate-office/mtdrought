@@ -15,7 +15,7 @@ source("./R/setup.R")
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 Winter weather in Montana is heavily influenced by the El Niño Southern Oscillation (ENSO), the natural seasonal fluctuations in the sea surface temperature of the Pacific ocean near the equator. ENSO affects the position of the jet stream over North America. When the ocean is warmer than normal, Montana tends to experience warm, dry winters; we call this an "El Niño" event. When the ocean is cooler than normal, Montana tends to experience cool, wet winters; this is called a "La Niña." When the ocean is near average temperatures, conditions in Montana are less predictable; this is called "ENSO Neutral." It is important to note, however, that in the past there *have* been El Niño winters that were cooler or wetter than normal, and La Niña winters that were warmer and drier!
 
-According to NOAA, there is a 65--70% chance of El Niño conditions arriving this coming winter. These maps show what an average El Niño December--February looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into winter.
+According to NOAA, there is a 65% chance of El Niño conditions arriving this coming spring. These maps show what an average El Niño March--May looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into spring.
 
 ```{r load enso, cache=TRUE}
 # enso <- mtd_get_all_enso_ee(start_date = "2019-03-01",
@@ -54,12 +54,14 @@ El Niño winters are on average warmer than normal winters across Montana, espec
 
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "tmean",
-                   use_normal = TRUE) %T>%
+                   use_normal = TRUE,
+                   Season = "Mar-May") %T>%
   save_mt_map("forecast_enso_tmean.pdf")
 
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "prcp",
-                   use_normal = TRUE) %T>%
+                   use_normal = TRUE,
+                   Season = "Mar-May") %T>%
   save_mt_map("forecast_enso_prcp.pdf")
 
 

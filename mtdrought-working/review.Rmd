@@ -60,7 +60,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Aside from a period in early August, temperatures this summer were below normal across much of central Montana, and above normal in northeastern and western Montana. Warm conditions in western Montana contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn't materialize.
+Warmer than average temperatures in december and early january have been balanced out by near record low temperatures for parts of the state in early February. Central Montana seeing cooler than average winter; western Montana is warmer than average.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -100,7 +100,7 @@ knitr::include_url("./figures/review_temperature.html",
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures in January thru August 2018 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
+The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
 gridmet_sum <-
@@ -127,7 +127,7 @@ ggplot2::ggsave("./figures/review_temperature_climate.pdf")
 ```
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-In general, precipitation was above normal across south-central and eastern Montana this summer, and below normal across northern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.
+While drier than normal conditions persist in western Montana, portions of eastern Montana have seen over 300 percent of their normal precipitation for December through February. Continue to monitor mountain snowfall as we move into spring.
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -172,7 +172,7 @@ knitr::include_url("./figures/review_precipitation.html",
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation in January thru August 2018 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
+The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
 ```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = gridmet_series[c("pr")],
@@ -194,7 +194,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
-Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the Upper Missouri River Basin above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
+Snowpack is very close to normal across Montana, with slightly lower than average Snow Water Equivalent (SWE) in northwest Montana (80%--100%), and slightly higher than average SWE for southern and central Montana (100%--120%). ENSO Neutral conditions going into the spring mean it is very uncertain where snowpack will end up at the end of the season. It will also be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
