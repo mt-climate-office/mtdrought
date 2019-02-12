@@ -14,39 +14,34 @@ mtd_plot_swe_basins <- function(date = "latest",
     sf::st_intersection(mt_state_simple)
   
   swe %<>%
-    dplyr::filter(sf::st_area(swe) > units::set_units(1000000000,m^2))
+    dplyr::filter(sf::st_area(swe) > units::set_units(1000000000,m^2)) %>%
+    dplyr::mutate(Watershed = as.character(Watershed),
+                  percent = as.numeric(percent)) %>%
+    dplyr::arrange(Watershed)
   
   if(date == "latest")
     date <- Sys.Date()
   
   swe_map <- (swe %>%
-                dplyr::mutate(Centroid_x = swe %>%
-                                sf::st_centroid() %>%
-                                sf::st_coordinates() %>%
-                                tibble::as_tibble() %$%
-                                X,
-                              Centroid_y = swe %>%
-                                sf::st_centroid() %>%
-                                sf::st_coordinates() %>%
-                                tibble::as_tibble() %$%
-                                Y) %>%
                 ggplot2::ggplot() +
                 # Plot the polygon fills
-                geom_sf(aes(fill = percent),
-                        color = NA) +
-                scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"\n",
-                                                           "Snow water equivalent","\nPercent of normal"),
-                                     #limits = c(0,1),
-                                     direction = 1,
-                                     limits = c(0,200),
-                                     palette = "RdBu",
-                                     expand = FALSE,
-                                     guide = guide_colourbar(title.position = "bottom")) +
+                ggplot2::geom_sf(ggplot2::aes(fill = value / normals * 100),
+                                 color = NA) +
+                ggplot2::scale_fill_distiller(
+                  name = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"\n",
+                                        "Snow water equivalent","\nPercent of normal"),
+                  #limits = c(0,1),
+                  direction = 1,
+                  limits = c(80,120),
+                  palette = "RdBu",
+                  expand = FALSE,
+                  guide = ggplot2::guide_colourbar(title.position = "bottom")
+                ) +
                 mtd_plot() +
                 # Plot the polygon boundaries
-                geom_sf(fill = NA,
-                        color = "white",
-                        size = 0.5)# +
+                ggplot2::geom_sf(fill = NA,
+                                 color = "white",
+                                 size = 0.5)# +
               # # Plot the labels
               # geom_label(aes(x = Centroid_x,
               #                y = Centroid_y,
@@ -62,30 +57,30 @@ mtd_plot_swe_basins <- function(date = "latest",
                                  "SWE % of Normal: ",percent,"%"))
   
   tm_out <- (swe %>%
-                    tm_shape() + 
+               tm_shape() + 
                tm_polygons(col = "percent",
                            border.col = "white",
                            id = "Label",
                            # popup.vars = FALSE,
                            lwd = 2,
-                            title = "",
-                            alpha = 1,
-                            style = "cont",
-                            palette = "RdBu",
-                            breaks = seq(0,200,25),
-                            midpoint = 100,
-                            legend.reverse = TRUE,
-                            legend.is.portrait = TRUE) +
-                    tm_layout(title = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"<br>",
-                                                     "<a href='../reference.html' target='_blank'>Snow water equivalent, % of normal</a>")) +
-                    tm_view(view.legend.position = c("left","bottom"))) %>%
+                           title = "",
+                           alpha = 1,
+                           style = "cont",
+                           palette = "RdBu",
+                           breaks = seq(50,150,1),
+                           midpoint = 100,
+                           legend.reverse = TRUE,
+                           legend.is.portrait = TRUE) +
+               tm_layout(title = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"<br>",
+                                                "<a href='../reference.html' target='_blank'>Snow water equivalent, % of normal</a>")) +
+               tm_view(view.legend.position = c("left","bottom"))) %>%
     tmap_leaflet()
   
   out <- mtd_leaflet_base(attribution = attribution)
   
   tm_out$x$calls[[6]]$args[[1]]$labels %<>% rev()
   
-  tm_out$x$calls[[5]]$args[[5]] <-tm_out$x$calls[[5]]$args[[7]] <-  swe$Label
+  tm_out$x$calls[[5]]$args[[5]] <- tm_out$x$calls[[5]]$args[[7]] <- swe$Label
   tm_out$x$calls[[5]]$args[[4]] <- tm_out$x$calls[[5]]$args[[4]][-3]
   
   tm_out$x$calls[[5]]$args[[4]]$pane <- "background"
@@ -93,7 +88,7 @@ mtd_plot_swe_basins <- function(date = "latest",
   out$x$calls <- c(out$x$calls,tm_out$x$calls[5:6])
   
   out$title <- tm_out$title
-
+  
   out$jsHooks$render <- c(out$jsHooks$render, tm_out$jsHooks$render)
   
   # setwd("./figures")

@@ -1,5 +1,5 @@
 ---
-title: "Winter Outlook: Return of El Niño?"
+title: "Winter Update: El Niño Watch Continues"
 editor_options: 
   chunk_output_type: console
 ---
@@ -12,7 +12,7 @@ source("./R/setup.R")
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
-### <img src="icons/enso.svg" width="35px"/> El Niño Outlook {-}
+### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 Winter weather in Montana is heavily influenced by the El Niño Southern Oscillation (ENSO), the natural seasonal fluctuations in the sea surface temperature of the Pacific ocean near the equator. ENSO affects the position of the jet stream over North America. When the ocean is warmer than normal, Montana tends to experience warm, dry winters; we call this an "El Niño" event. When the ocean is cooler than normal, Montana tends to experience cool, wet winters; this is called a "La Niña." When the ocean is near average temperatures, conditions in Montana are less predictable; this is called "ENSO Neutral." It is important to note, however, that in the past there *have* been El Niño winters that were cooler or wetter than normal, and La Niña winters that were warmer and drier!
 
 According to NOAA, there is a 65--70% chance of El Niño conditions arriving this coming winter. These maps show what an average El Niño December--February looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into winter.

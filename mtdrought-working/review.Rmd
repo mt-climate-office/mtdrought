@@ -71,17 +71,17 @@ gridmet_sf %>%
 
 ```
 
-```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 
-x <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
-attr(x,"dates") <- attr(gridmet,"dates")
+past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
+attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
 
-mtd_leaflet(x,
+mtd_leaflet(x = past_seasonal_temp,
             pal =  "-RdBu",
-            legend_title = stringr::str_c(format(head(attr(x,"dates"),1), '%B %d, %Y')," - ",
-                                          format(tail(attr(x,"dates"),1), '%B %d, %Y'),"<br>",
+            legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
+                                          format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
                                           "Average temperature"," (ºF)",", ",
                                           "deviation from normal"),
             image_query_title = "Temperature Deviation (ºF)",
@@ -97,6 +97,8 @@ knitr::include_url("./figures/review_temperature.html",
                    height = "500px")
 
 ```
+
+<!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures in January thru August 2018 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
@@ -136,17 +138,18 @@ gridmet_sf %>%
 ```
 
 
-```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 
-x <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
+past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
   magrittr::multiply_by(100) %>%
   round()
-attr(x,"dates") <- attr(gridmet,"dates")
+attr(past_seasonal_prcp,"dates") <- attr(gridmet,"dates")
 
-mtd_leaflet(x,
+
+mtd_leaflet(past_seasonal_prcp,
             pal =  "BrBG",
-            legend_title = stringr::str_c(format(head(attr(x,"dates"),1), '%B %d, %Y')," - ",
-                                          format(tail(attr(x,"dates"),1), '%B %d, %Y'),"<br>",
+            legend_title = stringr::str_c(format(head(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y')," – ",
+                                          format(tail(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y'),"<br>",
                                           "Net precipitation",", ",
                                           "% of normal"),
             image_query_title = "Net precipitation, percent of normal",
@@ -166,6 +169,8 @@ knitr::include_url("./figures/review_precipitation.html",
 # 
 
 ```
+
+<!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
 The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation in January thru August 2018 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
@@ -191,25 +196,13 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 Snowpack was well above normal going into April across Montana. Snow Water Equivalent (SWE) in the Upper Missouri River Basin above Fort Peck Reservoir and between Fort Peck and Garrison Reservoirs was 127% and 130%, respectively. Snowfall in central and eastern Montana increased the snowpack and covered the ground, which was bare at the end of January. The above normal snowpack will contribute to soil moisture recharge and good growing conditions this summer. However, it will be important to pay close attention to spring temperatures that impact the pace of snowmelt and potential for flooding.
 
-```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
-
+```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
 
 knitr::include_url(past_seasonal_swe$leaflet$path,
-                   height = "500px")
+height = "500px")
 
 ```
 
-### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
-By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but see the sections on soil moisture and evapotranspiration, which tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season.
-
-```{r past-seasonal-drought, cache=TRUE}
-
-past_seasonal_drought <- mtd_plot_usdm(date = "2019-03-01",
-                                       data_out = "../data/USDM")
-
-past_seasonal_drought$map %T>%
-  save_mt_map("review_drought.pdf")
-
-```
+<!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
 

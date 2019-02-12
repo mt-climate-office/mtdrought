@@ -174,7 +174,7 @@ mtd_get_gridmet_climatology_ee <- function(collection = "IDAHO_EPSCOR/GRIDMET",
                       end_date = end_date) %>% 
     purrr::transpose() %>% 
     map(unlist) %>% 
-    tibble::as_data_frame() %>%
+    tibble::as_tibble() %>%
     dplyr::mutate(day = 1:366) %>%
     dplyr::select(day, everything()) %>%
     tidyr::gather(key = "variable", 

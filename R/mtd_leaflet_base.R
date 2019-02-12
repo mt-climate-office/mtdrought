@@ -16,11 +16,12 @@ mtd_leaflet_base <- function(attribution = ""){
                 options = leaflet::scaleBarOptions(metric = FALSE)) %>%
     htmlwidgets::onRender("function(el, x) {L.control.zoom({ position: 'topright' }).addTo(this)}") %>%
     leaflet.extras::addFullscreenControl(position = "topright") %>%
-    leaflet::addEasyButton(easyButton(icon = "ion-arrow-shrink", 
-                                      title = "Reset View", 
-                                      position = "topright",
-                                      onClick = JS("function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }"))) %>% 
-    htmlwidgets::onRender(JS("function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}")) %>%
+    # htmlwidgets::onRender(JS("function(el, x){ var map = this; map._initialCenter = map.getCenter(); map._initialZoom = map.getZoom();}")) %>%
+    # leaflet::addEasyButton(easyButton(icon = "ion-arrow-shrink", 
+    #                                   title = "Reset View", 
+    #                                   position = "topright",
+    #                                   onClick = JS("function(btn, map){ map.setView(map._initialCenter, map._initialZoom); }"))) %>% 
+    # leaflet.extras::addResetMapButton(position = "topright") %>%
     leaflet::addEasyButton(leaflet::easyButton(
       icon="fa-crosshairs", 
       title="Locate Me",

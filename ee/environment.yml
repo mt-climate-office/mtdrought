@@ -1,6 +1,6 @@
 name: ee
 dependencies:
-  - python=3.7   # or 2.7
+  - python
   - numpy
   - scipy
   - PyCrypto
