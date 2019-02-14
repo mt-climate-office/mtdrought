@@ -64,8 +64,6 @@ enso$`El Niño` %>%
                    Season = "Mar-May") %T>%
   save_mt_map("forecast_enso_prcp.pdf")
 
-
-
 ```
 
 The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day.

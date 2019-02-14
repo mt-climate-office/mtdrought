@@ -8,7 +8,7 @@ mtd_leaflet <- function(x,
                         midpoint = 0,
                         digits = 1,
                         reverse = FALSE,
-                        attribution = "<a href='http://www.climatologylab.org/gridmet.html' target='_blank'>gridMET</a> via <a href='https://earthengine.google.com/' target='_blank'>Google Earth Engine</a>"){
+                        attribution = "Climate data by <a href='http://www.climatologylab.org/gridmet.html' target='_blank'>gridMET</a> via <a href='https://earthengine.google.com/' target='_blank'>Google Earth Engine</a>"){
   
   tm_out <- (x %>%
                tm_shape() + 
@@ -40,9 +40,14 @@ mtd_leaflet <- function(x,
   if(reverse){
     tm_out$x$calls[[5]]$args[[1]]$labels %<>% rev()
   }
+
   
-  tm_out$x$calls[[4]]$args[[4]]$pane <- "background"
+  # tm_out$x$calls[[4]]$args[[4]]$pane <- "background"
+  # tm_out$x$calls[[4]]$args[[4]]$attribution <- ""
+  # tm_out$x$calls[[4]]$args[[6]] <- ""
   # out$x$calls[[length(out$x$calls)]]$args[[4]]$pane <- "foreground"
+  
+  
   
   out$x$calls <- c(out$x$calls,tm_out$x$calls[4:5])
   

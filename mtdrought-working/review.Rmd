@@ -60,7 +60,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of our western MT valley bottoms and for portions of north to south central Montana. Northeastern MT has experienced warmer than normal temperatures.
+Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. Northeastern MT has experienced warmer than normal temperatures.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -78,16 +78,18 @@ gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
 attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
 
-mtd_leaflet(x = past_seasonal_temp,
+past_seasonal_temp_map <- 
+  mtd_leaflet(x = past_seasonal_temp,
             pal =  "-RdBu",
             legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
                                           format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
-                                          "Average temperature"," (ºF)",", ",
-                                          "deviation from normal"),
+                                          "<a href='../reference.html' target='_blank'>Average temperature (ºF), deviation from normal</a>"),
             image_query_title = "Temperature Deviation (ºF)",
             reverse = TRUE,
             midpoint = 0,
-            digits = 1) %>%
+            digits = 1)
+
+past_seasonal_temp_map %>%
   saveWidgetFix("./figures/review_temperature.html", 
                 selfcontained = FALSE,
                 libdir = "./site_libs"
@@ -150,8 +152,7 @@ mtd_leaflet(past_seasonal_prcp,
             pal =  "BrBG",
             legend_title = stringr::str_c(format(head(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y')," – ",
                                           format(tail(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y'),"<br>",
-                                          "Net precipitation",", ",
-                                          "% of normal"),
+                                          "<a href='../reference.html' target='_blank'>Net precipitation, % of normal</a>"),
             image_query_title = "Net precipitation, percent of normal",
             reverse = TRUE,
             midpoint = 100,
