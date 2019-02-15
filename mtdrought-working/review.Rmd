@@ -1,5 +1,5 @@
 ---
-title: "Winter 2019: El Niño? What El Niño?"
+title: "Winter 2019: El Niño?"
 editor_options: 
   chunk_output_type: console
 ---
