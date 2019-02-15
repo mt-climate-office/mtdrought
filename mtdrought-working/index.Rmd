@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![A new Montana Mesonet station near Miles City, MT. There are currently 50 stations across the state recording soil moisture and weather conditions. Real time data can be viewed at [climate.umt.edu/mesonet/Stations](https://climate.umt.edu/mesonet/Stations/default.php). Photo: Kevin Hyde.](./img/Kevin_Hyde_fort_keogh.jpg)
+![Lolo Pass in early January. Although winter got off to a slow start, snowpack across Montana is now approaching normal levels. Photo: Kevin Hyde.](./img/Kevin_Hyde_Lolo_winter_small.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
