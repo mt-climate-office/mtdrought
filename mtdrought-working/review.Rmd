@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![Four-footed fans of the Montana Mesonet visit the new station near Broadus, MT. Photo: Kevin Hyde.](./img/Kevin_Hyde_broadus.jpg)
+![Making snow at sunset in Glasgow, MT. It was -16 ºF at the time, the high temperature for the day. Photo: NWS Glasgow](./img/Tanja_Fransen_glasgow.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
