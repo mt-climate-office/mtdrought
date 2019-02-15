@@ -37,7 +37,9 @@ Here's what you'll find in this newsletter:
 
 ### We are listening! Soil Moisture mapping across Montana {-}
 
-**SOIL MOISTURE EXPLANATION HERE**
+Soil moisture is notoriously difficult to measure and across we have very few weather stations across Montana that can measure soil moisture. Recent advances in satellite monitoring now enable us to estimate root zone soil wetness to depths up to three feet, but only at coarse spatial scales of about six miles. These predictions are dependent upon measurements from the satellite and meteorological data that are combined to model soil moisture.
+ 
+In our fall newsletter, this map of [SMAP satellite derived soil moisture](./reference.html) from September 1, 2018, showed a pattern of moisture trending from wetter in eastern portions of the state to drier in western Montana. A well-informed observer from Toole County (outlined in bold on the map) reported that near surface soil moisture was much lower than the SMAP estimates. In this region much of the spring snowmelt ran off due to frozen soils and there was a deficit in summer precipitation. This discrepancy highlights the importance of local observations of soil moisture---including reports from our readers!---and of using multiple types of data when making decisions. To help with drought monitoring you can provide your own local observations at the [MT Drought Impacts reporter website: http://dnrc.mt.gov/divisions/water/drought-management](http://dnrc.mt.gov/divisions/water/drought-management).
 
 ```{r past-seasonal-smap-grid, cache=TRUE}
 

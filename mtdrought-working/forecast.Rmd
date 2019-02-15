@@ -91,7 +91,7 @@ enso_series %>%
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-ENSO has a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this spring are in part guided by ENSO conditions. The CPC is projecting that temperatures will likely be warmer across Montana this spring, especially going into April.
+ENSO has a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this spring are in part guided by ENSO conditions. The CPC is projecting that temperatures will likely be warmer across Montana this spring, especially going into April. Warmer temperatures may accelerate spring snowmelt and prompt an earlier start to the growing season.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -104,6 +104,7 @@ noaa_seasonal$map %T>%
 ```
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
+
 Wait, what's going on with this precipitation map? It doesn't look like there is anything on it! That's right---the CPC isn't making predictions one way or another for preciptation this spring. The entire state of Montana is in the "Equal Chances" category, meaning that our precipitation is likely to be near-normal, but might be higher or lower than normal depending on particular storm tracks. 
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
