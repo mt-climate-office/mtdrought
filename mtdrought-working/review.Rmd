@@ -200,6 +200,7 @@ Snowpack is very close to normal across Montana, with slightly lower than averag
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
 
+
 knitr::include_url(past_seasonal_swe$leaflet$path,
 height = "500px")
 

@@ -95,6 +95,15 @@ mtd_plot_swe_basins <- function(date = "latest",
   
   tm_out$x$calls[[6]]$args[[1]]$labels %<>% rev()
   
+  # correcting problem with duplicated polygons
+  dups <- !duplicated(tm_out$x$calls[[5]]$args[[7]])
+  tm_out$x$calls[[5]]$args[[7]] <- tm_out$x$calls[[5]]$args[[7]][dups]
+  tm_out$x$calls[[5]]$args[[5]] <- tm_out$x$calls[[5]]$args[[5]][dups]
+  tm_out$x$calls[[5]]$args[[4]]$fillColor <- tm_out$x$calls[[5]]$args[[4]]$fillColor[dups]
+  tm_out$x$calls[[5]]$args[[4]]$fillOpacity <- tm_out$x$calls[[5]]$args[[4]]$fillOpacity[dups]
+  tm_out$x$calls[[5]]$args[[2]] <- tm_out$x$calls[[5]]$args[[2]][dups]
+  tm_out$x$calls[[5]]$args[[1]] <- tm_out$x$calls[[5]]$args[[1]][dups]
+  
   tm_out$x$calls[[5]]$args[[5]] <- tm_out$x$calls[[5]]$args[[7]] <- swe$Label
   tm_out$x$calls[[5]]$args[[4]] <- tm_out$x$calls[[5]]$args[[4]][-3]
   
