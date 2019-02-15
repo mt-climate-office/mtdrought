@@ -6,7 +6,6 @@ title: "Reference"
 source("./R/setup.R")
 ```
 
-## In a Word... {-}
 Weather and climate forecasters use words and information in very particular ways that may be different from what we are accustomed to. Here is a list of terms we use in this newsletter:
   
 <hr>

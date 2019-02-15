@@ -27,7 +27,7 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Weak El Niño conditions formed during January, 2019, based on the presence of above-average sea surface temperatures, and they are likely to persist into the spring.
+* Weak El Niño conditions formed during January 2019, based on the presence of above-average sea surface temperatures, and they are likely to persist into the spring.
 * Temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. Northeastern MT has experienced warmer than normal temperatures.
 * Consistent with El Niño, snowpack west of the divide has been slightly lower than normal. For the plains region east of the divide, winter precipitation has been up to 250% of normal.
 * The NOAA seasonal forecast, which takes El Niño and other current climate patterns into account, is for warmer conditions statewide this spring, with equal chances of above or below normal precipitation. Warmer temperatures tilt the odds towards earlier snowmelt and an earlier start to the growing season.
@@ -40,9 +40,15 @@ Here's what you'll find in this newsletter:
 **SOIL MOISTURE EXPLANATION HERE**
 
 ```{r past-seasonal-smap-grid, cache=TRUE}
-mtd_plot_smap(date = "2018-09-01",
+
+(mtd_plot_smap(date = "2018-09-01",
               variable = "sm_rootzone_wetness",
-              data_out = "../data/SMAP")$map %T>%
+              data_out = "../data/SMAP")$map +
+    ggplot2::geom_sf(data = mcor::mt_counties_simple %>%
+                       dplyr::filter(County == "Toole"),
+                   fill = NA,
+                   color = "white",
+                   size = 1)) %T>%
   save_mt_map("review_soil_moisture.pdf")
 
 ```

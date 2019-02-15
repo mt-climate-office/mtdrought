@@ -1,5 +1,5 @@
 ---
-title: "Winter Update: El Niño Watch Continues"
+title: "Winter Update: El Niño Arrives"
 editor_options: 
   chunk_output_type: console
 ---
@@ -13,9 +13,12 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
-Winter weather in Montana is heavily influenced by the El Niño Southern Oscillation (ENSO), the natural seasonal fluctuations in the sea surface temperature of the Pacific ocean near the equator. ENSO affects the position of the jet stream over North America. When the ocean is warmer than normal, Montana tends to experience warm, dry winters; we call this an "El Niño" event. When the ocean is cooler than normal, Montana tends to experience cool, wet winters; this is called a "La Niña." When the ocean is near average temperatures, conditions in Montana are less predictable; this is called "ENSO Neutral." It is important to note, however, that in the past there *have* been El Niño winters that were cooler or wetter than normal, and La Niña winters that were warmer and drier!
 
-According to NOAA, there is a 65% chance of El Niño conditions arriving this coming spring. These maps show what an average El Niño March--May looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into spring.
+The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific ocean near the equator. El Niño events have a stong influence on winter weather across Montana, and less of an influence during the rest of the year.
+
+Back in October, NOAA was predicting an El Niño event would begin over the winter. A weak El Niño finally formed during January 2019, and weak El Niño conditions are likely to continue into spring. Historically, El Niño events bring slightly warmer than normal spring temperatures to northern and western Montana, and slightly cooler than normal temperatures in southeastern Montana. Spring precipitation during an El Niño event is very close to normal across the state.
+
+These maps show what an average El Niño March--May looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into spring.
 
 ```{r load enso, cache=TRUE}
 # enso <- mtd_get_all_enso_ee(start_date = "2019-03-01",
@@ -48,7 +51,7 @@ enso_series <- mtd_get_enso_series_ee()
 
 ```
 
-El Niño winters are on average warmer than normal winters across Montana, especially as you move towards northeastern Montana. They are also drier than normal years, but only slightly, and only in north-central Montana; the southwestern and far eastern portions of the state actually experience slightly wetter conditions in El Niño years.
+Early spring during an El Niño event is on average warmer than normal across Montana, especially as you move towards northwestern Montana.
 
 ```{r future-seasonal-enso, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -88,7 +91,7 @@ enso_series %>%
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-ENSO has a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this winter are in part guided by ENSO conditions. Due to the high probability of there being an El Niño event beginning this winter, the CPC is projecting that temperatures will likely be warmer across Montana.
+ENSO has a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this spring are in part guided by ENSO conditions. The CPC is projecting that temperatures will likely be warmer across Montana this spring, especially going into April.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -101,7 +104,7 @@ noaa_seasonal$map %T>%
 ```
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
-The CPC is projecting this winter will likely be drier across Montana, with more certainty for the northern and northwestern part of the state.
+Wait, what's going on with this precipitation map? It doesn't look like there is anything on it! That's right---the CPC isn't making predictions one way or another for preciptation this spring. The entire state of Montana is in the "Equal Chances" category, meaning that our precipitation is likely to be near-normal, but might be higher or lower than normal depending on particular storm tracks. 
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
