@@ -10,7 +10,7 @@ mtd_leaflet_base <- function(attribution = ""){
              options = leaflet::tileOptions(pane = "foreground")) %>%
     leaflet::addProviderTiles("Stamen.TonerLines",
                               options = leaflet::providerTileOptions(pane = "foreground", 
-                                                                     attribution = "Map data by <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a>, Map style by <a href='https://stamen.com/' target='_blank'>Stamen Design</a>")) %>%
+                                                                     attribution = "map data by <a href='https://www.openstreetmap.org/copyright' target='_blank'>OpenStreetMap</a>, map style by <a href='https://stamen.com/' target='_blank'>Stamen Design</a>")) %>%
     leaflet::addProviderTiles("Stamen.TonerLabels",
                               options = leaflet::providerTileOptions(pane = "foreground",
                                                                      attribution = "")) %>%

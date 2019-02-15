@@ -19,6 +19,19 @@ mtd_plot_swe_basins <- function(date = "latest",
                   percent = as.numeric(percent)) %>%
     dplyr::arrange(Watershed)
   
+  range_swe <- 
+    swe$percent %>% 
+    range() %>% 
+    abs() %>%
+    max() %>%
+    magrittr::subtract(100) %>%
+    magrittr::add(1) %>%
+    abs() %>%
+    magrittr::multiply_by(c(-1,1)) %>%
+    magrittr::subtract(100,.) %>%
+    sort()
+    
+  
   if(date == "latest")
     date <- Sys.Date()
   
@@ -32,7 +45,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                                         "Snow water equivalent","\nPercent of normal"),
                   #limits = c(0,1),
                   direction = 1,
-                  limits = c(80,120),
+                  limits = range_swe,
                   palette = "RdBu",
                   expand = FALSE,
                   guide = ggplot2::guide_colourbar(title.position = "bottom")
@@ -67,7 +80,9 @@ mtd_plot_swe_basins <- function(date = "latest",
                            alpha = 1,
                            style = "cont",
                            palette = "RdBu",
-                           breaks = seq(50,150,1),
+                           # breaks = seq(range_swe[1],
+                           #              range_swe[2],
+                           #              1),
                            midpoint = 100,
                            legend.reverse = TRUE,
                            legend.is.portrait = TRUE) +
