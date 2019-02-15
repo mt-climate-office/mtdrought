@@ -35,7 +35,7 @@ Here's what you'll find in this newsletter:
 
 -----
 
-### We are listening! Soil Moisture mapping across Montana {-}
+### We are listening! Soil moisture across Montana {-}
 
 Soil moisture is notoriously difficult to measure and across we have very few weather stations across Montana that can measure soil moisture. Recent advances in satellite monitoring now enable us to estimate root zone soil wetness to depths up to three feet, but only at coarse spatial scales of about six miles. These predictions are dependent upon measurements from the satellite and meteorological data that are combined to model soil moisture.
  
