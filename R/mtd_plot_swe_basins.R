@@ -7,7 +7,7 @@ mtd_plot_swe_basins <- function(date = "latest",
   
   swe <- mcor::mco_get_swe_basins(date = date,
                                   huc = huc,
-                                  min_stations = 3) %>%
+                                  min_stations = 2) %>%
     dplyr::rename(value = `SWE (in)`,
                   normals = `SWE 1981-2010 Median (in)`,
                   percent = `Percent SWE`) %>%

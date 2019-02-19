@@ -60,7 +60,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. Northeastern MT has experienced warmer than normal temperatures.
+Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. During early winter, northeastern MT experienced warmer than normal temperatures, but cold weather in February has brought lowered the seasonal average down normal or below normal.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -129,7 +129,7 @@ ggplot2::ggsave("./figures/review_temperature_climate.pdf")
 ```
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-Drier than normal conditions persist in western Montana with slightly lower than normal mountain snowpack. Portions of eastern Montana have seen over 250 percent of their normal precipitation for December through February. Mountain snowpack can be a good indicator of streamflow levels and the water available for diversion in the summer for areas east and west of the divide. It will be important to pay attention to spring temperatures that impact the timing of snowmelt.  
+Drier than normal conditions persist in western Montana with slightly lower than normal mountain snowpack. Portions of eastern Montana have seen over 350 percent of their normal precipitation for December through February.
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -199,6 +199,7 @@ Snowpack is very close to normal across Montana, with slightly lower than averag
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
+
 
 knitr::include_url(past_seasonal_swe$leaflet$path,
 height = "500px")
