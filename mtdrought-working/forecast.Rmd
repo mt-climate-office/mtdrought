@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![A new Montana Mesonet station near Absarokee, MT. Photo: Kevin Hyde.](./img/Kevin_Hyde_absarokee.jpg)
+![A winter view on the Conservation trails up the Rattlesnake Valley. Photo: Ada Smith.](./img/Ada_Smith_Rattlesnake_Valley.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
