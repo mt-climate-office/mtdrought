@@ -60,7 +60,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. During early winter, northeastern MT experienced warmer than normal temperatures, but cold weather in February has brought lowered the seasonal average down normal or below normal.
+Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. During early winter, northeastern MT experienced warmer than normal temperatures, but cold weather in February has lowered the seasonal average down to normal or below normal.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
