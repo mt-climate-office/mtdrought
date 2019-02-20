@@ -35,8 +35,8 @@ knitr::opts_chunk$set(echo = FALSE,
                       fig.retina = 4, 
                       fig.align = "center", 
                       out.width = '100%', 
-                      collapse=TRUE,
-                      cache=TRUE
+                      collapse = TRUE,
+                      cache = TRUE
 )
 
 ## Load all packages

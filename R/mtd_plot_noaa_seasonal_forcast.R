@@ -79,7 +79,11 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                              stringr::str_subset(months) %>%
                              stringr::str_subset("lead[1-9]_"),
                            quiet = T) %>%
-    lwgeom::st_transform_proj(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane)
+  
+  sf::st_agr(noaa_data) = "constant"
+  
+  noaa_data %<>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(Chance = ifelse(Prob > 60, "Very likely", 

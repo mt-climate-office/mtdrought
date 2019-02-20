@@ -107,7 +107,9 @@ The graph below compares historical daily temperatures (shaded bands and dashed 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
 gridmet_sum <-
   gridmet %>%
-  purrr::map(raster::cellStats, mean)
+  purrr::map(raster::cellStats, 
+             stat = mean,
+             na.rm = TRUE)
 
 mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
                      col = c("#0571b0","#ca0020"),
@@ -119,11 +121,15 @@ mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
   ggplot2::geom_line(ggplot2::aes(x = day,
                                   y = value),
                      col = "#0571b0",
-                     data = gridmet_series$tmmn) +
+                     data = gridmet_series$tmmn %>%
+                      na.omit(),
+                    na.rm = TRUE) +
   ggplot2::geom_line(ggplot2::aes(x = day,
                                   y = value),
                      col = "#ca0020",
-                     data = gridmet_series$tmmx)
+                     data = gridmet_series$tmmx %>%
+                      na.omit(),
+                    na.rm = TRUE)
 
 ggplot2::ggsave("./figures/review_temperature_climate.pdf")
 ```
@@ -184,10 +190,12 @@ mtd_plot_climatology(x = gridmet_series[c("pr")],
                      smooth = TRUE,
                      mean = TRUE,
                      family = tw()) +
-  ggplot2::geom_col(ggplot2::aes(x = day,
+  ggplot2::geom_col(mapping = ggplot2::aes(x = day,
                                  y = value),
                     col = "forestgreen",
-                    data = gridmet_series$pr)
+                    data = gridmet_series$pr %>%
+                      na.omit(),
+                    na.rm = TRUE)
 
 ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
@@ -199,6 +207,7 @@ Snowpack is very close to normal across Montana, with slightly lower than averag
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
+
 
 knitr::include_url(past_seasonal_swe$leaflet$path,
 height = "500px")

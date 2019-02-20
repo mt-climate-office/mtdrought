@@ -60,7 +60,11 @@ mtd_plot_enso_grid <- function(gridmet,
     gridmet %<>%
       magrittr::extract2(c("value.mean","normal.mean")) %>%
       spex::qm_rasterToPolygons(na.rm = T) %>%
-      lwgeom::st_transform_proj(mt_state_plane) %>%
+      lwgeom::st_transform_proj(mt_state_plane)
+    
+    sf::st_agr(gridmet) = "constant"
+    
+    gridmet %<>%
       sf::st_intersection(y = mcor::mt_state_simple)
   }
   

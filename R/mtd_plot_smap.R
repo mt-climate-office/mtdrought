@@ -65,7 +65,11 @@ mtd_plot_smap <- function(date,
                                               "40-45%",
                                               "45-50%",
                                               "50-60%",
-                                              ">60%"))) %>%
+                                              ">60%")))
+    
+    sf::st_agr(soil_moisture) = "constant"
+    
+    soil_moisture %<>%
       sf::st_intersection(mt_state_simple) %>%
       dplyr::group_by(layer) %>%
       dplyr::summarise()

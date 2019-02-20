@@ -6,11 +6,12 @@ get_df <- function(x){
   if(is.factor(x)){
     
     levels <- levels(x)[[1]] %>%
-      dplyr::mutate_all(.funs = funs(ordered)) %>%
+      dplyr::mutate_all(.funs = list(ordered)) %>%
       tibble::as_tibble()
     
     fact <- out$ID %>%
       ordered(levels = levels(levels$ID))
+    
     out %<>%
       dplyr::mutate(ID = fact) %>%
       dplyr::left_join(levels)

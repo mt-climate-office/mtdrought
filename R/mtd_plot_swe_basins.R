@@ -10,8 +10,13 @@ mtd_plot_swe_basins <- function(date = "latest",
                                   min_stations = 2) %>%
     dplyr::rename(value = `SWE (in)`,
                   normals = `SWE 1981-2010 Median (in)`,
-                  percent = `Percent SWE`) %>%
-    sf::st_intersection(mt_state_simple)
+                  percent = `Percent SWE`)
+  mt <- mcor::mt_state_simple
+  
+  sf::st_agr(swe) = "constant"
+  
+  swe %<>%
+    sf::st_intersection(mcor::mt_state_simple)
   
   swe %<>%
     dplyr::filter(sf::st_area(swe) > units::set_units(1000000000,m^2)) %>%

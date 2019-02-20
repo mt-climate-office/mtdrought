@@ -20,7 +20,8 @@ mtd_theme_climatology <- function(ybreaks,
     ggplot2::geom_hline(yintercept = ybreaks, 
                         color = "grey60", 
                         size = 0.3,
-                        linetype = 2),
+                        linetype = 2,
+                        na.rm = TRUE),
     ggplot2::geom_vline(xintercept = c(1, 
                                        month_lengths %>%
                                          cumsum() %>%
@@ -28,12 +29,14 @@ mtd_theme_climatology <- function(ybreaks,
                                        365), 
                         color = "grey60", 
                         size = 0.3,
-                        linetype = 2),
+                        linetype = 2,
+                        na.rm = TRUE),
     if(polar)
       ggplot2::geom_hline(yintercept = tail(ybreaks,1), 
                           color = "grey60", 
                           size = 0.5,
-                          linetype = 1),
+                          linetype = 1,
+                          na.rm = TRUE),
     if(polar) 
       ggplot2::annotate(geom = "text", 
                         y = c(ybreaks[-1],
@@ -104,7 +107,8 @@ mtd_theme_climatology <- function(ybreaks,
                                ymax = tail(ybreaks,1)),
                            fill = NA,
                            color = "grey60", 
-                           size = 0.5),
+                           size = 0.5,
+                           na.rm = TRUE),
     ggtitle(title)
   )
 }

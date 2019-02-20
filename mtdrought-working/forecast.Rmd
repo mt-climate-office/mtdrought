@@ -30,7 +30,7 @@ enso <- readr::read_rds("../Data/gridmet/ENSO_MAM.rds")
 
 enso %<>%
   purrr::transpose()
-  
+
 enso$pr %<>%
   purrr::map(mm_to_in)
 
@@ -57,14 +57,14 @@ Early spring during an El Niño event is on average warmer than normal across Mo
 
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "tmean",
-                   use_normal = TRUE,
-                   Season = "Mar-May") %T>%
+                     use_normal = TRUE,
+                     Season = "Mar-May") %T>%
   save_mt_map("forecast_enso_tmean.pdf")
 
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "prcp",
-                   use_normal = TRUE,
-                   Season = "Mar-May") %T>%
+                     use_normal = TRUE,
+                     Season = "Mar-May") %T>%
   save_mt_map("forecast_enso_prcp.pdf")
 
 ```
@@ -80,12 +80,15 @@ For precipitation, however, it is very difficult to distinguish the three solid 
 enso_series %>%
   mtd_plot_climatology_enso(element = "tmean",
                             ybreaks = seq(-10, 80, 10))
-  ggplot2::ggsave("./figures/forecast_enso_graph_tmean.pdf")
+
+ggplot2::ggsave("./figures/forecast_enso_graph_tmean.pdf")
 
 enso_series %>%
   mtd_plot_climatology_enso(element = "prcp",
                             ybreaks = seq(0,0.8,0.1))
-  ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf")
+
+ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf")
+
 
 ```
 

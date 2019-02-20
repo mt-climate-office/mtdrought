@@ -40,7 +40,11 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                              list.files(pattern = "\\.shp$",
                                         full.names = T),
                            quiet = T) %>%
-    lwgeom::st_transform_proj(mt_state_plane) %>%
+    lwgeom::st_transform_proj(mt_state_plane)
+  
+  sf::st_agr(usdm_data) = "constant"
+  
+  usdm_data %<>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(DM = factor(DM,
