@@ -94,7 +94,7 @@ ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf")
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-El Niño events can have a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this spring are in part guided by El Niño conditions. The CPC is projecting that temperatures will likely be warmer across Montana this spring, especially going into April. Warmer temperatures may accelerate spring snowmelt and prompt an earlier start to the growing season.
+El Niño events can have a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this spring are in part guided by El Niño conditions. The CPC is projecting that temperatures will likely be warmer than normal across western Montana this spring, especially going into April. Warmer temperatures may accelerate spring snowmelt and prompt an earlier start to the growing season.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
