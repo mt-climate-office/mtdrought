@@ -1,5 +1,5 @@
 ---
-title: "Spring 2019 Forecast"
+title: "Late Spring 2019 Forecast"
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,19 +14,17 @@ source("./R/setup.R")
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 
-The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific ocean near the equator. El Niño events have a stong influence on winter weather across Montana, and less of an influence during the rest of the year.
+The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific ocean near the equator. El Niño events have a strong influence on winter weather across Montana, and less of an influence during the rest of the year. We are still experiencing a weak El Niño, but conditions through this winter have been very different (much colder!) than a typical El Niño. Historically, April--June precipitation and temperature during an El Niño year are practically identical to those of a normal or La Niña year, meaning that climate forecasters must depend on other data to make their seasonal predictions.
 
-Back in October, NOAA was predicting an El Niño event would begin over the winter. A weak El Niño finally formed during January 2019, and weak El Niño conditions are likely to continue into spring. Historically, El Niño events bring slightly warmer than normal spring temperatures to northern and western Montana, and slightly cooler than normal temperatures in southeastern Montana. Spring precipitation during an El Niño event is very close to normal across the state. However, weak El Niño events have less of an influence than strong El Niños, and there have been many years when these patterns haven't held up. For example, Montana has been officially in an El Niño since the end of January, but this February has been colder than average across much of the state, and portions of Montana have received much more precipitation than normal.
-
-These maps show what an average El Niño March--May looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into spring.
+These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring.
 
 ```{r load enso, cache=TRUE}
-# enso <- mtd_get_all_enso_ee(start_date = "2019-03-01",
-#                                 end_date = "2019-06-01") %T>%
-#   readr::write_rds("../Data/gridmet/ENSO_MAM.rds",
+# enso <- mtd_get_all_enso_ee(start_date = "2019-04-01",
+#                                 end_date = "2019-07-01") %T>%
+#   readr::write_rds("../Data/gridmet/ENSO_AMJ.rds",
 #                      compress = "gz")
 
-enso <- readr::read_rds("../Data/gridmet/ENSO_MAM.rds")
+enso <- readr::read_rds("../Data/gridmet/ENSO_AMJ.rds")
 
 enso %<>%
   purrr::transpose()
@@ -58,20 +56,20 @@ Early spring during an El Niño event is on average warmer than normal across Mo
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "tmean",
                      use_normal = TRUE,
-                     Season = "Mar-May") %T>%
+                     Season = "Apr-Jun") %T>%
   save_mt_map("forecast_enso_tmean.pdf")
 
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "prcp",
                      use_normal = TRUE,
-                     Season = "Mar-May") %T>%
+                     Season = "Apr-Jun") %T>%
   save_mt_map("forecast_enso_prcp.pdf")
 
 ```
 
 The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day.
 
-For temperature, ENSO conditions only have a strong influence on Montana climate in the winter months; the solid green line (El Niño) is above the other lines, indicating warmer conditions on average in El Niño years.
+For temperature, ENSO conditions only have a strong influence on Montana climate in the winter months; the solid green line (El Niño) is above the other lines during the winter, indicating warmer winter conditions on average in El Niño years.
 
 For precipitation, however, it is very difficult to distinguish the three solid lines. El Niño conditions lead to slightly drier winters, while La Niña conditions are indistinguishable from ENSO Neutral conditions with regard to winter precipitation across Montana.
 
@@ -94,11 +92,11 @@ ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf")
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-El Niño events can have a strong influence on weather in North America, so NOAA's Climate Prediction Center (CPC) seasonal projections for this spring are in part guided by El Niño conditions. The CPC is projecting that temperatures will likely be warmer than normal across western Montana this spring, especially going into April. Warmer temperatures may accelerate spring snowmelt and prompt an earlier start to the growing season.
+NOAA's Climate Prediction Center (CPC) is projecting that temperatures will likely be warmer than normal across western Montana this spring, and potentially cooler than normal across eastern Montana. Warmer temperatures may accelerate spring snowmelt and prompt an earlier start to the growing season.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-03-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -108,11 +106,11 @@ noaa_seasonal$map %T>%
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-Wait, what's going on with this precipitation map? It doesn't look like there is anything on it! That's right---the CPC isn't making predictions one way or another for preciptation this spring. The entire state of Montana is in the "Equal Chances" category, meaning that our precipitation may be higher, lower, or near normal depending upon particular storm tracks.
+The CPC has increased its seasonal precipitation forecast across southern Montana to "somewhat likely wetter" conditions. The rest of the state continues to be in the "Equal Chances" category, meaning that  precipitation may be higher, lower, or near normal depending upon particular storm tracks. The timing of these storms will matter too; precipitation in the spring may still fall as snow in the mountains, but as we move into late spring rain-dominant storms could accelerate snowmelt.
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-03-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -126,7 +124,7 @@ noaa_seasonal$map %T>%
 
 <!-- ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
 
-<!-- future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2019-03-01", -->
+<!-- future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2019-04-15", -->
 <!--                               data_out = "../data/NOAA_droughtlook") -->
 
 <!-- future_seasonal_drought$map -->

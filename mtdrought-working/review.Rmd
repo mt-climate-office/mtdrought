@@ -1,5 +1,5 @@
 ---
-title: "Winter 2019: El Niño Arrives"
+title: "Early Spring 2019 Review"
 editor_options: 
   chunk_output_type: console
 ---
@@ -18,8 +18,8 @@ gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
                                           "tmmn" = "mean",
                                           "tmmx" = "mean"),
-                              start_date = "2018-12-01",
-                              end_date = "2019-02-28",
+                              start_date = "2019-02-01",
+                              end_date = "2019-04-15",
                               raw_dir = "../data/GRIDMET",
                               overwrite = FALSE)
 
@@ -60,7 +60,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Warmer than average temperatures in December and early January have been balanced out by near record low temperatures for parts of the state in early February. Overall, temperatures this winter have been cooler than normal in the majority of western MT valley bottoms and for portions of north and south central Montana. During early winter, northeastern MT experienced warmer than normal temperatures, but cold weather in February has lowered the seasonal average down to normal or below normal.
+Brrrr! February and early March brought near-record lows across Montana, with some areas more than 30ºF below normal temperatures. These extreme cold temperatures bring benefits beyond good ski conditions---Montana's snowpack was able to rebound from a slow start in early winter, and the deep freezes likely killed mountain pine beetle populations that have been attacking Montana forests since the late 1990s. Temperatures have moderated since mid-March, however, and are now normal or slightly warmer than normal across the state.
 
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -71,7 +71,7 @@ gridmet_sf %>%
 
 ```
 
-```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
+```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 
@@ -80,20 +80,20 @@ attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
 
 past_seasonal_temp_map <- 
   mtd_leaflet(x = past_seasonal_temp,
-            pal =  "-RdBu",
-            legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
-                                          format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
-                                          "<a href='../reference.html' target='_blank'>Average temperature (ºF), deviation from normal</a>"),
-            image_query_title = "Temperature Deviation (ºF)",
-            reverse = TRUE,
-            midpoint = 0,
-            digits = 1)
+              pal =  "-RdBu",
+              legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
+                                            format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
+                                            "<a href='../reference.html' target='_blank'>Average temperature (ºF), deviation from normal</a>"),
+              image_query_title = "Temperature Deviation (ºF)",
+              reverse = TRUE,
+              midpoint = 0,
+              digits = 1)
 
 past_seasonal_temp_map %>%
   saveWidgetFix("./figures/review_temperature.html", 
                 selfcontained = FALSE,
                 libdir = "./site_libs"
-                )
+  )
 
 knitr::include_url("./figures/review_temperature.html",
                    height = "500px")
@@ -122,20 +122,20 @@ mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
                                   y = value),
                      col = "#0571b0",
                      data = gridmet_series$tmmn %>%
-                      na.omit(),
-                    na.rm = TRUE) +
+                       na.omit(),
+                     na.rm = TRUE) +
   ggplot2::geom_line(ggplot2::aes(x = day,
                                   y = value),
                      col = "#ca0020",
                      data = gridmet_series$tmmx %>%
-                      na.omit(),
-                    na.rm = TRUE)
+                       na.omit(),
+                     na.rm = TRUE)
 
 ggplot2::ggsave("./figures/review_temperature_climate.pdf")
 ```
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-Drier than normal conditions persist in western Montana with slightly lower than normal mountain snowpack. Portions of eastern Montana have seen over 350 percent of their normal precipitation for December through February.
+Although February brought several large winter storms to Montana, March has been drier than normal, leading to overall drier conditions during late winter. The exception is north-eastern Montana, portions of which have experienced over 200% of normal precipitation for February through March. Colder than normal temperatures have enabled snowpack to build up, especially in south-central Montana.
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -146,7 +146,7 @@ gridmet_sf %>%
 ```
 
 
-```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
+```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 
 past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
   magrittr::multiply_by(100) %>%
@@ -191,7 +191,7 @@ mtd_plot_climatology(x = gridmet_series[c("pr")],
                      mean = TRUE,
                      family = tw()) +
   ggplot2::geom_col(mapping = ggplot2::aes(x = day,
-                                 y = value),
+                                           y = value),
                     col = "forestgreen",
                     data = gridmet_series$pr %>%
                       na.omit(),
@@ -203,16 +203,53 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
-Snowpack is very close to normal across Montana, with slightly lower than average Snow Water Equivalent (SWE) in northwest Montana (80%–100%), and slightly higher than average SWE for southern and central Montana (100%–120%). Mountain snowpack can be a good indicator of streamflow levels and the water available for diversion in the summer for areas east and west of the divide. It will be important to pay attention to spring temperatures that impact the timing of snowmelt and flooding. El Niño conditions going into the spring tilt the odds towards warmer temperatures and earlier than normal snowmelt.
+Snowpack across western Montana continues to diverge along a line from roughly Lolo to Great Falls, with increasingly lower than average Snow Water Equivalent (SWE) in northwest Montana (80%–100%), and higher than average SWE for southern and central Montana (100%–120%). Where spring storms hit in early April---and whetehr they bring predominately snow or rain---will largely determine how long the snowpack is retained into the late spring. Continue to pay attention to spring temperatures that impact the timing of snowmelt and flooding.
 
-```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
-past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-03-01", huc = 8)
+```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
+past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-04-15", huc = 8)
 
 
 knitr::include_url(past_seasonal_swe$leaflet$path,
-height = "500px")
+                   height = "500px")
 
 ```
 
 <!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
 
+### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
+As Montana thaws after a long winter, soil moisture measurements from weatehr stations and satellite data become more accurate. Soil moisture is factored into drought and flood forecasts as an indicator of wet or dry basin conditions. We are seeing typical soil moisture conditions for early spring across Montana. The majority of Montana currently has very saturated soil (the blue areas in the map below). Soils in southwestern Montana are drier than the rest of the state; the extreme dry spots in northeastern Montana are noise in the data that will become more accurate as conditions warm. As we move into spring, daytime temperatures and the intensity of spring storms will greatly determine how soil moisture conditions change across the state.
+
+```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+smap <- mtd_plot_smap(date = "2019-04-15",
+                      variable = "sm_rootzone_wetness",
+                      data_out = "../data/SMAP")
+
+smap$map %>%
+  save_mt_map("review_soil_moisture.pdf")
+
+```
+
+```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
+smap$leaflet %>%
+  saveWidgetFix("./figures/review_soil_moisture.html", 
+                selfcontained = FALSE,
+                libdir = "./site_libs"
+  )
+
+knitr::include_url("./figures/review_soil_moisture.html",
+                   height = "500px")
+
+```
+
+<!-- ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-} -->
+<!-- By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but see the sections on soil moisture and evapotranspiration, which tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season. -->
+
+<!-- ```{r past-seasonal-drought, cache=TRUE} -->
+
+<!-- past_seasonal_drought <- mtd_plot_usdm(date = "2019-04-15", -->
+<!--                                        data_out = "../data/USDM") -->
+
+<!-- past_seasonal_drought$map %T>% -->
+<!--   save_mt_map("review_drought.pdf") -->
+
+<!-- ``` -->

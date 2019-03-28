@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Late Spring 2019 Forecast</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta http-equiv="Cache-Control" content="no-store">
+
+<style>
+  iframe {
+    width: 100%;
+    border: none;
+
+  }
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left; vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring and Forecasting<br>for Agricultural Producers<br><b>April 2019</b></ht></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Seasonal Summary</a>
+</li>
+<li>
+  <a href="review.html">Early Spring 2019 Update</a>
+</li>
+<li>
+  <a href="forecast.html">Late Spring 2019 Forecast</a>
+</li>
+<li>
+  <a href="reference.html">Reference</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Late Spring 2019 Forecast</h1>
+
+</div>
+
+
+<div class="figure">
+<img src="img/Ada_Smith_Rattlesnake_Valley.jpg" alt="A winter view on the Conservation trails up the Rattlesnake Valley. Photo: Ada Smith." />
+<p class="caption">A winter view on the Conservation trails up the Rattlesnake Valley. Photo: Ada Smith.</p>
+</div>
+<div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills">
+<h2></h2>
+<div id="el-nino-update" class="section level3 unnumbered">
+<h3><img src="icons/enso.svg" width="35px"/> El Niño Update</h3>
+<p>The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific ocean near the equator. El Niño events have a strong influence on winter weather across Montana, and less of an influence during the rest of the year. We are still experiencing a weak El Niño, but conditions through this winter have been very different (much colder!) than a typical El Niño. Historically, April–June precipitation and temperature during an El Niño year are practically identical to those of a normal or La Niña year, meaning that climate forecasters must depend on other data to make their seasonal predictions.</p>
+<p>These maps show what an average El Niño April–June looks like relative to normal. Keep an eye on the NOAA ENSO outlook (<a href="https://www.climate.gov/enso">https://www.climate.gov/enso</a>) for the latest ENSO conditions and predictions as we head into late spring.</p>
+<p>Early spring during an El Niño event is on average warmer than normal across Montana, especially as you move towards northwestern Montana.</p>
+<p><img src="forecast_files/figure-html/future-seasonal-enso-1.png" width="100%" style="display: block; margin: auto;" /><img src="forecast_files/figure-html/future-seasonal-enso-2.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the <a href="./reference.html">Reference</a> section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981–2010 period on any given day.</p>
+<p>For temperature, ENSO conditions only have a strong influence on Montana climate in the winter months; the solid green line (El Niño) is above the other lines during the winter, indicating warmer winter conditions on average in El Niño years.</p>
+<p>For precipitation, however, it is very difficult to distinguish the three solid lines. El Niño conditions lead to slightly drier winters, while La Niña conditions are indistinguishable from ENSO Neutral conditions with regard to winter precipitation across Montana.</p>
+<p><img src="forecast_files/figure-html/future-seasonal-enso-prcp-1.png" width="100%" style="display: block; margin: auto;" /><img src="forecast_files/figure-html/future-seasonal-enso-prcp-2.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="temperature" class="section level3 unnumbered">
+<h3><img src="icons/temperature.svg" width="35px"/> Temperature</h3>
+<p>NOAA’s Climate Prediction Center (CPC) is projecting that temperatures will likely be warmer than normal across western Montana this spring, and potentially cooler than normal across eastern Montana. Warmer temperatures may accelerate spring snowmelt and prompt an earlier start to the growing season.</p>
+<p><img src="forecast_files/figure-html/future-seasonal-temp-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="precipitation" class="section level3 unnumbered">
+<h3><img src="icons/precipitation.svg" width="35px"/> Precipitation</h3>
+<p>The CPC has increased its seasonal precipitation forecast across southern Montana to “somewhat likely wetter” conditions. The rest of the state continues to be in the “Equal Chances” category, meaning that precipitation may be higher, lower, or near normal depending upon particular storm tracks. The timing of these storms will matter too; precipitation in the spring may still fall as snow in the mountains, but as we move into late spring rain-dominant storms could accelerate snowmelt.</p>
+<p><img src="forecast_files/figure-html/future-seasonal-prcp-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<!-- ### <img src="icons/drought.svg" width="35px"/> Drought {-} -->
+<!-- The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions. -->
+<!-- ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
+<!-- future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2019-04-15", -->
+<!--                               data_out = "../data/NOAA_droughtlook") -->
+<!-- future_seasonal_drought$map -->
+<!-- ``` -->
+</div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78448357-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78448357-4');
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

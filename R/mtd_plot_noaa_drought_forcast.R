@@ -10,13 +10,7 @@ mtd_plot_noaa_drought_outlook <- function(date,
   
   # List the files available from the Drought Monitor
   noaa_files <- 
-    suppressWarnings(
-      httr::GET(
-        noaa_url,
-        httr::authenticate("anonymous", "")
-        )
-      ) %>%
-    httr::content() %>%
+    curl::curl(noaa_url) %>%
     readr::read_table(col_names = FALSE) %$%
     X9 %>%
     stringr::str_subset("sdo")
