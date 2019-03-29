@@ -108,6 +108,12 @@ mtd_plot_smap <- function(date,
   
   attribution = "Soil moisture data by <a href='https://smap.jpl.nasa.gov/' target='_blank'>NASA SMAP</a>"
   
+  soil_moisture_rast %<>%
+    raster::crop(mcor::mt_state_simple %>%
+                   sf::st_transform(raster::projection(soil_moisture_rast)) %>%
+                   as('Spatial'),
+                 snap = "out")
+  
   tm_out <- (soil_moisture_rast %>%
                tm_shape() + 
                tm_raster(title = "",

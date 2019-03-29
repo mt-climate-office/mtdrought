@@ -60,8 +60,7 @@ attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
 ```
 
 ### <img src="./icons/temperature.svg" width="35px"/> Temperature {-}
-Brrrr! February and early March brought near-record lows across Montana, with some areas more than 30ºF below normal temperatures. These extreme cold temperatures bring benefits beyond good ski conditions---Montana's snowpack was able to rebound from a slow start in early winter, and the deep freezes likely killed mountain pine beetle populations that have been attacking Montana forests since the late 1990s. Temperatures have moderated since mid-March, however, and are now normal or slightly warmer than normal across the state.
-
+Brrrr! February and early March brought near-record lows across Montana, with some areas more than 30ºF below normal temperatures. These extreme cold temperatures bring benefits beyond good ski conditions---Montana's snowpack was able to rebound from a slow start in early winter, and the deep freezes likely killed mountain pine beetle populations that have been attacking Montana forests since the late 1990s. Cold temperatures in February made for a hard start to the calving season. Producers were forced thaw water supplies and supplement cows and calves with additional feed. Many put up wind breaks and plenty of straw to keep cows and calves as warm and dry as possible. Temperatures have moderated since mid-March, however, and are now normal or slightly warmer than normal across the state.
 ```{r past-seasonal-temp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
 gridmet_sf %>%
@@ -203,7 +202,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
-Snowpack across western Montana continues to diverge along a line from roughly Lolo to Great Falls, with increasingly lower than average Snow Water Equivalent (SWE) in northwest Montana (80%–100%), and higher than average SWE for southern and central Montana (100%–120%). Where spring storms hit in early April---and whetehr they bring predominately snow or rain---will largely determine how long the snowpack is retained into the late spring. Continue to pay attention to spring temperatures that impact the timing of snowmelt and flooding.
+Snowpack across western Montana continues to diverge along a line from roughly Lolo to Great Falls, with increasingly lower than average Snow Water Equivalent (SWE) in northwest Montana (80%–100%), and higher than average SWE for southern and central Montana (100%–120%). Where spring storms hit in early April---and whether they bring predominately snow or rain---will largely determine how long the snowpack is retained into the late spring. Continue to pay attention to spring temperatures that impact the timing of snowmelt and flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-04-15", huc = 8)
@@ -217,9 +216,10 @@ knitr::include_url(past_seasonal_swe$leaflet$path,
 <!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
-As Montana thaws after a long winter, soil moisture measurements from weatehr stations and satellite data become more accurate. Soil moisture is factored into drought and flood forecasts as an indicator of wet or dry basin conditions. We are seeing typical soil moisture conditions for early spring across Montana. The majority of Montana currently has very saturated soil (the blue areas in the map below). Soils in southwestern Montana are drier than the rest of the state; the extreme dry spots in northeastern Montana are noise in the data that will become more accurate as conditions warm. As we move into spring, daytime temperatures and the intensity of spring storms will greatly determine how soil moisture conditions change across the state.
+As Montana thaws after a long winter, soil moisture measurements from weather stations and satellite data become more accurate. Soil moisture is factored into drought and flood forecasts as an indicator of wet or dry basin conditions. We are seeing typical soil moisture conditions for early spring across Montana. The majority of Montana currently has very saturated soil (the blue areas in the map below). Soils in southwestern Montana are drier than the rest of the state; the extreme dry spots in northeastern Montana are noise in the data that will become more accurate as conditions warm. As we move into spring, daytime temperatures and the intensity of spring storms will greatly determine how soil moisture conditions change across the state.
 
-```{r past-seasonal-smap-grid, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
+
 smap <- mtd_plot_smap(date = "2019-04-15",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
