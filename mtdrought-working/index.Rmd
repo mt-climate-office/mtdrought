@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![Lolo Pass in early January. Although winter got off to a slow start, snowpack across Montana is now approaching normal levels. Photo: Kevin Hyde.](./img/Kevin_Hyde_Lolo_winter_small.jpg)
+![Glasgow, MT, March 30, 2019. Rapid snowmelt and spring storms are causing flooding of the Milk River in eastern Montana. Photo: © Sean R. Heavey](./img/Sean_Heavey_Glasgow.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
