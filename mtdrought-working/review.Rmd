@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![Glasgow, MT, March 30, 2019. Rapid snowmelt and spring storms are causing flooding of the Milk River in eastern Montana. Photo: © Sean R. Harvey](./img/Sean_Heavey_Glasgow.jpg)
+![Glasgow, MT, March 30, 2019. Rapid snowmelt and spring storms are causing flooding of the Milk River in eastern Montana. Photo: © Sean R. Heavey](./img/Sean_Heavey_Glasgow.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
