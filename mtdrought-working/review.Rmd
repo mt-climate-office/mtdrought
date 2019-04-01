@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![Making snow at sunset in Glasgow, MT, on February 7th. It was -16 ºF at the time, the high temperature for the day. Photo: NWS Glasgow](./img/Tanja_Fransen_glasgow.jpg)
+![Glasgow, MT, March 30, 2019. Rapid snowmelt and spring storms are causing flooding of the Milk River in eastern Montana. Photo: © Sean R. Harvey](./img/Sean_Heavey_Glasgow.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
