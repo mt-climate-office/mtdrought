@@ -27,10 +27,10 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Historically cold temperatures February and early March have moderated as we moved into spring.
+* Historically cold temperatures during February and early March have warmed as we moved into spring.
 * Statewide snowpack was near normal at the end of February, but has decreased in northwestern Montana while increasing in the south-central part of the state.
-* Early spring soil moisture is typically high across Montana. The timing and temperature of spring storms will in large part determine the speed and intensity of snowmelt this spring.
-* The NOAA seasonal forecast for April--June is for warmer than normal conditions in western Montana and cooler than normal conditions in eastern Montana. Conditions in southern Montana are somewhat likely to be wetter than normal in late spring and early summer.
+* Soil moisture is high across Montana, as is typical in early spring. The timing and temperature of spring storms will in large part determine the speed and intensity of snowmelt.
+* The NOAA seasonal forecast for April--June is for warmer than normal conditions in western Montana and cooler than normal conditions in eastern Montana. Conditions in southern Montana are somewhat likely to be wetter than normal during late spring and early summer.
 </div>
 
 -----

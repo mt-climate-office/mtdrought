@@ -14,7 +14,7 @@ source("./R/setup.R")
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 
-The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific ocean near the equator. El Niño events have a strong influence on winter weather across Montana, and less of an influence during the rest of the year. We are still experiencing a weak El Niño, but conditions through this winter have been very different (much colder!) than a typical El Niño. Historically, April--June precipitation and temperature during an El Niño year are practically identical to those of a normal or La Niña year, meaning that climate forecasters must depend on other data to make their seasonal predictions.
+The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific ocean near the equator. El Niño events have a strong influence on winter weather across Montana, and less of an influence during the rest of the year. We are still experiencing a weak El Niño, but conditions through this winter have been very different (much colder!) than a typical El Niño. Historically, April--June precipitation and temperature during an El Niño year are practically identical to those of a normal or La Niña year, meaning that climate forecasting is more difficult and must depend on other data to make seasonal predictions.
 
 These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring.
 
