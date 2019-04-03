@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![A winter view on the Conservation trails up the Rattlesnake Valley. Photo: Ada Smith.](./img/Ada_Smith_Rattlesnake_Valley.jpg)
+![Photo: Casey Page, Billings Gazette.](./img/Cold_Cows.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
