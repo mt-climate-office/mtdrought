@@ -42,7 +42,7 @@ knitr::opts_chunk$set(echo = FALSE,
 ## Load all packages
 all_packages <- c("mcor", "thredds",# The Core MCO package
                   "FedData", "smapr", "rhdf5", # Package for data aquisition
-                  "sf", "raster", "rgeos", "fasterize", "velox", "spex", "lwgeom",# Packages for spatial processing
+                  "sf", "raster", "rgeos", "fasterize", "velox", "spex", "lwgeom", "geojsonsf", # Packages for spatial processing
                   "magrittr", "tidyverse", "purrrlyr", "matrixStats",# Packages for tidy code
                   "reticulate", # Python in R
                   "RColorBrewer", "htmlwidgets", "htmltools", "leaflet", "mapview", "leaflet.extras","tmap", "plotly", "mgcv",
