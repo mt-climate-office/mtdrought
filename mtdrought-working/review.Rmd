@@ -134,7 +134,7 @@ ggplot2::ggsave("./figures/review_temperature_climate.pdf")
 ```
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
-Although February brought several large winter storms to Montana, March has been drier than normal, leading to overall drier conditions during late winter. The exception is north-eastern Montana, portions of which have experienced over 200% of normal precipitation for February through March. Colder than normal temperatures have enabled snowpack to build up throughout the state, especially in south-central Montana.
+Although February brought several large winter storms to Montana, March has been drier than normal, leading to overall drier conditions during late winter. The exception is north-eastern Montana, portions of which have experienced over 300% of normal precipitation for February through Early April.
 
 ```{r past-seasonal-prcp-grid-normals, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
