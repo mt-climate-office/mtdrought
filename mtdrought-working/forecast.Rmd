@@ -19,17 +19,17 @@ The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in th
 These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring.
 
 ```{r load enso, cache=TRUE}
-# enso <- mtd_get_all_enso_ee(start_date = "2019-04-01",
-#                                 end_date = "2019-07-01") %T>%
-#   readr::write_rds("../Data/gridmet/ENSO_AMJ.rds",
+# enso <- mtd_get_all_enso_ee(start_date = "2019-06-01",
+#                                 end_date = "2019-09-01") %T>%
+#   readr::write_rds("../data/gridmet/ENSO_JJA.rds",
 #                      compress = "gz")
 
-enso <- readr::read_rds("../Data/gridmet/ENSO_AMJ.rds")
+enso <- readr::read_rds("../data/gridmet/ENSO_JJA.rds")
 
 enso %<>%
   purrr::transpose()
 
-enso$pr %<>%
+enso$pr %>%
   purrr::map(mm_to_in)
 
 enso$tmmn %<>%
@@ -56,13 +56,13 @@ Early spring during an El Niño event is on average warmer than normal across Mo
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "tmean",
                      use_normal = TRUE,
-                     Season = "Apr-Jun") %T>%
+                     Season = "Jun-Aug") %T>%
   save_mt_map("forecast_enso_tmean.pdf")
 
 enso$`El Niño` %>%
   mtd_plot_enso_grid(element = "prcp",
                      use_normal = TRUE,
-                     Season = "Apr-Jun") %T>%
+                     Season = "Jun-Aug") %T>%
   save_mt_map("forecast_enso_prcp.pdf")
 
 ```
@@ -96,7 +96,7 @@ NOAA's Climate Prediction Center (CPC) is projecting that temperatures will like
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-06-01",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -110,7 +110,7 @@ The CPC has increased its seasonal precipitation forecast across southern Montan
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-04-15",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2019-06-01",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 

@@ -18,8 +18,8 @@ gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
                                           "tmmn" = "mean",
                                           "tmmx" = "mean"),
-                              start_date = "2019-02-01",
-                              end_date = "2019-04-15",
+                              start_date = "2019-04-01",
+                              end_date = "2019-06-01",
                               raw_dir = "../data/GRIDMET",
                               overwrite = FALSE)
 
@@ -73,6 +73,7 @@ gridmet_sf %>%
 ```{r past-seasonal-temp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
+names(gridmet$tmean) <- names(gridmet$tmmn)
 
 past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
 attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
@@ -205,7 +206,8 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 Snowpack across western Montana continues to diverge along a line from roughly Lolo to Great Falls, with increasingly lower than average Snow Water Equivalent (SWE) in northwest Montana (80%–100%), and higher than average SWE for southern and central Montana (100%–120%). The timing and extent of storms in April---and whether they bring predominately snow or rain---will largely determine how long the snowpack is retained into the late spring. Continue to pay attention to spring temperatures, since they impact the timing of snowmelt and flooding.
 
 ```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
-past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-04-15", huc = 8)
+
+past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-06-01", huc = 8)
 
 
 knitr::include_url(past_seasonal_swe$leaflet$path,
@@ -220,7 +222,7 @@ As Montana thaws after a long winter, soil moisture measurements from weather st
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
 
-smap <- mtd_plot_smap(date = "2019-04-15",
+smap <- mtd_plot_smap(date = "2019-06-01",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
 
@@ -241,15 +243,183 @@ knitr::include_url("./figures/review_soil_moisture.html",
 
 ```
 
-<!-- ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-} -->
-<!-- By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but see the sections on soil moisture and evapotranspiration, which tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season. -->
+### <img src="./icons/soil_saturation.svg" width="35px"/> Evapotranspiration {-}
 
-<!-- ```{r past-seasonal-drought, cache=TRUE} -->
+Evapotranspiration (ET), or the amount of water vapor leaving the Earth's surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). The plot and graph below show the deviation from normal ET at the end of this summer. In the map, the green areas experienced greater amounts of ET than their normal amounts from 2000--2016 (the period of record); the brown areas experienced less ET.
 
-<!-- past_seasonal_drought <- mtd_plot_usdm(date = "2019-04-15", -->
-<!--                                        data_out = "../data/USDM") -->
+```{r past-seasonal-ET, cache=TRUE}
+mod16_2019 <- mtd_get_mod16a2(start_date = "2019-01-01", 
+                              end_date = "2019-12-31", 
+                              base_name = 'MOD16A2',
+                              raw_dir = "../data/MOD16A2",
+                              overwrite = FALSE)
 
-<!-- past_seasonal_drought$map %T>% -->
-<!--   save_mt_map("review_drought.pdf") -->
+# mod16_2018[][is.na(mod16_2018[])] <- 0
 
-<!-- ``` -->
+mod16_2019 %<>%
+  mcor::mco_mask(mcor::mt_state)
+
+ET_date <- mod16_2019 %>%
+  names() %>%
+  stringr::str_remove("X") %>%
+  lubridate::as_date()
+
+mod16_2018 <- mtd_get_mod16a2(start_date = "2018-01-01", 
+                              end_date = "2018-12-31", 
+                              base_name = 'MOD16A2',
+                              raw_dir = "../data/MOD16A2",
+                              overwrite = FALSE)
+
+# mod16_2017[][is.na(mod16_2017[])] <- 0
+
+mod16_2018 %<>%
+  mcor::mco_mask(mcor::mt_state)
+
+mod16_normals <-
+  mtd_get_mod16a2_normals(base_name = 'MOD16A2',
+                          raw_dir = "../data/MOD16A2",
+                          overwrite = FALSE)
+
+# mod16_normals %<>%
+#   purrr::map(function(x){
+#     x[][is.na(x[])] <- 0
+#     x
+#   })
+
+mod16_normals %<>%
+  purrr::map(mcor::mco_mask,
+             mcor::mt_state)
+
+mod16_normals_summary <-
+  mod16_normals %>%
+  purrr::map(mtd_aggregate_normals) %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(YDAY = seq(1, 365, 8))
+
+mod16_2019_summary <- tibble::tibble(mean = mod16_2019 %>%
+                                       mtd_aggregate_normals(),
+                                     YDAY = names(mod16_2019) %>%
+                                       stringr::str_remove("X") %>%
+                                       lubridate::as_date() %>%
+                                       lubridate::yday())
+
+mod16_2018_summary <- tibble::tibble(mean = mod16_2018 %>%
+                                       mtd_aggregate_normals(),
+                                     YDAY = names(mod16_2018) %>%
+                                       stringr::str_remove("X") %>%
+                                       lubridate::as_date() %>%
+                                       lubridate::yday())
+
+mod16_2019_dev <- mod16_2019 - mod16_normals$p50[[names(mod16_2019) %>%
+                                                    stringr::str_remove("X") %>%
+                                                    lubridate::as_date() %>%
+                                                    lubridate::yday() %>%
+                                                    stringr::str_c("X",.)]]
+mod16_2018_dev <- mod16_2018 - mod16_normals$p50[[names(mod16_2018) %>%
+                                                    stringr::str_remove("X") %>%
+                                                    lubridate::as_date() %>%
+                                                    lubridate::yday() %>%
+                                                    stringr::str_c("X",.)]]
+
+mod16_normals_summary_dev <- mod16_normals_summary %>%
+  dplyr::mutate(median = `p50`) %>%
+  dplyr::mutate_at(.vars = dplyr::vars(-YDAY,
+                                       -mean,
+                                       -median),
+                   .funs = dplyr::funs(. - mean))
+
+mod16_2019_summary_dev <- mod16_2019_summary %>%
+  dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2019_summary)])
+
+mod16_2018_summary_dev <- mod16_2018_summary %>%
+  dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2018_summary)])
+
+```
+
+```{r past-seasonal-ET-plot-grid, cache=TRUE}
+this.date <- which.min(abs(lubridate::as_date("2019-06-01")-ET_date))
+
+mod16_2019_dev_sf <-
+  mod16_2019_dev %>%
+  as.list() %>%
+  magrittr::extract2(this.date) %>%
+  mtd_as_sf_gridmet() %>%
+  spex::qm_rasterToPolygons(na.rm = T) %>%
+  lwgeom::st_transform_proj(mt_state_plane) %>%
+  sf::st_intersection(mcor::mt_state_simple)
+
+limits <- c(-100,100)
+
+mod16_2019_dev_sf[[1]][mod16_2019_dev_sf[[1]] > limits[2]] <- limits[2]
+mod16_2019_dev_sf[[1]][mod16_2019_dev_sf[[1]] < limits[1]] <- limits[1]
+
+mod16_2019_dev_sf %<>%
+  dplyr::group_by_at(names(mod16_2019_dev_sf)[[1]]) %>%
+  dplyr::summarise()
+
+col <- names(mod16_2019_dev_sf)[[1]]
+
+(mod16_2019_dev_sf %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_sf(aes_string(fill = col),
+                     color = NA) +
+    scale_fill_distiller(name = stringr::str_c(format(ET_date[this.date], '%B %d, %Y'),"\n",
+                                               "Evapotranspiration (mm / 8 days)\n",
+                                               "Deviation from normal"),
+                         direction = 1,
+                         limits = limits,
+                         # breaks = breaks,
+                         palette = "BrBG",
+                         expand = FALSE,
+                         guide = guide_colourbar(title.position = "bottom")) +
+    mtd_plot()) %T>%
+  save_mt_map("review_map_ET.pdf")
+
+```
+
+In the graph below, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000--2017 period. The jagged black line represent this year's conditions; the jagged red line represents the 2018 conditions, for reference. Across Montana, 2019 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions. In contrast, 2018 ET declined to below-normal values from early June through the early September, reflecting last summer's drought conditions.
+
+```{r past-seasonal-ET-plot, cache=FALSE}
+mtd_plot_climatology(x = list(mod16_normals_summary %>%
+                                dplyr::rename(
+                                  `normal.000` = p0,
+                                  `normal.025` = p25,
+                                  `normal.050` = p50,
+                                  `normal.075` = p75,
+                                  `normal.100` = p100,
+                                  `normal.mean` = mean,
+                                  day = YDAY)),
+                     col = c("forestgreen"),
+                     ybreaks = seq(0, 240, 20),
+                     title = NULL,
+                     polar = FALSE,
+                     # smooth = TRUE,
+                     mean = TRUE) +
+  mtd_plot_add_climatology(x = mod16_2019_summary %>%
+                             dplyr::rename(
+                               `normal.mean` = mean,
+                               day = YDAY),
+                           mean = TRUE) +
+  mtd_plot_add_climatology(x = mod16_2018_summary %>%
+                             dplyr::rename(
+                               `normal.mean` = mean,
+                               day = YDAY),
+                           mean = TRUE,
+                           col = "red")
+
+ggplot2::ggsave("./figures/review_graph_ET.pdf")
+```
+
+
+### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but see the sections on soil moisture and evapotranspiration, which tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season.
+
+```{r past-seasonal-drought, cache=TRUE}
+
+past_seasonal_drought <- mtd_plot_usdm(date = "2019-06-01",
+                                       data_out = "../data/USDM")
+
+past_seasonal_drought$map %T>%
+  save_mt_map("review_drought.pdf")
+
+```

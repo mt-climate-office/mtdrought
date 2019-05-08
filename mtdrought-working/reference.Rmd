@@ -28,9 +28,9 @@ Weather and climate forecasters use words and information in very particular way
 ![](./icons/normals.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Normal(s)** --- Climatologists use the term "normal" to compare current conditions or forecasts, such as  temperature or precipitation, to the past. Here, the normal value is the statistical mean (the average) for a given measurement in a specific place during a specific period of time. Climatologists use the most recent 30-year period, rounded to the nearest decade, to define normal in North America: 1981--2010. The goal is to look far enough back in time to capture variation in weather patterns, but not so far as to be irrelevant to recent conditions. In 2021, we will start using the 1991--2020 period.
 <!-- The median is the middle value among observed values when arranged from smallest to largest. 50 percent of the values are above the median, and 50 percent are below it. -->
 
-<!-- <div class="clearfix"></div> -->
+<div class="clearfix"></div>
 
-<!-- ![](./icons/drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Drought** --- The US Drought Monitor identifies general areas of drought and labels them by intensity. Maps of drought intensity are used by policy-makers, resource managers, and agricultural producers to make decisions. More information about the US Drought Monitor can be found at the [US Drought Monitor website](https://droughtmonitor.unl.edu/). -->
+![](./icons/drought.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Drought** --- The US Drought Monitor identifies general areas of drought and labels them by intensity. Maps of drought intensity are used by policy-makers, resource managers, and agricultural producers to make decisions. More information about the US Drought Monitor can be found at the [US Drought Monitor website](https://droughtmonitor.unl.edu/).
 
 <div class="clearfix"></div>
 
@@ -50,9 +50,9 @@ Weather and climate forecasters use words and information in very particular way
 
 <div class="clearfix"></div>
 
-<!-- ![](./icons/soil_saturation.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Evapotranspiration** --- Evapotranspiration (ET) is a joint measure of evaporation of water from the Earth's surface, and plant transpiration, or water vapor that exits a plant's leaves during the process of photosynthesis. ET is one of the factors that climatologists look at when assessing and predicting drought. When atmospheric demand for water is high (i.e., when the air is dry), ET should be high. If ET is low, this might indicate that there is not enough water available to plants to support photosynthesis. In the maps in this newsletter, ET comes from the [MODIS Global Evapotranspiration Project](http://www.ntsg.umt.edu/project/modis/mod16.php), run in part by the Numerical Terradynamic Simulation Group at the University of Montana. ET is mapped at an approximately 4-km spatial resolution. -->
+![](./icons/soil_saturation.svg){style="height:50px; margin:10px 10px; float:left;"}<br>**Evapotranspiration** --- Evapotranspiration (ET) is a joint measure of evaporation of water from the Earth's surface, and plant transpiration, or water vapor that exits a plant's leaves during the process of photosynthesis. ET is one of the factors that climatologists look at when assessing and predicting drought. When atmospheric demand for water is high (i.e., when the air is dry), ET should be high. If ET is low, this might indicate that there is not enough water available to plants to support photosynthesis. In the maps in this newsletter, ET comes from the [MODIS Global Evapotranspiration Project](http://www.ntsg.umt.edu/project/modis/mod16.php), run in part by the Numerical Terradynamic Simulation Group at the University of Montana. ET is mapped at an approximately 4-km spatial resolution.
 
-<!-- <div class="clearfix"></div> -->
+<div class="clearfix"></div>
 
 
 

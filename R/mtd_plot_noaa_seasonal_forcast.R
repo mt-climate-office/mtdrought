@@ -39,7 +39,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
     lubridate::ymd(truncated = 2)
   
   closest_file <- which.min(abs(lubridate::as_date(date)-noaa_dates))
-  if(abs(lubridate::as_date(date)-noaa_dates)[closest_file] == 0)
+  if(abs(lubridate::as_date(date)-noaa_dates)[closest_file] < 27)
     closest_file <- closest_file - 1
   
   

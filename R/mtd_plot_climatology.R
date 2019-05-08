@@ -10,7 +10,8 @@ mtd_plot_climatology <- function(x,
                                  ...){
   if(smooth){
     x %<>%
-      purrr::map(mtd_smooth_normals, ...)
+      purrr::map(mtd_smooth_normals, 
+                 ...)
   }
   
   ggplot2::ggplot() +
