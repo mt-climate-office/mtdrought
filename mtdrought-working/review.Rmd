@@ -14,16 +14,17 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
+start_date <- "2019-04-01"
+end_date <- "2019-06-01"
+
 gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
                                           "tmmn" = "mean",
                                           "tmmx" = "mean"),
-                              start_date = "2019-04-01",
-                              end_date = "2019-06-01",
+                              start_date = start_date,
+                              end_date = end_date,
                               raw_dir = "../data/GRIDMET",
                               overwrite = FALSE)
-
-# gridmet <- readr::read_rds("../data/gridmet/2018-12-01_2019-02-28.rds")
 
 gridmet$pr %<>%
   mm_to_in()
@@ -33,6 +34,109 @@ gridmet$tmmn %<>%
 
 gridmet$tmmx %<>%
   k_to_f()
+
+normals <- 
+  readr::read_rds("../data/gridmet/normals/gridmet_normals.Rds") %>%
+  purrr::map(
+    function(x){
+      x %>%
+        purrr::map(function(i){
+          i[[lubridate::as_date(attr(gridmet,"dates")) %>%
+               lubridate::yday()]]
+        })
+    }
+  )
+
+normals$precipitation_amount %<>%
+  purrr::map(raster::calc, sum, na.rm = TRUE) %>%
+  raster::brick() %>%
+  mm_to_in()
+
+normals$daily_minimum_temperature %<>%
+  purrr::map(raster::calc, mean, na.rm = TRUE) %>%
+  raster::brick() %>%
+  k_to_f()
+
+normals$daily_maximum_temperature %<>%
+  purrr::map(raster::calc, mean, na.rm = TRUE) %>%
+  raster::brick() %>%
+  k_to_f()
+
+normals %<>%
+  purrr::map(raster::projectRaster, gridmet$pr)
+
+gridmet$pr %<>%
+  as.list() %>%
+  c(
+    normals$precipitation_amount %>% 
+      as.list()
+  ) %>%
+  raster::brick()
+
+gridmet$tmmn %<>%
+  as.list() %>%
+  c(
+    normals$daily_minimum_temperature %>% 
+      as.list()
+  ) %>%
+  raster::brick()
+
+gridmet$tmmx %<>%
+  as.list() %>%
+  c(
+    normals$daily_maximum_temperature %>% 
+      as.list()
+  ) %>%
+  raster::brick()
+
+
+# test <- readr::read_rds("../data/gridmet/normals/precipitation_amount.Rds")
+# 
+# out <-
+#   tibble::tibble(
+#     rasts = 
+#       test %>%
+#       as.list(),
+#     year = 
+#       test %>%
+#       names() %>%
+#       stringr::str_remove("X") %>%
+#       lubridate::as_date() %>%
+#       lubridate::year(),
+#     day = 
+#       test %>%
+#       names() %>%
+#       stringr::str_remove("X") %>%
+#       lubridate::as_date() %>%
+#       lubridate::yday()
+#   ) %>%
+#   dplyr::filter(day %in% (seq(lubridate::as_date(start_date),
+#                               lubridate::as_date(end_date),
+#                               "1 day") %>%
+#                            lubridate::yday())) %>%
+#   dplyr::group_by(year) %>%
+#   dplyr::summarise(
+#     rasts = list(
+#       list(
+#         mean = rasts %>%
+#           raster::brick() %>%
+#           mean() %>%
+#           magrittr::set_names("normal.mean"),
+#         
+#         quantile = rasts %>%
+#           raster::brick() %>%
+#           calc(fun = quantile, na.rm = TRUE) %>%
+#           magrittr::set_names(c("normal.000",  "normal.025",  "normal.050",  "normal.075",  "normal.100"))
+#       ) %>%
+#         raster::brick())
+#   )
+# 
+# 
+# (out$rasts %>%
+#     purrr::reduce(`+`) %>%
+#     mm_to_in())[["mean"]] %>%
+#   raster::plot()
+
 
 gridmet_series <- mtd_get_gridmet_series_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
                                             vars = c("pr", "tmmn", "tmmx"),
@@ -75,7 +179,7 @@ gridmet_sf %>%
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 names(gridmet$tmean) <- names(gridmet$tmmn)
 
-past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
+past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$mean)
 attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
 
 past_seasonal_temp_map <- 
@@ -148,7 +252,7 @@ gridmet_sf %>%
 
 ```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 
-past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
+past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$mean) %>%
   magrittr::multiply_by(100) %>%
   round()
 attr(past_seasonal_prcp,"dates") <- attr(gridmet,"dates")
@@ -217,31 +321,31 @@ knitr::include_url(past_seasonal_swe$leaflet$path,
 
 <!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
 
-### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
-As Montana thaws after a long winter, soil moisture measurements from weather stations and satellite data become more accurate. Soil moisture is factored into drought and flood forecasts as an indicator of wet or dry basin conditions. We are seeing typical soil moisture conditions for early spring across Montana. The majority of Montana currently has very saturated soil (the blue areas in the map below). Soils in southwestern Montana are drier than the rest of the state; the extreme dry spots in northeastern Montana are noise in the data that will become more accurate as conditions warm. As we move into spring, daytime temperatures and the intensity of spring storms will greatly determine how soil moisture conditions change across the state.
+<!-- ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-} -->
+<!-- As Montana thaws after a long winter, soil moisture measurements from weather stations and satellite data become more accurate. Soil moisture is factored into drought and flood forecasts as an indicator of wet or dry basin conditions. We are seeing typical soil moisture conditions for early spring across Montana. The majority of Montana currently has very saturated soil (the blue areas in the map below). Soils in southwestern Montana are drier than the rest of the state; the extreme dry spots in northeastern Montana are noise in the data that will become more accurate as conditions warm. As we move into spring, daytime temperatures and the intensity of spring storms will greatly determine how soil moisture conditions change across the state. -->
 
-```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
+<!-- ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE} -->
 
-smap <- mtd_plot_smap(date = "2019-06-01",
-                      variable = "sm_rootzone_wetness",
-                      data_out = "../data/SMAP")
+<!-- smap <- mtd_plot_smap(date = "2019-06-01", -->
+<!--                       variable = "sm_rootzone_wetness", -->
+<!--                       data_out = "../data/SMAP") -->
 
-smap$map %>%
-  save_mt_map("review_soil_moisture.pdf")
+<!-- smap$map %>% -->
+<!--   save_mt_map("review_soil_moisture.pdf") -->
 
-```
+<!-- ``` -->
 
-```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
-smap$leaflet %>%
-  saveWidgetFix("./figures/review_soil_moisture.html", 
-                selfcontained = FALSE,
-                libdir = "./site_libs"
-  )
+<!-- ```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
+<!-- smap$leaflet %>% -->
+<!--   saveWidgetFix("./figures/review_soil_moisture.html",  -->
+<!--                 selfcontained = FALSE, -->
+<!--                 libdir = "./site_libs" -->
+<!--   ) -->
 
-knitr::include_url("./figures/review_soil_moisture.html",
-                   height = "500px")
+<!-- knitr::include_url("./figures/review_soil_moisture.html", -->
+<!--                    height = "500px") -->
 
-```
+<!-- ``` -->
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Evapotranspiration {-}
 

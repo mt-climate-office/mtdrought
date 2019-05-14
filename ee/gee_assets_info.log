@@ -38,3 +38,6 @@
 2018-09-17 20:06:55,020 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
 2018-09-17 20:06:55,020 :: oauth2client.client :: INFO :: Refreshing access_token
 2018-09-17 20:06:56,429 :: root :: WARNING :: Nothing to remove. Exiting.
+2019-05-10 08:12:27,858 :: oauth2client.transport :: INFO :: Attempting refresh to obtain initial access_token
+2019-05-10 08:12:27,865 :: oauth2client.client :: INFO :: Refreshing access_token
+2019-05-10 08:14:26,845 :: root :: INFO :: Collection users/bocinsky/GRIDMET_MT_1981-2010_Normals removed
