@@ -44,9 +44,8 @@ mtd_plot_noaa_drought_outlook <- function(date,
   
   sf::st_agr(noaa_data) = "constant"
   
-  noaa_data %<>%
-    sf::st_intersection(mt_counties_simple %>%
-                          sf::st_union()) %>%
+  noaa_data %>%
+    sf::st_intersection(mt_state_simple) %>%
     tidyr::gather(key = "Drought Outlook",
                   value = "True?",
                   FID_improv,FID_persis,FID_dev,FID_Remove) %>%

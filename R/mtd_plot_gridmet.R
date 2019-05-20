@@ -40,7 +40,7 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet %<>%
       purrr::map(function(x){
         x %>%
-          magrittr::extract(c("value","normal.mean"))
+          magrittr::extract(c("value","mean"))
       })
   }
   
@@ -48,7 +48,7 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet_out <- gridmet[[1]]
     
     gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
-    gridmet_out$normal.mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
+    gridmet_out$mean <- (gridmet[[1]]$mean + gridmet[[2]]$mean) / 2
     gridmet <- gridmet_out
     
   } else {
@@ -63,7 +63,7 @@ mtd_plot_gridmet <- function(gridmet,
   if(use_normal){
     if(element == "prcp") {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value / normal.mean) %>%
+        dplyr::mutate(value = (value / mean) %>%
                         magrittr::multiply_by(100) %>%
                         round()) %>%
         dplyr::select(value)
@@ -73,7 +73,7 @@ mtd_plot_gridmet <- function(gridmet,
                                      long_name,"\nPercent of normal")
     } else {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value - normal.mean) %>%
+        dplyr::mutate(value = (value - mean) %>%
                         round(digits = 1)) %>%
         dplyr::select(value)
       

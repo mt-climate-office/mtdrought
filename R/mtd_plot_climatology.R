@@ -7,11 +7,12 @@ mtd_plot_climatology <- function(x,
                                  polar = TRUE,
                                  mean = FALSE,
                                  col = "black",
+                                 family = gaussian(),
                                  ...){
   if(smooth){
     x %<>%
       purrr::map(mtd_smooth_normals, 
-                 ...)
+                 family = family)
   }
   
   ggplot2::ggplot() +

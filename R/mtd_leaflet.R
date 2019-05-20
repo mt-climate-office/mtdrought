@@ -29,7 +29,7 @@ mtd_leaflet <- function(x,
   
   out <- mtd_leaflet_base(attribution = attribution) %>%
     # leaflet::addRasterImage(x) %>%
-    mapview::addImageQuery(x,
+    leafem::addImageQuery(x,
                            # type = "click",
                            layerId = image_query_title,
                            prefix = "",
@@ -82,7 +82,8 @@ mtd_leaflet <- function(x,
   #                              data = NULL)))
   
   out %<>%
-    appendContent(stars)
+    appendContent(stars) #%>%
+    # leaflet.opacity::addOpacitySlider(layerId = image_query_title)
   
   out
   
