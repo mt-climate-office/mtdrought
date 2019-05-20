@@ -115,6 +115,10 @@ mtd_plot_smap <- function(date,
     raster::crop(mcor::mt_state_simple %>%
                    sf::st_transform(raster::projection(soil_moisture_rast)) %>%
                    as('Spatial'),
+                 snap = "out") %>%
+    raster::mask(mcor::mt_state_simple %>%
+                   sf::st_transform(raster::projection(soil_moisture_rast)) %>%
+                   as('Spatial'),
                  snap = "out")
   
   # test <- leaflet() %>%
