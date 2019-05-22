@@ -206,9 +206,10 @@ knitr::include_url("./figures/review_temperature.html",
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-After one of the most bitterly cold winters on record, April and May saw the return of generally normal temperatures across Montana. A series of cold storms (see the graph, below) has been punctuated by warm spring weather across most of the state. Western Montana has seen temperatures stightly warmer than normal---especially at high elevations---which has led to rapid snowmelt and leess snowpack than normal for late spring. Eastern Montana remains slightly cooler than normal.
+After one of the most bitterly cold winters on record, April and May saw the return of near normal temperatures across Montana. A series of cold storms (see the graph, below) has been punctuated by warm spring weather across most of the state. Western Montana has seen warmer than normal—temperatures---especially at high elevations---which has led to rapid snowmelt and slightly less snowpack than normal for late spring. Eastern Montana remains slightly cooler than normal.
 
-The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
+The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.
+
 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
@@ -278,9 +279,9 @@ knitr::include_url("./figures/review_precipitation.html",
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-Precipitation in April and May has been quite variable across Montana. Southwestern and far eastern Montana have seen less precipitation than normal, while other regions of the state have seen upwards of 200 to 300 percent of normal precipitation. The extreme is near White Sulfer Springs, which has seen over 3.5 times its normal precipitation for April and May! Flooding is a growing concern across Montana---very weet storms during mid-May have pushed the Bitterroot, Clark Fork, and Musselshell rivers above flood stage, and precipitation forecasts are for wetter than normal conditions to continue.
+Precipitation in April and May has been quite variable across Montana. Southwestern Montana has seen less precipitation than normal, while other regions of the state have seen upwards of 200 to 300 percent of normal precipitation. The above normal precipitation has increased yield prospects but it has also delayed spring planting in many locations. The extreme is near White Sulphur Springs, which has seen over 3.5 times its normal precipitation for April and May! Flooding is a growing concern across Montana—very wet storms during mid-May have pushed the Bitterroot, Clark Fork, and Musselshell rivers above flood stage, and precipitation forecasts are for wetter than normal conditions to continue.
 
-The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
+The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981–2010 period on any given day. The dashed line represents the average precipitation during the 1981–2010 period.
 
 ```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = gridmet_series[c("pr")],
@@ -316,13 +317,13 @@ knitr::include_url(past_seasonal_swe$leaflet$path,
 
 <!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
 
-Wet and warm conditions across western Montana have accelerated snowmelt---most basins now have less snowpack than normal, ranging from ~35% of normal in the Yaak basin in far northwestern Montana to the near normal elsewhere. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack earlier this spring.
+Wet and warmer conditions across western Montana have accelerated snowmelt—most basins now have less snowpack than normal, ranging from ~35% of normal in the Yaak basin in far northwestern Montana to the near normal elsewhere. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack and cooler temperatures earlier this spring.
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
 
-smap <- mtd_plot_smap(date = "2019-06-01",
+smap <- mtd_plot_smap(date = "2019-05-16",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
 
@@ -433,7 +434,7 @@ mod16_normals_summary_dev <- mod16_normals_summary %>%
   dplyr::mutate_at(.vars = dplyr::vars(-YDAY,
                                        -mean,
                                        -median),
-                   .funs = dplyr::funs(. - mean))
+                   .funs = ~(. - mean))
 
 mod16_2019_summary_dev <- mod16_2019_summary %>%
   dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2019_summary)])
@@ -506,9 +507,9 @@ knitr::include_url("./figures/review_evapotranspiration.html",
 
 <!-- <iframe id="review_evapotranspiration" src="./figures/review_evapotranspiration.html" width="100%" height="500px"> -->
 
-Evapotranspiration (ET), or the amount of water vapor leaving the Earth's surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). This map shows the deviation from normal ET so far this spring. The green areas experienced greater amounts of ET than their normal amounts from 2000--2017 (the period of record); the brown areas experienced less ET. We look at the decline in ET below normal values as an early indicator of potential drought conditions. The Montana Climate Office will continue monitoring conditions in northwestern Montana forr potential drought impacts as we move into summer.
+Evapotranspiration (ET), or the amount of water vapor leaving the Earth’s surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). This map shows the deviation from normal ET so far this spring. The green areas experienced greater amounts of ET than their normal amounts from 2000–2017 (the period of record); the brown areas experienced less ET. We look at the decline in ET below normal values as an early indicator of potential drought conditions. The Montana Climate Office will continue monitoring conditions in northwestern Montana for potential drought impacts as we move into summer.
 
-In the graph below, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000--2017 period. The jagged black line represent this year's conditions; the jagged red line represents the 2018 conditions, for reference. Across Montana, 2019 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions.
+In the graph below, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000–2017 period. The jagged black line represent this year’s conditions; the jagged red line represents the 2018 conditions, for reference. Across Montana, 2019 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions.
 
 ```{r past-seasonal-ET-plot, cache=FALSE}
 mtd_plot_climatology(x = list(mod16_normals_summary %>%
@@ -554,4 +555,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-The US Drought Monitor has categorized northwestern Montana as abnormally dry going into early summer. This aligns with the evapotranspiration patterns from early spring.
+The US Drought Monitor has categorized northwestern Montana as abnormally dry going into early summer. This aligns with the evapotranspiration patterns and precipitation deficits from earlier this spring.
