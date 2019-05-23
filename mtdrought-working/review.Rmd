@@ -17,77 +17,83 @@ source("./R/setup.R")
 start_date <- "2019-04-01"
 end_date <- "2019-06-01"
 
-gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
-                              vars = list("pr" = "sum",
-                                          "tmmn" = "mean",
-                                          "tmmx" = "mean"),
-                              start_date = start_date,
-                              end_date = end_date,
-                              raw_dir = "../data/GRIDMET",
-                              overwrite = FALSE)
+# gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
+#                               vars = list("pr" = "sum",
+#                                           "tmmn" = "mean",
+#                                           "tmmx" = "mean"),
+#                               start_date = start_date,
+#                               end_date = end_date,
+#                               raw_dir = "../data/GRIDMET",
+#                               overwrite = FALSE)
 
-gridmet$pr %<>%
-  mm_to_in()
+gridmet <- mtd_get_gridmet(dates = c(start_date, end_date),
+                           raw_dir = "../data/GRIDMET")
 
-gridmet$tmmn %<>%
-  k_to_f()
-
-gridmet$tmmx %<>%
-  k_to_f()
-
-normals <- 
-  readr::read_rds("../data/gridmet/normals/gridmet_normals.Rds") %>%
-  purrr::map(
-    function(x){
-      x %>%
-        purrr::map(function(i){
-          i[[lubridate::as_date(attr(gridmet,"dates")) %>%
-               lubridate::yday()]]
-        })
-    }
-  )
-
-normals$precipitation_amount %<>%
-  purrr::map(raster::calc, fun = base::sum, na.rm = TRUE) %>%
-  raster::brick() %>%
-  mm_to_in()
-
-normals$daily_minimum_temperature %<>%
-  purrr::map(raster::calc, fun = base::mean, na.rm = TRUE) %>%
-  raster::brick() %>%
-  k_to_f()
-
-normals$daily_maximum_temperature %<>%
-  purrr::map(raster::calc, fun = base::mean, na.rm = TRUE) %>%
-  raster::brick() %>%
-  k_to_f()
-
-normals %<>%
-  purrr::map(raster::projectRaster, gridmet$pr)
-
-gridmet$pr %<>%
-  as.list() %>%
-  c(
-    normals$precipitation_amount %>% 
-      as.list()
-  ) %>%
-  raster::brick()
-
-gridmet$tmmn %<>%
-  as.list() %>%
-  c(
-    normals$daily_minimum_temperature %>% 
-      as.list()
-  ) %>%
-  raster::brick()
-
-gridmet$tmmx %<>%
-  as.list() %>%
-  c(
-    normals$daily_maximum_temperature %>% 
-      as.list()
-  ) %>%
-  raster::brick()
+# gridmet$pr %<>%
+#   mm_to_in()
+# 
+# gridmet$tmmn %<>%
+#   k_to_f()
+# 
+# gridmet$tmmx %<>%
+#   k_to_f()
+# 
+# normals <- 
+#   readr::read_rds("../data/gridmet/normals/gridmet_normals.Rds") %>%
+#   purrr::map(
+#     function(x){
+#       x %>%
+#         purrr::map(function(i){
+#           i[[lubridate::as_date(attr(gridmet,"dates")) %>%
+#                lubridate::yday()]]
+#         })
+#     }
+#   )
+# 
+# normals$precipitation_amount %<>%
+#   purrr::map(raster::calc, fun = base::sum, na.rm = TRUE) %>%
+#   raster::brick() %>%
+#   mm_to_in()
+# 
+# normals$daily_minimum_temperature %<>%
+#   purrr::map(raster::calc, fun = base::mean, na.rm = TRUE) %>%
+#   raster::brick() %>%
+#   k_to_f()
+# 
+# normals$daily_maximum_temperature %<>%
+#   purrr::map(raster::calc, fun = base::mean, na.rm = TRUE) %>%
+#   raster::brick() %>%
+#   k_to_f()
+# 
+# normals_projected <- normals %>%
+#   purrr::map(raster::projectRaster, gridmet$pr, method = "ngb")
+# 
+# # gridmet_plain <- gridmet
+# gridmet <- gridmet_plain
+# 
+# gridmet$pr %<>%
+#   as.list() %>%
+#   c(
+#     normals_projected$precipitation_amount %>% 
+#       as.list()
+#   ) %>%
+#   raster::brick()
+# 
+# gridmet$tmmn %<>%
+#   as.list() %>%
+#   c(
+#     normals_projected$daily_minimum_temperature %>% 
+#       as.list()
+#   ) %>%
+#   raster::brick()
+# 
+# gridmet$tmmx %<>%
+#   as.list() %>%
+#   c(
+#     normals_projected$daily_maximum_temperature %>% 
+#       as.list()
+#   ) %>%
+#   raster::brick()
 
 
 # test <- readr::read_rds("../data/gridmet/normals/precipitation_amount.Rds")
@@ -179,7 +185,7 @@ gridmet_sf %>%
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 names(gridmet$tmean) <- names(gridmet$tmmn)
 
-past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$mean)
+past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
 attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
 
 past_seasonal_temp_map <- 
@@ -206,7 +212,7 @@ knitr::include_url("./figures/review_temperature.html",
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-After one of the most bitterly cold winters on record, April and May saw the return of near normal temperatures across Montana. A series of cold storms (see the graph, below) has been punctuated by warm spring weather across most of the state. Western Montana has seen warmer than normal—temperatures---especially at high elevations---which has led to rapid snowmelt and slightly less snowpack than normal for late spring. Eastern Montana remains slightly cooler than normal.
+After one of the most bitterly cold winters on record, April and May saw the return of near normal temperatures across Montana. A series of cold storms (see the graph, below) has been punctuated by warm spring weather across most of the state. Western Montana has seen warmer than normal temperatures---especially at high elevations---which has led to rapid snowmelt and slightly less snowpack than normal for late spring. Eastern Montana remains slightly cooler than normal.
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.
 
@@ -243,12 +249,13 @@ gridmet_sf %>%
   mtd_plot_gridmet(element = "prcp",
                    use_normal = TRUE) %>%
   save_mt_map("review_precipitation.pdf")
+
 ```
 
 
 ```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 
-past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$mean) %>%
+past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
   magrittr::multiply_by(100) %>%
   round()
 attr(past_seasonal_prcp,"dates") <- attr(gridmet,"dates")
@@ -323,7 +330,7 @@ Wet and warmer conditions across western Montana have accelerated snowmelt—mos
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
 
-smap <- mtd_plot_smap(date = "2019-05-16",
+smap <- mtd_plot_smap(date = "2019-06-01",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
 
@@ -412,10 +419,10 @@ mod16_2018_summary <- tibble::tibble(mean = mod16_2018 %>%
                                        lubridate::yday())
 
 mod16_2019_p <- mod16_2019 / mod16_normals$mean[[names(mod16_2019) %>%
-                                                    stringr::str_remove("X") %>%
-                                                    lubridate::as_date() %>%
-                                                    lubridate::yday() %>%
-                                                    stringr::str_c("X",.)]]
+                                                   stringr::str_remove("X") %>%
+                                                   lubridate::as_date() %>%
+                                                   lubridate::yday() %>%
+                                                   stringr::str_c("X",.)]]
 
 
 mod16_2019_dev <- mod16_2019 - mod16_normals$p50[[names(mod16_2019) %>%
@@ -492,7 +499,7 @@ mtd_leaflet(x = mod16_2019_p %>%
               magrittr::multiply_by(100),
             pal =  "BrBG",
             legend_title =  stringr::str_c(format(ET_date[this.date], '%B %d, %Y'),"<br>",
-                                               "<a href='../reference.html' target='_blank'>Evapotranspiration (mm / 8 days), % of normal</a>"),
+                                           "<a href='../reference.html' target='_blank'>Evapotranspiration (mm / 8 days), % of normal</a>"),
             image_query_title = "Evapotranspiration, percent of normal",
             reverse = TRUE,
             midpoint = 100,
