@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![Glasgow, MT, March 30, 2019. Rapid snowmelt and spring storms are causing flooding of the Milk River in eastern Montana. Photo: © Sean R. Heavey](./img/Sean_Heavey_Glasgow.jpg)
+![Branding cattle at the Mannix Ranch near Helmville, Montana. Photo: Ada Smith.](./img/Ada_Smith_Branding.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
@@ -35,8 +35,8 @@ Here's what you'll find in this newsletter:
 
 -----
 
-### Mark your calendars!<br>MT Drought & Climate newsletter timing {-}
-We traveled the state in summer 2018, meeting with farmers and ranchers in St. Ignatius, Chester, Harlowton, Fairfield, and Choteau. We wanted to learn more about your operations, what kind of climate information would be helpful to you, and when you would like to see it. **Based on your feedback, we will provide this newsletter on March 1^st^, April 15^th^, June 1^st^, and October 15^th^.**
+### We want to hear from you! {-}
+We're looking for examples of how producers are using the information in the MT Drought & Climate newsletters. **Please send us your stories, comments, and questions!** Your story or an answer to your question could be featured in the next newsletter.
 
 -----
 

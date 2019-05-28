@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![Photo: Casey Page, Billings Gazette.](./img/Cold_Cows.jpg)
+![Late spring in Ninemile Valley. Cooler than normal temperatures and lots of precipitation has maintained snowpack across much of the northern Rockies. Photo: Ada Smith.](./img/Ada_Smith_Ninemile_Valley.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
