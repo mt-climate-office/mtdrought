@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![Snows cling to the front range of the Rocky Mountains near Dupuyer, Montana. Photo: Libby Metcalf.](./img/Libby_Metcalf_Dupuyer.jpg)
+![Snow clings to the front range of the Rocky Mountains near Dupuyer, Montana. Photo: Libby Metcalf.](./img/Libby_Metcalf_Dupuyer.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
@@ -561,4 +561,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-The US Drought Monitor has categorized northwestern Montana as abnormally dry going into early summer. This aligns with the evapotranspiration patterns and precipitation deficits from earlier this spring.
+The US Drought Monitor has categorized northwestern and northeastern Montana as abnormally dry going into early summer, and portions of northwestern Montana as experiencing moderate drought. This aligns with the evapotranspiration patterns and precipitation deficits from earlier this spring.
