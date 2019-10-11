@@ -6,6 +6,7 @@ dependencies:
   - PyCrypto
   - pandas
   - pyOpenSSL
+  - pip
   - pip:
     - google-api-python-client
     - oauth2client
