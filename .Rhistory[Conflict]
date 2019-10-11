@@ -1,0 +1,512 @@
+x %>%
+purrr::map(function(i){
+i[[lubridate::as_date(gridmet_dates) %>%
+lubridate::yday()]]
+})
+}
+)
+normals$precipitation_amount %<>%
+purrr::map(raster::calc, fun = base::sum, na.rm = TRUE) %>%
+raster::brick() %>%
+mm_to_in()
+normals$daily_minimum_temperature %<>%
+purrr::map(raster::calc, fun = base::mean, na.rm = TRUE) %>%
+raster::brick() %>%
+k_to_f()
+normals$daily_maximum_temperature %<>%
+purrr::map(raster::calc, fun = base::mean, na.rm = TRUE) %>%
+raster::brick() %>%
+k_to_f()
+normals %<>%
+purrr::map(magrittr::set_names, c("normal.000",
+"normal.0025",
+"normal.025",
+"normal.050",
+"normal.075",
+"normal.0975",
+"normal.100",
+"normal.mean")) %>%
+purrr::map(magrittr::extract2, c("normal.000",
+"normal.025",
+"normal.050",
+"normal.075",
+"normal.100",
+"normal.mean"))
+gridmet$precipitation_amount %<>%
+magrittr::set_names("value") %>%
+as.list() %>%
+c(
+normals$precipitation_amount %>%
+as.list()
+) %>%
+raster::brick()
+gridmet$daily_minimum_temperature %<>%
+magrittr::set_names("value") %>%
+as.list() %>%
+c(
+normals$daily_minimum_temperature %>%
+as.list()
+) %>%
+raster::brick()
+gridmet$daily_maximum_temperature %<>%
+magrittr::set_names("value") %>%
+as.list() %>%
+c(
+normals$daily_maximum_temperature %>%
+as.list()
+) %>%
+raster::brick()
+gridmet %<>%
+magrittr::set_names(c("pr","tmmn","tmmx")) %>%
+purrr::map(mcor::mco_mask,
+mcor::mt_state)
+attr(gridmet,"dates") <- gridmet_dates
+readr::write_rds(gridmet,
+outfile,
+compress = "gz")
+}
+c("precipitation_amount",
+"daily_minimum_temperature",
+"daily_maximum_temperature") %T>%
+{
+paste0(raw_dir, "/", ., ".Rds") %>%
+purrr::walk(unlink,
+recursive = TRUE,
+force = TRUE)
+} %>%
+paste0(raw_dir, "/", ., ".nc") %>%
+purrr::walk(unlink,
+recursive = TRUE,
+force = TRUE)
+return(outfile %>%
+readr::read_rds())
+}
+gridmet <- mtd_get_gridmet(dates = c(start_date, end_date),
+raw_dir = "../data/GRIDMET")
+gridmet
+mtd_plot_gridmet <- function(gridmet,
+element = "tmean",
+# dates = "latest",
+# data_out = "./data/gridmet",
+# agg_sf,
+# agg_sf_fun = mean,
+use_normal = FALSE){
+if(element == "tmax"){
+gridmet_element = "tmmx"
+unit_symbol <- "ºF"
+long_name <- "Maximum temperature"
+} else if(element == "tmin"){
+gridmet_element = "tmmn"
+unit_symbol <- "ºF"
+long_name <- "Minimum temperature"
+}else if(element == "prcp"){
+gridmet_element = "pr"
+unit_symbol <- "in."
+long_name <- "Net precipitation"
+}else if(element == "tmean"){
+gridmet_element = c("tmmx","tmmn")
+unit_symbol <- "ºF"
+long_name <- "Average temperature"
+} else {
+stop("Element passed was not allowed!")
+}
+# if(missing(gridmet)){
+#   gridmet <- mtd_get_gridmet(dates = dates,
+#                              data_out = data_out)
+# }
+gridmet_dates <- attr(gridmet,"dates")
+gridmet %<>%
+magrittr::extract(gridmet_element)
+if(!is(gridmet[[1]],"RasterBrick")){
+gridmet %<>%
+purrr::map(function(x){
+x %>%
+magrittr::extract(c("value","normal.mean"))
+})
+}
+if(length(gridmet) > 1){
+gridmet_out <- gridmet[[1]]
+gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
+gridmet_out$mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
+gridmet <- gridmet_out
+} else {
+gridmet <- gridmet[[1]]
+}
+if(is(gridmet,"RasterBrick")){
+gridmet %<>%
+mtd_as_sf_gridmet()
+}
+if(use_normal){
+if(element == "prcp") {
+map_data <- gridmet %>%
+dplyr::mutate(value = (value / normal.mean) %>%
+magrittr::multiply_by(100) %>%
+round()) %>%
+dplyr::select(value)
+legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
+format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
+long_name,"\nPercent of normal")
+} else {
+map_data <- gridmet %>%
+dplyr::mutate(value = (value - normal.mean) %>%
+round(digits = 1)) %>%
+dplyr::select(value)
+legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
+format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
+long_name," (",unit_symbol,")","\n",
+"Deviation from normal")
+}
+} else {
+map_data <- gridmet %>%
+dplyr::mutate(value = value %>%
+round() %>%
+as.integer()) %>%
+dplyr::select(value)
+legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
+format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
+long_name," (",unit_symbol,")")
+}
+sf_column <- attr(map_data, "sf_column") %>%
+rlang::sym()
+map_data %<>%
+dplyr::rename(geometry = !!sf_column)
+if(use_normal){
+if(element == "prcp") {
+limits <- c(0,200)
+map_data$value[map_data$value > 200] <- 200
+map_data %<>%
+dplyr::group_by(value) %>%
+dplyr::summarise()
+} else {
+range <- map_data$value %>%
+abs() %>%
+max() %>%
+ceiling()
+limits <- c(-range,range)
+}
+} else {
+limits <- range(map_data$value)
+}
+if(element == "prcp") {
+direction = 1
+if(use_normal)
+palette = "BrBG"
+else
+palette = "BuGn"
+}else {
+direction = -1
+if(use_normal)
+palette = "RdBu"
+else{
+direction = 1
+palette = "Reds"
+}
+map_data %<>%
+dplyr::group_by(value) %>%
+dplyr::summarise()
+(map_data %>%
+ggplot2::ggplot() +
+ggplot2::geom_sf(aes(fill = value),
+color = NA) +
+scale_fill_distiller(name = legend_title,
+direction = direction,
+limits = limits,
+# breaks = breaks,
+palette = palette,
+expand = FALSE,
+guide = guide_colourbar(title.position = "bottom")) +
+mtd_plot())
+}
+gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
+names(gridmet$tmean) <- names(gridmet$tmmn)
+past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
+attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
+past_seasonal_temp_map <-
+mtd_leaflet(x = past_seasonal_temp,
+pal =  "-RdBu",
+legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
+format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
+"<a href='../reference.html' target='_blank'>Average temperature (ºF), deviation from normal</a>"),
+image_query_title = "Temperature Deviation (ºF)",
+reverse = TRUE,
+midpoint = 0,
+digits = 1)
+past_seasonal_temp_map %>%
+saveWidgetFix("./figures/review_temperature.html",
+selfcontained = FALSE,
+libdir = "./site_libs"
+)
+knitr::include_url("./figures/review_temperature.html",
+height = "500px")
+past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
+magrittr::multiply_by(100) %>%
+round()
+attr(past_seasonal_prcp,"dates") <- attr(gridmet,"dates")
+mtd_leaflet(x = past_seasonal_prcp,
+pal =  "BrBG",
+legend_title = stringr::str_c(format(head(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y')," – ",
+format(tail(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y'),"<br>",
+"<a href='../reference.html' target='_blank'>Net precipitation, % of normal</a>"),
+image_query_title = "Net precipitation, percent of normal",
+reverse = TRUE,
+midpoint = 100,
+digits = 0) %>%
+saveWidgetFix("./figures/review_precipitation.html",
+selfcontained = FALSE,
+libdir = "./site_libs")
+knitr::include_url("./figures/review_precipitation.html",
+height = "500px")
+gridmet_sf %>%
+mtd_plot_gridmet(element = "prcp",
+use_normal = TRUE) %>%
+save_mt_map("review_precipitation.pdf")
+gridmet_sf <- gridmet %>%
+mtd_as_sf_gridmet() %>%
+purrr::map(sf::st_intersection,
+y = mt_state_simple)
+attr(gridmet_sf,"dates") <- attr(gridmet,"dates")
+gridmet_sf %>%
+mtd_plot_gridmet(element = "prcp",
+use_normal = TRUE) %>%
+save_mt_map("review_precipitation.pdf")
+gridmet_sf %>%
+mtd_plot_gridmet(element = "tmean",
+use_normal = TRUE) %>%
+save_mt_map("review_temperature.pdf")
+gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
+names(gridmet$tmean) <- names(gridmet$tmmn)
+past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
+attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
+past_seasonal_temp_map <-
+mtd_leaflet(x = past_seasonal_temp,
+pal =  "-RdBu",
+legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
+format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
+"<a href='../reference.html' target='_blank'>Average temperature (ºF), deviation from normal</a>"),
+image_query_title = "Temperature Deviation (ºF)",
+reverse = TRUE,
+midpoint = 0,
+digits = 1)
+past_seasonal_temp_map %>%
+saveWidgetFix("./figures/review_temperature.html",
+selfcontained = FALSE,
+libdir = "./site_libs"
+)
+knitr::include_url("./figures/review_temperature.html",
+height = "500px")
+gridmet_sf %>%
+mtd_plot_gridmet(element = "tmean",
+use_normal = TRUE) %>%
+save_mt_map("review_temperature.pdf")
+gridmet_sf
+element = "tmean"
+use_normal = TRUE
+if(element == "tmax"){
+gridmet_element = "tmmx"
+unit_symbol <- "ºF"
+long_name <- "Maximum temperature"
+} else if(element == "tmin"){
+gridmet_element = "tmmn"
+unit_symbol <- "ºF"
+long_name <- "Minimum temperature"
+}else if(element == "prcp"){
+gridmet_element = "pr"
+unit_symbol <- "in."
+long_name <- "Net precipitation"
+}else if(element == "tmean"){
+gridmet_element = c("tmmx","tmmn")
+unit_symbol <- "ºF"
+long_name <- "Average temperature"
+} else {
+stop("Element passed was not allowed!")
+}
+gridmet_dates <- attr(gridmet,"dates")
+gridmet %<>%
+magrittr::extract(gridmet_element)
+if(!is(gridmet[[1]],"RasterBrick")){
+gridmet %<>%
+purrr::map(function(x){
+x %>%
+magrittr::extract(c("value","normal.mean"))
+})
+}
+gridmet
+gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
+names(gridmet$tmean) <- names(gridmet$tmmn)
+gridmet <- gridmet$tmean
+gridmet
+gridmet <- gridmet_sf
+gridmet_dates <- attr(gridmet,"dates")
+gridmet %<>%
+magrittr::extract(gridmet_element)
+if(!is(gridmet[[1]],"RasterBrick")){
+gridmet %<>%
+purrr::map(function(x){
+x %>%
+magrittr::extract(c("value","normal.mean"))
+})
+}
+if(length(gridmet) > 1){
+gridmet_out <- gridmet[[1]]
+gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
+gridmet_out$mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
+gridmet <- gridmet_out
+} else {
+gridmet <- gridmet[[1]]
+}
+if(is(gridmet,"RasterBrick")){
+gridmet %<>%
+mtd_as_sf_gridmet()
+}
+gridmet
+gridmet <- gridmet_sf
+gridmet
+gridmet_out <- gridmet[[1]]
+gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
+gridmet_out$normal.mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
+gridmet <- gridmet_out
+gridmet
+mtd_plot_gridmet <- function(gridmet,
+element = "tmean",
+# dates = "latest",
+# data_out = "./data/gridmet",
+# agg_sf,
+# agg_sf_fun = mean,
+use_normal = FALSE){
+if(element == "tmax"){
+gridmet_element = "tmmx"
+unit_symbol <- "ºF"
+long_name <- "Maximum temperature"
+} else if(element == "tmin"){
+gridmet_element = "tmmn"
+unit_symbol <- "ºF"
+long_name <- "Minimum temperature"
+}else if(element == "prcp"){
+gridmet_element = "pr"
+unit_symbol <- "in."
+long_name <- "Net precipitation"
+}else if(element == "tmean"){
+gridmet_element = c("tmmx","tmmn")
+unit_symbol <- "ºF"
+long_name <- "Average temperature"
+} else {
+stop("Element passed was not allowed!")
+}
+# if(missing(gridmet)){
+#   gridmet <- mtd_get_gridmet(dates = dates,
+#                              data_out = data_out)
+# }
+gridmet_dates <- attr(gridmet,"dates")
+gridmet %<>%
+magrittr::extract(gridmet_element)
+if(!is(gridmet[[1]],"RasterBrick")){
+gridmet %<>%
+purrr::map(function(x){
+x %>%
+magrittr::extract(c("value","normal.mean"))
+})
+}
+if(length(gridmet) > 1){
+gridmet_out <- gridmet[[1]]
+gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
+gridmet_out$normal.mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
+gridmet <- gridmet_out
+} else {
+gridmet <- gridmet[[1]]
+}
+if(is(gridmet,"RasterBrick")){
+gridmet %<>%
+mtd_as_sf_gridmet()
+}
+if(use_normal){
+if(element == "prcp") {
+map_data <- gridmet %>%
+dplyr::mutate(value = (value / normal.mean) %>%
+magrittr::multiply_by(100) %>%
+round()) %>%
+dplyr::select(value)
+legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
+format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
+long_name,"\nPercent of normal")
+} else {
+map_data <- gridmet %>%
+dplyr::mutate(value = (value - normal.mean) %>%
+round(digits = 1)) %>%
+dplyr::select(value)
+legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
+format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
+long_name," (",unit_symbol,")","\n",
+"Deviation from normal")
+}
+} else {
+map_data <- gridmet %>%
+dplyr::mutate(value = value %>%
+round() %>%
+as.integer()) %>%
+dplyr::select(value)
+legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
+format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
+long_name," (",unit_symbol,")")
+}
+sf_column <- attr(map_data, "sf_column") %>%
+rlang::sym()
+map_data %<>%
+dplyr::rename(geometry = !!sf_column)
+if(use_normal){
+if(element == "prcp") {
+limits <- c(0,200)
+map_data$value[map_data$value > 200] <- 200
+map_data %<>%
+dplyr::group_by(value) %>%
+dplyr::summarise()
+} else {
+range <- map_data$value %>%
+abs() %>%
+max() %>%
+ceiling()
+limits <- c(-range,range)
+}
+} else {
+limits <- range(map_data$value)
+}
+if(element == "prcp") {
+direction = 1
+if(use_normal)
+palette = "BrBG"
+else
+palette = "BuGn"
+}else {
+direction = -1
+if(use_normal)
+palette = "RdBu"
+else{
+direction = 1
+palette = "Reds"
+}
+map_data %<>%
+dplyr::group_by(value) %>%
+dplyr::summarise()
+(map_data %>%
+ggplot2::ggplot() +
+ggplot2::geom_sf(aes(fill = value),
+color = NA) +
+scale_fill_distiller(name = legend_title,
+direction = direction,
+limits = limits,
+# breaks = breaks,
+palette = palette,
+expand = FALSE,
+guide = guide_colourbar(title.position = "bottom")) +
+mtd_plot())
+}
+setwd("~/Google Drive/UM/MCO/MTDrought/Newsletter/mtdrought/mtdrought-working")
+rmarkdown::clean_site()
+rmarkdown::render_site()
+setwd("~/Google Drive/UM/MCO/MTDrought/Newsletter/mtdrought/mtdrought-working")
+rmarkdown::clean_site()
+rmarkdown::render_site()
+setwd("~/Google Drive/UM/MCO/MTDrought/Newsletter/mtdrought/mtdrought-working")
+rmarkdown::clean_site()
+rmarkdown::render_site()
+rmarkdown::clean_site()
+rmarkdown::render_site()

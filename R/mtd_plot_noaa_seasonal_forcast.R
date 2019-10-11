@@ -163,7 +163,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
   noaa_map <- (noaa_data  %>%
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = Chance),
-                         color = NA) +
+                         color = "transparent") +
                  scale_fill_manual(name = legend.name,
                                    drop = FALSE,
                                    na.translate = FALSE,

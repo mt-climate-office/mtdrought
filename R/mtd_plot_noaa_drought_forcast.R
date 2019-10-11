@@ -67,7 +67,7 @@ mtd_plot_noaa_drought_outlook <- function(date,
   noaa_map <- (noaa_data  %>%
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = `Drought Outlook`),
-                         color = NA) +
+                         color = "transparent") +
                  scale_fill_manual(name = legend.name,
                                    limits = c("Drought persists",
                                               "Drought remains but improves",

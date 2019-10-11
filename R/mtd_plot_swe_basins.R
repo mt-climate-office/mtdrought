@@ -44,7 +44,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                 ggplot2::ggplot() +
                 # Plot the polygon fills
                 ggplot2::geom_sf(ggplot2::aes(fill = value / normals * 100),
-                                 color = NA) +
+                                 color = "transparent") +
                 ggplot2::scale_fill_distiller(
                   name = stringr::str_c(format(lubridate::ymd(date), '%B %d, %Y'),"\n",
                                         "Snow water equivalent","\nPercent of normal"),
@@ -52,7 +52,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                   direction = 1,
                   limits = c(0,210),
                   palette = "RdBu",
-                  expand = FALSE,
+                  expand = expand_scale(mult = 0, add = 0),
                   guide = ggplot2::guide_colourbar(title.position = "bottom")
                 ) +
                 mtd_plot() +

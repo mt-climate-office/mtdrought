@@ -50,10 +50,7 @@ mtd_plot_smap <- function(date,
                            0.6,
                            1),
                 ordered_result = TRUE) %>%
-    # Convert to polygons
-    raster::rasterToPolygons() %>%
-    sf::st_as_sf() %>%
-    lwgeom::st_transform_proj(mt_state_plane) %>%
+    spex::polygonize() %>%
     dplyr::mutate(layer = factor(layer,
                                  levels = 1:9,
                                  labels = c("<10%",
@@ -69,6 +66,8 @@ mtd_plot_smap <- function(date,
   sf::st_agr(soil_moisture) = "constant"
   
   soil_moisture %<>%
+    lwgeom::st_make_valid() %>%
+    sf::st_transform(mt_state_plane) %>%
     sf::st_intersection(mt_state_simple) %>%
     dplyr::group_by(layer) %>%
     dplyr::summarise()
@@ -76,7 +75,7 @@ mtd_plot_smap <- function(date,
   smap_map <- (soil_moisture %>%
                  ggplot2::ggplot() +
                  ggplot2::geom_sf(aes(fill = layer),
-                                  color = NA) +
+                                  color = "transparent") +
                  scale_fill_manual(name = var_label,
                                    limits = c("<10%",
                                               "10-20%",

@@ -82,10 +82,10 @@ mtd_theme_climatology <- function(ybreaks,
                    cumsum() %>%
                    head(11)) + (month_lengths/2),
       labels = names(month_lengths),
-      expand = c(0,0)
+      expand = expand_scale(mult = 0, add = 0)
     ),
     ggplot2::scale_y_continuous(limits = c(head(ybreaks, 1), tail(ybreaks, 1)),
-                                expand = c(0,0)),
+                                expand = expand_scale(mult = 0, add = 0)),
     ggplot2::theme_minimal(),
     ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                    axis.title.y = ggplot2::element_blank(),

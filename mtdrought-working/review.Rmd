@@ -1,5 +1,5 @@
 ---
-title: "Late Spring 2019 Review"
+title: "Summer 2019 Review"
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,20 +14,20 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-start_date <- "2019-04-01"
-end_date <- "2019-06-01"
+start_date <- "2019-06-01"
+end_date <- "2019-10-01"
 
-# gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
-#                               vars = list("pr" = "sum",
-#                                           "tmmn" = "mean",
-#                                           "tmmx" = "mean"),
-#                               start_date = start_date,
-#                               end_date = end_date,
-#                               raw_dir = "../data/GRIDMET",
-#                               overwrite = FALSE)
+gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
+                              vars = list("pr" = "sum",
+                                          "tmmn" = "mean",
+                                          "tmmx" = "mean"),
+                              start_date = start_date,
+                              end_date = end_date,
+                              raw_dir = "../data/GRIDMET",
+                              overwrite = FALSE)
 
-gridmet <- mtd_get_gridmet(dates = c(start_date, end_date),
-                           raw_dir = "../data/GRIDMET")
+# gridmet <- mtd_get_gridmet(dates = c(start_date, end_date),
+#                            raw_dir = "../data/GRIDMET")
 
 # gridmet$pr %<>%
 #   mm_to_in()
@@ -310,26 +310,26 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 ```
 
-### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
+<!-- ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-} -->
 
-```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
-past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-06-01", huc = 8)
+<!-- ```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
+<!-- past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-06-01", huc = 8) -->
 
 
-knitr::include_url(past_seasonal_swe$leaflet$path,
-                   height = "500px")
+<!-- knitr::include_url(past_seasonal_swe$leaflet$path, -->
+<!--                    height = "500px") -->
 
-```
+<!-- ``` -->
 
 <!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
 
-Wet and warmer conditions across western Montana have accelerated snowmelt—most basins now have less snowpack than normal, ranging from ~11% of normal in the Yaak basin in far northwestern Montana to upward of 200% of normal in the Upper Tongue and Big Horn Lake basins. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack and cooler temperatures earlier this spring.
+<!-- Wet and warmer conditions across western Montana have accelerated snowmelt—most basins now have less snowpack than normal, ranging from ~11% of normal in the Yaak basin in far northwestern Montana to upward of 200% of normal in the Upper Tongue and Big Horn Lake basins. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack and cooler temperatures earlier this spring. -->
 
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
 
-smap <- mtd_plot_smap(date = "2019-06-01",
+smap <- mtd_plot_smap(date = "2019-10-01",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
 
@@ -352,208 +352,11 @@ knitr::include_url("./figures/review_soil_moisture.html",
 
 Soil moisture is factored into drought and flood forecasts as an indicator of wet or dry basin conditions. Soils in southwestern and eastern Montana---which have seen lower than normal precipitation---have begun drying out, while soil moisture remains very high across much of the rest of the state (the blue areas in the map).
 
-### <img src="./icons/soil_saturation.svg" width="35px"/> Evapotranspiration {-}
-
-```{r past-seasonal-ET, cache=TRUE}
-mod16_2019 <- mtd_get_mod16a2(start_date = "2019-01-01", 
-                              end_date = "2019-12-31", 
-                              base_name = 'MOD16A2',
-                              raw_dir = "../data/MOD16A2",
-                              overwrite = FALSE)
-
-# mod16_2018[][is.na(mod16_2018[])] <- 0
-
-mod16_2019 %<>%
-  mcor::mco_mask(mcor::mt_state)
-
-ET_date <- mod16_2019 %>%
-  names() %>%
-  stringr::str_remove("X") %>%
-  lubridate::as_date()
-
-mod16_2018 <- mtd_get_mod16a2(start_date = "2018-01-01", 
-                              end_date = "2018-12-31", 
-                              base_name = 'MOD16A2',
-                              raw_dir = "../data/MOD16A2",
-                              overwrite = FALSE)
-
-# mod16_2017[][is.na(mod16_2017[])] <- 0
-
-mod16_2018 %<>%
-  mcor::mco_mask(mcor::mt_state)
-
-mod16_normals <-
-  mtd_get_mod16a2_normals(base_name = 'MOD16A2',
-                          raw_dir = "../data/MOD16A2",
-                          overwrite = FALSE)
-
-# mod16_normals %<>%
-#   purrr::map(function(x){
-#     x[][is.na(x[])] <- 0
-#     x
-#   })
-
-mod16_normals %<>%
-  purrr::map(mcor::mco_mask,
-             mcor::mt_state)
-
-mod16_normals_summary <-
-  mod16_normals %>%
-  purrr::map(mtd_aggregate_normals) %>%
-  tibble::as_tibble() %>%
-  dplyr::mutate(YDAY = seq(1, 365, 8))
-
-mod16_2019_summary <- tibble::tibble(mean = mod16_2019 %>%
-                                       mtd_aggregate_normals(),
-                                     YDAY = names(mod16_2019) %>%
-                                       stringr::str_remove("X") %>%
-                                       lubridate::as_date() %>%
-                                       lubridate::yday())
-
-mod16_2018_summary <- tibble::tibble(mean = mod16_2018 %>%
-                                       mtd_aggregate_normals(),
-                                     YDAY = names(mod16_2018) %>%
-                                       stringr::str_remove("X") %>%
-                                       lubridate::as_date() %>%
-                                       lubridate::yday())
-
-mod16_2019_p <- mod16_2019 / mod16_normals$mean[[names(mod16_2019) %>%
-                                                   stringr::str_remove("X") %>%
-                                                   lubridate::as_date() %>%
-                                                   lubridate::yday() %>%
-                                                   stringr::str_c("X",.)]]
-
-
-mod16_2019_dev <- mod16_2019 - mod16_normals$p50[[names(mod16_2019) %>%
-                                                    stringr::str_remove("X") %>%
-                                                    lubridate::as_date() %>%
-                                                    lubridate::yday() %>%
-                                                    stringr::str_c("X",.)]]
-mod16_2018_dev <- mod16_2018 - mod16_normals$p50[[names(mod16_2018) %>%
-                                                    stringr::str_remove("X") %>%
-                                                    lubridate::as_date() %>%
-                                                    lubridate::yday() %>%
-                                                    stringr::str_c("X",.)]]
-
-mod16_normals_summary_dev <- mod16_normals_summary %>%
-  dplyr::mutate(median = `p50`) %>%
-  dplyr::mutate_at(.vars = dplyr::vars(-YDAY,
-                                       -mean,
-                                       -median),
-                   .funs = ~(. - mean))
-
-mod16_2019_summary_dev <- mod16_2019_summary %>%
-  dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2019_summary)])
-
-mod16_2018_summary_dev <- mod16_2018_summary %>%
-  dplyr::mutate(mean = mean - mod16_normals_summary$mean[1:nrow(mod16_2018_summary)])
-
-```
-
-```{r past-seasonal-ET-plot-grid, cache=TRUE}
-this.date <- which.min(abs(lubridate::as_date("2019-06-01")-ET_date))
-
-mod16_2019_dev_sf <-
-  mod16_2019_dev %>%
-  as.list() %>%
-  magrittr::extract2(this.date) %>%
-  mtd_as_sf_gridmet() %>%
-  spex::qm_rasterToPolygons(na.rm = T) %>%
-  lwgeom::st_transform_proj(mt_state_plane) %>%
-  sf::st_intersection(mcor::mt_state_simple)
-
-limits <- c(-100,100)
-
-mod16_2019_dev_sf[[1]][mod16_2019_dev_sf[[1]] > limits[2]] <- limits[2]
-mod16_2019_dev_sf[[1]][mod16_2019_dev_sf[[1]] < limits[1]] <- limits[1]
-
-mod16_2019_dev_sf %<>%
-  dplyr::group_by_at(names(mod16_2019_dev_sf)[[1]]) %>%
-  dplyr::summarise()
-
-col <- names(mod16_2019_dev_sf)[[1]]
-
-(mod16_2019_dev_sf %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_sf(aes_string(fill = col),
-                     color = NA) +
-    scale_fill_distiller(name = stringr::str_c(format(ET_date[this.date], '%B %d, %Y'),"\n",
-                                               "Evapotranspiration (mm / 8 days)\n",
-                                               "Deviation from normal"),
-                         direction = 1,
-                         limits = limits,
-                         # breaks = breaks,
-                         palette = "BrBG",
-                         expand = FALSE,
-                         guide = guide_colourbar(title.position = "bottom")) +
-    mtd_plot()) %>%
-  save_mt_map("review_map_ET.pdf")
-
-```
-
-```{r past-seasonal-ET-plot-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
-mtd_leaflet(x = mod16_2019_p %>%
-              as.list() %>%
-              magrittr::extract2(this.date) %>%
-              magrittr::multiply_by(100),
-            pal =  "BrBG",
-            legend_title =  stringr::str_c(format(ET_date[this.date], '%B %d, %Y'),"<br>",
-                                           "<a href='../reference.html' target='_blank'>Evapotranspiration (mm / 8 days), % of normal</a>"),
-            image_query_title = "Evapotranspiration, percent of normal",
-            reverse = TRUE,
-            midpoint = 100,
-            digits = 0) %>%
-  saveWidgetFix("./figures/review_evapotranspiration.html", 
-                selfcontained = FALSE,
-                libdir = "./site_libs")
-
-knitr::include_url("./figures/review_evapotranspiration.html",
-                   height = "500px")
-```
-
-<!-- <iframe id="review_evapotranspiration" src="./figures/review_evapotranspiration.html" width="100%" height="500px"> -->
-
-Evapotranspiration (ET), or the amount of water vapor leaving the Earth’s surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). This map shows the deviation from normal ET so far this spring. The green areas experienced greater amounts of ET than their normal amounts from 2000–2018 (the period of record); the brown areas experienced less ET. We look at the decline in ET below normal values as an early indicator of potential drought conditions. The Montana Climate Office will continue monitoring conditions in northwestern Montana for potential drought impacts as we move into summer.
-
-In the graph below, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000–2018 period. The jagged black line represent this year’s conditions; the jagged red line represents the 2018 conditions, for reference. Across Montana, 2019 ET has remained above average---reflecting that atmospheric demand was met by wetter than normal soil conditions.
-
-```{r past-seasonal-ET-plot, cache=FALSE}
-mtd_plot_climatology(x = list(mod16_normals_summary %>%
-                                dplyr::rename(
-                                  `normal.000` = p0,
-                                  `normal.025` = p25,
-                                  `normal.050` = p50,
-                                  `normal.075` = p75,
-                                  `normal.100` = p100,
-                                  `normal.mean` = mean,
-                                  day = YDAY)),
-                     col = c("forestgreen"),
-                     ybreaks = seq(0, 240, 20),
-                     title = NULL,
-                     polar = FALSE,
-                     # smooth = TRUE,
-                     mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2019_summary %>%
-                             dplyr::rename(
-                               `normal.mean` = mean,
-                               day = YDAY),
-                           mean = TRUE) +
-  mtd_plot_add_climatology(x = mod16_2018_summary %>%
-                             dplyr::rename(
-                               `normal.mean` = mean,
-                               day = YDAY),
-                           mean = TRUE,
-                           col = "red")
-
-ggplot2::ggsave("./figures/review_graph_ET.pdf")
-```
-
-
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
 
 ```{r past-seasonal-drought, cache=TRUE}
 
-past_seasonal_drought <- mtd_plot_usdm(date = "2019-06-01",
+past_seasonal_drought <- mtd_plot_usdm(date = "2019-10-01",
                                        data_out = "../data/USDM")
 
 past_seasonal_drought$map %T>%

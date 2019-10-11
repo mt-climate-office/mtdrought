@@ -79,7 +79,7 @@ mtd_plot_climdiv <- function (months,
                       "BrBG" 
                     else 
                       "RdBu",
-                    expand = FALSE,
+                    expand = expand_scale(mult = 0, add = 0),
                     guide = guide_colourbar(title.position = "bottom")) +
                     mdt_theme_map()) %T>%
     save_mt_map(stringr::str_c(month.abb[[head(months,1)]],"-",month.abb[[tail(months,1)]],"-",

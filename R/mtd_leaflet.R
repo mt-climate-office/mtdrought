@@ -25,7 +25,7 @@ mtd_leaflet <- function(x,
                tm_view(view.legend.position = c("left","bottom"))) %>%
     tmap_leaflet()
   
-  tm_out$x$calls[[4]]$args[[5]] <- image_query_title
+  tm_out$x$calls[[5]]$args[[5]] <- image_query_title
   
   out <- mtd_leaflet_base(attribution = attribution) %>%
     # leaflet::addRasterImage(x) %>%
@@ -38,7 +38,7 @@ mtd_leaflet <- function(x,
     )
   
   if(reverse){
-    tm_out$x$calls[[5]]$args[[1]]$labels %<>% rev()
+    tm_out$x$calls[[6]]$args[[1]]$labels %<>% rev()
   }
 
   
@@ -49,7 +49,7 @@ mtd_leaflet <- function(x,
   
   
   
-  out$x$calls <- c(out$x$calls,tm_out$x$calls[4:5])
+  out$x$calls <- c(out$x$calls,tm_out$x$calls[5:6])
   
   out$title <- tm_out$title
   

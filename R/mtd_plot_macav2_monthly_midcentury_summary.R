@@ -154,13 +154,13 @@ mtd_plot_macav2_monthly_midcentury_summary <- function(macav2,
   (map_data %>%
       ggplot2::ggplot() +
       ggplot2::geom_sf(aes(fill = value),
-                       color = NA) +
+                       color = "transparent") +
       scale_fill_distiller(name = legend_title,
                            direction = direction,
                            limits = limits,
                            # breaks = breaks,
                            palette = palette,
-                           expand = FALSE,
+                           expand = expand_scale(mult = 0, add = 0),
                            guide = guide_colourbar(title.position = "bottom")) +
       mtd_plot()) %T>%
     save_mt_map(file_name)

@@ -91,7 +91,7 @@ mtd_plot_midcentury_swe_basins <- function(month,
                                   ggplot2::ggplot() +
                                   # Plot the polygon fills
                                   geom_sf(aes(fill = midcentury_percent),
-                                          color = NA) +
+                                          color = "transparent") +
                                   scale_fill_distiller(name = stringr::str_c(format(lubridate::ymd(date), '%B %d') %>%
                                                                                stringr::str_replace(" 0"," "),", ",
                                                                              "2040-2069\n",
@@ -102,7 +102,7 @@ mtd_plot_midcentury_swe_basins <- function(month,
                                                        limits = c(0,200),
                                                        # breaks = c(0,200),
                                                        palette = "RdBu",
-                                                       expand = FALSE,
+                                                       expand = expand_scale(mult = 0, add = 0),
                                                        guide = guide_colourbar(title.position = "bottom")) +
                                   mtd_plot() +
                                   # Plot the polygon boundaries

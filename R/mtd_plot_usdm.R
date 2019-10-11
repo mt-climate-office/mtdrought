@@ -69,7 +69,7 @@ mtd_plot_usdm <- function(date = "2017-08-30",
   usdm_map <- (usdm_data %>%
                  ggplot2::ggplot() +
                  geom_sf(aes(fill = DM),
-                         color = NA) +
+                         color = "transparent") +
                  scale_fill_manual(name = legend.name,
                                    values = usdm_cols,
                                    guide = guide_legend(title.position = "bottom"),

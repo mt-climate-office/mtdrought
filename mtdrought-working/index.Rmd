@@ -1,5 +1,5 @@
 ---
-title: "2019 Summer Update"
+title: "2019 Fall Update"
 editor_options: 
   chunk_output_type: console
 ---
@@ -12,13 +12,15 @@ source("./R/setup.R")
 
 ## {-}
 
-Welcome to the June 2019 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+Welcome to the October 2019 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
 Here's what you'll find in this newsletter:
 
-[**Late Spring 2019 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
+[**Summer 2019 Review**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
 
-[**Summer 2019 Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
+[**Fall/Winter 2019 Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
+
+[**Mid-century Outlook**](./midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 
