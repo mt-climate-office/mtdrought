@@ -328,7 +328,6 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
-
 smap <- mtd_plot_smap(date = "2019-10-01",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")

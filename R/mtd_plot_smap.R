@@ -225,7 +225,7 @@ mtd_plot_smap <- function(date,
   
   
   
-  out$x$calls <- c(out$x$calls,tm_out$x$calls[5])
+  out$x$calls <- c(out$x$calls,tm_out$x$calls[6])
   
   out$title <- tm_out$title
   
