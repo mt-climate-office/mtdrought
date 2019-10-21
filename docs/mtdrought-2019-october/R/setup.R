@@ -1,6 +1,6 @@
 ## Load all packages
 all_packages <- c("mcor", "thredds",# The Core MCO package
-                  "FedData", "smapr", "rhdf5", # Package for data aquisition
+                  "FedData", "smapr", # Package for data aquisition
                   "sf", "raster", "rgeos", "fasterize", "velox", "spex", "lwgeom", "geojsonsf", # Packages for spatial processing
                   "magrittr", "tidyverse", "purrrlyr", "matrixStats",# Packages for tidy code
                   "reticulate", # Python in R

@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![Branding cattle at the Mannix Ranch near Helmville, Montana. Photo: Ada Smith.](./img/Ada_Smith_Branding.jpg)
+![Late summer sunset over haystacks at the Mannix Ranch, Blackfoot Valley, Montana. Photo: Ada Smith.](./img/Ada-Smith-baled-hay.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
