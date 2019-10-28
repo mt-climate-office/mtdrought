@@ -214,7 +214,7 @@ knitr::include_url("./figures/review_temperature.html",
 
 Eastern and western Montana experienced very different conditions this past summer. East of the Rockies much of Montana was cooler than normal in June through September, while western Montana saw warmer than normal temperatures—especially at high elevations. Widespread, cold storms led to lower than normal daytime temperatures during late summer, with less heat available to crops during the growing season. Late September brought an historic early fall snow storm to Montana, with over four feet of snow falling in Browning.
 
-The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.
+The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
@@ -288,7 +288,7 @@ knitr::include_url("./figures/review_precipitation.html",
 
 The big story of the summer was the rain in eastern Montana. The Upper Missouri River Basin saw one of its wettest summers on record, and observed runoff in September near Sioux City, Iowa, was more than 16 times the long term average and more than twice the previous record. The agricultural impacts of these record conditions were substantial. Where flooding occurred along the Missouri River, wet and cool conditions led to delayed maturity, grain sprouting in silos, moisture-related crop disease, and field inundation. Conditions were slightly drier than normal across western Montana, but residual moisture from a wet winter and spring led to a mercifully calm fire season in the northern Rockies.
 
-The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981–2010 period on any given day. The dashed line represents the average precipitation during the 1981–2010 period.
+The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
 ```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = gridmet_series[c("pr")],
