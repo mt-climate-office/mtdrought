@@ -328,7 +328,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
-smap <- mtd_plot_smap(date = "2019-10-01",
+smap <- mtd_plot_smap(date = "2019-11-01",
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
 
@@ -349,7 +349,7 @@ knitr::include_url("./figures/review_soil_moisture.html",
 
 ```
 
-Cool temperatures and high precipitation have led to truly historic soil moisture conditions across central and eastern Montana going into the fall. Soils east of the continental divide are nearly saturated, and are likely to stay very wet into the winter. Impacts include increased flooding during fall snow storms, difficulty planting winter wheat, and the increased likelihood of significant flooding events and planting delays this coming spring as snow melts on frozen or saturated soils. As of early October, Montana producers had only sown 50% their intended winter wheat acreage and only 9% had emerged --- usually 75% has been sown by early October, with 35% emerged. Cool temperatures and the soil moisture surplus will likely continue to delay or prohibit fall planting.
+Cool temperatures and high precipitation have led to truly historic soil moisture conditions across central and eastern Montana going into the fall. Soils east of the continental divide are nearly saturated, and are likely to stay very wet into the winter. Impacts include increased flooding during fall snow storms, difficulty planting winter wheat, and the increased likelihood of significant flooding events and planting delays this coming spring as snow melts on frozen or saturated soils. As of early October, Montana producers had only sown 50% their intended winter wheat acreage and only 9% had emerged --- usually 75% has been sown by early October, with 35% emerged. Cool temperatures and the soil moisture surplus have continued to delay or prohibit fall planting.
 
 <!-- ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-} -->
 

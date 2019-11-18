@@ -2,10 +2,9 @@ base
 mcor
 thredds
 sp
+sf
 FedData
 smapr
-rhdf5
-sf
 raster
 rgeos
 fasterize
@@ -40,3 +39,4 @@ mgcv
 bibtex
 knitcitations
 kableExtra
+rhdf5
