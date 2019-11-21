@@ -1,0 +1,29 @@
+name: MT Drought & Climate — Fall Update 2019
+navbar:
+  title: <img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left;
+    vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
+    and Forecasting<br>for Agricultural Producers<br><b>October 2019</b></ht>
+  right:
+  - text: Seasonal Summary
+    href: index.html
+  - text: Summer 2019 Review
+    href: review.html
+  - text: Winter Forecast
+    href: forecast.html
+  - text: Mid-century Outlook
+    href: midcentury.html
+  - text: Reference
+    href: reference.html
+output:
+  html_document:
+    theme: simplex
+    highlight: textmate
+    css: style.css
+    df_print: paged
+    includes:
+      in_header: header.html
+      after_body: after_body.html
+    lib_dir: site_libs
+    self_contained: no
+output_dir: ../docs/mtdrought-2019-november
+
