@@ -5,7 +5,7 @@ mtd_aggregate_gridmet <- function(gridmet,
   gridmet_dates <- attr(gridmet,"dates")
   
   agg_sf_4326 <- agg_sf %>%
-    lwgeom::st_transform_proj(raster::projection(gridmet[[1]]))
+    sf::st_transform(raster::projection(gridmet[[1]]))
   
   gridmet %<>%
     purrr::map(function(element){

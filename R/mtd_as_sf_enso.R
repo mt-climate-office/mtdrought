@@ -5,7 +5,7 @@ mtd_as_sf_enso <- function(enso){
       purrr::map(function(x){
        x %>%
           spex::qm_rasterToPolygons(na.rm = T) %>%
-          lwgeom::st_transform_proj(mt_state_plane)
+          sf::st_transform(mt_state_plane)
       }) %>%
       purrr::map(function(x){
         

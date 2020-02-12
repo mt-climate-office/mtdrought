@@ -16,7 +16,7 @@ mtd_plot_climatology <- function(x,
   }
   
   ggplot2::ggplot() +
-    ggplot2::geom_ribbon(aes(x = 1:365,
+    ggplot2::geom_ribbon(aes(x = x[[1]]$date,
                              ymin = ymin,
                              ymax = ymax),
                          fill = "gray95") +
@@ -25,6 +25,13 @@ mtd_plot_climatology <- function(x,
                 mtd_plot_add_climatology,
                 mean = mean) +
     mtd_theme_climatology(ybreaks = ybreaks,
-                          title = title,
-                          polar = polar)
+                           title = title,
+                           polar = polar) +
+    ggplot2::geom_ribbon(aes(x = x[[1]]$date,
+                             ymin = head(ybreaks,1),
+                             ymax = tail(ybreaks,1)),
+                         fill = NA,
+                         color = "grey60", 
+                         size = 0.5,
+                         na.rm = TRUE)
 }

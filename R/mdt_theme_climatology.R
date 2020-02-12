@@ -17,20 +17,20 @@ mtd_theme_climatology <- function(ybreaks,
   list(  
     if(polar) 
       ggplot2::coord_polar(),
-    ggplot2::geom_hline(yintercept = ybreaks, 
-                        color = "grey60", 
-                        size = 0.3,
-                        linetype = 2,
-                        na.rm = TRUE),
-    ggplot2::geom_vline(xintercept = c(1, 
-                                       month_lengths %>%
-                                         cumsum() %>%
-                                         head(11),
-                                       365), 
-                        color = "grey60", 
-                        size = 0.3,
-                        linetype = 2,
-                        na.rm = TRUE),
+    # ggplot2::geom_hline(yintercept = ybreaks, 
+    #                     color = "grey60", 
+    #                     size = 0.3,
+    #                     linetype = 2,
+    #                     na.rm = TRUE),
+    # ggplot2::geom_vline(xintercept = c(1, 
+    #                                    month_lengths %>%
+    #                                      cumsum() %>%
+    #                                      head(11),
+    #                                    365), 
+    #                     color = "grey60", 
+    #                     size = 0.3,
+    #                     linetype = 2,
+    #                     na.rm = TRUE),
     if(polar)
       ggplot2::geom_hline(yintercept = tail(ybreaks,1), 
                           color = "grey60", 
@@ -73,42 +73,48 @@ mtd_theme_climatology <- function(ybreaks,
     #                     hjust = 1.25,
     #                     vjust = 0.5,
     #                     size = 3.5)
-    ggplot2::scale_x_continuous(
-      limits = c(1,365),
-      minor_breaks = c(1, month_lengths %>%
-                         cumsum() %>%
-                         head(11)),
-      breaks = c(1, month_lengths %>%
-                   cumsum() %>%
-                   head(11)) + (month_lengths/2),
-      labels = names(month_lengths),
-      expand = expand_scale(mult = 0, add = 0)
+    ggplot2::scale_x_date(
+      # limits = c(1,365),
+      # minor_breaks = c(1, month_lengths %>%
+      #                    cumsum() %>%
+      #                    head(11)),
+      # breaks = c(1, month_lengths %>%
+      #              cumsum() %>%
+      #              head(11)) + (month_lengths/2),
+      # labels = names(month_lengths),
+      date_breaks = "1 month",
+      labels = function(x){lubridate::month(x, label = TRUE)},
+      expand = ggplot2::expand_scale(mult = 0, add = 0)
     ),
     ggplot2::scale_y_continuous(limits = c(head(ybreaks, 1), tail(ybreaks, 1)),
+                                breaks = ybreaks,
                                 expand = expand_scale(mult = 0, add = 0)),
     ggplot2::theme_minimal(),
     ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                    axis.title.y = ggplot2::element_blank(),
-                   axis.text.y = element_blank(),
-                   axis.text.x = ggplot2::element_text(size = 8),
-                   panel.grid = element_blank(),
+                   # axis.text = ggplot2::element_text(size = 14),
+                   panel.ontop = TRUE,
+                   panel.grid = element_line(color = "grey60", 
+                                                     size = 0.3,
+                                                     linetype = 2),
+                   panel.grid.minor = element_blank(),
                    plot.title = ggplot2::element_text(size = 10)),
     if(!polar)
       ggplot2::theme(plot.margin = ggplot2::margin(t = 20,
                                                    r = 20,
                                                    b = 20,
                                                    l = 20),
-                     axis.text.x = ggplot2::element_text(size = 8),
+                     axis.text.x = ggplot2::element_text(size = 8,
+                                                         hjust = 0),
                      axis.text.y = ggplot2::element_text(size = 8,
                                                          hjust = 1)),
-    if(!polar)
-      ggplot2::geom_ribbon(aes(x = 1:365,
-                               ymin = head(ybreaks,1),
-                               ymax = tail(ybreaks,1)),
-                           fill = NA,
-                           color = "grey60", 
-                           size = 0.5,
-                           na.rm = TRUE),
+    # if(!polar)
+    #   ggplot2::geom_ribbon(aes(ymin = head(ybreaks,1),
+    #                            ymax = tail(ybreaks,1)),
+    #                        fill = NA,
+    #                        color = "grey60", 
+    #                        size = 0.5,
+    #                        na.rm = TRUE),
     ggtitle(title)
   )
 }

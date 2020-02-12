@@ -1,5 +1,5 @@
 ---
-title: "2019 Fall Update"
+title: "2020 March Update"
 editor_options: 
   chunk_output_type: console
 ---
@@ -12,15 +12,13 @@ source("./R/setup.R")
 
 ## {-}
 
-Welcome to the November 2019 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+Happy New Year! Welcome to the March 2020 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
 Here's what you'll find in this newsletter:
 
-[**Summer 2019 Review**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
+[**Winter 2019/2020 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
 
-[**Winter Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
-
-[**Mid-century Outlook**](./midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
+[**Spring Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 
@@ -29,12 +27,23 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Summer across eastern Montana was cooler than normal and very wet, leading to delays in crop development.
-* Soil moisture continues to be high across Montana, especially in the east.
-* The NOAA seasonal forecast for December through February is for slightly warmer and wetter than normal conditions across most of Montana.
+* Despite an early start, winter across Montana has been warmer and drier than average.
+* Despite the temperature and precipitation amounts — and thanks to some sizeable storms in early February — snowpack in the mountains is above average.
+* The NOAA seasonal forecast for March through May is for slightly warmer than normal conditions across western Montana, and likely wetter conditions than normal in eastern Montana. Warmer temperatures in western MT tilt the odds towards earlier snowmelt and an earlier start to the growing season.
 </div>
 
 -----
+
+### Enhanced agricultural weather monitoring from the Montana Mesonet {-}
+
+The [Montana Climate Office](https://climate.umt.edu/) is always looking for ways to serve Montanan's better, and we've recently developed a new resource for getting weather information in your local area. The [Montana Mesonet Dashboard](https://climate.umt.edu/mesonet_dashboard) delivers up to date weather information at [Montana Mesonet](https://climate.umt.edu/mesonet/) stations across the state. This dashboard provides the latest data for each MT Mesonet station, and tables and graphs of data going back two weeks. Check out the dashboard at [https://climate.umt.edu/mesonet_dashboard]. 
+
+[![](./img/mesonet_dashboard.jpg "Screenshot of the Montana Mesonet dashboard")](https://climate.umt.edu/mesonet_dashboard)
+
+The dashboard is currently under development, and we definitely want your feedback. Please email Zach Hoylman at [state.climatologist@umontana.edu](mailto:state.climatologist@umontana.edu) with any feedback or questions.
+
+-----
+
 
 ### We want to hear from you! {-}
 **Please send us stories, photos, feedback, and questions!** Your story about how you use this information, photos of your farm or ranch, or your question could be featured in the next newsletter.

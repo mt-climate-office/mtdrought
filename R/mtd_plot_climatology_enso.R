@@ -3,6 +3,7 @@ mtd_plot_climatology_enso <- function(x,
                                       climates = c("El Niño",
                                                   "ENSO Neutral",
                                                   "La Niña"),
+                                      date_range,
                                  title = NULL,
                                  ybreaks = seq(-25,100,25),
                                  ymin = min(ybreaks, na.rm = TRUE),
@@ -56,20 +57,28 @@ mtd_plot_climatology_enso <- function(x,
   x %<>%
     tidyr::spread(statistic,value)
   
+  date_range %<>% lubridate::as_date()
+  x <- 
+    tibble::tibble(date = seq(date_range[[1]],
+                            date_range[[2]],
+                            "1 day")) %>%
+    dplyr::mutate(day = lubridate::yday(date)) %>%
+    dplyr::left_join(x, by = "day")
+  
   ggplot2::ggplot() +
-    ggplot2::geom_ribbon(aes(x = 1:365,
+    ggplot2::geom_ribbon(aes(x = x$date,
                              ymin = ymin,
                              ymax = ymax),
                          fill = "gray95",
                          na.rm = TRUE) +
-    ggplot2::geom_line(ggplot2::aes(x = day,
+    ggplot2::geom_line(ggplot2::aes(x = date,
                                     y = `0%`,
                                     color = `climate`),
                        data = x,
                        linetype = 2,
                        alpha = 1,
                        na.rm = TRUE) +
-    ggplot2::geom_line(ggplot2::aes(x = day,
+    ggplot2::geom_line(ggplot2::aes(x = date,
                                     y = `100%`,
                                     color = `climate`),
                        data = x,
@@ -84,7 +93,7 @@ mtd_plot_climatology_enso <- function(x,
     #                      alpha = 0.5,
     #                      data = x
     #                      ) +
-    ggplot2::geom_line(ggplot2::aes(x = day,
+    ggplot2::geom_line(ggplot2::aes(x = date,
                                     y = mean,
                                     color = `climate`),
                        data = x,

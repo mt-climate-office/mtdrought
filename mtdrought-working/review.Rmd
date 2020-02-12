@@ -1,5 +1,5 @@
 ---
-title: "Summer 2019 Review"
+title: "Winter 2019/2020 Update"
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,8 +14,8 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-start_date <- "2019-06-01"
-end_date <- "2019-10-01"
+start_date <- "2019-12-01"
+end_date <- "2020-02-29"
 
 gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
@@ -146,8 +146,8 @@ gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
 
 gridmet_series <- mtd_get_gridmet_series_ee(collection = "IDAHO_EPSCOR/GRIDMET", 
                                             vars = c("pr", "tmmn", "tmmx"),
-                                            start_date = "2019-01-01", 
-                                            end_date = "2019-12-31")
+                                            start_date = "2019-10-01", 
+                                            end_date = "2020-09-30")
 
 gridmet_series$pr %<>%
   dplyr::mutate_at(.vars = dplyr::vars(value:normal.100),
@@ -185,11 +185,11 @@ gridmet_sf %>%
 gridmet$tmean <- (gridmet$tmmn + gridmet$tmmx)/2
 names(gridmet$tmean) <- names(gridmet$tmmn)
 
-past_seasonal_temp <- (gridmet$tmean$value - gridmet$tmean$normal.mean)
+past_seasonal_temp <- (gridmet$tmean$layer - gridmet$tmean$normal.mean)
 attr(past_seasonal_temp,"dates") <- attr(gridmet,"dates")
 
 past_seasonal_temp_map <- 
-  mtd_leaflet(x = past_seasonal_temp,
+  mcor::mco_leaflet(x = past_seasonal_temp,
               pal =  "-RdBu",
               legend_title = stringr::str_c(format(head(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y')," – ",
                                             format(tail(attr(past_seasonal_temp,"dates"), 1), '%B %d, %Y'),"<br>",
@@ -212,7 +212,7 @@ knitr::include_url("./figures/review_temperature.html",
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-Eastern and western Montana experienced very different conditions this past summer. East of the Rockies much of Montana was cooler than normal in June through September, while western Montana saw warmer than normal temperatures—especially at high elevations. Widespread, cold storms led to lower than normal daytime temperatures during late summer, with less heat available to crops during the growing season. Late September brought an historic early fall snow storm to Montana, with over four feet of snow falling in Browning.
+Despite what felt like early onset of winter for most of the state, Montana has been warmer than average for much of December through February. The mountains of western Montana have experienced temperatures nearly 3ºF warmer than average, and only a couple places in far northern and southwestern Montana have experienced temperatures that are cooler than normal. Warm temperatures in the winter can lead to mid-season snow melt, causing high winter runoff and reducing the snowpack available later in the season.
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
@@ -225,13 +225,13 @@ mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
                      polar = FALSE,
                      smooth = TRUE,
                      mean = TRUE) +
-  ggplot2::geom_line(ggplot2::aes(x = day,
+  ggplot2::geom_line(ggplot2::aes(x = date,
                                   y = value),
                      col = "#0571b0",
                      data = gridmet_series$tmmn %>%
                        na.omit(),
                      na.rm = TRUE) +
-  ggplot2::geom_line(ggplot2::aes(x = day,
+  ggplot2::geom_line(ggplot2::aes(x = date,
                                   y = value),
                      col = "#ca0020",
                      data = gridmet_series$tmmx %>%
@@ -239,6 +239,7 @@ mtd_plot_climatology(x = gridmet_series[c("tmmn","tmmx")],
                      na.rm = TRUE)
 
 ggplot2::ggsave("./figures/review_temperature_climate.pdf")
+
 ```
 
 ### <img src="./icons/precipitation.svg" width="35px"/> Precipitation {-}
@@ -255,13 +256,13 @@ gridmet_sf %>%
 
 ```{r past-seasonal-prcp-grid-normals-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
 
-past_seasonal_prcp <- (gridmet$pr$value / gridmet$pr$normal.mean) %>%
+past_seasonal_prcp <- (gridmet$pr$layer / gridmet$pr$normal.mean) %>%
   magrittr::multiply_by(100) %>%
   round()
 attr(past_seasonal_prcp,"dates") <- attr(gridmet,"dates")
 
 
-mtd_leaflet(x = past_seasonal_prcp,
+mcor::mco_leaflet(x = past_seasonal_prcp,
             pal =  "BrBG",
             legend_title = stringr::str_c(format(head(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y')," – ",
                                           format(tail(attr(past_seasonal_prcp,"dates"),1), '%B %d, %Y'),"<br>",
@@ -286,7 +287,7 @@ knitr::include_url("./figures/review_precipitation.html",
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-The big story of the summer was the rain in eastern Montana. The Upper Missouri River Basin saw one of its wettest summers on record, and observed runoff in September near Sioux City, Iowa, was more than 16 times the long term average and more than twice the previous record. The agricultural impacts of these record conditions were substantial. Where flooding occurred along the Missouri River, wet and cool conditions led to delayed maturity, grain sprouting in silos, moisture-related crop disease, and field inundation. Conditions were slightly drier than normal across western Montana, but residual moisture from a wet winter and spring led to a mercifully calm fire season in the northern Rockies.
+December was very dry for most of Montana, which has cause our precipitation values across the state to be slightly below normal for Decemeber through February. However, January and February have welcomed a series of "atmospheric river" events to the Pacific Northwest, including Montana. Admospheric rivers are narrow bands of concentrated moisture that originate in the Pacific and flow inland, releasing snow and rain. Areas that are under these "rivers in the sky" tend to see large amounts of precipitation, sometimes over long durations. If the current pattern of regular storms continues, winter precipitation values will continue to improve across the state.
 
 The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
@@ -299,7 +300,7 @@ mtd_plot_climatology(x = gridmet_series[c("pr")],
                      smooth = TRUE,
                      mean = TRUE,
                      family = tw()) +
-  ggplot2::geom_col(mapping = ggplot2::aes(x = day,
+  ggplot2::geom_col(mapping = ggplot2::aes(x = date,
                                            y = value),
                     col = "forestgreen",
                     data = gridmet_series$pr %>%
@@ -325,42 +326,56 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 <!-- Wet and warmer conditions across western Montana have accelerated snowmelt—most basins now have less snowpack than normal, ranging from ~11% of normal in the Yaak basin in far northwestern Montana to upward of 200% of normal in the Upper Tongue and Big Horn Lake basins. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack and cooler temperatures earlier this spring. -->
 
-### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
+<!-- ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-} -->
 
-```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
-smap <- mtd_plot_smap(date = "2019-11-01",
-                      variable = "sm_rootzone_wetness",
-                      data_out = "../data/SMAP")
+<!-- ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE} -->
+<!-- smap <- mtd_plot_smap(date = "2020-03-01", -->
+<!--                       variable = "sm_rootzone_wetness", -->
+<!--                       data_out = "../data/SMAP") -->
 
-smap$map %>%
-  save_mt_map("review_soil_moisture.pdf")
-
-```
-
-```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''}
-smap$leaflet %>%
-  saveWidgetFix("./figures/review_soil_moisture.html",
-                selfcontained = FALSE,
-                libdir = "./site_libs"
-  )
-
-knitr::include_url("./figures/review_soil_moisture.html",
-                   height = "500px")
-
-```
-
-Cool temperatures and high precipitation have led to truly historic soil moisture conditions across central and eastern Montana going into the fall. Soils east of the continental divide are nearly saturated, and are likely to stay very wet into the winter. Impacts include increased flooding during fall snow storms, difficulty planting winter wheat, and the increased likelihood of significant flooding events and planting delays this coming spring as snow melts on frozen or saturated soils. As of early October, Montana producers had only sown 50% their intended winter wheat acreage and only 9% had emerged --- usually 75% has been sown by early October, with 35% emerged. Cool temperatures and the soil moisture surplus have continued to delay or prohibit fall planting.
-
-<!-- ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-} -->
-
-<!-- ```{r past-seasonal-drought, cache=TRUE} -->
-
-<!-- past_seasonal_drought <- mtd_plot_usdm(date = "2019-10-15", -->
-<!--                                        data_out = "../data/USDM") -->
-
-<!-- past_seasonal_drought$map %T>% -->
-<!--   save_mt_map("review_drought.pdf") -->
+<!-- smap$map %>% -->
+<!--   save_mt_map("review_soil_moisture.pdf") -->
 
 <!-- ``` -->
 
-<!-- The US Drought Monitor has categorized northwestern and northeastern Montana as abnormally dry going into early summer, and portions of northwestern Montana as experiencing moderate drought. This aligns with the evapotranspiration patterns and precipitation deficits from earlier this spring. -->
+<!-- ```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
+<!-- smap$leaflet %>% -->
+<!--   saveWidgetFix("./figures/review_soil_moisture.html", -->
+<!--                 selfcontained = FALSE, -->
+<!--                 libdir = "./site_libs" -->
+<!--   ) -->
+
+<!-- knitr::include_url("./figures/review_soil_moisture.html", -->
+<!--                    height = "500px") -->
+
+<!-- ``` -->
+
+<!-- Cool temperatures and high precipitation have led to truly historic soil moisture conditions across central and eastern Montana going into the fall. Soils east of the continental divide are nearly saturated, and are likely to stay very wet into the winter. Impacts include increased flooding during fall snow storms, difficulty planting winter wheat, and the increased likelihood of significant flooding events and planting delays this coming spring as snow melts on frozen or saturated soils. As of early October, Montana producers had only sown 50% their intended winter wheat acreage and only 9% had emerged --- usually 75% has been sown by early October, with 35% emerged. Cool temperatures and the soil moisture surplus have continued to delay or prohibit fall planting. -->
+
+### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
+
+As of late February, snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 105% of normal in Fisher basin to nearly 140% of normal in Belt and Judith basins. Like precipitation, snowpack was well below average into early January, but rebounded thanks to a series of strong winter storms in the high country. Mountain snowpack can be a good indicator of streamflow levels and the water available for diversion in the summer for areas east and west of the divide. It will be important to pay attention to spring temperatures that impact the timing of snowmelt and flooding.
+
+```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
+past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-03-01", huc = 8)
+
+
+knitr::include_url(past_seasonal_swe$leaflet$path,
+height = "500px")
+
+```
+
+
+### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
+
+```{r past-seasonal-drought, cache=TRUE}
+
+past_seasonal_drought <- mtd_plot_usdm(date = "2020-03-01",
+                                       data_out = "../data/USDM")
+
+past_seasonal_drought$map %T>%
+  save_mt_map("review_drought.pdf")
+
+```
+
+The US Drought Monitor has categorized the area of central Montana around Great Falls as abnormally dry going into late winter. This aligns with persistent below-average precipitation amounts for this region. The location of storms into early spring will likely determine whether drought conditions are declared for this region later this spring.

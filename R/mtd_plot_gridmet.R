@@ -40,14 +40,14 @@ mtd_plot_gridmet <- function(gridmet,
     gridmet %<>%
       purrr::map(function(x){
         x %>%
-          magrittr::extract(c("value","normal.mean"))
+          magrittr::extract(c("layer","normal.mean"))
       })
   }
   
   if(length(gridmet) > 1){
     gridmet_out <- gridmet[[1]]
     
-    gridmet_out$value <- (gridmet[[1]]$value + gridmet[[2]]$value) / 2
+    gridmet_out$layer <- (gridmet[[1]]$layer + gridmet[[2]]$layer) / 2
     gridmet_out$normal.mean <- (gridmet[[1]]$normal.mean + gridmet[[2]]$normal.mean) / 2
     gridmet <- gridmet_out
     
@@ -63,19 +63,19 @@ mtd_plot_gridmet <- function(gridmet,
   if(use_normal){
     if(element == "prcp") {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value / normal.mean) %>%
+        dplyr::mutate(layer = (layer / normal.mean) %>%
                         magrittr::multiply_by(100) %>%
                         round()) %>%
-        dplyr::select(value)
+        dplyr::select(layer)
       
       legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
                                      format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
                                      long_name,"\nPercent of normal")
     } else {
       map_data <- gridmet %>%
-        dplyr::mutate(value = (value - normal.mean) %>%
+        dplyr::mutate(layer = (layer - normal.mean) %>%
                         round(digits = 1)) %>%
-        dplyr::select(value)
+        dplyr::select(layer)
       
       legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
                                      format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
@@ -85,10 +85,10 @@ mtd_plot_gridmet <- function(gridmet,
     }
   } else {
     map_data <- gridmet %>%
-      dplyr::mutate(value = value %>%
+      dplyr::mutate(layer = layer %>%
                       round() %>%
                       as.integer()) %>%
-      dplyr::select(value)
+      dplyr::select(layer)
     
     legend_title <- stringr::str_c(format(head(gridmet_dates,1), '%B %d, %Y')," - \n",
                                    format(tail(gridmet_dates,1), '%B %d, %Y'),"\n",
@@ -105,14 +105,14 @@ mtd_plot_gridmet <- function(gridmet,
     if(element == "prcp") {
       limits <- c(0,200)
       
-      map_data$value[map_data$value > 200] <- 200
+      map_data$layer[map_data$layer > 200] <- 200
       
       map_data %<>%
-        dplyr::group_by(value) %>%
+        dplyr::group_by(layer) %>%
         dplyr::summarise()
       
     } else {
-      range <- map_data$value %>%
+      range <- map_data$layer %>%
         abs() %>%
         max() %>%
         ceiling()
@@ -120,7 +120,7 @@ mtd_plot_gridmet <- function(gridmet,
       limits <- c(-range,range)
     }
   } else {
-    limits <- range(map_data$value)
+    limits <- range(map_data$layer)
   }
   
   if(element == "prcp") {
@@ -140,12 +140,12 @@ mtd_plot_gridmet <- function(gridmet,
   }
   
   map_data %<>%
-    dplyr::group_by(value) %>%
+    dplyr::group_by(layer) %>%
     dplyr::summarise()
   
   (map_data %>%
       ggplot2::ggplot() +
-      ggplot2::geom_sf(aes(fill = value),
+      ggplot2::geom_sf(aes(fill = layer),
                        color = "transparent") +
       scale_fill_distiller(name = legend_title,
                            direction = direction,

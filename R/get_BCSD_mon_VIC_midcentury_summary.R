@@ -23,7 +23,7 @@ get_bcsd_swe_midcentury_summary <-
                                        dplyr::filter(`Hydrologic Unit` == 6) %>%
                                        sf::st_bbox() %>%
                                        sf::st_as_sfc() %>%
-                                       lwgeom::st_transform_proj(4326) %>%
+                                       sf::st_transform(4326) %>%
                                        # magrittr::add(c(360,0)) %>%
                                        sf::st_bbox(),
                                      vars = var,

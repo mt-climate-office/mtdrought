@@ -40,7 +40,7 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                              list.files(pattern = "\\.shp$",
                                         full.names = T),
                            quiet = T) %>%
-    lwgeom::st_transform_proj(mt_state_plane)
+    sf::st_transform(mt_state_plane)
   
   sf::st_agr(usdm_data) = "constant"
   

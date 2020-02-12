@@ -79,7 +79,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
                              stringr::str_subset(months) %>%
                              stringr::str_subset("lead[1-9]_"),
                            quiet = T) %>%
-    lwgeom::st_transform_proj(mt_state_plane)
+    sf::st_transform(mt_state_plane)
   
   sf::st_agr(noaa_data) = "constant"
   

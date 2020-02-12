@@ -3,7 +3,7 @@ mtd_plot_add_climatology <- function(x,
                                      mean = FALSE){
   list(
     if("normal.000" %in% names(x))
-      ggplot2::geom_ribbon(ggplot2::aes(x = day,
+      ggplot2::geom_ribbon(ggplot2::aes(x = date,
                                         ymin = normal.000,
                                         ymax = normal.100),
                            data = x,
@@ -30,7 +30,7 @@ mtd_plot_add_climatology <- function(x,
     #                      alpha = 1,
     #                      linetype = 2),
     if(mean && "normal.mean" %in% names(x))
-      ggplot2::geom_line(ggplot2::aes(x = day,
+      ggplot2::geom_line(ggplot2::aes(x = date,
                                       y = normal.mean),
                          data = x,
                          color = col,
