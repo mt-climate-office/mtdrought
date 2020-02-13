@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Summer 2018: Drought?</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="site_libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="site_libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="site_libs/stars-1/data_stars_stars723f1a.txt"></script>
+<script src="site_libs/joda-0.0.1/joda.js"></script>
+<link href="site_libs/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.css" rel="stylesheet" />
+<script src="site_libs/lfx-fullscreen-1.0.2/lfx-fullscreen-prod.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left; vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring and Forecasting<br>for Agricultural Producers<br><b>October 2018</b></ht></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="review.html">Summer 2018 Review</a>
+</li>
+<li>
+  <a href="forecast.html">Winter 2018–2019 Forecast</a>
+</li>
+<li>
+  <a href="reference.html">Reference</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Summer 2018: Drought?</h1>
+
+</div>
+
+
+<div class="figure">
+<img src="img/Kevin_Hyde_broadus.jpg" alt="Four-footed fans of the Montana Mesonet visit the new station near Broadus, MT. Photo: Kevin Hyde." />
+<p class="caption">Four-footed fans of the Montana Mesonet visit the new station near Broadus, MT. Photo: Kevin Hyde.</p>
+</div>
+<div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills">
+<h2></h2>
+<div id="temperature" class="section level3 unnumbered">
+<h3><img src="icons/temperature.svg" width="35px"/> Temperature</h3>
+<p>Aside from a period in early August, temperatures this summer were below normal across much of central Montana, and above normal in northeastern and western Montana. Warm conditions in western Montana contributed to drought declarations in the northwestern part of the state, and led to fears of an above-average fire season which mercifully didn’t materialize.</p>
+<div id="htmlwidget-46c8547a410cb54d615c" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-46c8547a410cb54d615c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false,"fullscreenControl":{"position":"topright","pseudoFullscreen":false}},"calls":[{"method":"addTiles","args":["https://maps.tilehosting.com/data/hillshades/{z}/{x}/{y}.png?key=KZO7rAv96Alr8UVUrd4a",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.012081901,-116.062334708],[44.340842424,-104.024909901]],0.498039215686275,null,"Temperature Deviation (ºF)","."]},{"method":"addProviderTiles","args":["Stamen.TonerLines",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TonerLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addControl","args":["","bottomleft","imageValues","info legend"]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":false,"imperial":true,"updateWhenIdle":true,"position":"bottomright"}]},{"method":"addLegend","args":[{"colors":["#BC2D35","#D96652","#F4A582","#FBD0B9","#F9EBE3","#E7EFF4","#C4DEEC","#98C8DF","#5AA2CB","#327CB7","#1B5B9D","#053061"],"labels":["2.0 to 2.5","1.5 to 2.0","1.0 to 1.5","0.5 to 1.0","0.0 to 0.5","-0.5 to 0.0","-1.0 to -0.5","-1.5 to -1.0","-2.0 to -1.5","-2.5 to -2.0","-3.0 to -2.5","-3.5 to -3.0"],"na_color":null,"na_label":null,"opacity":0.498039215686275,"position":"bottomleft","type":"factor","title":null,"extra":null,"layerId":null,"className":"info legend","group":"."}]}],"limits":{"lat":[44.340842424,49.012081901],"lng":[-116.062334708,-104.024909901]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (function(el, x, data) { var map = this; map.on(\"mousemove\", function (e) {  rasterPicker.pick(e, x, 2, \" \"); }); var tldiv = document.getElementsByClassName(\"leaflet-top leaflet-left\")[0];var titlediv = document.createElement('div');titlediv.className = \"info legend leaflet-control\";titlediv.innerHTML = \"<b>June 01, 2018 - August 31, 2018<br>Average temperature (ºF), deviation from normal<\/b>\";tldiv.insertBefore(titlediv, tldiv.childNodes[0]);}).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el, x) {\n                          L.control.zoom({ position: 'topright' }).addTo(this)\n}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+<p>The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures in January thru August 2018 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.</p>
+<p><img src="review_files/figure-html/past-seasonal-temp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="precipitation" class="section level3 unnumbered">
+<h3><img src="icons/precipitation.svg" width="35px"/> Precipitation</h3>
+<p>In general, precipitation was above normal across south-central and eastern Montana this summer, and below normal across northern and western Montana. Portions of southern Montana experienced over double the normal amount of summer precipitation! Much of this happened in June, however; July and early August were closer to average across the state.</p>
+<div id="htmlwidget-77ae3ba655052cce0faf" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-77ae3ba655052cce0faf">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"zoomControl":false,"fullscreenControl":{"position":"topright","pseudoFullscreen":false}},"calls":[{"method":"addTiles","args":["https://maps.tilehosting.com/data/hillshades/{z}/{x}/{y}.png?key=KZO7rAv96Alr8UVUrd4a",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[49.012081901,-116.062334708],[44.340842424,-104.024909901]],0.498039215686275,null,"Net precipitation, percent of normal","."]},{"method":"addProviderTiles","args":["Stamen.TonerLines",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TonerLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addControl","args":["","bottomleft","imageValues","info legend"]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":false,"imperial":true,"updateWhenIdle":true,"position":"bottomright"}]},{"method":"addLegend","args":[{"colors":["#003C30","#006159","#2A8D85","#69BCB2","#AADED6","#DEEFED","#F5EEDC","#EAD4A0","#CFA154","#A5691B"],"labels":["200 to 220","180 to 200","160 to 180","140 to 160","120 to 140","100 to 120","80 to 100","60 to 80","40 to 60","20 to 40"],"na_color":null,"na_label":null,"opacity":0.498039215686275,"position":"bottomleft","type":"factor","title":null,"extra":null,"layerId":null,"className":"info legend","group":"."}]}],"limits":{"lat":[44.340842424,49.012081901],"lng":[-116.062334708,-104.024909901]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (function(el, x, data) { var map = this; map.on(\"mousemove\", function (e) {  rasterPicker.pick(e, x, 0, \" \"); }); var tldiv = document.getElementsByClassName(\"leaflet-top leaflet-left\")[0];var titlediv = document.createElement('div');titlediv.className = \"info legend leaflet-control\";titlediv.innerHTML = \"<b>June 01, 2018 - August 31, 2018<br>Net precipitation, percent of normal<\/b>\";tldiv.insertBefore(titlediv, tldiv.childNodes[0]);}).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el, x) {\n                          L.control.zoom({ position: 'topright' }).addTo(this)\n}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+<p>The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation in January thru August 2018 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981–2010 period on any given day. The dashed line represents the average precipitation during the 1981–2010 period.</p>
+<p><img src="review_files/figure-html/past-seasonal-prcp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="drought-icon-drought" class="section level3 unnumbered">
+<h3><img src="icons/drought.svg" alt="drought icon" width="35" /> Drought</h3>
+<p>By the end of the summer, the US Drought Monitor had declared most of the northern and western portions of Montana to be abnormally dry, with north-central and northwestern portions of the state under drought conditions. This aligns with precipitation patterns from the summer, but see the sections on soil moisture and evapotranspiration, which tell a slightly different story. In northwestern Montana, a deficit of soil moisture and groundwater will need to be resupplied by winter snowpack and spring rainfall in order for drought declarations to be lifted before next year’s growing season.</p>
+<p><img src="review_files/figure-html/past-seasonal-drought-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="soil-moisture" class="section level3 unnumbered">
+<h3><img src="icons/soil_saturation.svg" width="35px"/> Soil Moisture</h3>
+<p>Soil moisture is factored into forecasts as an indicator of wet or dry basin conditions and the potential for drought or flooding. Throughout the summer, the majority of Montana east of the Rockies enjoyed soil moisture surpluses (the blue areas in the map below), due to our above normal winter snowpack, protracted snowmelt, and above-average summer precipitation in south-central Montana. However, west of the Rockies experienced a soil moisture deficit (the yellow and orange areas) due primarily to below-normal precipitation.</p>
+<p><img src="review_files/figure-html/past-seasonal-smap-grid-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="evapotranspiration" class="section level3 unnumbered">
+<h3><img src="icons/soil_saturation.svg" width="35px"/> Evapotranspiration</h3>
+<p>Evapotranspiration (ET), or the amount of water vapor leaving the Earth’s surface through evaporation and plant photosynthesis, reflects both the amount of plant-available water and the atmospheric demand for water (i.e., how dry the air is). The plot and graph below show the deviation from normal ET at the end of this summer. In the map, the green areas experienced greater amounts of ET than their normal amounts from 2000–2016 (the period of record); the brown areas experienced less ET.</p>
+<p><img src="review_files/figure-html/past-seasonal-ET-plot-grid-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>In the graph below, the green line represents the average ET through the year, and the green band represents the extremes recorded during the 2000–2016 period. The jagged black line represent this year’s conditions; the jagged red line represents the 2017 conditions, for reference. Across Montana, 2018 ET has remained above average—reflecting that atmospheric demand was met by wetter than normal soil conditions. In contrast, 2017 ET declined to below-normal values from early June through the early September, reflecting last summer’s drought conditions.</p>
+<p><img src="review_files/figure-html/past-seasonal-ET-plot-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78448357-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78448357-4');
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
