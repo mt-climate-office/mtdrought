@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![A highway webcam shows a snowy portion of U.S. Highway 89 near Pendroy, MT on September 30 after a record-setting winter storm dumped snow on the northern Rockies. Photo: MT Department of Transportation.](./img/MTDOT-september-storm.jpg)
+![A beautiful red barn surrounded with snow near Chinook, Montana.](./img/chinook.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
@@ -212,7 +212,7 @@ knitr::include_url("./figures/review_temperature.html",
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-Despite what felt like early onset of winter for most of the state, Montana has been warmer than average for much of December through February. The mountains of western Montana have experienced temperatures nearly 3ºF warmer than average, and only a couple places in far northern and southwestern Montana have experienced temperatures that are cooler than normal. Warm temperatures in the winter can lead to mid-season snow melt, causing high winter runoff and reducing the snowpack available later in the season.
+Despite what felt like early onset of winter for most of the state, Montana has been warmer than average for much of December through February. The mountains of western Montana have experienced temperatures nearly 3ºF warmer than average, and only a couple places in far northern and southwestern Montana have experienced temperatures that are cooler than normal. Warm temperatures in the winter can lead to mid-season snow melt, causing high winter runoff and reducing the snowpack available later in the spring and early summer.
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
@@ -287,7 +287,7 @@ knitr::include_url("./figures/review_precipitation.html",
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-December was very dry for most of Montana, which has cause our precipitation values across the state to be slightly below normal for Decemeber through February. However, January and February have welcomed a series of "atmospheric river" events to the Pacific Northwest, including Montana. Admospheric rivers are narrow bands of concentrated moisture that originate in the Pacific and flow inland, releasing snow and rain. Areas that are under these "rivers in the sky" tend to see large amounts of precipitation, sometimes over long durations. If the current pattern of regular storms continues, winter precipitation values will continue to improve across the state.
+December was very dry for most of Montana, which resulted in slightly below-normal precipitation across the state for December through February. However, in January and February Montana experienced a series of *atmospheric rivers*. Atmospheric rivers are narrow bands of concentrated moisture that originate over the Pacific Ocean and flow inland, releasing snow and rain. Areas that are under these rivers in the sky tend to see large amounts of precipitation, sometimes over long durations. If the current pattern of regular storms continues, snowpack and soil moisture will increase across the state.
 
 The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
@@ -354,7 +354,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf")
 
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
-As of late February, snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 105% of normal in Fisher basin to nearly 140% of normal in Belt and Judith basins. Like precipitation, snowpack was well below average into early January, but rebounded thanks to a series of strong winter storms in the high country. Mountain snowpack can be a good indicator of streamflow levels and the water available for diversion in the summer for areas east and west of the divide. It will be important to pay attention to spring temperatures that impact the timing of snowmelt and flooding.
+As of late February, snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 101% of normal in Fisher basin to over 140% of normal in Judith basin. Like precipitation, snowpack was well below average into early January, but rebounded thanks to a series of strong winter storms. Mountain snowpack can be a good indicator of spring streamflow and the amount of water available for summer irrigation. It will be important to pay attention to spring temperatures, as a warmer spring can result in earlier snowmelt and flooding, and ultimately impact streamflow in mid-to-late summer.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-03-01", huc = 8)
@@ -378,4 +378,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-The US Drought Monitor has categorized the area of central Montana around Great Falls as abnormally dry going into late winter. This aligns with persistent below-average precipitation amounts for this region. The location of storms into early spring will likely determine whether drought conditions are declared for this region later this spring.
+The US Drought Monitor has categorized an area around Great Falls as abnormally dry going into late winter. This aligns with persistent below-average precipitation in  this region. The location of storms from now until early spring will likely determine whether drought conditions are declared for area later this spring.

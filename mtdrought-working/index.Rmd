@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![Late summer sunset over haystacks at the Mannix Ranch, Blackfoot Valley, Montana. Photo: Ada Smith.](./img/Ada-Smith-baled-hay.jpg)
+![Riding behind a herd of black Angus cattle on a quiet country road near Toston, Montana.](./img/toston.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
@@ -27,8 +27,10 @@ Here's what you'll find in this newsletter:
 ### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Despite an early start, winter across Montana has been warmer and drier than average.
-* Despite the temperature and precipitation amounts — and thanks to some sizeable storms in early February — snowpack in the mountains is above average.
+* Despite an early start, winter across Montana has been warmer and drier than average. 
+
+* However, thanks to some sizeable storms in early February snowpack in the mountains is above average.
+
 * The NOAA seasonal forecast for March through May is for slightly warmer than normal conditions across western Montana, and likely wetter conditions than normal in eastern Montana. Warmer temperatures in western MT tilt the odds towards earlier snowmelt and an earlier start to the growing season.
 </div>
 
@@ -36,7 +38,7 @@ Here's what you'll find in this newsletter:
 
 ### Enhanced agricultural weather monitoring from the Montana Mesonet {-}
 
-The [Montana Climate Office](https://climate.umt.edu/) is always looking for ways to serve Montanan's better, and we've recently developed a new resource for getting weather information in your local area. The [Montana Mesonet Dashboard](https://climate.umt.edu/mesonet_dashboard) delivers up to date weather information at [Montana Mesonet](https://climate.umt.edu/mesonet/) stations across the state. This dashboard provides the latest data for each MT Mesonet station, and tables and graphs of data going back two weeks. Check out the dashboard at [https://climate.umt.edu/mesonet_dashboard]. 
+The [Montana Climate Office](https://climate.umt.edu/) is always looking for ways to serve Montanan's better, and we’ve recently developed a online new resource for getting weather information on your local area. The [Montana Mesonet Dashboard](https://climate.umt.edu/mesonet_dashboard) delivers up-to-date weather information from [Montana Mesonet](https://climate.umt.edu/mesonet/) stations across the state. This dashboard provides the latest data for each MT Mesonet station, and tables and graphs of data going back two weeks. Check out the dashboard at [https://climate.umt.edu/mesonet_dashboard]. 
 
 [![](./img/mesonet_dashboard.jpg "Screenshot of the Montana Mesonet dashboard")](https://climate.umt.edu/mesonet_dashboard)
 
