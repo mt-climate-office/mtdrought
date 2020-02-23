@@ -96,7 +96,7 @@ mtd_theme_climatology <- function(ybreaks,
                    panel.ontop = TRUE,
                    panel.grid = element_line(color = "grey60", 
                                                      size = 0.3,
-                                                     linetype = 2),
+                                                     linetype = 3),
                    panel.grid.minor = element_blank(),
                    plot.title = ggplot2::element_text(size = 10)),
     if(!polar)

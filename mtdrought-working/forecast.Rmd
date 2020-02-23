@@ -14,7 +14,7 @@ source("./R/setup.R")
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 
-The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through this coming winter and spring. In Montana, winter conditions vary greatly under ENSO neutral. You can see that in the two graphs below, which show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña---ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.
+The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through this coming spring. In Montana, winter and spring conditions vary greatly under ENSO Neutral. The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña---ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.
 
 <!-- These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring. -->
 
@@ -74,21 +74,21 @@ enso_series %>%
                             element = "tmean",
                             ybreaks = seq(-10, 80, 10))
 
-ggplot2::ggsave("./figures/forecast_enso_graph_tmean.pdf")
+ggplot2::ggsave("./figures/forecast_enso_graph_tmean.pdf", width = 5.13, height = 2.49)
 
 enso_series %>%
   mtd_plot_climatology_enso(date_range = c("2019-10-01","2020-09-30"),
                             element = "prcp",
                             ybreaks = seq(0,0.8,0.1))
 
-ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf")
+ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf", width = 5.13, height = 2.49)
 
 
 ```
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-During ENSO Neutral conditions, climate forecasters rely on other types of data to create seasonal outlooks (since neither El Niño nor La Niña is influencing the state). NOAA's Climate Prediction Center (CPC) is projecting that temperatures are somewhat likely to be warmer than normal across western Montana into early spring (March–May). This is a fairly weak prediction (due to ENSO Neutral conditions); there is still a chance that temperatures could be cooler than normal. The rest of the state has equal chances of being cooler or warmer than normal.
+During ENSO Neutral conditions, climate forecasters rely on other types of data to create seasonal outlooks (since neither El Niño nor La Niña is influencing the state). NOAA's Climate Prediction Center (CPC) is projecting that temperatures are somewhat likely to be cooler than normal across eastern Montana into early spring (March–May). This is a fairly weak prediction (due to ENSO Neutral conditions); there is still a chance that temperatures could be warmer than normal. Most of the rest of the state has equal chances of being cooler or warmer than normal.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

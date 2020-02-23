@@ -147,7 +147,7 @@ mtd_get_gridmet_series_ee <- function(collection = "IDAHO_EPSCOR/GRIDMET",
                   day,
                   variable,
                   dplyr::everything()) %>%
-    tidyr::nest(-variable)
+    tidyr::nest(data = -variable)
   
   names(out$data) <- out$variable
   

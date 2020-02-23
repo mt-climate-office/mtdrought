@@ -50,7 +50,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                                         "Snow water equivalent","\nPercent of normal"),
                   #limits = c(0,1),
                   direction = 1,
-                  limits = c(0,210),
+                  limits = c(60,140),
                   palette = "RdBu",
                   expand = expand_scale(mult = 0, add = 0),
                   guide = ggplot2::guide_colourbar(title.position = "bottom")
