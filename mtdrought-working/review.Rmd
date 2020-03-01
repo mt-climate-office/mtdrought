@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![A beautiful red barn surrounded with snow near Chinook, Montana.](./img/chinook.jpg)
+![A beautiful red barn surrounded with snow near Chinook, Montana. Photo: Todd Klassy Photography.](./img/chinook.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 

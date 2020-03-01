@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![A row of grain bins catch the last light of the day near Inverness, Montana.](./img/inverness.jpg)
+![A row of grain bins catch the last light of the day near Inverness, Montana. Photo: Todd Klassy Photography.](./img/inverness.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 

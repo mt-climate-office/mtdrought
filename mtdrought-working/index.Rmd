@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![Riding behind a herd of black Angus cattle on a quiet country road near Toston, Montana.](./img/toston.jpg)
+![Riding behind a herd of black Angus cattle on a quiet country road near Toston, Montana. Photo: Todd Klassy Photography.](./img/toston.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
