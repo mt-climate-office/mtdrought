@@ -1,5 +1,5 @@
 ---
-title: "Winter 2019/2020 Update"
+title: "Spring 2020 Update"
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,8 +14,8 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-start_date <- "2019-12-01"
-end_date <- "2020-02-29"
+start_date <- "2020-02-01"
+end_date <- "2020-04-15"
 
 gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
@@ -353,7 +353,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf", width = 5.13, heig
 As of late February, snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 96% of normal in Fisher basin to nearly 140% of normal in Judith basin. Like precipitation, snowpack was well below average into early January, but rebounded thanks to a series of strong winter storms. Mountain snowpack can be a good indicator of spring streamflow and the amount of water available for summer irrigation. It will be important to pay attention to spring temperatures, as a warmer spring in western Montana can result in earlier snowmelt and flooding, and ultimately impact streamflow during the summer.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
-past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-03-01", huc = 8)
+past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-04-15", huc = 8)
 
 if(knitr::is_html_output())
   knitr::include_url(past_seasonal_swe$leaflet$path,
@@ -366,7 +366,7 @@ if(knitr::is_html_output())
 
 ```{r past-seasonal-drought, cache=TRUE}
 
-past_seasonal_drought <- mtd_plot_usdm(date = "2020-03-01",
+past_seasonal_drought <- mtd_plot_usdm(date = "2020-04-15",
                                        data_out = "../data/USDM")
 
 past_seasonal_drought$map %T>%
