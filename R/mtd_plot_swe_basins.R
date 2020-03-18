@@ -52,7 +52,7 @@ mtd_plot_swe_basins <- function(date = "latest",
                   direction = 1,
                   limits = c(60,140),
                   palette = "RdBu",
-                  expand = expand_scale(mult = 0, add = 0),
+                  expand = expansion(mult = 0, add = 0),
                   guide = ggplot2::guide_colourbar(title.position = "bottom")
                 ) +
                 mtd_plot() +

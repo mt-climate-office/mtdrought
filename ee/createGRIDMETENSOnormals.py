@@ -26,8 +26,11 @@ start_date = "1971-01-01"
 end_date = "2001-01-01"
 out_path = 'users/bocinsky/GRIDMET_MT_1971-2000_Normals'
 
-geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))
+# geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+#     .filter(ee.Filter.eq('Name', 'Montana'))
+    
+geom = ee.FeatureCollection("TIGER/2018/States")\
+    .filter(ee.Filter.eq('NAME', 'Montana'))
 
 imgColl = ee.ImageCollection(collection)\
     .select(vars)\

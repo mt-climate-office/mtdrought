@@ -24,7 +24,8 @@ def stackCollection ( collection ):
   return ee.Image(collection.iterate(appendBands, first))
   
 def clipMT( image ):
-  return image.clip(ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')))
+  # return image.clip(ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')))
+  return image.clip(ee.FeatureCollection("TIGER/2018/States").filter(ee.Filter.eq('NAME', 'Montana')))
 
 def getDate( image ):
   return image.get('system:index')
@@ -38,9 +39,13 @@ def getGridmet( collection, vars, start_date, end_date ):
     
     normals = getGridmetNormals( days )
       
-    bounds = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))\
-    .geometry()
+    # bounds = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+    # .filter(ee.Filter.eq('Name', 'Montana'))\
+    # .geometry()
+    
+    bounds = ee.FeatureCollection("TIGER/2018/States")\
+      .filter(ee.Filter.eq('NAME', 'Montana'))\
+      .geometry()
     
     bbox = bounds.bounds().getInfo()
     
@@ -86,9 +91,13 @@ def getGridmetNormals ( days, collection = "users/bocinsky/GRIDMET_MT_1981-2010_
 
 def getDailySeries ( collection, vars, start_date, end_date ):
     
-    geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))\
-    .geometry()
+    # geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+    # .filter(ee.Filter.eq('Name', 'Montana'))\
+    # .geometry()
+    
+    geom = ee.FeatureCollection("TIGER/2018/States")\
+      .filter(ee.Filter.eq('NAME', 'Montana'))\
+      .geometry()
     
     imgColl = ee.ImageCollection(collection)\
     .select(vars)\
@@ -112,9 +121,13 @@ def getDailySeries ( collection, vars, start_date, end_date ):
 
 def getDailyClimatology ( collection, vars, start_date, end_date ):
     
-    geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))\
-    .geometry()
+    # geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+    # .filter(ee.Filter.eq('Name', 'Montana'))\
+    # .geometry()
+    
+    geom = ee.FeatureCollection("TIGER/2018/States")\
+      .filter(ee.Filter.eq('NAME', 'Montana'))\
+      .geometry()
     
     imgColl = ee.ImageCollection(collection)\
     .select(vars)\
@@ -160,8 +173,12 @@ def calculateENSOClimatology( dates, name = 'GRIDMET_MT_1981-2010_ENSO_Normals' 
   vars = ['pr','tmmn','tmmx']
   out_path = 'users/bocinsky/' + name
 
-  geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))
+  # geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+  #   .filter(ee.Filter.eq('Name', 'Montana'))
+  
+  geom = ee.FeatureCollection("TIGER/2018/States")\
+    .filter(ee.Filter.eq('NAME', 'Montana'))
+    
   
   imgColl = ee.ImageCollection(collection)\
     .select(vars)\
@@ -203,9 +220,13 @@ def getENSO ( collection, vars, start_date, end_date ):
     
     normals = getGridmetNormals( days = days )
       
-    bounds = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))\
-    .geometry()
+    # bounds = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+    # .filter(ee.Filter.eq('Name', 'Montana'))\
+    # .geometry()
+    
+    bounds = ee.FeatureCollection("TIGER/2018/States")\
+      .filter(ee.Filter.eq('NAME', 'Montana'))\
+      .geometry()
     
     bbox = bounds.bounds().getInfo()
     
@@ -234,8 +255,12 @@ def getENSO ( collection, vars, start_date, end_date ):
 
 def getENSOSeries ( collection ):
     
-    geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))\
+    # geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+    # .filter(ee.Filter.eq('Name', 'Montana'))\
+    # .geometry()
+    
+    geom = ee.FeatureCollection("TIGER/2018/States")\
+    .filter(ee.Filter.eq('NAME', 'Montana'))\
     .geometry()
     
     imgColl = ee.ImageCollection(collection)

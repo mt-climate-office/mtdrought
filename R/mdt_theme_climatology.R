@@ -84,11 +84,11 @@ mtd_theme_climatology <- function(ybreaks,
       # labels = names(month_lengths),
       date_breaks = "1 month",
       labels = function(x){lubridate::month(x, label = TRUE)},
-      expand = ggplot2::expand_scale(mult = 0, add = 0)
+      expand = ggplot2::expansion(mult = 0, add = 0)
     ),
     ggplot2::scale_y_continuous(limits = c(head(ybreaks, 1), tail(ybreaks, 1)),
                                 breaks = ybreaks,
-                                expand = expand_scale(mult = 0, add = 0)),
+                                expand = expansion(mult = 0, add = 0)),
     ggplot2::theme_minimal(),
     ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                    axis.title.y = ggplot2::element_blank(),

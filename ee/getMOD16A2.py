@@ -10,10 +10,14 @@ def stackCollection ( collection ):
   return ee.Image(collection.iterate(appendBands, first))
   
 def clipMT( image ):
-  return image.clip(ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')))
+  # return image.clip(ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')))
+  return image.clip(ee.FeatureCollection("TIGER/2018/States").filter(ee.Filter.eq('NAME', 'Montana')))
+
 
 def getMOD16A2( start_date, end_date, base_name = 'MOD16A2'):
-    bbox = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')).geometry().bounds().getInfo()
+    # bbox = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')).geometry().bounds().getInfo()
+    bbox = ee.FeatureCollection("TIGER/2018/States").filter(ee.Filter.eq('NAME', 'Montana')).geometry().bounds().getInfo()
+
     
     params = {
         'name': base_name + "_" + start_date + "_" + end_date,
@@ -35,7 +39,8 @@ def getMOD16A2( start_date, end_date, base_name = 'MOD16A2'):
 
 def getMOD16A2normals():
     base_name = 'MOD16A2'
-    bbox = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')).geometry().bounds().getInfo()
+    # bbox = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8').filter(ee.Filter.eq('Name', 'Montana')).geometry().bounds().getInfo()
+    bbox = ee.FeatureCollection("TIGER/2018/States").filter(ee.Filter.eq('NAME', 'Montana')).geometry().bounds().getInfo()
     
     params = {
         'name': base_name + "_normals",

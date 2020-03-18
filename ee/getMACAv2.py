@@ -15,8 +15,11 @@ vars = ['pr','tasmin','tasmax']
 start_date = "2040-01-01"
 end_date = "2070-01-01"
 
-geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
-    .filter(ee.Filter.eq('Name', 'Montana'))
+# geom = ee.FeatureCollection('ft:1fRY18cjsHzDgGiJiS2nnpUU3v9JPDc2HNaR7Xk8')\
+#     .filter(ee.Filter.eq('Name', 'Montana'))
+    
+geom = ee.FeatureCollection("TIGER/2018/States")\
+    .filter(ee.Filter.eq('NAME', 'Montana'))
     
 imgColl = ee.ImageCollection(collection)\
     .select(vars)\
