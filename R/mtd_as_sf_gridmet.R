@@ -2,7 +2,7 @@ mtd_as_sf_gridmet <- function(gridmet){
   
   gridmet_dates <- attr(gridmet,"dates")
   
-  if(is(gridmet[[1]],"RasterBrick")){
+  if(is(gridmet[[1]],"RasterBrick") | is(gridmet[[1]],"RasterStack")){
     gridmet %<>%
       purrr::map(function(x){
        x %>%

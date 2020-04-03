@@ -10,19 +10,39 @@ editor_options:
 source("./R/setup.R")
 ```
 
+---
+
+### A Message from Montana State Climatologist Dr. Kelsey Jencso {-}
+
+:::::: {.columns}
+
+::: {.column width="35%"}
+![Montana State Climatologist Dr. Kelsey Jencso.](./img/jencso.jpg)
+:::
+
+::: {.column width="5%"}
+\ 
+<!-- an empty Div (with a whitespace), serving as
+a column separator -->
+:::
+
+::: {.column width="60%"}
+As communities across Montana continue to deal with COVID-19, I write to provide an update on the additional steps we are taking at the Montana Climate Office to prevent further spread of the virus and to protect the health and safety of our community. The Montana Climate Office has temporarily closed its doors on the University of Montana Campus and our employees are working from home to help minimize the spread here in MT. Our operations will continue on a modified work schedule. Importantly, our climate data services and drought outlooks will continue on schedule. You can still contact us through email for climate and drought related questions. We are humbled by the hard work of the agricultural community, its creativity in finding solutions and true grit during this challenging time. Said simply, thank you for your efforts to produce our food and sustain Montana’s economy. We are here to help in any way that we can.
+:::
+::::::
+
+
+
+-----
+
 ## {-}
-
-Happy New Year! Welcome to the March 2020 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
-
-Here's what you'll find in this newsletter:
+Here's what you'll find in the April 2020 Montana Drought & Climate newsletter:
 
 [**Winter 2019/2020 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
 
 [**Spring Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
-
------
 
 ### In Brief {-}
 
@@ -37,11 +57,11 @@ Here's what you'll find in this newsletter:
 
 -----
 
-### Enhanced agricultural weather monitoring from the Montana Mesonet {-}
+### Data-driven drought monitoring from all Montanans {-}
 
-The [Montana Climate Office](https://climate.umt.edu/) is always looking for ways to serve Montanan's better, and we’ve recently developed a online new resource for getting weather information on your local area. The [Montana Mesonet Dashboard](https://climate.umt.edu/mesonet_dashboard) delivers up-to-date weather information from [Montana Mesonet](https://climate.umt.edu/mesonet/) stations across the state. This dashboard provides the latest data for each MT Mesonet station, and tables and graphs of data going back two weeks. Check out the dashboard at [https://climate.umt.edu/mesonet_dashboard]. 
+During this time of "social distancing," the [Montana Climate Office](https://climate.umt.edu/) is working hard to provide Montanans with useful and timely online tools for agricultural decision making. With support from the National Oceanic and Atmospheric Administration’s (NOAA) National Integrated Drought Information System (NIDIS), we have developed the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://climate.umt.edu/drought). This website provides access to drought indices that are used regularly by the Montana [Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc) to advise drought declarations in Montana. The goal is to provide up-to-date drought information using the most current peer reviewed science. Check out the dashboard at [https://climate.umt.edu/drought].
 
-[![](./img/mesonet_dashboard.jpg "Screenshot of the Montana Mesonet dashboard")](https://climate.umt.edu/mesonet_dashboard)
+[![](./img/drought_dashboard.jpg "Screenshot of the Upper Missouri River Basin (UMRB) drought indicators dashboard")](https://climate.umt.edu/drought)
 
 The dashboard is currently under development, and we definitely want your feedback. Please email Zach Hoylman at [state.climatologist@umontana.edu](mailto:state.climatologist@umontana.edu) with any feedback or questions.
 

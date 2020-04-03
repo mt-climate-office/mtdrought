@@ -20,7 +20,7 @@ all_packages <- c("mcor", "thredds",# The Core MCO package
 # devtools::install_bioc("rhdf5")
 # remotes::install_github("mt-climate-office/mcor")
 # remotes::install_github("mt-climate-office/thredds")
-# remotes::install_github("hunzikp/velox")
+# remotes::install_github("hunzikp/velox@v0.1.0")
 # devtools::install_cran(all_packages)
 # # remotes::install_github("tidyverse/ggplot2")
 
