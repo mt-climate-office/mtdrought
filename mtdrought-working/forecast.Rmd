@@ -128,5 +128,5 @@ noaa_seasonal$map %T>%
 
 <!-- ``` -->
 
-### <img src="icons/drought.svg" width="35px"/> Hydrologic Outlook {-}
+### <img src="icons/soil_saturation.svg" width="35px"/> Hydrologic Outlook {-}
 Spring streamflow in western Montana is likely to be near normal given the slightly above normal snowpack across the region. This could change if the seasonal outlook of warmer than normal temperatures for the western region comes to pass, causing rapid loss of snowpack and swelling of rivers. NOAA's Missouri River Basin River Forecast Center is predicting near normal stream flows for most of the central to eastern portions of state, with the exception of moderate flooding in north central Montana around Battle Creek, Clear Creek, Lodge Creek and the Milk River. Early snowmelt on the plains has already contributed to flooding on the Milk River. Visit https://water.weather.gov for up-to-date stream gauge and flood forecasting across Montana.
