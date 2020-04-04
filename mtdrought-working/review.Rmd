@@ -9,12 +9,12 @@ source("./R/setup.R")
 
 ```
 
-![A beautiful red barn surrounded with snow near Chinook, Montana. Photo: Todd Klassy Photography.](./img/chinook.jpg)
+![(CAPTION HERE). Photo: Ada Smith.](./img/ada_smith_kate_walking_horse.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-start_date <- "2020-02-01"
+start_date <- "2020-03-01"
 end_date <- "2020-04-15"
 
 gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
@@ -214,9 +214,9 @@ if(knitr::is_html_output())
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-Despite what felt like early onset of winter for most of the state, Montana has been warmer than normal for much of December through February. Parts of western Montana have experienced temperatures over 3ºF warmer than normal, and only a couple places in far northern and southwestern Montana have experienced temperatures that are cooler than normal. Warm temperatures in the winter can lead to mid-season snow melt, causing high winter runoff and reducing the snowpack available later in the spring and early summer.
+Last month's temperature predictions from NOAA's Climate Prediction Center (CPC) hit the mark --- since March 1<sup>st</sup>, temperatures across the state have been below normal, especially in northern Montana, parts of which have experienced temperatures nearly 5ºF colder than normal. This has really helped Montana retain its snowpack, despite drier than average conditions.
 
-The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
+The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2020 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
 
 ```{r past-seasonal-temp-grid-climatology, cache=FALSE}
@@ -284,9 +284,9 @@ if(knitr::is_html_output())
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-December was very dry for most of Montana, which resulted in slightly below-normal precipitation across the state for December through February. However, in January and February Montana experienced a series of *atmospheric rivers*. Atmospheric rivers are narrow bands of concentrated moisture that originate over the Pacific Ocean and flow inland, releasing snow and rain. Areas that are under these rivers in the sky tend to see large amounts of precipitation, sometimes over long durations. If the current pattern of regular storms continues, snowpack and soil moisture will increase across the state.
+Conditions since March have been very dry for most of Montana, with the exception of the central part of the state. Areas of western Montana have received only 35% of their normal March--April preciptation, and parts of southeast Montana only 20%. Meanwhile, several wet storms have brought greater than normal precipitation to parts of central Montana, with areas west of Billings experiencing nearly 175% of their normal March--April preciptation, and areas west of Great Falls nearly 165%. These precipitation events and snowmelt caused small-stream flooding in Blaine and Hill counties, and flood warnings for the Milk River in early April. This aligns with flood risk being above normal for much of the Missouri River Basin heading into summer.
 
-The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
+The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2020 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
 ```{r past-seasonal-prcp-grid-climatology, cache=FALSE}
 mtd_plot_climatology(x = gridmet_series[c("pr")],
@@ -351,7 +351,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf", width = 5.13, heig
 
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
-As of late February, snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 96% of normal in Fisher basin to nearly 140% of normal in Judith basin. Like precipitation, snowpack was well below average into early January, but rebounded thanks to a series of strong winter storms. Mountain snowpack can be a good indicator of spring streamflow and the amount of water available for summer irrigation. It will be important to pay attention to spring temperatures, as a warmer spring in western Montana can result in earlier snowmelt and flooding, and ultimately impact streamflow during the summer.
+Due to cooler than normal conditions and a series of spring storms, as of mid April snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 101% of normal in Jefferson basin east of Butte to nearly 128% of normal in the North Fork Flathead basin north of Whitefish. As we move into this Spring, it will continue to be important to pay attention to temperatures, which will have a large impact on snowmelt rates.
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-04-15", huc = 8)
@@ -375,4 +375,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-The US Drought Monitor has categorized an area around Great Falls as abnormally dry going into late winter. This aligns with persistent below-normal precipitation in  this region. The location of storms from now until early spring will likely determine whether drought conditions are declared for this area later this spring.
+Despite higher than normal snowpack, the US Drought Monitor has categorized several areas of Montana as abnormally dry going into mid-April, including northwest Montana around Kalispell, an area north of Livingston and Big Timber, and the Interstate 15 corridor from Helena to Shelby This has been driven primarily by persistent below-normal precipitation. The location of spring storms will continue to determine whether drought conditions are declared for this area later going into the summer.

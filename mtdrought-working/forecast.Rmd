@@ -8,13 +8,13 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![A row of grain bins catch the last light of the day near Inverness, Montana. Photo: Todd Klassy Photography.](./img/inverness.jpg)
+![(CAPTION HERE). Photo: Kevin Hyde.](./img/kevin_hyde_spring_bluster.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 
-The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through this coming spring. In Montana, winter and spring conditions vary greatly under ENSO Neutral. The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña---ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.
+The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through this coming spring and summer. In Montana, spring conditions vary greatly under ENSO Neutral. The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña---ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.
 
 <!-- These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring. -->
 
@@ -88,7 +88,7 @@ ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf", width = 5.13, height =
 
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-During ENSO Neutral conditions, climate forecasters rely on other types of data to create seasonal outlooks (since neither El Niño nor La Niña is influencing the state). NOAA's Climate Prediction Center (CPC) is projecting that temperatures are somewhat likely to be cooler than normal across eastern Montana into early spring (March–May). This is a fairly weak prediction (due to ENSO Neutral conditions); there is still a chance that temperatures could be warmer than normal. Most of the rest of the state has equal chances of being cooler or warmer than normal.
+During ENSO Neutral conditions, climate forecasters rely on other types of data to create seasonal outlooks (since neither El Niño nor La Niña is influencing the state). NOAA's Climate Prediction Center (CPC) is projecting that temperatures are somewhat likely to be warmer than normal across western Montana into early summer (April–June). This is a fairly weak prediction (due to ENSO Neutral conditions); there is still a chance that temperatures could be cooler than normal in western Montana. Most of the rest of the state has equal chances of being cooler or warmer than normal.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -102,7 +102,7 @@ noaa_seasonal$map %T>%
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-NOAA's Climate Prediction Center (CPC) is forecasting that March–May precipitation across eastern Montana is likely to be wetter than normal, with the rest of the state having equal chances of being wetter or drier than normal. Keep in mind that while the CPC is projecting wetter conditions in eastern Montana, this map doesn't reflect *how much* wetter is it likely to be, or the intensity of specific precipitation events.
+NOAA's Climate Prediction Center (CPC) is forecasting that April–June precipitation near the eastern edge Montana is somewhat likely to be wetter than normal, with the rest of the state having equal chances of being wetter or drier than normal. Keep in mind that while the CPC is projecting somewhat wetter conditions in eastern Montana, this map doesn't reflect *how much* wetter is it likely to be, or the intensity of specific precipitation events.
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -120,10 +120,13 @@ noaa_seasonal$map %T>%
 
 <!-- ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
 
-<!-- future_seasonal_drought <- mtd_plot_noaa_drought_outlook(date = "2020-04-15", -->
-<!--                                                          data_out = "../data/NOAA_droughtlook") -->
+<!-- future_seasonal_drought <-  -->
+<!--   mtd_plot_noaa_drought_outlook(date = "2020-04-15", -->
+<!--                                 data_out = "../data/NOAA_droughtlook") -->
 
 <!-- future_seasonal_drought$map -->
 
 <!-- ``` -->
 
+### <img src="icons/drought.svg" width="35px"/> Hydrologic Outlook {-}
+Spring streamflow in western Montana is likely to be near normal given the slightly above normal snowpack across the region. This could change if the seasonal outlook of warmer than normal temperatures for the western region comes to pass, causing rapid loss of snowpack and swelling of rivers. NOAA's Missouri River Basin River Forecast Center is predicting near normal stream flows for most of the central to eastern portions of state, with the exception of moderate flooding in north central Montana around Battle Creek, Clear Creek, Lodge Creek and the Milk River. Early snowmelt on the plains has already contributed to flooding on the Milk River. Visit https://water.weather.gov for up-to-date stream gauge and flood forecasting across Montana.

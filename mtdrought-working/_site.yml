@@ -13,7 +13,7 @@ navbar:
   - text: Reference
     href: reference.html
 output:
-  html_document:
+  bookdown::html_document2:
     theme: simplex
     highlight: textmate
     css: style.css
@@ -23,5 +23,5 @@ output:
       after_body: after_body.html
     lib_dir: site_libs
     self_contained: no
-#  word_document: true
+#  bookdown::word_document2: true
 output_dir: ../docs/mtdrought-2020-april
