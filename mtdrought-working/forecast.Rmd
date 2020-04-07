@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![(CAPTION HERE). Photo: Kevin Hyde.](./img/kevin_hyde_spring_bluster.jpg)
+![April bluster along the continental divide above Virginia City. Photo: Kevin Hyde.](./img/kevin_hyde_spring_bluster.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 

@@ -351,8 +351,6 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf", width = 5.13, heig
 
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
-Due to cooler than normal conditions and a series of spring storms, as of mid April snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 101% of normal in Jefferson basin east of Butte to nearly 128% of normal in the North Fork Flathead basin north of Whitefish. As we move into this Spring, it will continue to be important to pay attention to temperatures, which will have a large impact on snowmelt rates.
-
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
 past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-04-15", huc = 8)
 
@@ -362,6 +360,7 @@ if(knitr::is_html_output())
 
 ```
 
+Due to cooler than normal conditions and a series of spring storms, as of mid April snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 99% of normal in Jefferson basin east of Butte to nearly 128% of normal in the North Fork Flathead basin north of Whitefish. As we move into this Spring, it will continue to be important to pay attention to temperatures, which will have a large impact on snowmelt rates.
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
 

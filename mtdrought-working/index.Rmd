@@ -24,7 +24,7 @@ source("./R/setup.R")
 a column separator -->
 :::
 ::: {.column width="58%"}
-As communities across Montana continue to deal with COVID-19, I write to provide an update on the additional steps we are taking at the Montana Climate Office to prevent further spread of the virus and to protect the health and safety of our community. The Montana Climate Office has temporarily closed its doors on the University of Montana Campus and our employees are working from home to help minimize the spread here in Montana. Our operations will continue on a modified work schedule. Importantly, our climate data services and drought outlooks will continue on schedule. You can still contact us through email for climate and drought related questions. We are humbled by the hard work of the agricultural community, its creativity in finding solutions and true grit during this challenging time. Said simply, thank you for your efforts to produce our food and sustain Montana’s economy. We are here to help in any way that we can.
+As communities across Montana continue to deal with COVID-19, I write to provide an update on the additional steps we are taking at the Montana Climate Office to prevent further spread of the virus and to protect the health and safety of our community. The Montana Climate Office has temporarily closed its doors on the University of Montana Campus and our employees are working from home to help minimize the spread here in Montana. Our operations will continue on a modified work schedule. Importantly, our climate data services and drought outlooks will continue on schedule. You can still contact us through email for climate and drought related questions. We are humbled by the hard work of the agricultural community, its creativity in finding solutions and true grit during this challenging time. Thank you for your efforts to produce our food and sustain Montana’s economy. We are here to help in any way that we can.
 :::
 ::::::
 
@@ -48,7 +48,7 @@ Things are looking fairly normal, at least as far as climate is concerned...
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
 * March and April have thus far been cooler than normal across most of Montana
 
-* March and April have been much drier then normal in western and eatern Montana, and wetter than normal in central Montana.
+* March and April have been much drier then normal in western and eastern Montana, and wetter than normal in central Montana.
 
 * Mountain snowpack is currently normal to above normal across much of Montana.
 
@@ -60,7 +60,7 @@ Things are looking fairly normal, at least as far as climate is concerned...
 
 -----
 
-### Data-driven drought monitoring from all Montanans {-}
+### Data-driven drought monitoring for all Montanans {-}
 
 During this time of social distancing, the [Montana Climate Office](https://climate.umt.edu/) is working hard to provide Montanans with useful and timely online tools for agricultural decision making. With support from the National Oceanic and Atmospheric Administration’s (NOAA) National Integrated Drought Information System (NIDIS), we have developed the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://climate.umt.edu/drought). This website provides access to drought indices that are used regularly by the [Montana Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc) to advise drought declarations in Montana. The goal is to provide up-to-date drought information using the most current peer-reviewed science. Check out the dashboard at https://climate.umt.edu/drought.
 
