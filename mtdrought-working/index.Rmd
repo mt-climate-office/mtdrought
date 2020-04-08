@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![(CAPTION HERE). Photo: Ada Smith.](./img/ada_smith_calf.jpg)
+![The first calf of the season on a ranch near Deer Lodge, MT. Photo: Ada Smith.](./img/ada_smith_calf.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")

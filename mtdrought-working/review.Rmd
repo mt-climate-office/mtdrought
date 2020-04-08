@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![(CAPTION HERE). Photo: Ada Smith.](./img/ada_smith_kate_walking_horse.jpg)
+![Moving cattle on a snowy spring morning in the Blackfoot Valley. Photo: Ada Smith.](./img/ada_smith_kate_walking_horse.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
@@ -284,7 +284,7 @@ if(knitr::is_html_output())
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-Conditions since March have been very dry for most of Montana, with the exception of the central part of the state. Areas of western Montana have received only 35% of their normal March--April preciptation, and parts of southeast Montana only 20%. Meanwhile, several wet storms have brought greater than normal precipitation to parts of central Montana, with areas west of Billings experiencing nearly 175% of their normal March--April preciptation, and areas west of Great Falls nearly 165%. These precipitation events and snowmelt caused small-stream flooding in Blaine and Hill counties, and flood warnings for the Milk River in early April. This aligns with flood risk being above normal for much of the Missouri River Basin heading into summer.
+Conditions since March have been very dry for most of Montana, with the exception of the central part of the state. Areas of western Montana have received only 35% of their normal March--April preciptation, and parts of southeast Montana only 20%. Meanwhile, several wet storms have brought greater than normal precipitation to parts of central Montana, with areas west of Billings experiencing nearly 175% of their normal March--April preciptation, and areas west of Great Falls nearly 165%. These precipitation events in combination with snowmelt resulted in small-stream flooding in Blaine and Hill counties, and flood warnings for the Milk River in early April. This aligns with flood risk being above normal for much of the Missouri River Basin heading into summer.
 
 The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2020 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
@@ -360,7 +360,7 @@ if(knitr::is_html_output())
 
 ```
 
-Due to cooler than normal conditions and a series of spring storms, as of mid April snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 99% of normal in Jefferson basin east of Butte to nearly 128% of normal in the North Fork Flathead basin north of Whitefish. As we move into this Spring, it will continue to be important to pay attention to temperatures, which will have a large impact on snowmelt rates.
+Due to cooler than normal conditions and a series of spring storms, as of mid-April snowpack is normal to above normal across Montana. Snow Water Equivalent (SWE) values range from 99% of normal in Jefferson basin east of Butte to nearly 128% of normal in the North Fork Flathead basin north of Whitefish. As we move into this Spring, it will continue to be important to pay attention to temperatures, which will have a large impact on snowmelt rates.
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
 
@@ -374,4 +374,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-Despite higher than normal snowpack, the US Drought Monitor has categorized several areas of Montana as abnormally dry going into mid-April, including northwest Montana around Kalispell, an area north of Livingston and Big Timber, and the Interstate 15 corridor from Helena to Shelby This has been driven primarily by persistent below-normal precipitation. The location of spring storms will continue to determine whether drought conditions are declared for this area later going into the summer.
+Despite higher than normal snowpack across most of the state, the US Drought Monitor has categorized several areas of Montana as abnormally dry going into mid-April, including northwest Montana around Kalispell, an area north of Livingston and Big Timber, and the Interstate 15 corridor from Helena to Shelby. This has been driven primarily by persistent below-normal precipitation. The location of spring storms will continue to determine whether drought conditions are declared going into the summer.
