@@ -8,13 +8,13 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![(CAPTION HERE). Photo: Kevin Hyde.](./img/kevin_hyde_spring_bluster.jpg)
+![April bluster along the continental divide above Virginia City. Photo: Kevin Hyde.](./img/kevin_hyde_spring_bluster.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ### <img src="icons/enso.svg" width="35px"/> El Niño Update {-}
 
-The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through this coming spring and summer. In Montana, spring conditions vary greatly under ENSO Neutral. The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña---ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.
+The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through the spring and summer. In Montana, spring conditions vary greatly under ENSO Neutral. The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the [Reference](./reference.html) section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981--2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña---ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.
 
 <!-- These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring. -->
 
