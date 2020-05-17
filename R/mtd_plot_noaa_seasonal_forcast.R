@@ -84,7 +84,7 @@ mtd_plot_noaa_seasonal_forecast <- function(date,
   sf::st_agr(noaa_data) = "constant"
   
   noaa_data %<>%
-    lwgeom::st_make_valid() %>%
+    sf::st_make_valid() %>%
     sf::st_intersection(mt_counties_simple %>%
                           sf::st_union()) %>%
     dplyr::mutate(Chance = ifelse(Prob > 60, "Very likely", 

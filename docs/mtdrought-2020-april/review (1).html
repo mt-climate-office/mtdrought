@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Spring 2020 Update</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta http-equiv="Cache-Control" content="no-store">
+
+<style>
+  iframe {
+    width: 100%;
+    border: none;
+
+  }
+</style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left; vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring and Forecasting<br>for Agricultural Producers<br><b>March 2020</b></ht></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Seasonal Summary</a>
+</li>
+<li>
+  <a href="review.html">Spring 2020 Update</a>
+</li>
+<li>
+  <a href="forecast.html">Spring/Summer Forecast</a>
+</li>
+<li>
+  <a href="reference.html">Reference</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Spring 2020 Update</h1>
+
+</div>
+
+
+<div class="figure">
+<img src="img/chinook.jpg" alt="" />
+<p class="caption">A beautiful red barn surrounded with snow near Chinook, Montana. Photo: Todd Klassy Photography.</p>
+</div>
+<div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills">
+<h2 class="unnumbered tabset tabset-fade tabset-pills"></h2>
+<div id="temperature" class="section level3 unnumbered">
+<h3 class="unnumbered"><img src="icons/temperature.svg" width="35px"/> Temperature</h3>
+<iframe src="./figures/review_temperature.html" width="100%" height="500px">
+</iframe>
+<!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
+<p>Despite what felt like early onset of winter for most of the state, Montana has been warmer than normal for much of December through February. Parts of western Montana have experienced temperatures over 3ºF warmer than normal, and only a couple places in far northern and southwestern Montana have experienced temperatures that are cooler than normal. Warm temperatures in the winter can lead to mid-season snow melt, causing high winter runoff and reducing the snowpack available later in the spring and early summer.</p>
+<p>The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2019 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.</p>
+<p><img src="review_files/figure-html/past-seasonal-temp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="precipitation" class="section level3 unnumbered">
+<h3 class="unnumbered"><img src="icons/precipitation.svg" width="35px"/> Precipitation</h3>
+<iframe src="./figures/review_precipitation.html" width="100%" height="500px">
+</iframe>
+<!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
+<p>December was very dry for most of Montana, which resulted in slightly below-normal precipitation across the state for December through February. However, in January and February Montana experienced a series of <em>atmospheric rivers</em>. Atmospheric rivers are narrow bands of concentrated moisture that originate over the Pacific Ocean and flow inland, releasing snow and rain. Areas that are under these rivers in the sky tend to see large amounts of precipitation, sometimes over long durations. If the current pattern of regular storms continues, snowpack and soil moisture will increase across the state.</p>
+<p>The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2019 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981–2010 period on any given day. The dashed line represents the average precipitation during the 1981–2010 period.</p>
+<p><img src="review_files/figure-html/past-seasonal-prcp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<!-- ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-} -->
+<!-- ```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
+<!-- past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-10-31", huc = 8) -->
+<!-- knitr::include_url(past_seasonal_swe$leaflet$path, -->
+<!--                    height = "500px") -->
+<!-- ``` -->
+<!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
+<!-- Wet and warmer conditions across western Montana have accelerated snowmelt—most basins now have less snowpack than normal, ranging from ~11% of normal in the Yaak basin in far northwestern Montana to upward of 200% of normal in the Upper Tongue and Big Horn Lake basins. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack and cooler temperatures earlier this spring. -->
+<!-- ### <img src="icons/soil_saturation.svg" width="35px"/> Soil Moisture {-} -->
+<!-- ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE} -->
+<!-- smap <- mtd_plot_smap(date = "2020-03-01", -->
+<!--                       variable = "sm_rootzone_wetness", -->
+<!--                       data_out = "../data/SMAP") -->
+<!-- smap$map %>% -->
+<!--   save_mt_map("review_soil_moisture.pdf") -->
+<!-- ``` -->
+<!-- ```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
+<!-- smap$leaflet %>% -->
+<!--   saveWidgetFix("./figures/review_soil_moisture.html", -->
+<!--                 selfcontained = FALSE, -->
+<!--                 libdir = "./site_libs" -->
+<!--   ) -->
+<!-- knitr::include_url("./figures/review_soil_moisture.html", -->
+<!--                    height = "500px") -->
+<!-- ``` -->
+<!-- Cool temperatures and high precipitation have led to truly historic soil moisture conditions across central and eastern Montana going into the fall. Soils east of the continental divide are nearly saturated, and are likely to stay very wet into the winter. Impacts include increased flooding during fall snow storms, difficulty planting winter wheat, and the increased likelihood of significant flooding events and planting delays this coming spring as snow melts on frozen or saturated soils. As of early October, Montana producers had only sown 50% their intended winter wheat acreage and only 9% had emerged --- usually 75% has been sown by early October, with 35% emerged. Cool temperatures and the soil moisture surplus have continued to delay or prohibit fall planting. -->
+</div>
+<div id="swe-icon-snowpack" class="section level3 unnumbered">
+<h3 class="unnumbered"><img src="icons/swe.svg" width="35" alt="swe icon" /> Snowpack</h3>
+<p>As of late February, snowpack is above normal across Montana. Snow Water Equivalent (SWE) values range from 96% of normal in Fisher basin to nearly 140% of normal in Judith basin. Like precipitation, snowpack was well below average into early January, but rebounded thanks to a series of strong winter storms. Mountain snowpack can be a good indicator of spring streamflow and the amount of water available for summer irrigation. It will be important to pay attention to spring temperatures, as a warmer spring in western Montana can result in earlier snowmelt and flooding, and ultimately impact streamflow during the summer.</p>
+<iframe src="./figures/2020-04-01-swe.html" width="100%" height="500px">
+</iframe>
+</div>
+<div id="drought-icon-drought" class="section level3 unnumbered">
+<h3 class="unnumbered"><img src="icons/drought.svg" width="35" alt="drought icon" /> Drought</h3>
+<p><img src="review_files/figure-html/past-seasonal-drought-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>The US Drought Monitor has categorized an area around Great Falls as abnormally dry going into late winter. This aligns with persistent below-normal precipitation in this region. The location of storms from now until early spring will likely determine whether drought conditions are declared for this area later this spring.</p>
+</div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78448357-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78448357-4');
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,14 +1,14 @@
-name: MT Drought & Climate — April 2020
+name: MT Drought & Climate — June 2020
 navbar:
   title: <img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left;
     vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring
-    and Forecasting<br>for Agricultural Producers<br><b>April 2020</b></ht>
+    and Forecasting<br>for Agricultural Producers<br><b>June 2020</b></ht>
   right:
   - text: Seasonal Summary
     href: index.html
-  - text: Spring 2020 Update
+  - text: Early Summer 2020 Update
     href: review.html
-  - text: Spring/Summer Forecast
+  - text: Summer Forecast
     href: forecast.html
   - text: Reference
     href: reference.html
@@ -24,4 +24,4 @@ output:
     lib_dir: site_libs
     self_contained: no
 #  bookdown::word_document2: true
-output_dir: ../docs/mtdrought-2020-april
+output_dir: ../docs/mtdrought-2020-june

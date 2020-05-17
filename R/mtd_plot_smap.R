@@ -66,7 +66,7 @@ mtd_plot_smap <- function(date,
   sf::st_agr(soil_moisture) = "constant"
   
   soil_moisture %<>%
-    lwgeom::st_make_valid() %>%
+    sf::st_make_valid() %>%
     sf::st_transform(mt_state_plane) %>%
     sf::st_intersection(mt_state_simple) %>%
     dplyr::group_by(layer) %>%

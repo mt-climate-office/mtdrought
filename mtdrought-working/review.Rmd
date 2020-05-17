@@ -1,5 +1,5 @@
 ---
-title: "Spring 2020 Update"
+title: "Early Summer 2020 Update"
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,8 +14,8 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-start_date <- "2020-03-01"
-end_date <- "2020-04-15"
+start_date <- "2020-04-01"
+end_date <- "2020-06-01"
 
 gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
@@ -352,7 +352,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf", width = 5.13, heig
 ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-}
 
 ```{r past-seasonal-swe, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE}
-past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-04-15", huc = 8)
+past_seasonal_swe <- mtd_plot_swe_basins(date = "2020-06-01", huc = 8)
 
 if(knitr::is_html_output())
   knitr::include_url(past_seasonal_swe$leaflet$path,
@@ -366,7 +366,7 @@ Due to cooler than normal conditions and a series of spring storms, as of mid-Ap
 
 ```{r past-seasonal-drought, cache=TRUE}
 
-past_seasonal_drought <- mtd_plot_usdm(date = "2020-04-15",
+past_seasonal_drought <- mtd_plot_usdm(date = "2020-06-01",
                                        data_out = "../data/USDM")
 
 past_seasonal_drought$map %T>%

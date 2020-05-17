@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>2020 June Update</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta http-equiv="Cache-Control" content="no-store">
+
+<style>
+  iframe {
+    width: 100%;
+    border: none;
+
+  }
+</style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><img src="img/MDC_logo.svg" style="height:50px; padding:0 15px; float:left; vertical-align:middle;"/><ht style="white-space:nowrap;overflow:hidden;position:relative;top:-1.5px;">Monitoring and Forecasting<br>for Agricultural Producers<br><b>June 2020</b></ht></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Seasonal Summary</a>
+</li>
+<li>
+  <a href="review.html">Early Summer 2020 Update</a>
+</li>
+<li>
+  <a href="forecast.html">Summer Forecast</a>
+</li>
+<li>
+  <a href="reference.html">Reference</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">2020 June Update</h1>
+
+</div>
+
+
+<div class="figure">
+<img src="img/ada_smith_calf.jpg" alt="" />
+<p class="caption">The first calf of the season on a ranch near Deer Lodge, MT. Photo: Ada Smith.</p>
+</div>
+<hr />
+<div id="a-message-from-montana-state-climatologist-dr.-kelsey-jencso" class="section level3 unnumbered" number="">
+<h3>A Message from Montana State Climatologist Dr. Kelsey Jencso</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="figure">
+<img src="img/jencso.jpg" alt="" />
+<p class="caption">State Climatologist Kelsey Jencso. Photo: Matt Roberts.</p>
+</div>
+</div><div class="column" style="width:2%;">
+<p> 
+<!-- an empty Div (with a whitespace), serving as
+a column separator --></p>
+</div><div class="column" style="width:58%;">
+<p>As communities across Montana continue to deal with COVID-19, I write to provide an update on the additional steps we are taking at the Montana Climate Office to prevent further spread of the virus and to protect the health and safety of our community. The Montana Climate Office has temporarily closed its doors on the University of Montana Campus and our employees are working from home to help minimize the spread here in Montana. Our operations will continue on a modified work schedule. Importantly, our climate data services and drought outlooks will continue on schedule. You can still contact us through email for climate and drought related questions. We are humbled by the hard work of the agricultural community, its creativity in finding solutions and true grit during this challenging time. Thank you for your efforts to produce our food and sustain Montana’s economy. We are here to help in any way that we can.</p>
+</div>
+</div>
+<hr />
+</div>
+<div id="section" class="section level2 unnumbered" number="">
+<h2 class="unnumbered" number=""></h2>
+<p>Here’s what you’ll find in the April 2020 Montana Drought &amp; Climate newsletter:</p>
+<p><a href="./review.html"><strong>Spring 2020 Update</strong></a> — Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.</p>
+<p><a href="./forecast.html"><strong>Spring/Summer Forecast</strong></a> — The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.</p>
+<p><a href="./reference.html"><strong>Reference</strong></a> — A helpful glossary of terms found in this newsletter.</p>
+<hr />
+<div id="in-brief" class="section level3 unnumbered" number="">
+<h3>In Brief:</h3>
+<p>Things are looking fairly normal, at least as far as climate is concerned…</p>
+<div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
+<ul>
+<li><p>March and April have thus far been cooler than normal across most of Montana</p></li>
+<li><p>March and April have been much drier then normal in western and eastern Montana, and wetter than normal in central Montana.</p></li>
+<li><p>Mountain snowpack is currently normal to above normal across much of Montana.</p></li>
+<li><p>The NOAA seasonal forecast for April through June is for slightly warmer than normal conditions in western Montana, and slightly wetter than normal conditions in far eastern Montana. Most of the state is forecast to be near normal conditions.</p></li>
+<li><p>The hydrologic outlook for Montana is for near-normal stream flows for most of the state through early summer, with the exception of moderate flooding along the Milk River and its tributaries in north central Montana.</p></li>
+</ul>
+</div>
+<hr />
+</div>
+<div id="data-driven-drought-monitoring-for-all-montanans" class="section level3 unnumbered" number="">
+<h3>Data-driven drought monitoring for all Montanans</h3>
+<p>During this time of social distancing, the <a href="https://climate.umt.edu/">Montana Climate Office</a> is working hard to provide Montanans with useful and timely online tools for agricultural decision making. With support from the National Oceanic and Atmospheric Administration’s (NOAA) National Integrated Drought Information System (NIDIS), we have developed the <a href="https://climate.umt.edu/drought">Upper Missouri River Basin (UMRB) drought indicators dashboard</a>. This website provides access to drought indices that are used regularly by the <a href="http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc">Montana Governor’s Drought and Water Supply Advisory Committee</a> to advise drought declarations in Montana. The goal is to provide up-to-date drought information using the most current peer-reviewed science. Check out the dashboard at <a href="https://climate.umt.edu/drought" class="uri">https://climate.umt.edu/drought</a>.</p>
+<p><a href="https://climate.umt.edu/drought"><img src="img/drought_dashboard.jpg" title="Screenshot of the Upper Missouri River Basin (UMRB) drought indicators dashboard" /></a></p>
+<p>The dashboard is currently under development, and we definitely want your feedback. Please email Zach Hoylman at <a href="mailto:state.climatologist@umontana.edu">state.climatologist@umontana.edu</a> with any feedback or questions.</p>
+<hr />
+</div>
+<div id="we-want-to-hear-from-you" class="section level3 unnumbered" number="">
+<h3>We want to hear from you!</h3>
+<p><strong>Please send us stories, photos, feedback, and questions!</strong> Your story about how you use this information, photos of your farm or ranch, or your question could be featured in the next newsletter.</p>
+<p>Please contact <a href="mailto:mtdrought@umontana.edu">mtdrought@umontana.edu</a><br> with questions and comments, or to be added to our mailing list.</p>
+<hr />
+</div>
+<div id="about-montana-drought-climate-and-the-montana-climate-office" class="section level3 unnumbered" number="">
+<h3>About <strong>Montana Drought &amp; Climate</strong><br>and the <strong>Montana Climate Office</strong></h3>
+<p><a href="https://climate.umt.edu/mtdrought/">Montana Drought &amp; Climate</a> is a USDA-funded project of the <a href="https://climate.umt.edu/">Montana Climate Office (MCO)</a> at the W.A. Franke College of Forestry &amp; Conservation at the University of Montana, in collaboration with the Montana State University Extension Service. The MCO is an independent state-designated body that provides Montanans with high-quality, timely, relevant, and scientifically-based climate information and services. We strive to be a credible and expert source of information for decision makers that rely on the most current information on climate to make important decisions. It is also the role of the MCO to assist stakeholders in interpreting climate information or adapting climate products to their needs.</p>
+<p>Production of this newsletter is supported by Water for Agriculture Challenge Area grant no. 2017-67027-26313 from the <a href="https://nifa.usda.gov/">USDA National Institute of Food and Agriculture</a> and by the <a href="https://www.montanawatercenter.org/">Montana Water Center</a>. Any opinions, findings, conclusions, or recommendations expressed in this publication are those of the author(s) and do not necessarily reflect the view of the U.S. Department of Agriculture, the Montana Water Center, or the University of Montana. Please refer to the Montana Climate Office user agreement and disclaimer at <a href="https://climate.umt.edu/disclaimer/">climate.umt.edu/disclaimer</a>.</p>
+<br>
+<div style="text-align: left;">
+<p><img src="img/NIFA_logo.jpg" style="width:400px;" /></p>
+</div>
+<hr />
+<p><br>
+<a href="https://climate.umt.edu/" target="_blank">
+<img src="img/MCO_logo.svg" alt="Montana Climate Office logo" style="width:250px;float:right;">
+</a>
+<a href="https://climate.umt.edu/">Montana Climate Office</a><br>
+Montana Forest &amp; Conservation Experiment Station<br>
+University of Montana<br>
+32 Campus Drive<br>
+Missoula, MT 59812<br></p>
+<p>P: (406) 243-6793<br>
+E: <a href="mailto:mtdrought@umontana.edu">mtdrought@umontana.edu</a><br>
+W: <a href="https://climate.umt.edu/">https://climate.umt.edu/</a></p>
+</div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78448357-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78448357-4');
+</script>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

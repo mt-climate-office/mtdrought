@@ -1,5 +1,5 @@
 ---
-title: "Spring/Summer Forecast"
+title: "Summer Forecast"
 editor_options: 
   chunk_output_type: console
 ---
@@ -24,7 +24,7 @@ The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in th
 #   readr::write_rds("../Data/gridmet/ENSO_AMJ.rds",
 #                      compress = "gz")
 
-enso <- readr::read_rds("../data/gridmet/ENSO_AMJ.rds")
+enso <- readr::read_rds("../data/gridmet/ENSO_JJA.rds")
 
 enso %<>%
   purrr::transpose()
@@ -92,7 +92,7 @@ During ENSO Neutral conditions, climate forecasters rely on other types of data 
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-04-15",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-06-01",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -106,7 +106,7 @@ NOAA's Climate Prediction Center (CPC) is forecasting that April–June precipit
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-04-15",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-06-01",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 
