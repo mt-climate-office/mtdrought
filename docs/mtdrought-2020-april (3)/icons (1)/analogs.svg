@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="150" height="150" viewBox="0, 0, 150, 150">
-  <g id="Mid-century">
-    <path d="M150,74.998 C150,116.419 116.425,150 75,150 C33.575,150 -0,116.419 -0,74.998 C-0,33.581 33.575,-0 75,-0 C116.425,-0 150,33.581 150,74.998" fill="#8FCBDB" id="Full"/>
-    <path d="M28.58,56.15 L122.42,56.205" fill-opacity="0" stroke="#1A6A92" stroke-width="21"/>
-    <path d="M28.58,94.795 L122.42,94.85" fill-opacity="0" stroke="#1A6A92" stroke-width="21"/>
-  </g>
-</svg>
