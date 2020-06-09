@@ -13,6 +13,26 @@ mtd_plot_smap <- function(date,
                                                start_date = date,
                                                end_date = date,
                                                raw_dir = data_out)
+  # out_dir <- "../data/SMAP/montana_2020-05-29"
+  
+  # soil_moisture <-
+  #   out_dir %>%
+  #   list.files(full.names = TRUE,
+  #              pattern = "csv") %>%
+  #   readr::read_csv() %>%
+  #   dplyr::select(`File Name`,
+  #                 Date) %>%
+  #   dplyr::mutate(`File Name` = `File Name` %>%
+  #                   stringr::str_replace("_",
+  #                                        ".") %>%
+  #                   stringr::str_c(".tif")) %>%
+  #   dplyr::group_by(Date) %>%
+  #   dplyr::summarise(Raster = list(raster::stack(paste0(out_dir,"/",`File Name`)) %>%
+  #                                    raster::mean())
+  #   ) %$%
+  #   {Raster %>%
+  #       magrittr::set_names(Date)} %>%
+  #   raster::brick()
   
   soil_moisture_date <- soil_moisture %>%
     names() %>%
@@ -140,43 +160,44 @@ mtd_plot_smap <- function(date,
   #   addLayersControl(overlayGroups = "poppendorf")
   
   
-  out <- mtd_leaflet_base(attribution = attribution) %>%
-    # addProviderTiles("OpenStreetMap") %>%
+  out <- 
+    mco_leaflet_base(attribution = attribution) %>%
     addRasterImage(soil_moisture_rast, 
-                   colors = colorBin(palette = c("<10%" = rgb(115, 0, 0, maxColorValue = 255),
-                                                 "10-20%" = rgb(230, 0, 0, maxColorValue = 255),
-                                                 "20-30%" = rgb(255, 170, 0, maxColorValue = 255),
-                                                 "30-35%" = rgb(252, 211, 127, maxColorValue = 255),
-                                                 "35-40%" = rgb(255, 255, 0, maxColorValue = 255),
-                                                 "40-45%" = rgb(240, 240, 240, maxColorValue = 255),
-                                                 "45-50%" = rgb(190, 232, 255, maxColorValue = 255),
-                                                 "50-60%" = rgb(0, 112, 255, maxColorValue = 255),
-                                                 ">60%" = rgb(0, 38, 115, maxColorValue = 255)),
-                                     domain = c(0,1),
-                                     bins = c(0,
-                                              0.1,
-                                              0.2,
-                                              0.3,
-                                              0.35,
-                                              0.4,
-                                              0.45,
-                                              0.5,
-                                              0.6,
-                                              1),
-                                     na.color="#00000000"),
-                   # group = "poppendorf",
-                   layerId = image_query_title)# %>%
-    # addImageQuery(soil_moisture_rast * 100,
-    #               layerId = image_query_title,
-    #               prefix = "",
-    #               digits = 1,
-    #               position = "bottomleft")
+                   colors = colorBin(
+                     palette = c("<10%" = rgb(115, 0, 0, maxColorValue = 255),
+                                 "10-20%" = rgb(230, 0, 0, maxColorValue = 255),
+                                 "20-30%" = rgb(255, 170, 0, maxColorValue = 255),
+                                 "30-35%" = rgb(252, 211, 127, maxColorValue = 255),
+                                 "35-40%" = rgb(255, 255, 0, maxColorValue = 255),
+                                 "40-45%" = rgb(240, 240, 240, maxColorValue = 255),
+                                 "45-50%" = rgb(190, 232, 255, maxColorValue = 255),
+                                 "50-60%" = rgb(0, 112, 255, maxColorValue = 255),
+                                 ">60%" = rgb(0, 38, 115, maxColorValue = 255)),
+                     domain = c(0,1),
+                     bins = c(0,
+                              0.1,
+                              0.2,
+                              0.3,
+                              0.35,
+                              0.4,
+                              0.45,
+                              0.5,
+                              0.6,
+                              1),
+                     na.color="#00000000"),
+                   group = image_query_title
+    ) %>%
+    leafem::addImageQuery(soil_moisture_rast * 100,
+                          group = image_query_title,
+                          layerId = image_query_title,
+                          prefix = "",
+                          digits = 0,
+                          position = "bottomleft")
   
   tm_out <- (soil_moisture_rast %>%
                tm_shape() + 
                tm_raster(title = "",
                          alpha = 1,
-                         group = "test",
                          legend.is.portrait = TRUE,
                          legend.reverse = TRUE,
                          breaks = c(0,
@@ -212,6 +233,7 @@ mtd_plot_smap <- function(date,
                tm_view(view.legend.position = c("left","bottom"))) %>%
     tmap_leaflet()
   
+  tm_out$x$calls[[5]]$args[[5]] <- image_query_title
   # Reverse
   # if(reverse){
   # tm_out$x$calls[[5]]$args[[1]]$labels %<>% rev()
@@ -225,7 +247,7 @@ mtd_plot_smap <- function(date,
   
   
   
-  out$x$calls <- c(out$x$calls,tm_out$x$calls[6])
+  out$x$calls <- c(out$x$calls,tm_out$x$calls[5:6])
   
   out$title <- tm_out$title
   
@@ -237,11 +259,12 @@ mtd_plot_smap <- function(date,
   out$jsHooks$render %<>%
     purrr::map(function(x){
       x$code %<>%
-        stringr::str_remove_all("\\t") %>%
-        stringr::str_remove_all("\\n")
+        stringr::str_remove_all("\\\\t") %>%
+        stringr::str_remove_all("\\\\n")
       
       return(x)
     })
+  
   
   # stars <- out$dependencies %>%
   #   purrr::keep(~ .x$name == "stars") %>%

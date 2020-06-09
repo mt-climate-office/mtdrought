@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![The first calf of the season on a ranch near Deer Lodge, MT. Photo: Ada Smith.](./img/ada_smith_calf.jpg)
+![A bovine standoff on a ranch near Deer Lodge, MT. Photo: Ada Smith.](./img/ada_smith_standoff.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
@@ -12,30 +12,12 @@ source("./R/setup.R")
 
 ---
 
-### A Message from Montana State Climatologist Dr. Kelsey Jencso {-}
-
-:::::: {.columns}
-::: {.column width="40%"}
-![State Climatologist Kelsey Jencso. Photo: Matt Roberts.](./img/jencso.jpg)
-:::
-::: {.column width="2%"}
-\ 
-<!-- an empty Div (with a whitespace), serving as
-a column separator -->
-:::
-::: {.column width="58%"}
-As communities across Montana continue to deal with COVID-19, I write to provide an update on the additional steps we are taking at the Montana Climate Office to prevent further spread of the virus and to protect the health and safety of our community. The Montana Climate Office has temporarily closed its doors on the University of Montana Campus and our employees are working from home to help minimize the spread here in Montana. Our operations will continue on a modified work schedule. Importantly, our climate data services and drought outlooks will continue on schedule. You can still contact us through email for climate and drought related questions. We are humbled by the hard work of the agricultural community, its creativity in finding solutions and true grit during this challenging time. Thank you for your efforts to produce our food and sustain Montana’s economy. We are here to help in any way that we can.
-:::
-::::::
-
------
-
 ## {-}
-Here's what you'll find in the April 2020 Montana Drought & Climate newsletter:
+Here's what you'll find in the June 2020 Montana Drought & Climate newsletter:
 
-[**Spring 2020 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
+[**Early Summer 2020 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
 
-[**Spring/Summer Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
+[**Summer Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 
@@ -43,18 +25,12 @@ Here's what you'll find in the April 2020 Montana Drought & Climate newsletter:
 
 ### In Brief:{-}
 
-Things are looking fairly normal, at least as far as climate is concerned...
-
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* March and April have thus far been cooler than normal across most of Montana
+* Cool weather this spring across Montana will likely give way to warmer than normal summer temperatures.
 
-* March and April have been much drier then normal in western and eastern Montana, and wetter than normal in central Montana.
+* Much of the state has experienced drier than normal conditions since April, which are likely to continue into the summer.
 
-* Mountain snowpack is currently normal to above normal across much of Montana.
-
-* The NOAA seasonal forecast for April through June is for slightly warmer than normal conditions in western Montana, and slightly wetter than normal conditions in far eastern Montana. Most of the state is forecast to be near normal conditions.
-
-* The hydrologic outlook for Montana is for near-normal stream flows for most of the state through early summer, with the exception of moderate flooding along the Milk River and its tributaries in north central Montana.
+* Moderate drought conditions have been declared in southwestern Montana, and many parts of the state are abnormally dry as of early June. Expectdry conditions to persist and intensify if dry and warm seasonal forecasts play out as expected.
 
 </div>
 
@@ -62,11 +38,11 @@ Things are looking fairly normal, at least as far as climate is concerned...
 
 ### Data-driven drought monitoring for all Montanans {-}
 
-During this time of social distancing, the [Montana Climate Office](https://climate.umt.edu/) is working hard to provide Montanans with useful and timely online tools for agricultural decision making. With support from the National Oceanic and Atmospheric Administration’s (NOAA) National Integrated Drought Information System (NIDIS), we have developed the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://climate.umt.edu/drought). This website provides access to drought indices that are used regularly by the [Montana Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc) to advise drought declarations in Montana. The goal is to provide up-to-date drought information using the most current peer-reviewed science. Check out the dashboard at https://climate.umt.edu/drought.
+As we move into the summer, the [Montana Climate Office](https://climate.umt.edu/) continues to monitor developing drought conditions across Montana, and is to provide *you* with useful and timely online tools for agricultural decision making. Be sure to keep an eye on the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://drought.climate.umt.edu)---it is updated nightly, and provides access to drought metrics used regularly by the [Montana Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc). Check out the dashboard at https://drought.climate.umt.edu.
 
-[![](./img/drought_dashboard.jpg "Screenshot of the Upper Missouri River Basin (UMRB) drought indicators dashboard")](https://climate.umt.edu/drought)
+[![](./img/drought_dashboard.jpg "Screenshot of the Upper Missouri River Basin (UMRB) drought indicators dashboard")](https://drought.climate.umt.edu)
 
-The dashboard is currently under development, and we definitely want your feedback. Please email Zach Hoylman at [state.climatologist@umontana.edu](mailto:state.climatologist@umontana.edu) with any feedback or questions.
+The dashboard is currently under development, and we continue to gather feedback from producers across the state. Please email Zach Hoylman at [state.climatologist@umontana.edu](mailto:state.climatologist@umontana.edu) with any feedback or questions.
 
 -----
 

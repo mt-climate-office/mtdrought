@@ -13,7 +13,7 @@
 
 <title>Summer Forecast</title>
 
-<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -315,52 +315,20 @@ $(document).ready(function () {
 
 
 <div class="figure">
-<img src="img/kevin_hyde_spring_bluster.jpg" alt="" />
-<p class="caption">April bluster along the continental divide above Virginia City. Photo: Kevin Hyde.</p>
+<img src="img/kelsey_jencso_square_butte.jpg" alt="" />
+<p class="caption">Square Butte at the Turek Ranch. Photo: Kelsey Jencso.</p>
 </div>
 <div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills" number="">
 <h2 class="unnumbered tabset tabset-fade tabset-pills" number=""></h2>
-<div id="el-niño-update" class="section level3 unnumbered" number="">
-<h3><img src="icons/enso.svg" width="35px"/> El Niño Update</h3>
-<p>The El Niño Southern Oscillation (ENSO) is a natural seasonal fluctuation in the sea surface temperature of the Pacific Ocean near the equator. In July, the Pacific officially moved out of El Niño conditions, and is currently in ENSO Neutral conditions (neither El Niño nor La Niña). NOAA is forecasting that it will likely stay neutral through the spring and summer. In Montana, spring conditions vary greatly under ENSO Neutral. The two graphs below show how Montana as a whole is affected by the ENSO climate patterns. The solid lines represent the average conditions in each of El Niño, La Niña, and ENSO Neutral conditions (see the <a href="./reference.html">Reference</a> section for an explanation of these conditions). The dashed lines represent the range of recorded conditions during the 1981–2010 period on any given day. Notice that the range for ENSO Neutral conditions (orange dashed lines) is wider than for El Niño or La Niña—ENSO Neutral conditions can be warmer or cooler, and wetter or dryer, than normal conditions.</p>
-<!-- These maps show what an average El Niño April--June looks like relative to normal. Keep an eye on the NOAA ENSO outlook ([https://www.climate.gov/enso](https://www.climate.gov/enso)) for the latest ENSO conditions and predictions as we head into late spring. -->
-<!-- ```{r future-seasonal-enso, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- enso$`ENSO Neutral` %>% -->
-<!--   mtd_plot_enso_grid(element = "tmean", -->
-<!--                      use_normal = TRUE, -->
-<!--                      Season = "Nov-Jan", -->
-<!--                      enso = "ENSO Neutral") %T>% -->
-<!--   save_mt_map("forecast_enso_tmean.pdf") -->
-<!-- enso$`ENSO Neutral` %>% -->
-<!--   mtd_plot_enso_grid(element = "prcp", -->
-<!--                      use_normal = TRUE, -->
-<!--                      Season = "Nov-Jan", -->
-<!--                      enso = "ENSO Neutral") %T>% -->
-<!--   save_mt_map("forecast_enso_prcp.pdf") -->
-<!-- ``` -->
-<p><img src="forecast_files/figure-html/future-seasonal-enso-prcp-1.png" width="100%" style="display: block; margin: auto;" /><img src="forecast_files/figure-html/future-seasonal-enso-prcp-2.png" width="100%" style="display: block; margin: auto;" /></p>
-</div>
 <div id="temperature" class="section level3 unnumbered" number="">
 <h3><img src="icons/temperature.svg" width="35px"/> Temperature</h3>
-<p>During ENSO Neutral conditions, climate forecasters rely on other types of data to create seasonal outlooks (since neither El Niño nor La Niña is influencing the state). NOAA’s Climate Prediction Center (CPC) is projecting that temperatures are somewhat likely to be warmer than normal across western Montana into early summer (April–June). This is a fairly weak prediction (due to ENSO Neutral conditions); there is still a chance that temperatures could be cooler than normal in western Montana. Most of the rest of the state has equal chances of being cooler or warmer than normal.</p>
+<p>In contrast to our cool temperatures across the state this past spring, NOAA’s Climate Prediction Center (CPC) is projecting warmer than normal conditions throughout the summer (June–August). This prediction is stronger for western Montana (“likely warmer” than normal) than in eastern Montana (“somewhat likely warmer”).</p>
 <p><img src="forecast_files/figure-html/future-seasonal-temp-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="precipitation" class="section level3 unnumbered" number="">
 <h3><img src="icons/precipitation.svg" width="35px"/> Precipitation</h3>
-<p>NOAA’s Climate Prediction Center (CPC) is forecasting that April–June precipitation near the eastern edge Montana is somewhat likely to be wetter than normal, with the rest of the state having equal chances of being wetter or drier than normal. Keep in mind that while the CPC is projecting somewhat wetter conditions in eastern Montana, this map doesn’t reflect <em>how much</em> wetter is it likely to be, or the intensity of specific precipitation events.</p>
+<p>NOAA’s Climate Prediction Center (CPC) is forecasting that June–August precipitation to be drier than normal across Montana, with more confidence in drier conditions for western Montana than eastern Montana. Dry conditions, combined with likely warmer temperatures across the state, could lead to expanding drought conditions and increased irrigation demand as we move into summer.</p>
 <p><img src="forecast_files/figure-html/future-seasonal-prcp-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<!-- ### <img src="icons/drought.svg" width="35px"/> Drought {-} -->
-<!-- The three month drought outlook suggests that drought will persist through August in Daniels, Sheridan, and Roosevelt counties. Due to late may rainfall these counties were recently downgraded to “abnormally dry.” Drought development is not predicted for the remainder of the state; however, drought development may still be possible given the uncertain seasonal forecast (above) for eastern portions of the state and warmer and drier than normal forecast for western portions of the state. For example, portions of Valley, Phillips, and Blaine counties have been designated as abnormally dry due to lack of rainfall in the past month and drying soil conditions. -->
-<!-- ```{r future-seasonal-drought, fig.retina = 2, fig.align = "center", out.width = '100%', collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- future_seasonal_drought <-  -->
-<!--   mtd_plot_noaa_drought_outlook(date = "2020-04-15", -->
-<!--                                 data_out = "../data/NOAA_droughtlook") -->
-<!-- future_seasonal_drought$map -->
-<!-- ``` -->
-</div>
-<div id="hydrologic-outlook" class="section level3 unnumbered" number="">
-<h3><img src="icons/soil_saturation.svg" width="35px"/> Hydrologic Outlook</h3>
-<p>Spring streamflow in western Montana is likely to be near normal given the slightly above normal snowpack across the region. This could change if the seasonal outlook of warmer than normal temperatures for the western region comes to pass, causing rapid loss of snowpack and swelling of rivers. NOAA’s Missouri River Basin River Forecast Center is predicting near normal stream flows for most of the central to eastern portions of state, with the exception of moderate flooding in north central Montana around Battle Creek, Clear Creek, Lodge Creek and the Milk River. Early snowmelt on the plains has already contributed to flooding on the Milk River. Visit <a href="https://water.weather.gov" class="uri">https://water.weather.gov</a> for up-to-date stream gauge and flood forecasting across Montana.</p>
 </div>
 </div>
 

@@ -152,7 +152,7 @@ mtd_plot_gridmet <- function(gridmet,
                            limits = limits,
                            # breaks = breaks,
                            palette = palette,
-                           expand = expand_scale(mult = 0, add = 0),
+                           expand = expansion(mult = 0, add = 0),
                            guide = guide_colourbar(title.position = "bottom")) +
       mtd_plot())
 }

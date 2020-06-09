@@ -13,7 +13,7 @@
 
 <title>Early Summer 2020 Update</title>
 
-<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -315,8 +315,8 @@ $(document).ready(function () {
 
 
 <div class="figure">
-<img src="img/ada_smith_kate_walking_horse.jpg" alt="" />
-<p class="caption">Moving cattle on a snowy spring morning in the Blackfoot Valley. Photo: Ada Smith.</p>
+<img src="img/kelsey_jencso_northern_ag.jpg" alt="" />
+<p class="caption">Pivot irrigation at the Northern Agriculture Research Center. Photo: Kelsey Jencso.</p>
 </div>
 <div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills" number="">
 <h2 class="unnumbered tabset tabset-fade tabset-pills" number=""></h2>
@@ -325,7 +325,7 @@ $(document).ready(function () {
 <iframe src="./figures/review_temperature.html" width="100%" height="500px">
 </iframe>
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
-<p>Last month’s temperature predictions from NOAA’s Climate Prediction Center (CPC) hit the mark — since March 1<sup>st</sup>, temperatures across the state have been below normal, especially in northern Montana, parts of which have experienced temperatures nearly 5ºF colder than normal. This has really helped Montana retain its snowpack, despite drier than average conditions.</p>
+<p>Temperatures in April and May continued to be cooler than normal across Montana, especially in the plains. This has been driven by a pattern of cold storms over the last two months, which has led to retention of snow pack in the high country. However, things warmed up sharply in the final days of May, when much of the state experienced temperatures more typical of July or August.</p>
 <p>The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2020 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.</p>
 <p><img src="review_files/figure-html/past-seasonal-temp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
@@ -334,46 +334,20 @@ $(document).ready(function () {
 <iframe src="./figures/review_precipitation.html" width="100%" height="500px">
 </iframe>
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
-<p>Conditions since March have been very dry for most of Montana, with the exception of the central part of the state. Areas of western Montana have received only 35% of their normal March–April preciptation, and parts of southeast Montana only 20%. Meanwhile, several wet storms have brought greater than normal precipitation to parts of central Montana, with areas west of Billings experiencing nearly 175% of their normal March–April preciptation, and areas west of Great Falls nearly 165%. These precipitation events in combination with snowmelt resulted in small-stream flooding in Blaine and Hill counties, and flood warnings for the Milk River in early April. This aligns with flood risk being above normal for much of the Missouri River Basin heading into summer.</p>
+<p>Dry conditions have persisted across much of Montana, with the area around Dillon receiving only about 20% of its normal April–May precipitation. Meanwhile, portions of western Montana have seen upwards of 130% of normal precipitation for the same period. This pattern of precipitation has been the primary driver of current drought declarations in southwestern Montana.</p>
 <p>The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2020 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981–2010 period on any given day. The dashed line represents the average precipitation during the 1981–2010 period.</p>
 <p><img src="review_files/figure-html/past-seasonal-prcp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<!-- ### ![swe icon](./icons/swe.svg){width="35px"} Snowpack {-} -->
-<!-- ```{r past-seasonal-swe, collapse=TRUE, message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
-<!-- past_seasonal_swe <- mtd_plot_swe_basins(date = "2019-10-31", huc = 8) -->
-<!-- knitr::include_url(past_seasonal_swe$leaflet$path, -->
-<!--                    height = "500px") -->
-<!-- ``` -->
-<!-- <iframe id="past_seasonal_swe" src="./figures/2019-02-11-swe.html" width="100%" height="500px"> -->
-<!-- Wet and warmer conditions across western Montana have accelerated snowmelt—most basins now have less snowpack than normal, ranging from ~11% of normal in the Yaak basin in far northwestern Montana to upward of 200% of normal in the Upper Tongue and Big Horn Lake basins. Several basins in central Montana remain slightly higher than normal thanks to exceptional snowpack and cooler temperatures earlier this spring. -->
-<!-- ### <img src="icons/soil_saturation.svg" width="35px"/> Soil Moisture {-} -->
-<!-- ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE} -->
-<!-- smap <- mtd_plot_smap(date = "2020-03-01", -->
-<!--                       variable = "sm_rootzone_wetness", -->
-<!--                       data_out = "../data/SMAP") -->
-<!-- smap$map %>% -->
-<!--   save_mt_map("review_soil_moisture.pdf") -->
-<!-- ``` -->
-<!-- ```{r past-seasonal-smap-grid-leaflet, fig.height=5, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=FALSE, out.extra=''} -->
-<!-- smap$leaflet %>% -->
-<!--   saveWidgetFix("./figures/review_soil_moisture.html", -->
-<!--                 selfcontained = FALSE, -->
-<!--                 libdir = "./site_libs" -->
-<!--   ) -->
-<!-- knitr::include_url("./figures/review_soil_moisture.html", -->
-<!--                    height = "500px") -->
-<!-- ``` -->
-<!-- Cool temperatures and high precipitation have led to truly historic soil moisture conditions across central and eastern Montana going into the fall. Soils east of the continental divide are nearly saturated, and are likely to stay very wet into the winter. Impacts include increased flooding during fall snow storms, difficulty planting winter wheat, and the increased likelihood of significant flooding events and planting delays this coming spring as snow melts on frozen or saturated soils. As of early October, Montana producers had only sown 50% their intended winter wheat acreage and only 9% had emerged --- usually 75% has been sown by early October, with 35% emerged. Cool temperatures and the soil moisture surplus have continued to delay or prohibit fall planting. -->
 </div>
-<div id="swe-icon-snowpack" class="section level3 unnumbered" number="">
-<h3><img src="icons/swe.svg" width="35" alt="swe icon" /> Snowpack</h3>
-<iframe src="./figures/2020-05-17-swe.html" width="100%" height="500px">
+<div id="soil-moisture" class="section level3 unnumbered" number="">
+<h3><img src="icons/soil_saturation.svg" width="35px"/> Soil Moisture</h3>
+<iframe src="./figures/review_soil_moisture.html" width="100%" height="500px">
 </iframe>
-<p>Due to cooler than normal conditions and a series of spring storms, as of mid-April snowpack is normal to above normal across Montana. Snow Water Equivalent (SWE) values range from 99% of normal in Jefferson basin east of Butte to nearly 128% of normal in the North Fork Flathead basin north of Whitefish. As we move into this Spring, it will continue to be important to pay attention to temperatures, which will have a large impact on snowmelt rates.</p>
+<p>Satellite-derived soil moisture estimates for the state track closely with the precipitation metrics going into the summer. Southwestern Montana around Dillon, southeastern Montana, and northeastern Montana are experiencing dry conditions early in the season.</p>
 </div>
 <div id="drought-icon-drought" class="section level3 unnumbered" number="">
 <h3><img src="icons/drought.svg" width="35" alt="drought icon" /> Drought</h3>
 <p><img src="review_files/figure-html/past-seasonal-drought-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>Despite higher than normal snowpack across most of the state, the US Drought Monitor has categorized several areas of Montana as abnormally dry going into mid-April, including northwest Montana around Kalispell, an area north of Livingston and Big Timber, and the Interstate 15 corridor from Helena to Shelby. This has been driven primarily by persistent below-normal precipitation. The location of spring storms will continue to determine whether drought conditions are declared going into the summer.</p>
+<p>The current US Drought Monitor has expanded its “abnormally dry” declaration to several areas of Montana, including across the southern part of the state, northeastern Montana, west of Kalispell, and north of Havre. Additionally, the USDM has categorized the area around Dillon as being under “moderate drought” conditions. Current dry conditions across the state coupled with forecasts of drier and warmer weather going into summer increase the likelihood of further expansion of drought declarations in the state.</p>
 </div>
 </div>
 

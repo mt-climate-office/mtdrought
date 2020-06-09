@@ -14,6 +14,9 @@ mtd_leaflet_base <- function(attribution = ""){
     leaflet::addProviderTiles("Stamen.TonerLabels",
                               options = leaflet::providerTileOptions(pane = "foreground",
                                                                      attribution = "")) %>%
+    leaflet::addProviderTiles("OpenStreetMap.BlackAndWhite",
+                              options = leaflet::providerTileOptions(pane = "foreground",
+                                                                     attribution = "")) %>%
     leaflet::addScaleBar(position = "bottomright",
                 options = leaflet::scaleBarOptions(metric = FALSE)) %>%
     htmlwidgets::onRender("function(el, x) {L.control.zoom({ position: 'topright' }).addTo(this)}") %>%

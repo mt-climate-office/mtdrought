@@ -2,6 +2,7 @@
 all_packages <- c("mcor", "thredds",# The Core MCO package
                   "FedData",
                   "smapr", # Package for data aquisition
+                  "bookdown",
                   "sf", "raster", "rgeos", "fasterize", 
                   "velox",
                   "spex", "lwgeom", "geojsonsf", # Packages for spatial processing
