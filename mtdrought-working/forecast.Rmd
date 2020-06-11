@@ -27,7 +27,7 @@ noaa_seasonal$map %T>%
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-NOAA's Climate Prediction Center (CPC) is forecasting that June--August precipitation to be drier than normal across Montana, with more confidence in drier conditions for western Montana than eastern Montana. Dry conditions, combined with likely warmer temperatures across the state, could lead to expanding drought conditions and increased irrigation demand as we move into summer.
+NOAA's Climate Prediction Center (CPC) is forecasting that June--August precipitation will be drier than normal across Montana, with more confidence in drier conditions for western Montana than eastern Montana. Dry conditions, combined with likely warmer temperatures across the state, could lead to expanding drought conditions and increased irrigation demand as we move into summer.
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

@@ -26,7 +26,7 @@ Here's what you'll find in the June 2020 Montana Drought & Climate newsletter:
 ### In Brief:{-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Cool weather this spring across Montana will likely give way to warmer than normal summer temperatures.
+* Across Montana, cool weather this spring across Montana will likely give way to warmer than normal summer temperatures.
 
 * Much of the state has experienced drier than normal conditions since April, which are likely to continue into the summer.
 
@@ -38,7 +38,7 @@ Here's what you'll find in the June 2020 Montana Drought & Climate newsletter:
 
 ### Get Up-to-date Drought Conditions in Montana {-}
 
-As we move into the summer, the [Montana Climate Office](https://climate.umt.edu/) continues to monitor developing drought conditions across Montana, and is to provide *you* with useful and timely online tools for agricultural decision making. Be sure to keep an eye on the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://drought.climate.umt.edu)---it is updated nightly, and provides access to drought metrics used regularly by the [Montana Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc). Check out the dashboard at https://drought.climate.umt.edu.
+As we move into the summer, the [Montana Climate Office](https://climate.umt.edu/) continues to monitor developing drought conditions across Montana, and to provide *you* with useful and timely online tools for agricultural decision making. Be sure to keep an eye on the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://drought.climate.umt.edu)---it is updated nightly, and provides access to drought metrics used regularly by the [Montana Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc). Check out the dashboard at https://drought.climate.umt.edu.
 
 [![](./img/drought_dashboard.jpg "Screenshot of the Upper Missouri River Basin (UMRB) drought indicators dashboard")](https://drought.climate.umt.edu)
 

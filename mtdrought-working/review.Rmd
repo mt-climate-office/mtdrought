@@ -347,4 +347,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-The current US Drought Monitor has expanded its "abnormally dry" declaration to several areas of Montana, including across the southern part of the state, northeastern Montana, west of Kalispell, and north of Havre. Additionally, the USDM has categorized the area around Dillon as being under "moderate drought" conditions. Current dry conditions across the state coupled with forecasts of drier and warmer weather going into summer increase the likelihood of further expansion of drought declarations in the state.
+The current US Drought Monitor (USDM) has expanded its "abnormally dry" declaration to several areas of Montana, including across the southern part of the state, northeastern Montana, west of Kalispell, and north of Havre. Additionally, the USDM has categorized the area around Dillon as being under "moderate drought" conditions. Current dry conditions across the state coupled with forecasts for drier and warmer weather going into summer increase the likelihood of further expansion of drought declarations in the state.
