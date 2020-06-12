@@ -23,5 +23,5 @@ output:
       after_body: after_body.html
     lib_dir: site_libs
     self_contained: no
-#  bookdown::word_document2: true
+  bookdown::word_document2: true
 output_dir: ../docs/mtdrought-2020-june

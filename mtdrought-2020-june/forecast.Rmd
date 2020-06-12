@@ -1,0 +1,42 @@
+---
+title: "Summer Forecast"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+source("./R/setup.R")
+```
+
+![Square Butte at the Turek Ranch. Photo: Kelsey Jencso.](./img/kelsey_jencso_square_butte.jpg)
+
+## {- .tabset .tabset-fade .tabset-pills}
+
+### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
+In contrast to our cool temperatures across the state this past spring, NOAA's Climate Prediction Center (CPC) is projecting warmer than normal conditions throughout the summer (June--August). This prediction is stronger for western Montana ("likely warmer" than normal) than in eastern Montana ("somewhat likely warmer").
+
+```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-06-15",
+                                                 element = "temp",
+                                                 data_out = "../data/NOAA_seasonal")
+
+noaa_seasonal$map %T>%
+  save_mt_map("forecast_noaa_seasonal_temperature.pdf")
+```
+
+### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
+
+NOAA's Climate Prediction Center (CPC) is forecasting that June--August precipitation will be drier than normal across Montana, with more confidence in drier conditions for western Montana than eastern Montana. Dry conditions, combined with likely warmer temperatures across the state, could lead to expanding drought conditions and increased irrigation demand as we move into summer.
+
+```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
+
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-06-15",
+                                                 element = "prcp",
+                                                 data_out = "../data/NOAA_seasonal")
+
+noaa_seasonal$map %T>%
+  save_mt_map("forecast_noaa_seasonal_precipitation.pdf")
+
+```
+
