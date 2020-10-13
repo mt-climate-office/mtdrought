@@ -12,7 +12,7 @@ source("./R/setup.R")
 
 ## {-}
 
-Welcome to the October 2020 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
+Welcome to the October 2020 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful.
 
 Here's what you'll find in this newsletter:
 
@@ -36,10 +36,9 @@ Here's what you'll find in this newsletter:
 
 -----
 
-### We want to hear from you! {-}
-**Please send us stories, photos, feedback, and questions!** Your story about how you use this information, photos of your farm or ranch, or your question could be featured in the next newsletter.
+### We want to hear from you! Survey coming in the new year... {-}
 
-Please contact [mtdrought@umontana.edu](mailto:mtdrought@umontana.edu)<br> with questions and comments, or to be added to our mailing list.
+Have you enjoyed the Montana Drought and Climate Newsletter?
 
 -----
 
