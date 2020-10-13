@@ -1,5 +1,5 @@
 ---
-title: "Early Summer 2020 Update"
+title: "Summer 2020 Review"
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,8 +14,8 @@ source("./R/setup.R")
 ## {- .tabset .tabset-fade .tabset-pills}
 
 ```{r load gridmet, cache=TRUE}
-start_date <- "2020-04-01"
-end_date <- "2020-06-15"
+start_date <- "2020-07-01"
+end_date <- "2020-10-01"
 
 gridmet <- mtd_get_gridmet_ee(collection = "IDAHO_EPSCOR/GRIDMET",
                               vars = list("pr" = "sum",
@@ -215,7 +215,7 @@ if(knitr::is_html_output())
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-Temperatures in April and May continued to be cooler than normal across Montana, especially in the plains. This has been driven by a pattern of cold storms over the last two months, which has led to retention of snow pack in the high country. However, things warmed up sharply in the final days of May, when much of the state experienced temperatures more typical of July or August.
+After a July of near-normal temperatures, August brought the heat, leading to above-normal temperatures for the summer across Montana as a whole. Portions of western Montana were 3 ºF above normal, and the western Crazy mountains north of Livingston were 2 ºF above normal Northeastern Montana had slightly cooler than normal temperatures throughout the summer.
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2020 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
@@ -285,7 +285,7 @@ if(knitr::is_html_output())
 
 <!-- <iframe id="review_precipitation" src="./figures/review_precipitation.html" width="100%" height="500px"> -->
 
-Dry conditions have persisted across much of Montana, with the area around Dillon receiving only about 20% of its normal April--May precipitation. Meanwhile, portions of western Montana have seen upwards of 130% of normal precipitation for the same period. This pattern of precipitation has been the primary driver of current drought declarations in southwestern Montana.
+Dry conditions continued across the state, with the exception of far eastern Montana. The region around the Crazy mountains received only about 30% of its normal summer precipitation, and the Highwood mountains east of Great Falls received only about 25% of its normal precipitation. This pattern of precipitation continues to be the primary driver of ongoing drought conditions across Montana.
 
 The graph below compares historical daily precipitation (shaded band and dashed line) to current daily precipitation so far in 2020 (vertical bars) across Montana. The shaded band represent the range of recorded precipitation during the 1981--2010 period on any given day. The dashed line represents the average precipitation during the 1981--2010 period.
 
@@ -312,7 +312,7 @@ ggplot2::ggsave("./figures/review_precipitation_climate.pdf", width = 5.13, heig
 ### <img src="./icons/soil_saturation.svg" width="35px"/> Soil Moisture {-}
 
 ```{r past-seasonal-smap-grid, collapse=TRUE, results='hide', message=FALSE, warning=FALSE, cache=TRUE}
-smap <- mtd_plot_smap(date = "2020-06-15",
+smap <- mtd_plot_smap(date = end_date,
                       variable = "sm_rootzone_wetness",
                       data_out = "../data/SMAP")
 
@@ -334,13 +334,13 @@ knitr::include_url("./figures/review_soil_moisture.html",
 
 ```
 
-Satellite-derived soil moisture estimates for the state track closely with the precipitation metrics going into the summer. Southwestern Montana around Dillon, southeastern Montana, and northeastern Montana are experiencing dry conditions early in the season.
+While satellite-derived soil moisture estimates for the Western Montana continue to be very low, conditions in central and northern Montana have improved as we head into the fall. Soil moisture in northeastern Montana also remains low. Given the climate outlook for the winter, soil moisture conditions should continue to improve across the state.
 
 ### ![drought icon](./icons/drought.svg){width="35px"} Drought {-}
 
 ```{r past-seasonal-drought, cache=TRUE}
 
-past_seasonal_drought <- mtd_plot_usdm(date = "2020-06-15",
+past_seasonal_drought <- mtd_plot_usdm(date = end_date,
                                        data_out = "../data/USDM")
 
 past_seasonal_drought$map %T>%
@@ -348,4 +348,4 @@ past_seasonal_drought$map %T>%
 
 ```
 
-The current US Drought Monitor (USDM) has expanded its "abnormally dry" declaration to several areas of Montana, including across the southern part of the state, northeastern Montana, west of Kalispell, and north of Havre. Additionally, the USDM has categorized a region stretching from Dillon to Bozeman as being under "moderate drought" conditions. Current dry conditions across the state coupled with forecasts for drier and warmer weather going into summer increase the likelihood of further expansion of drought declarations in the state.
+Over the summer, abnormally dry and drought conditions expanded across Montana, according to the US Drought Monitor (USDM). Much of western Montana has moderate drought conditions, and portions of northeastern and southeastern Montana are experiencing severe drought. Abnormally warm conditions during early fall have delayed drought recovery that we normally experience in the fall, but La Niña conditions should bring more precipitation as we head into the winter. 

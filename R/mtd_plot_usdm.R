@@ -40,6 +40,7 @@ mtd_plot_usdm <- function(date = "2017-08-30",
                              list.files(pattern = "\\.shp$",
                                         full.names = T),
                            quiet = T) %>%
+    sf::st_make_valid() %>%
     sf::st_transform(mt_state_plane)
   
   sf::st_agr(usdm_data) = "constant"

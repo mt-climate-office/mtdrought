@@ -1,18 +1,18 @@
 mtd_plot_climatology_enso <- function(x,
                                       element,
                                       climates = c("El Niño",
-                                                  "ENSO Neutral",
-                                                  "La Niña"),
+                                                   "ENSO Neutral",
+                                                   "La Niña"),
                                       date_range,
-                                 title = NULL,
-                                 ybreaks = seq(-25,100,25),
-                                 ymin = min(ybreaks, na.rm = TRUE),
-                                 ymax = max(ybreaks, na.rm = TRUE),
-                                 smooth = TRUE,
-                                 polar = FALSE,
-                                 mean = TRUE,
-                                 col = "black",
-                                 ...){
+                                      title = NULL,
+                                      ybreaks = seq(-25,100,25),
+                                      ymin = min(ybreaks, na.rm = TRUE),
+                                      ymax = max(ybreaks, na.rm = TRUE),
+                                      smooth = TRUE,
+                                      polar = FALSE,
+                                      mean = TRUE,
+                                      col = "black",
+                                      ...){
   
   if(element == "tmax"){
     gridmet_element = "tmmx"
@@ -44,7 +44,7 @@ mtd_plot_climatology_enso <- function(x,
       summarise(value = mean(value)) %>%
       ungroup()
   }
-
+  
   if(smooth){
     
     x %<>%
@@ -60,8 +60,8 @@ mtd_plot_climatology_enso <- function(x,
   date_range %<>% lubridate::as_date()
   x <- 
     tibble::tibble(date = seq(date_range[[1]],
-                            date_range[[2]],
-                            "1 day")) %>%
+                              date_range[[2]],
+                              "1 day")) %>%
     dplyr::mutate(day = lubridate::yday(date)) %>%
     dplyr::left_join(x, by = "day")
   

@@ -1,51 +1,40 @@
 ---
-title: "2020 June Update"
+title: "2020 Fall Update"
 editor_options: 
   chunk_output_type: console
 ---
 
-![A bovine standoff on a ranch near Deer Lodge, MT. Photo: Ada Smith.](./img/ada_smith_standoff.jpg)
+![Late summer sunset over haystacks at the Mannix Ranch, Blackfoot Valley, Montana. Photo: Ada Smith.](./img/Ada-Smith-baled-hay.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")
 ```
 
----
-
 ## {-}
-Here's what you'll find in the June 2020 Montana Drought & Climate newsletter:
 
-[**Early Summer 2020 Update**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
+Welcome to the October 2020 Montana Drought & Climate newsletter. We hope that Montana farmers and ranchers find the information here useful. Please [send us your feedback](mailto:mtdrought@umontana.edu)!
 
-[**Summer Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
+Here's what you'll find in this newsletter:
+
+[**Summer 2020 Review**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
+
+[**Winter Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
+
+[**Mid-century Outlook**](./midcentury.html) --- What do Montanans need to do to prepare for the future? In this section we present projections of mid-century conditions across Montana. Comparing these projected conditions to current or past conditions gives an improved understanding of how to respond to a changing climate.
 
 [**Reference**](./reference.html) --- A helpful glossary of terms found in this newsletter.
 
----
+-----
 
-### In Brief:{-}
+### In Brief {-}
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
-* Across Montana, cool weather this spring across Montana will likely give way to warmer than normal summer temperatures.
-
-* Much of the state has experienced drier than normal conditions since April, which are likely to continue into the summer.
-
-* Moderate drought conditions have been declared in southwestern Montana, and many parts of the state are abnormally dry as of early June. Expectdry conditions to persist and intensify if dry and warm seasonal forecasts play out as expected.
-
+* Summer across eastern Montana was cooler than normal and very wet, leading to delays in crop development.
+* Soil moisture continues to be high across Montana, especially in the east.
+* The NOAA seasonal forecast for December through February is for slightly warmer and wetter than normal conditions across most of Montana.
 </div>
 
 -----
-
-### Get Up-to-date Drought Conditions in Montana {-}
-
-As we move into the summer, the [Montana Climate Office](https://climate.umt.edu/) continues to monitor developing drought conditions across Montana, and to provide *you* with useful and timely online tools for agricultural decision making. Be sure to keep an eye on the [Upper Missouri River Basin (UMRB) drought indicators dashboard](https://drought.climate.umt.edu)---it is updated nightly, and provides access to drought metrics used regularly by the [Montana Governor’s Drought and Water Supply Advisory Committee](http://dnrc.mt.gov/divisions/water/drought-management/drought-committee/monitoring-sub-committee-msc). Check out the dashboard at https://drought.climate.umt.edu.
-
-[![](./img/drought_dashboard.jpg "Screenshot of the Upper Missouri River Basin (UMRB) drought indicators dashboard")](https://drought.climate.umt.edu)
-
-The dashboard is currently under development, and we continue to gather feedback from producers across the state. Please email Zach Hoylman at [state.climatologist@umontana.edu](mailto:state.climatologist@umontana.edu) with any feedback or questions.
-
------
-
 
 ### We want to hear from you! {-}
 **Please send us stories, photos, feedback, and questions!** Your story about how you use this information, photos of your farm or ranch, or your question could be featured in the next newsletter.
