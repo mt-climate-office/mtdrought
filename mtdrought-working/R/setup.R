@@ -16,7 +16,8 @@ all_packages <-
 # devtools::install_bioc("rhdf5")
 # devtools::install_github("mt-climate-office/mcor")
 # devtools::install_github("mt-climate-office/thredds")
-# devtools::install_github("hunzikp/velox@v0.1.0")
+# devtools::install_github("hunzikp/velox")
+# devtools::install_github("paleolimbot/libproj")
 # devtools::install_cran(all_packages)
 
 purrr::walk(all_packages, library, character.only = TRUE)
