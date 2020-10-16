@@ -89,11 +89,11 @@ ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf", width = 5.13, height =
 ```
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-NOAA's Climate Prediction Center (CPC) is projecting warmer than normal conditions throughout the early winter (November--January), especially in the southern part of the state.
+NOAA's Climate Prediction Center (CPC) is projecting cooler than normal conditions throughout the winter (December--February), especially in the northeastern part of the state.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-10-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-12-01",
                                                  element = "temp",
                                                  data_out = "../data/NOAA_seasonal")
 
@@ -103,11 +103,11 @@ noaa_seasonal$map %T>%
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-NOAA's Climate Prediction Center (CPC) is forecasting that November--January precipitation will be higher than normal across western and central Montana, with more confidence in wetter conditions for western Montana. Wetter conditions should help reduce drought conditions across much of the state going into the winter months, and will hopefully provide good early season snowpack in the high country.
+NOAA's Climate Prediction Center (CPC) is forecasting that December--February precipitation will be higher than normal across all of Montana, with more confidence in wetter conditions for northern Montana. Wetter conditions should help reduce drought conditions across much of the state the winter months, and can be expected to provide heavy snowpack in the high country.
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
-noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-10-01",
+noaa_seasonal <- mtd_plot_noaa_seasonal_forecast(date = "2020-12-01",
                                                  element = "prcp",
                                                  data_out = "../data/NOAA_seasonal")
 
