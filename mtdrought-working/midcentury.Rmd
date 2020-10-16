@@ -41,6 +41,16 @@ Social and economic resilience to withstand and adapt to variable conditions has
 
 Resources for producers can be found online at the [USDA Northwest Climate Hub](https://www.climatehubs.usda.gov/hubs/northwest), the [USDA Northern Plains Climate Hub](https://www.climatehubs.usda.gov/hubs/northern-plains), the [Natural Resources Conservation Service](https://www.nrcs.usda.gov/wps/portal/nrcs/mt/home/), [USDA Farm Service Agency](https://www.fsa.usda.gov/state-offices/Montana/index), and [Montana State University Extension](http://www.msuextension.org).
 
+#### Planning for the Future {-}
+ 
+The analogs presented in the next section reflect uncertainty regarding future greenhouse gas emissions and the severity of climate change. In short, scientists know that things are changing and we often know the direction of the change (e.g., warmer and drier), but we can't predict exactly what your climate will look like in 2050. Also, the year 2050 is pretty far off in the future and your long-term planning might be focused on the next 5--10 years. So how do you plan for the future? Here's what your fellow farmers and ranchers have told us in response to this question:
+ 
+As you observe what's happening on your farm or ranch, think about what changes you will need to make to your operation as things continue to shift. What would you need to do if there is more prolonged drought? Make a plan and think about when you need to start transitioning to new practices.
+ 
+Montana farmers and ranchers often tell us how risky it is to transition to new crops or management practices. Watch what's working for your neighbors who are experimenting with new practices. Talk with the [Agricultural Research Center](https://agresearch.montana.edu/researchcenters.html) in your region. Take a small patch and try something new to see how it works as conditions change.
+ 
+Build in flexibility and diversity as much as you can. Diversify your operation so you have multiple income streams. Experiment in ways that require small investments and are easy to reverse if they don't work out.
+
 ### <img src="icons/analogs.svg" width="35px"/> Analogs {- .tabset .tabset-fade .tabset-pills}
 
 What will my climate be like in 2050?
@@ -63,14 +73,3 @@ Agricultural statistics from the USDA National Agricultural Statistics Service [
 Climate analogs from the [Future Urban Climates](https://www.umces.edu/futureurbanclimates) project, University of Maryland Center for Environmental Science. Research methods published in [Nature Communications](https://www.nature.com/articles/s41467-019-08540-3).
 
 Agricultural statistics from the USDA National Agricultural Statistics Service [2017 Census of Agriculture](https://www.nass.usda.gov/Publications/AgCensus/2017/).
-
-
-### Planning for the Future {-}
- 
-These two sets of analogs reflect uncertainty regarding future greenhouse gas emissions and the severity of climate change. In short, scientists know that things are changing and we often know the direction of the change (e.g., warmer and drier), but we can't predict exactly what your climate will look like in 2050. Also, the year 2050 is pretty far off in the future and your long-term planning might be focused on the next 5--10 years. So how do you plan for the future? Here's what your fellow farmers and ranchers have told us in response to this question:
- 
-As you observe what's happening on your farm or ranch, think about what changes you will need to make to your operation as things continue to shift. What would you need to do if there is more prolonged drought? Make a plan and think about when you need to start transitioning to new practices.
- 
-Montana farmers and ranchers often tell us how risky it is to transition to new crops or management practices. Watch what's working for your neighbors who are experimenting with new practices. Talk with the [Agricultural Research Center](https://agresearch.montana.edu/researchcenters.html) in your region. Take a small patch and try something new to see how it works as conditions change.
- 
-Build in flexibility and diversity as much as you can. Diversify your operation so you have multiple income streams. Experiment in ways that require small investments and are easy to reverse if they don't work out.
