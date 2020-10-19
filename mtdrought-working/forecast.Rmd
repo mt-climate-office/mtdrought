@@ -89,7 +89,7 @@ ggplot2::ggsave("./figures/forecast_enso_graph_prcp.pdf", width = 5.13, height =
 ```
 
 ### <img src="icons/temperature.svg" width="35px"/> Temperature {-}
-NOAA's Climate Prediction Center (CPC) is projecting cooler than normal conditions throughout the winter (December--February), especially in the northeastern part of the state.
+NOAA's Climate Prediction Center (CPC) is projecting cooler than normal conditions throughout the winter (December--February), especially in the northeastern part of the state.  Colder than normal conditions increase the odds of extreme cold spells and may require ranchers to keep an eye on their cattle.
 
 ```{r future-seasonal-temp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 
@@ -103,7 +103,7 @@ noaa_seasonal$map %T>%
 
 ### <img src="icons/precipitation.svg" width="35px"/> Precipitation {-}
 
-NOAA's Climate Prediction Center (CPC) is forecasting that December--February precipitation will be higher than normal across all of Montana, with more confidence in wetter conditions for northern Montana. Wetter conditions should help reduce drought conditions across much of the state the winter months, and can be expected to provide heavy snowpack in the high country.
+NOAA's Climate Prediction Center (CPC) is forecasting that December--February precipitation will be higher than normal across all of Montana, with more confidence in wetter conditions for northern Montana. Increased precipitation should help reduce drought conditions across much of the state the winter months, and can be expected to provide heavy snowpack in the high country.
 
 ```{r future-seasonal-prcp, collapse=TRUE, results='hold', message=FALSE, warning=FALSE, cache=TRUE}
 

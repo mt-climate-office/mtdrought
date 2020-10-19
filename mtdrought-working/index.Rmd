@@ -16,7 +16,7 @@ Welcome to the October 2020 Montana Drought & Climate newsletter. We hope that M
 
 Here's what you'll find in this newsletter:
 
-[**Summer 2020 Review**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of how this spring is progressing.
+[**Summer 2020 Review**](./review.html) --- Understanding current and past conditions aids in predicting future conditions. This section provides an overview of what happened this past summer.
 
 [**Winter Forecast**](./forecast.html) --- The seasonal forecast discusses predictions for temperature, precipitation, and drought, as well as the global air circulation patterns that impact growing conditions and water availability in Montana.
 
@@ -30,7 +30,7 @@ Here's what you'll find in this newsletter:
 
 <div style="-webkit-columns: 2 300px;-moz-columns: 2 300px;columns: 2 300px;">
 * While June and July were near normal across Montana, August was hot and dry, leading to rapid onset of drought conditions across the state.
-* Soil moisture going into winter is low.
+* Soil moisture going into winter is low. It will be critical to monitor whether soil moisture improves prior to the winter freeze.
 * The NOAA seasonal forecast for December through February is for cooler and wetter than normal conditions due to a moderate La Niña climate event.
 </div>
 
@@ -38,7 +38,7 @@ Here's what you'll find in this newsletter:
 
 ### We want to hear from you… questionnaire coming soon! {-}
 
-We need your feedback about the MT Drought and Climate newsletter! In the New Year, we will send you a questionnaire to hear your opinions and attitudes about the climate information presented in the newsletter. Please consider taking the survey and letting us know what you think.
+We need your feedback on the MT Drought and Climate newsletter! In the New Year, we will send you a questionnaire to learn that you think about the climate information presented in the newsletter. Please consider taking the survey and letting us know what you think.
 
 -----
 
