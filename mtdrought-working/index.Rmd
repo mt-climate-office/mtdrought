@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-![Late summer sunset over haystacks at the Mannix Ranch, Blackfoot Valley, Montana. Photo: Ada Smith.](./img/Ada-Smith-baled-hay.jpg)
+![Smoke column from a range fire near Capitol, MT. Photo: Kevin Hyde.](./img/kevin_hyde_range.jpg)
 
 ```{r setup, include=FALSE}
 source("./R/setup.R")

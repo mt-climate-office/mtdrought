@@ -8,7 +8,7 @@ editor_options:
 source("./R/setup.R")
 ```
 
-![Square Butte at the Turek Ranch. Photo: Kelsey Jencso.](./img/kelsey_jencso_square_butte.jpg)
+![High winds rapidly spread range fire south of Ekalaka on October 12. Photo: Kevin Hyde.](./img/kevin_hyde_fire.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 

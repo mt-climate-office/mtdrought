@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![Pivot irrigation at the Northern Agriculture Research Center. Photo: Kelsey Jencso.](./img/kelsey_jencso_northern_ag.jpg)
+![A major grasshopper infestation affected crops across eastern Montana. Population and impacts of pests like grasshoppers are closely tied to climate conditions. Photo: Gillette News Record.](./img/gillette_grasshoppers.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
