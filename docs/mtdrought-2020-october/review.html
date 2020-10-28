@@ -13,7 +13,7 @@
 
 <title>Summer 2020 Review</title>
 
-<script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -25,6 +25,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <meta http-equiv="Cache-Control" content="no-store">
 
 <style>
@@ -43,7 +45,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -328,7 +330,7 @@ $(document).ready(function () {
 
 <div class="figure">
 <img src="img/gillette_grasshoppers.jpg" alt="" />
-<p class="caption">A major grasshopper infestation affected crops across eastern Montana. Population and impacts of pests like grasshoppers are closely tied to climate conditions. Photo: Gillette News Record.</p>
+<p class="caption">A major grasshopper infestation affected crops across eastern Montana. The impacts of pests like grasshoppers are closely tied to climate conditions. Photo: Gillette News Record.</p>
 </div>
 <div id="section" class="section level2 unnumbered tabset tabset-fade tabset-pills">
 <h2 class="unnumbered tabset tabset-fade tabset-pills"></h2>
@@ -337,7 +339,7 @@ $(document).ready(function () {
 <iframe src="./figures/review_temperature.html" width="100%" height="500px">
 </iframe>
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
-<p>After a July of near-normal temperatures, August brought the heat, leading to above-normal temperatures across Montana as a whole. Portions of western Montana were 3 ºF above normal, and the western Crazy mountains north of Livingston were 2 ºF above normal Northeastern Montana had slightly cooler than normal temperatures throughout the summer.</p>
+<p>After a July of near-normal temperatures, August brought the heat, leading to above-normal temperatures across Montana as a whole. Portions of western Montana were 3 ºF above normal, and the western Crazy mountains north of Livingston were 2 ºF above normal. Northeastern Montana had slightly cooler than normal temperatures throughout the summer.</p>
 <p>The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2020 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981–2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981–2010 period.</p>
 <p><img src="review_files/figure-html/past-seasonal-temp-grid-climatology-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
@@ -381,7 +383,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

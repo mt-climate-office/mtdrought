@@ -55,18 +55,8 @@ To better understand where your climate is heading, we've provided spatial analo
 
 Because of uncertainties related to how technology, economics, and policy will influence carbon emissions in the future, the we're showing you analogs from two scenarios: RCP 4.5 ("moderating emissions") where carbon emissions peak around 2040 and then decline, and RCP 8.5 ("accelerating emissions") where carbon emissions continue to increase through the 21st century. Under both scenarios Montana is projected to be much warmer in the future.
 
-#### Moderating emissions {-}
+![](./img/analog_infographic.png)
 
-![](./img/analog_map_rcp45.png)
+Climate analogs are courtesy the [Future Urban Climates](https://www.umces.edu/futureurbanclimates) project, University of Maryland Center for Environmental Science. Research methods are published in [Nature Communications](https://www.nature.com/articles/s41467-019-08540-3).
 
-Climate analogs from the [Future Urban Climates](https://www.umces.edu/futureurbanclimates) project, University of Maryland Center for Environmental Science. Research methods published in [Nature Communications](https://www.nature.com/articles/s41467-019-08540-3).
-
-Agricultural statistics from the USDA National Agricultural Statistics Service [2017 Census of Agriculture](https://www.nass.usda.gov/Publications/AgCensus/2017/).
-
-#### Accelerating emissions {-}
-
-![](./img/analog_map_rcp85.png)
-
-Climate analogs from the [Future Urban Climates](https://www.umces.edu/futureurbanclimates) project, University of Maryland Center for Environmental Science. Research methods published in [Nature Communications](https://www.nature.com/articles/s41467-019-08540-3).
-
-Agricultural statistics from the USDA National Agricultural Statistics Service [2017 Census of Agriculture](https://www.nass.usda.gov/Publications/AgCensus/2017/).
+Agricultural statistics are from the USDA National Agricultural Statistics Service [2017 Census of Agriculture](https://www.nass.usda.gov/Publications/AgCensus/2017/).

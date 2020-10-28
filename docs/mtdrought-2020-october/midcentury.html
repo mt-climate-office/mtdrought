@@ -13,7 +13,7 @@
 
 <title>Mid-century Outlook</title>
 
-<script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -25,6 +25,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <meta http-equiv="Cache-Control" content="no-store">
 
 <style>
@@ -43,7 +45,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -372,18 +374,9 @@ $(document).ready(function () {
 <p><strong>What might my climate be like in 2050?</strong></p>
 <p>To better understand where your climate is heading, we’ve provided spatial analogs for three locations in Montana. Spatial analogs have become popular with agricultural producers because they provide a tangible and plausible representation of future climate in a particular place, based on what scientists currently know about how the climate is changing. For example, in 2050, it’s plausible that the climate of Fort Benton will similar to the current climate of the Utah Valley south of Salt Lake City, UT. This information provides farmers and ranchers with an understanding of what kind of agriculture can thrive under future conditions.</p>
 <p>Because of uncertainties related to how technology, economics, and policy will influence carbon emissions in the future, the we’re showing you analogs from two scenarios: RCP 4.5 (“moderating emissions”) where carbon emissions peak around 2040 and then decline, and RCP 8.5 (“accelerating emissions”) where carbon emissions continue to increase through the 21st century. Under both scenarios Montana is projected to be much warmer in the future.</p>
-<div id="moderating-emissions" class="section level4 unnumbered">
-<h4>Moderating emissions</h4>
-<p><img src="img/analog_map_rcp45.png" /></p>
-<p>Climate analogs from the <a href="https://www.umces.edu/futureurbanclimates">Future Urban Climates</a> project, University of Maryland Center for Environmental Science. Research methods published in <a href="https://www.nature.com/articles/s41467-019-08540-3">Nature Communications</a>.</p>
-<p>Agricultural statistics from the USDA National Agricultural Statistics Service <a href="https://www.nass.usda.gov/Publications/AgCensus/2017/">2017 Census of Agriculture</a>.</p>
-</div>
-<div id="accelerating-emissions" class="section level4 unnumbered">
-<h4>Accelerating emissions</h4>
-<p><img src="img/analog_map_rcp85.png" /></p>
-<p>Climate analogs from the <a href="https://www.umces.edu/futureurbanclimates">Future Urban Climates</a> project, University of Maryland Center for Environmental Science. Research methods published in <a href="https://www.nature.com/articles/s41467-019-08540-3">Nature Communications</a>.</p>
-<p>Agricultural statistics from the USDA National Agricultural Statistics Service <a href="https://www.nass.usda.gov/Publications/AgCensus/2017/">2017 Census of Agriculture</a>.</p>
-</div>
+<p><img src="img/analog_infographic.png" /></p>
+<p>Climate analogs are courtesy the <a href="https://www.umces.edu/futureurbanclimates">Future Urban Climates</a> project, University of Maryland Center for Environmental Science. Research methods are published in <a href="https://www.nature.com/articles/s41467-019-08540-3">Nature Communications</a>.</p>
+<p>Agricultural statistics are from the USDA National Agricultural Statistics Service <a href="https://www.nass.usda.gov/Publications/AgCensus/2017/">2017 Census of Agriculture</a>.</p>
 </div>
 </div>
 
@@ -405,7 +398,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

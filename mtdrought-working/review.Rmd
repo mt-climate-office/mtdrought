@@ -9,7 +9,7 @@ source("./R/setup.R")
 
 ```
 
-![A major grasshopper infestation affected crops across eastern Montana. Population and impacts of pests like grasshoppers are closely tied to climate conditions. Photo: Gillette News Record.](./img/gillette_grasshoppers.jpg)
+![A major grasshopper infestation affected crops across eastern Montana. The impacts of pests like grasshoppers are closely tied to climate conditions. Photo: Gillette News Record.](./img/gillette_grasshoppers.jpg)
 
 ## {- .tabset .tabset-fade .tabset-pills}
 
@@ -215,7 +215,7 @@ if(knitr::is_html_output())
 
 <!-- <iframe id="review_temperature" src="./figures/review_temperature.html" width="100%" height="500px"> -->
 
-After a July of near-normal temperatures, August brought the heat, leading to above-normal temperatures across Montana as a whole. Portions of western Montana were 3 ºF above normal, and the western Crazy mountains north of Livingston were 2 ºF above normal Northeastern Montana had slightly cooler than normal temperatures throughout the summer.
+After a July of near-normal temperatures, August brought the heat, leading to above-normal temperatures across Montana as a whole. Portions of western Montana were 3 ºF above normal, and the western Crazy mountains north of Livingston were 2 ºF above normal. Northeastern Montana had slightly cooler than normal temperatures throughout the summer.
 
 The graph below compares historical daily temperatures (shaded bands and dashed lines) to current daily temperatures so far in 2020 (solid-jagged lines) across Montana. The shaded bands represent the range of recorded temperatures during the 1981--2010 period on any given day. The red bands and lines represent the high temperatures and the blues bands and lines represent the lows. The dashed red and blue lines represent the average high and average low temperatures during the 1981--2010 period.
 
