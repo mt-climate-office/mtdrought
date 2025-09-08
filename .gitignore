@@ -43,4 +43,7 @@ cache/
 *.knit.md
 .Rproj.user
 
+Icon?
 
+
+.DS_Store
